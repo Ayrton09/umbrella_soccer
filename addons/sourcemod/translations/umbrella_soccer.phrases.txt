@@ -1,0 +1,3007 @@
+"Phrases"
+{
+    "Team_CT"
+    {
+        "en"    "CT"
+        "es"    "CT"
+        "pt"    "CT"
+        "fr"    "CT"
+        "de"    "CT"
+    }
+
+    "Team_T"
+    {
+        "en"    "TT"
+        "es"    "TT"
+        "pt"    "TT"
+        "fr"    "TT"
+        "de"    "TT"
+    }
+
+    "Team_Blue"
+    {
+        "en"    "Blue"
+        "es"    "Azul"
+        "pt"    "Azul"
+        "fr"    "Bleu"
+        "de"    "Blau"
+    }
+
+    "Team_Red"
+    {
+        "en"    "Red"
+        "es"    "Rojo"
+        "pt"    "Vermelho"
+        "fr"    "Rouge"
+        "de"    "Rot"
+    }
+
+    "Team_Join_Assigned_Other"
+    {
+        "en"    "Teams: you are assigned to the other team."
+        "es"    "Equipos: estas asignado al otro equipo."
+        "pt"    "Times: voce esta designado para o outro time."
+        "fr"    "Equipes : tu es assigne a l'autre equipe."
+        "de"    "Teams: du bist dem anderen Team zugeteilt."
+    }
+
+    "Team_Join_No_Replacements"
+    {
+        "en"    "Teams: there are no live replacement slots available."
+        "es"    "Equipos: no hay cupos de reemplazo disponibles durante el partido."
+        "pt"    "Times: nao ha vagas de substituicao disponiveis durante a partida."
+        "fr"    "Equipes : aucun remplacement n'est disponible pendant le match."
+        "de"    "Teams: es sind keine Ersatzplaetze im laufenden Spiel frei."
+    }
+
+    "Team_Join_RedCard"
+    {
+        "en"    "Teams: you cannot join while sent off."
+        "es"    "Equipos: no podes entrar estando expulsado."
+        "pt"    "Times: voce nao pode entrar enquanto esta expulso."
+        "fr"    "Equipes : tu ne peux pas entrer apres une expulsion."
+        "de"    "Teams: du kannst nach einem Platzverweis nicht beitreten."
+    }
+
+    "Client_None"
+    {
+        "en"    "none"
+        "es"    "ninguno"
+        "pt"    "nenhum"
+        "fr"    "aucun"
+        "de"    "keiner"
+    }
+
+    "Skin_Player"
+    {
+        "en"    "Player"
+        "es"    "Jugador"
+        "pt"    "Jogador"
+        "fr"    "Joueur"
+        "de"    "Spieler"
+    }
+
+    "Skin_Goalkeeper"
+    {
+        "en"    "Goalkeeper"
+        "es"    "Arquero"
+        "pt"    "Goleiro"
+        "fr"    "Gardien"
+        "de"    "Torwart"
+    }
+
+    "Goal_Own"
+    {
+        "#format"   "{1:N}"
+        "en"    "Own goal! by: {1}"
+        "es"    "Gol en contra! de: {1}"
+        "pt"    "Gol contra! de: {1}"
+        "fr"    "But contre son camp ! par : {1}"
+        "de"    "Eigentor! von: {1}"
+    }
+
+    "Goal_Own_Label"
+    {
+        "en"    "Own goal!"
+        "es"    "Gol en contra!"
+        "pt"    "Gol contra!"
+        "fr"    "But contre son camp !"
+        "de"    "Eigentor!"
+    }
+
+    "Goal_By"
+    {
+        "en"    "by:"
+        "es"    "de:"
+        "pt"    "de:"
+        "fr"    "par :"
+        "de"    "von:"
+    }
+
+    "Goal_Scorer"
+    {
+        "#format"   "{1:N}"
+        "en"    "Goal by {1}"
+        "es"    "Gol de {1}"
+        "pt"    "Gol de {1}"
+        "fr"    "But de {1}"
+        "de"    "Tor von {1}"
+    }
+
+    "Goal_Generic"
+    {
+        "en"    "Goal!"
+        "es"    "Gol!"
+        "pt"    "Gol!"
+        "fr"    "But !"
+        "de"    "Tor!"
+    }
+
+    "Goal_Assist"
+    {
+        "#format"   "{1:N}"
+        "en"    "Assist by {1}"
+        "es"    "Asistencia de {1}"
+        "pt"    "Assistencia de {1}"
+        "fr"    "Passe decisive de {1}"
+        "de"    "Vorlage von {1}"
+    }
+
+    "Score_Display"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "Score: CT {1} - {2} TT"
+        "es"    "Marcador: CT {1} - {2} TT"
+        "pt"    "Placar: CT {1} - {2} TT"
+        "fr"    "Score : CT {1} - {2} TT"
+        "de"    "Spielstand: CT {1} - {2} TT"
+    }
+
+    "Score_Label"
+    {
+        "en"    "Score"
+        "es"    "Marcador"
+        "pt"    "Placar"
+        "fr"    "Score"
+        "de"    "Spielstand"
+    }
+
+    "Hud_Match_Line"
+    {
+        "#format"   "{1:d},{2:d},{3:s}"
+        "en"    "CT {1}-{2} TT | {3}"
+        "es"    "CT {1}-{2} TT | {3}"
+        "pt"    "CT {1}-{2} TT | {3}"
+        "fr"    "CT {1}-{2} TT | {3}"
+        "de"    "CT {1}-{2} TT | {3}"
+    }
+
+    "Map_Not_Allowed"
+    {
+        "en"    "Map blocked: this map is not allowed for Soccer Mod."
+        "es"    "Mapa bloqueado: este mapa no esta permitido para Soccer Mod."
+        "pt"    "Mapa bloqueado: este mapa nao esta permitido para Soccer Mod."
+        "fr"    "Map bloquee : cette map n'est pas autorisee pour Soccer Mod."
+        "de"    "Map gesperrt: diese Map ist fur Soccer Mod nicht erlaubt."
+    }
+
+    "Soccer_Disabled"
+    {
+        "en"    "Soccer: the plugin is disabled."
+        "es"    "Soccer: el plugin esta desactivado."
+        "pt"    "Soccer: o plugin esta desativado."
+        "fr"    "Soccer : le plugin est desactive."
+        "de"    "Soccer: das Plugin ist deaktiviert."
+    }
+
+    "Match_Already_Live"
+    {
+        "en"    "Match: there is already a live match."
+        "es"    "Partido: ya hay un partido en curso."
+        "pt"    "Partida: ja existe uma partida em andamento."
+        "fr"    "Match : il y a deja un match en cours."
+        "de"    "Spiel: es lauft bereits ein Spiel."
+    }
+
+    "Ball_Not_Found"
+    {
+        "en"    "Ball: not found. The targetname must be: ball."
+        "es"    "Pelota: no se encontro. El targetname debe ser: ball."
+        "pt"    "Bola: nao encontrada. O targetname deve ser: ball."
+        "fr"    "Ballon : introuvable. Le targetname doit etre : ball."
+        "de"    "Ball: nicht gefunden. Der Targetname muss ball sein."
+    }
+
+    "Overtime_Tied"
+    {
+        "en"    "Overtime: finished tied."
+        "es"    "Tiempo extra: termino empatado."
+        "pt"    "Prorrogacao: terminou empatada."
+        "fr"    "Prolongation : terminee sur une egalite."
+        "de"    "Verlangerung: endete unentschieden."
+    }
+
+    "Overtime_Finished"
+    {
+        "en"    "Overtime: finished."
+        "es"    "Tiempo extra: termino."
+        "pt"    "Prorrogacao: terminou."
+        "fr"    "Prolongation : terminee."
+        "de"    "Verlangerung: ist beendet."
+    }
+
+    "Overtime_Start"
+    {
+        "#format"   "{1:s}"
+        "en"    "Match tied: overtime starts now for {1}."
+        "es"    "Partido empatado: arranca la prorroga de {1}."
+        "pt"    "Partida empatada: a prorrogacao comeca agora por {1}."
+        "fr"    "Match nul : la prolongation commence pour {1}."
+        "de"    "Spiel unentschieden: die Verlangerung startet fur {1}."
+    }
+
+    "GoldenGoal_Start"
+    {
+        "en"    "Golden goal: next goal wins."
+        "es"    "Gol de oro: el proximo gol gana."
+        "pt"    "Gol de ouro: o proximo gol vence."
+        "fr"    "But en or : le prochain but gagne."
+        "de"    "Golden Goal: das nachste Tor gewinnt."
+    }
+
+    "GoldenGoal_Finished"
+    {
+        "en"    "Golden goal: decided."
+        "es"    "Gol de oro: partido definido."
+        "pt"    "Gol de ouro: partida decidida."
+        "fr"    "But en or : match decide."
+        "de"    "Golden Goal: Spiel entschieden."
+    }
+
+    "KickoffReason_Overtime"
+    {
+        "en"    "Overtime"
+        "es"    "Tiempo extra"
+        "pt"    "Prorrogacao"
+        "fr"    "Prolongation"
+        "de"    "Verlangerung"
+    }
+
+    "KickoffReason_GoldenGoal"
+    {
+        "en"    "Golden goal"
+        "es"    "Gol de oro"
+        "pt"    "Gol de ouro"
+        "fr"    "But en or"
+        "de"    "Golden Goal"
+    }
+
+    "KickoffReason_FirstHalf"
+    {
+        "en"    "First half"
+        "es"    "Primer tiempo"
+        "pt"    "Primeiro tempo"
+        "fr"    "Premiere mi-temps"
+        "de"    "Erste Halbzeit"
+    }
+
+    "KickoffReason_SecondHalf"
+    {
+        "en"    "Second half"
+        "es"    "Segundo tiempo"
+        "pt"    "Segundo tempo"
+        "fr"    "Deuxieme mi-temps"
+        "de"    "Zweite Halbzeit"
+    }
+
+    "KickoffReason_Goal"
+    {
+        "en"    "After goal"
+        "es"    "Despues del gol"
+        "pt"    "Apos o gol"
+        "fr"    "Apres le but"
+        "de"    "Nach dem Tor"
+    }
+
+    "KickoffReason_NextPeriod"
+    {
+        "en"    "Next period"
+        "es"    "Siguiente periodo"
+        "pt"    "Proximo periodo"
+        "fr"    "Periode suivante"
+        "de"    "Nachste Periode"
+    }
+
+    "KickoffReason_Manual"
+    {
+        "en"    "Manual kick"
+        "es"    "Saque manual"
+        "pt"    "Saque manual"
+        "fr"    "Engagement manuel"
+        "de"    "Manueller Anstoss"
+    }
+
+    "Stoppage_Center"
+    {
+        "en"    "Last play"
+        "es"    "Ultima jugada"
+        "pt"    "Ultima jogada"
+        "fr"    "Derniere action"
+        "de"    "Letzte Aktion"
+    }
+
+    "Stoppage_Chat"
+    {
+        "en"    "Last play: until the ball crosses midfield or there is a goal."
+        "es"    "Ultima jugada: hasta que la pelota cruce mitad de cancha o haya gol."
+        "pt"    "Ultima jogada: ate a bola cruzar o meio-campo ou sair gol."
+        "fr"    "Derniere action : jusqu'a ce que le ballon passe le milieu ou qu'il y ait but."
+        "de"    "Letzte Aktion: bis der Ball die Mittellinie uberquert oder ein Tor fallt."
+    }
+
+    "Match_Stopped"
+    {
+        "en"    "Match: stopped."
+        "es"    "Partido: detenido."
+        "pt"    "Partida: encerrada."
+        "fr"    "Match : arrete."
+        "de"    "Spiel: gestoppt."
+    }
+
+    "Match_Paused"
+    {
+        "en"    "Match: paused."
+        "es"    "Partido: pausado."
+        "pt"    "Partida: pausada."
+        "fr"    "Match : en pause."
+        "de"    "Spiel: pausiert."
+    }
+
+    "Resume_Center"
+    {
+        "#format"   "{1:d}"
+        "en"    "Resuming in {1}"
+        "es"    "Reanudando en {1}"
+        "pt"    "Retornando em {1}"
+        "fr"    "Reprise dans {1}"
+        "de"    "Fortsetzung in {1}"
+    }
+
+    "Resume_Announce"
+    {
+        "#format"   "{1:d}"
+        "en"    "Resume: in {1} second(s)."
+        "es"    "Reanudando: en {1} segundo(s)."
+        "pt"    "Retornando: em {1} segundo(s)."
+        "fr"    "Reprise : dans {1} seconde(s)."
+        "de"    "Fortsetzung: in {1} Sekunde(n)."
+    }
+
+    "Resume_Play"
+    {
+        "en"    "Play!"
+        "es"    "Jueguen!"
+        "pt"    "Joguem!"
+        "fr"    "Jouez !"
+        "de"    "Spielen!"
+    }
+
+    "Resume_Done"
+    {
+        "en"    "Match: resumed."
+        "es"    "Partido: reanudado."
+        "pt"    "Partida: retomada."
+        "fr"    "Match : repris."
+        "de"    "Spiel: fortgesetzt."
+    }
+
+    "Resume_Countdown"
+    {
+        "#format"   "{1:d}"
+        "en"    "Resuming in {1}..."
+        "es"    "Reanudando en {1}..."
+        "pt"    "Retornando em {1}..."
+        "fr"    "Reprise dans {1}..."
+        "de"    "Fortsetzung in {1}..."
+    }
+
+    "JoinTeam_Blocked"
+    {
+        "en"    "You cannot change team during a match."
+        "es"    "No podes cambiar de equipo durante un partido."
+        "pt"    "Voce nao pode mudar de time durante uma partida."
+        "fr"    "Vous ne pouvez pas changer d'equipe pendant un match."
+        "de"    "Du kannst wahrend eines Spiels das Team nicht wechseln."
+    }
+
+    "JoinTeam_Return"
+    {
+        "#format"   "{1:s}"
+        "en"    "You can return to your match team: {1}."
+        "es"    "Podes volver a tu equipo del partido: {1}."
+        "pt"    "Voce pode voltar para o seu time da partida: {1}."
+        "fr"    "Vous pouvez revenir dans votre equipe du match : {1}."
+        "de"    "Du kannst in dein Spielteam zuruck: {1}."
+    }
+
+    "JoinTeam_OnlyAssigned"
+    {
+        "en"    "Only assigned players can enter the match."
+        "es"    "Solo pueden entrar los jugadores ya asignados al match."
+        "pt"    "Somente jogadores atribuidos podem entrar na partida."
+        "fr"    "Seuls les joueurs assignes peuvent entrer dans le match."
+        "de"    "Nur zugewiesene Spieler durfen dem Spiel beitreten."
+    }
+
+    "JoinTeam_ReplacementUsed"
+    {
+        "#format"   "{1:s},{2:d}"
+        "en"    "Replacement accepted: assigned to {1}. Remaining replacement slots: {2}."
+        "es"    "Reemplazo aceptado: asignado a {1}. Cupos restantes: {2}."
+        "pt"    "Substituicao aceita: atribuida ao {1}. Vagas restantes: {2}."
+        "fr"    "Remplacement accepte : assigne a {1}. Places restantes : {2}."
+        "de"    "Ersatz akzeptiert: zugewiesen zu {1}. Verbleibende Slots: {2}."
+    }
+
+    "JoinTeam_CaptainsLocked"
+    {
+        "en"    "Team changes are blocked during captain mode."
+        "es"    "Los cambios de equipo estan bloqueados durante el modo capitanes."
+        "pt"    "Trocas de time estao bloqueadas durante o modo capitaes."
+        "fr"    "Les changements d'equipe sont bloques pendant le mode capitaines."
+        "de"    "Teamwechsel sind im Kapitansmodus gesperrt."
+    }
+
+    "JoinTeam_RedCard"
+    {
+        "en"    "You cannot join a team with a red card."
+        "es"    "No podes entrar a un equipo con roja."
+        "pt"    "Voce nao pode entrar em um time com vermelho."
+        "fr"    "Vous ne pouvez pas entrer dans une equipe avec un rouge."
+        "de"    "Du kannst mit Rot nicht in ein Team."
+    }
+
+    "Cmd_Start_Usage"
+    {
+        "en"    "Usage: sm_soccer_start <minutes>"
+        "es"    "Uso: sm_soccer_start <minutos>"
+        "pt"    "Uso: sm_soccer_start <minutos>"
+        "fr"    "Usage : sm_soccer_start <minutes>"
+        "de"    "Verwendung: sm_soccer_start <minuten>"
+    }
+
+    "Match_Reset"
+    {
+        "en"    "Match: reset."
+        "es"    "Partido: reiniciado."
+        "pt"    "Partida: reiniciada."
+        "fr"    "Match : reinitialise."
+        "de"    "Spiel: zuruckgesetzt."
+    }
+
+    "Cmd_BallSaved_Current"
+    {
+        "en"    "Ball spawn: saved from the current ball position."
+        "es"    "Spawn de pelota: guardado desde la posicion actual."
+        "pt"    "Spawn da bola: salvo da posicao atual."
+        "fr"    "Spawn du ballon : sauvegarde depuis la position actuelle."
+        "de"    "Ball-Spawn: von der aktuellen Position gespeichert."
+    }
+
+    "Cmd_BallSaved_Player"
+    {
+        "en"    "Ball spawn: saved from your current position."
+        "es"    "Spawn de pelota: guardado desde tu posicion actual."
+        "pt"    "Spawn da bola: salvo da sua posicao atual."
+        "fr"    "Spawn du ballon : sauvegarde depuis votre position actuelle."
+        "de"    "Ball-Spawn: von deiner aktuellen Position gespeichert."
+    }
+
+    "Cmd_Ball_NotFound"
+    {
+        "en"    "Ball: not found."
+        "es"    "Pelota: no se encontro."
+        "pt"    "Bola: nao encontrada."
+        "fr"    "Ballon : introuvable."
+        "de"    "Ball: nicht gefunden."
+    }
+
+    "Cmd_BallSpawn_MapControlled"
+    {
+        "en"    "Ball spawn: controlled by the map."
+        "es"    "Spawn de pelota: lo controla el mapa."
+        "pt"    "Spawn da bola: controlado pelo mapa."
+        "fr"    "Spawn du ballon : controle par la map."
+        "de"    "Ball-Spawn: wird von der Map gesteuert."
+    }
+
+    "Cmd_Score_Usage"
+    {
+        "en"    "Usage: sm_soccer_score <t> <ct>"
+        "es"    "Uso: sm_soccer_score <t> <ct>"
+        "pt"    "Uso: sm_soccer_score <t> <ct>"
+        "fr"    "Usage : sm_soccer_score <t> <ct>"
+        "de"    "Verwendung: sm_soccer_score <t> <ct>"
+    }
+
+    "Score_Updated"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "Score updated: CT {1} - {2} TT"
+        "es"    "Marcador actualizado: CT {1} - {2} TT"
+        "pt"    "Placar atualizado: CT {1} - {2} TT"
+        "fr"    "Score mis a jour : CT {1} - {2} TT"
+        "de"    "Spielstand aktualisiert: CT {1} - {2} TT"
+    }
+
+    "Score_Goal_Added"
+    {
+        "#format"   "{1:N},{2:s},{3:d},{4:d}"
+        "en"    "Referee: {1} added a goal to {2}. Score: CT {3} - {4} TT"
+        "es"    "Referi: {1} agrego un gol a {2}. Marcador: CT {3} - {4} TT"
+        "pt"    "Arbitro: {1} adicionou um gol para {2}. Placar: CT {3} - {4} TT"
+        "fr"    "Arbitre : {1} a ajoute un but a {2}. Score : CT {3} - {4} TT"
+        "de"    "Schiedsrichter: {1} hat ein Tor fuer {2} hinzugefuegt. Spielstand: CT {3} - {4} TT"
+    }
+
+    "Score_Goal_Removed"
+    {
+        "#format"   "{1:N},{2:s},{3:d},{4:d}"
+        "en"    "Referee: {1} removed a goal from {2}. Score: CT {3} - {4} TT"
+        "es"    "Referi: {1} quito un gol a {2}. Marcador: CT {3} - {4} TT"
+        "pt"    "Arbitro: {1} removeu um gol de {2}. Placar: CT {3} - {4} TT"
+        "fr"    "Arbitre : {1} a retire un but a {2}. Score : CT {3} - {4} TT"
+        "de"    "Schiedsrichter: {1} hat ein Tor von {2} entfernt. Spielstand: CT {3} - {4} TT"
+    }
+
+    "Score_Already_Zero"
+    {
+        "#format"   "{1:s}"
+        "en"    "Score: {1} is already at 0."
+        "es"    "Marcador: {1} ya esta en 0."
+        "pt"    "Placar: {1} ja esta em 0."
+        "fr"    "Score : {1} est deja a 0."
+        "de"    "Spielstand: {1} ist bereits bei 0."
+    }
+
+    "Cmd_Goal_Usage"
+    {
+        "en"    "Usage: sm_soccer_goal <t/ct>"
+        "es"    "Uso: sm_soccer_goal <t/ct>"
+        "pt"    "Uso: sm_soccer_goal <t/ct>"
+        "fr"    "Usage : sm_soccer_goal <t/ct>"
+        "de"    "Verwendung: sm_soccer_goal <t/ct>"
+    }
+
+    "Cmd_Team_Usage"
+    {
+        "en"    "Use t or ct."
+        "es"    "Usa t o ct."
+        "pt"    "Use t ou ct."
+        "fr"    "Utilise t ou ct."
+        "de"    "Benutze t oder ct."
+    }
+
+    "Cmd_Yellow_Usage"
+    {
+        "en"    "Usage: sm_soccer_yellow <target>"
+        "es"    "Uso: sm_soccer_yellow <target>"
+        "pt"    "Uso: sm_soccer_yellow <target>"
+        "fr"    "Usage : sm_soccer_yellow <cible>"
+        "de"    "Verwendung: sm_soccer_yellow <ziel>"
+    }
+
+    "Card_Yellow"
+    {
+        "#format"   "{1:N},{2:d}"
+        "en"    "Yellow card: {1} ({2}/2)"
+        "es"    "Amarilla: {1} ({2}/2)"
+        "pt"    "Cartao amarelo: {1} ({2}/2)"
+        "fr"    "Carton jaune : {1} ({2}/2)"
+        "de"    "Gelbe Karte: {1} ({2}/2)"
+    }
+
+    "Cmd_Red_Usage"
+    {
+        "en"    "Usage: sm_soccer_red <target>"
+        "es"    "Uso: sm_soccer_red <target>"
+        "pt"    "Uso: sm_soccer_red <target>"
+        "fr"    "Usage : sm_soccer_red <cible>"
+        "de"    "Verwendung: sm_soccer_red <ziel>"
+    }
+
+    "Card_Red"
+    {
+        "#format"   "{1:N}"
+        "en"    "Red card! for {1}"
+        "es"    "Roja! para {1}"
+        "pt"    "Vermelho! para {1}"
+        "fr"    "Rouge ! pour {1}"
+        "de"    "Rot! fur {1}"
+    }
+
+    "Card_Yellow_Removed"
+    {
+        "#format"   "{1:N},{2:d}"
+        "en"    "Yellow removed: {1} ({2}/2)"
+        "es"    "Amarilla quitada: {1} ({2}/2)"
+        "pt"    "Amarelo removido: {1} ({2}/2)"
+        "fr"    "Jaune retire : {1} ({2}/2)"
+        "de"    "Gelb entfernt: {1} ({2}/2)"
+    }
+
+    "Card_Red_Removed"
+    {
+        "#format"   "{1:N}"
+        "en"    "Red removed: {1} can play again."
+        "es"    "Roja quitada: {1} puede volver a jugar."
+        "pt"    "Vermelho removido: {1} pode jogar de novo."
+        "fr"    "Rouge retire : {1} peut rejouer."
+        "de"    "Rot entfernt: {1} kann wieder spielen."
+    }
+
+    "Card_Cleared_Player"
+    {
+        "#format"   "{1:N}"
+        "en"    "Cards cleared: {1}."
+        "es"    "Tarjetas limpiadas: {1}."
+        "pt"    "Cartoes limpos: {1}."
+        "fr"    "Cartons effaces : {1}."
+        "de"    "Karten geloescht: {1}."
+    }
+
+    "Card_Cleared_All"
+    {
+        "en"    "Cards: all cards were cleared."
+        "es"    "Tarjetas: se limpiaron todas."
+        "pt"    "Cartoes: todos foram limpos."
+        "fr"    "Cartons : tous les cartons ont ete effaces."
+        "de"    "Karten: alle Karten wurden geloescht."
+    }
+
+    "Card_No_Yellow"
+    {
+        "#format"   "{1:N}"
+        "en"    "Cards: {1} has no yellow cards."
+        "es"    "Tarjetas: {1} no tiene amarillas."
+        "pt"    "Cartoes: {1} nao tem amarelos."
+        "fr"    "Cartons : {1} n'a pas de jaune."
+        "de"    "Karten: {1} hat keine gelbe Karte."
+    }
+
+    "Card_No_Red"
+    {
+        "#format"   "{1:N}"
+        "en"    "Cards: {1} has no red card."
+        "es"    "Tarjetas: {1} no tiene roja."
+        "pt"    "Cartoes: {1} nao tem vermelho."
+        "fr"    "Cartons : {1} n'a pas de rouge."
+        "de"    "Karten: {1} hat keine rote Karte."
+    }
+
+    "Cmd_Captains_Usage"
+    {
+        "en"    "Usage: sm_soccer_captains <captainT> <captainCT>"
+        "es"    "Uso: sm_soccer_captains <capitanT> <capitanCT>"
+        "pt"    "Uso: sm_soccer_captains <capitaoT> <capitaoCT>"
+        "fr"    "Usage : sm_soccer_captains <capitaineT> <capitaineCT>"
+        "de"    "Verwendung: sm_soccer_captains <kapitanT> <kapitanCT>"
+    }
+
+    "Cmd_Captains_Invalid"
+    {
+        "en"    "Invalid captains."
+        "es"    "Capitanes invalidos."
+        "pt"    "Capitaes invalidos."
+        "fr"    "Capitaines invalides."
+        "de"    "Ungueltige Kapitane."
+    }
+
+    "Captains_Set"
+    {
+        "#format"   "{1:N},{2:N}"
+        "en"    "Captains: T = {1} | CT = {2}"
+        "es"    "Capitanes: T = {1} | CT = {2}"
+        "pt"    "Capitaes: T = {1} | CT = {2}"
+        "fr"    "Capitaines : T = {1} | CT = {2}"
+        "de"    "Kapitane: T = {1} | CT = {2}"
+    }
+
+    "Captains_First"
+    {
+        "en"    "Captains: first set them with sm_soccer_captains."
+        "es"    "Capitanes: primero definilos con sm_soccer_captains."
+        "pt"    "Capitaes: primeiro defina com sm_soccer_captains."
+        "fr"    "Capitaines : definis-les d'abord avec sm_soccer_captains."
+        "de"    "Kapitane: zuerst mit sm_soccer_captains festlegen."
+    }
+
+    "Captains_Turn"
+    {
+        "#format"   "{1:s},{2:N},{3:d}"
+        "en"    "Pick turn: captain {1} ({2}). Players left: {3}"
+        "es"    "Turno de eleccion: capitan {1} ({2}). Jugadores restantes: {3}"
+        "pt"    "Vez de escolher: capitao {1} ({2}). Jogadores restantes: {3}"
+        "fr"    "Tour de choix : capitaine {1} ({2}). Joueurs restants : {3}"
+        "de"    "Auswahlrunde: Kapitan {1} ({2}). Verbleibende Spieler: {3}"
+    }
+
+    "Captains_Mode_Start"
+    {
+        "en"    "Captain mode: started. T captain picks first with !pick."
+        "es"    "Modo capitanes: iniciado. El capitan T elige primero con !pick."
+        "pt"    "Modo capitaes: iniciado. O capitao T escolhe primeiro com !pick."
+        "fr"    "Mode capitaines : lance. Le capitaine T choisit en premier avec !pick."
+        "de"    "Kapitansmodus: gestartet. Der T-Kapitan waehlt zuerst mit !pick."
+    }
+
+    "Captains_Mode_Inactive"
+    {
+        "en"    "Captain mode: is not active."
+        "es"    "Modo capitanes: no esta activo."
+        "pt"    "Modo capitaes: nao esta ativo."
+        "fr"    "Mode capitaines : n'est pas actif."
+        "de"    "Kapitansmodus: ist nicht aktiv."
+    }
+
+    "Captains_Not_Your_Turn"
+    {
+        "en"    "Pick: it is not your turn."
+        "es"    "Pick: no es tu turno."
+        "pt"    "Escolha: nao e a sua vez."
+        "fr"    "Choix : ce n'est pas ton tour."
+        "de"    "Auswahl: du bist nicht am Zug."
+    }
+
+    "Cmd_Pick_Usage"
+    {
+        "en"    "Usage: sm_pick <target>"
+        "es"    "Uso: sm_pick <target>"
+        "pt"    "Uso: sm_pick <target>"
+        "fr"    "Usage : sm_pick <cible>"
+        "de"    "Verwendung: sm_pick <ziel>"
+    }
+
+    "Captains_Player_Unavailable"
+    {
+        "en"    "Pick: that player is not available."
+        "es"    "Pick: ese jugador no esta disponible."
+        "pt"    "Escolha: esse jogador nao esta disponivel."
+        "fr"    "Choix : ce joueur n'est pas disponible."
+        "de"    "Auswahl: dieser Spieler ist nicht verfugbar."
+    }
+
+    "Captains_Player_Picked"
+    {
+        "#format"   "{1:N},{2:N},{3:s}"
+        "en"    "{1} picked {2} for {3}."
+        "es"    "{1} eligio a {2} para {3}."
+        "pt"    "{1} escolheu {2} para {3}."
+        "fr"    "{1} a choisi {2} pour {3}."
+        "de"    "{1} hat {2} fur {3} gewaehlt."
+    }
+
+    "Captains_Picks_End"
+    {
+        "en"    "Captain picks: finished."
+        "es"    "Elecciones de capitanes: terminadas."
+        "pt"    "Escolhas dos capitaes: terminadas."
+        "fr"    "Choix des capitaines : termines."
+        "de"    "Kapitansauswahl: beendet."
+    }
+
+    "Cmd_Position_Usage"
+    {
+        "en"    "Usage: sm_soccer_position <target> <gk/none>"
+        "es"    "Uso: sm_soccer_position <target> <gk/none>"
+        "pt"    "Uso: sm_soccer_position <target> <gk/none>"
+        "fr"    "Usage : sm_soccer_position <cible> <gk/none>"
+        "de"    "Verwendung: sm_soccer_position <ziel> <gk/none>"
+    }
+
+    "Skin_Now"
+    {
+        "#format"   "{1:N},{2:s}"
+        "en"    "{1} is now {2}."
+        "es"    "{1} ahora es {2}."
+        "pt"    "{1} agora e {2}."
+        "fr"    "{1} est maintenant {2}."
+        "de"    "{1} ist jetzt {2}."
+    }
+
+    "Skin_You_Now"
+    {
+        "#format"   "{1:s}"
+        "en"    "Your skin: is now {1}."
+        "es"    "Tu skin: ahora es {1}."
+        "pt"    "Sua skin: agora e {1}."
+        "fr"    "Ton skin : est maintenant {1}."
+        "de"    "Dein Skin: ist jetzt {1}."
+    }
+
+    "Skin_Current"
+    {
+        "#format"   "{1:s},{2:d}"
+        "en"    "Current skin: {1} | Stamina: {2}"
+        "es"    "Skin actual: {1} | Stamina: {2}"
+        "pt"    "Skin atual: {1} | Stamina: {2}"
+        "fr"    "Skin actuel : {1} | Endurance : {2}"
+        "de"    "Aktueller Skin: {1} | Ausdauer: {2}"
+    }
+
+    "JoinTeam_EnterTeamFirst"
+    {
+        "en"    "Teams: join T or CT first."
+        "es"    "Equipos: entra a T o CT primero."
+        "pt"    "Times: entre primeiro em T ou CT."
+        "fr"    "Equipes : entre d'abord en T ou CT."
+        "de"    "Teams: tritt zuerst T oder CT bei."
+    }
+
+    "Skin_NoLonger_Goalkeeper"
+    {
+        "#format"   "{1:N}"
+        "en"    "{1} is no longer goalkeeper."
+        "es"    "{1} ya no es arquero."
+        "pt"    "{1} nao e mais goleiro."
+        "fr"    "{1} n'est plus gardien."
+        "de"    "{1} ist kein Torwart mehr."
+    }
+
+    "Skin_Now_Goalkeeper"
+    {
+        "#format"   "{1:N}"
+        "en"    "{1} is now goalkeeper."
+        "es"    "{1} ahora es arquero."
+        "pt"    "{1} agora e goleiro."
+        "fr"    "{1} est maintenant gardien."
+        "de"    "{1} ist jetzt Torwart."
+    }
+
+    "Sprint_NoStamina"
+    {
+        "en"    "Sprint: you have no stamina."
+        "es"    "Sprint: no tenes stamina."
+        "pt"    "Sprint: voce nao tem stamina."
+        "fr"    "Sprint : tu n'as plus d'endurance."
+        "de"    "Sprint: du hast keine Ausdauer."
+    }
+
+    "Sprint_Enabled"
+    {
+        "en"    "Sprint: enabled."
+        "es"    "Sprint: activado."
+        "pt"    "Sprint: ativado."
+        "fr"    "Sprint : active."
+        "de"    "Sprint: aktiviert."
+    }
+
+    "Spec_Player_Sent"
+    {
+        "#format"   "{1:N}"
+        "en"    "{1} was moved to spectator."
+        "es"    "{1} fue enviado a spec."
+        "pt"    "{1} foi enviado para spec."
+        "fr"    "{1} a ete envoye en spec."
+        "de"    "{1} wurde zu spec verschoben."
+    }
+
+    "Spec_All_Sent"
+    {
+        "en"    "Spec: all players were moved to spectator."
+        "es"    "Spec: todos los jugadores fueron enviados a spec."
+        "pt"    "Spec: todos os jogadores foram enviados para spec."
+        "fr"    "Spec : tous les joueurs ont ete envoyes en spec."
+        "de"    "Spec: alle Spieler wurden zu Zuschauern verschoben."
+    }
+
+    "Skin_Cooldown"
+    {
+        "#format"   "{1:d}"
+        "en"    "Wait {1} second(s) before changing skin again."
+        "es"    "Espera {1} segundo(s) para volver a cambiar la skin."
+        "pt"    "Espere {1} segundo(s) para trocar a skin de novo."
+        "fr"    "Attends {1} seconde(s) avant de rechanger de skin."
+        "de"    "Warte {1} Sekunde(n), bevor du den Skin erneut wechselst."
+    }
+
+    "Match_Not_Live"
+    {
+        "en"    "Match: is not live."
+        "es"    "Partido: no esta en juego."
+        "pt"    "Partida: nao esta em jogo."
+        "fr"    "Match : n'est pas en cours."
+        "de"    "Spiel: laeuft nicht."
+    }
+
+    "Teams_Swapped"
+    {
+        "#format"   "{1:d}"
+        "en"    "Teams swapped: period {1} starts after the center kick."
+        "es"    "Equipos invertidos: arranca el periodo {1} tras el saque del medio."
+        "pt"    "Times invertidos: o periodo {1} comeca apos o saque do meio."
+        "fr"    "Equipes inversees : la periode {1} commence apres l'engagement."
+        "de"    "Teams getauscht: Periode {1} startet nach dem Anstoss."
+    }
+
+    "Kickoff_Center"
+    {
+        "#format"   "{1:s}"
+        "en"    "{1}"
+        "es"    "{1}"
+        "pt"    "{1}"
+        "fr"    "{1}"
+        "de"    "{1}"
+    }
+
+    "Kickoff_Chat"
+    {
+        "#format"   "{1:s}"
+        "en"    "{1}"
+        "es"    "{1}"
+        "pt"    "{1}"
+        "fr"    "{1}"
+        "de"    "{1}"
+    }
+
+    "Kickoff_Chat_Team"
+    {
+        "#format"   "{1:s},{2:s}"
+        "en"    "Match: {1}. {2} starts."
+        "es"    "Partido: {1}. Saca el equipo {2}."
+        "pt"    "Partida: {1}. O time {2} comeca."
+        "fr"    "Match : {1}. L'equipe {2} engage."
+        "de"    "Spiel: {1}. Team {2} beginnt."
+    }
+
+    "Kickoff_Wait_Center"
+    {
+        "en"    "Kick from center!"
+        "es"    "Saquen del medio!"
+        "pt"    "Saiam do meio!"
+        "fr"    "Engagez au centre !"
+        "de"    "Anstoss von der Mitte!"
+    }
+
+    "Kickoff_Wait_Chat"
+    {
+        "en"    "Match: waiting for the center kick."
+        "es"    "Partido: esperando el saque del medio."
+        "pt"    "Partida: esperando o saque do meio."
+        "fr"    "Match : en attente du coup d'envoi."
+        "de"    "Anstoss: warte auf den Anstoss."
+    }
+
+    "Kickoff_WhoKicks"
+    {
+        "#format"   "{1:s}"
+        "en"    "Match: {1} starts."
+        "es"    "Partido: saca el equipo {1}."
+        "pt"    "Partida: o time {1} comeca."
+        "fr"    "Match : l'equipe {1} engage."
+        "de"    "Spiel: Team {1} beginnt."
+    }
+
+    "Break_Start"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "Period {1}: break for {2} second(s)."
+        "es"    "Periodo {1}: descanso de {2} segundo(s)."
+        "pt"    "Periodo {1}: descanso de {2} segundo(s)."
+        "fr"    "Periode {1} : pause de {2} seconde(s)."
+        "de"    "Periode {1}: Pause fur {2} Sekunde(n)."
+    }
+
+    "Menu_Main_Title"
+    {
+        "#format"   "{1:d},{2:d},{3:d}"
+        "en"    "Umbrella Soccer | P{1} | CT {2} - {3} TT"
+        "es"    "Umbrella Soccer | P{1} | CT {2} - {3} TT"
+        "pt"    "Umbrella Soccer | P{1} | CT {2} - {3} TT"
+        "fr"    "Umbrella Soccer | P{1} | CT {2} - {3} TT"
+        "de"    "Umbrella Soccer | P{1} | CT {2} - {3} TT"
+    }
+
+    "Menu_Admin_Title"
+    {
+        "#format"   "{1:d},{2:d},{3:d}"
+        "en"    "Umbrella Soccer - Admin | P{1} | CT {2} - {3} TT"
+        "es"    "Umbrella Soccer - Admin | P{1} | CT {2} - {3} TT"
+        "pt"    "Umbrella Soccer - Admin | P{1} | CT {2} - {3} TT"
+        "fr"    "Umbrella Soccer - Admin | P{1} | CT {2} - {3} TT"
+        "de"    "Umbrella Soccer - Admin | P{1} | CT {2} - {3} TT"
+    }
+
+    "Menu_Match_Title"
+    {
+        "#format"   "{1:d},{2:d},{3:d}"
+        "en"    "Match control | P{1} | CT {2} - {3} TT"
+        "es"    "Control del partido | P{1} | CT {2} - {3} TT"
+        "pt"    "Controle da partida | P{1} | CT {2} - {3} TT"
+        "fr"    "Controle du match | P{1} | CT {2} - {3} TT"
+        "de"    "Spielkontrolle | P{1} | CT {2} - {3} TT"
+    }
+
+    "Menu_Status_Title"
+    {
+        "#format"   "{1:d},{2:d},{3:d},{4:d},{5:s},{6:d},{7:d}"
+        "en"    "Score / status\nCT {1} - {2} TT\nPeriod: {3}/{4}\nState: {5}\nMatch time: {6}:{7:02}"
+        "es"    "Marcador / estado\nCT {1} - {2} TT\nPeriodo: {3}/{4}\nEstado: {5}\nTiempo de partido: {6}:{7:02}"
+        "pt"    "Placar / estado\nCT {1} - {2} TT\nPeriodo: {3}/{4}\nEstado: {5}\nTempo da partida: {6}:{7:02}"
+        "fr"    "Score / etat\nCT {1} - {2} TT\nPeriode : {3}/{4}\nEtat : {5}\nTemps du match : {6}:{7:02}"
+        "de"    "Spielstand / Status\nCT {1} - {2} TT\nPeriode: {3}/{4}\nStatus: {5}\nSpielzeit: {6}:{7:02}"
+    }
+
+    "Menu_Match_Admin"
+    {
+        "en"    "Manage match"
+        "es"    "Administrar partido"
+        "pt"    "Administrar partida"
+        "fr"    "Gerer le match"
+        "de"    "Spiel verwalten"
+    }
+
+    "Menu_Match"
+    {
+        "en"    "Match"
+        "es"    "Partido"
+        "pt"    "Partida"
+        "fr"    "Match"
+        "de"    "Spiel"
+    }
+
+    "Menu_Penalties"
+    {
+        "en"    "Penalties"
+        "es"    "Penales"
+        "pt"    "Penaltis"
+        "fr"    "Penalties"
+        "de"    "Elfmeter"
+    }
+
+    "Menu_Penalties_Title"
+    {
+        "en"    "Match - penalties"
+        "es"    "Partido - penales"
+        "pt"    "Partida - penaltis"
+        "fr"    "Match - penalties"
+        "de"    "Spiel - Elfmeter"
+    }
+
+    "Menu_Match_Control"
+    {
+        "en"    "Match control"
+        "es"    "Control del partido"
+        "pt"    "Controle da partida"
+        "fr"    "Controle du match"
+        "de"    "Spielsteuerung"
+    }
+
+    "Menu_Skin"
+    {
+        "en"    "Skin / goalkeeper"
+        "es"    "Skin / arquero"
+        "pt"    "Skin / goleiro"
+        "fr"    "Skin / gardien"
+        "de"    "Skin / Torwart"
+    }
+
+    "Menu_Draft"
+    {
+        "en"    "Draft and captains"
+        "es"    "Draft y capitanes"
+        "pt"    "Draft e capitaes"
+        "fr"    "Draft et capitaines"
+        "de"    "Draft und Kapitane"
+    }
+
+    "Menu_Captains"
+    {
+        "en"    "Captains"
+        "es"    "Capitanes"
+        "pt"    "Capitaes"
+        "fr"    "Capitaines"
+        "de"    "Kapitaene"
+    }
+
+    "Menu_Referee"
+    {
+        "en"    "Referee"
+        "es"    "Referi"
+        "pt"    "Arbitro"
+        "fr"    "Arbitre"
+        "de"    "Schiedsrichter"
+    }
+
+    "Menu_Practice"
+    {
+        "en"    "Practice"
+        "es"    "Practica"
+        "pt"    "Treino"
+        "fr"    "Entrainement"
+        "de"    "Training"
+    }
+
+    "Menu_Captains_Title"
+    {
+        "en"    "Captains"
+        "es"    "Capitanes"
+        "pt"    "Capitaes"
+        "fr"    "Capitaines"
+        "de"    "Kapitaene"
+    }
+
+    "Menu_Referee_Title"
+    {
+        "en"    "Referee"
+        "es"    "Referi"
+        "pt"    "Arbitro"
+        "fr"    "Arbitre"
+        "de"    "Schiedsrichter"
+    }
+
+    "Menu_Referee_Score"
+    {
+        "en"    "Score"
+        "es"    "Marcador"
+        "pt"    "Placar"
+        "fr"    "Score"
+        "de"    "Spielstand"
+    }
+
+    "Menu_Referee_Score_Title"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "Score\nCT {1} - {2} TT"
+        "es"    "Marcador\nCT {1} - {2} TT"
+        "pt"    "Placar\nCT {1} - {2} TT"
+        "fr"    "Score\nCT {1} - {2} TT"
+        "de"    "Spielstand\nCT {1} - {2} TT"
+    }
+
+    "Menu_Score_Add_CT"
+    {
+        "en"    "Add goal to CT"
+        "es"    "Sumar gol a CT"
+        "pt"    "Adicionar gol ao CT"
+        "fr"    "Ajouter but aux CT"
+        "de"    "Tor fuer CT hinzufuegen"
+    }
+
+    "Menu_Score_Remove_CT"
+    {
+        "en"    "Remove goal from CT"
+        "es"    "Quitar gol a CT"
+        "pt"    "Remover gol do CT"
+        "fr"    "Retirer but aux CT"
+        "de"    "Tor von CT entfernen"
+    }
+
+    "Menu_Score_Add_TT"
+    {
+        "en"    "Add goal to TT"
+        "es"    "Sumar gol a TT"
+        "pt"    "Adicionar gol ao TT"
+        "fr"    "Ajouter but aux TT"
+        "de"    "Tor fuer TT hinzufuegen"
+    }
+
+    "Menu_Score_Remove_TT"
+    {
+        "en"    "Remove goal from TT"
+        "es"    "Quitar gol a TT"
+        "pt"    "Remover gol do TT"
+        "fr"    "Retirer but aux TT"
+        "de"    "Tor von TT entfernen"
+    }
+
+    "Menu_Card_Yellow_Give"
+    {
+        "en"    "Give yellow card"
+        "es"    "Poner amarilla"
+        "pt"    "Dar amarelo"
+        "fr"    "Donner jaune"
+        "de"    "Gelb geben"
+    }
+
+    "Menu_Card_Red_Give"
+    {
+        "en"    "Give red card"
+        "es"    "Poner roja"
+        "pt"    "Dar vermelho"
+        "fr"    "Donner rouge"
+        "de"    "Rot geben"
+    }
+
+    "Menu_Cards_Clear_Player"
+    {
+        "en"    "Clear player cards"
+        "es"    "Limpiar tarjetas jugador"
+        "pt"    "Limpar cartoes jogador"
+        "fr"    "Effacer cartons joueur"
+        "de"    "Spielerkarten loeschen"
+    }
+
+    "Menu_Cards_Clear_All"
+    {
+        "en"    "Clear all cards"
+        "es"    "Limpiar todas las tarjetas"
+        "pt"    "Limpar todos os cartoes"
+        "fr"    "Effacer tous les cartons"
+        "de"    "Alle Karten loeschen"
+    }
+
+    "Menu_Referee_Target_Title"
+    {
+        "en"    "Choose player"
+        "es"    "Elegir jugador"
+        "pt"    "Escolher jogador"
+        "fr"    "Choisir joueur"
+        "de"    "Spieler waehlen"
+    }
+
+    "Menu_Referee_Target_Display"
+    {
+        "#format"   "{1:N},{2:d},{3:s}"
+        "en"    "{1} | yellow: {2} | red: {3}"
+        "es"    "{1} | amarillas: {2} | roja: {3}"
+        "pt"    "{1} | amarelos: {2} | vermelho: {3}"
+        "fr"    "{1} | jaunes : {2} | rouge : {3}"
+        "de"    "{1} | Gelb: {2} | Rot: {3}"
+    }
+
+    "State_Yes"
+    {
+        "en"    "yes"
+        "es"    "si"
+        "pt"    "sim"
+        "fr"    "oui"
+        "de"    "ja"
+    }
+
+    "State_No"
+    {
+        "en"    "no"
+        "es"    "no"
+        "pt"    "nao"
+        "fr"    "non"
+        "de"    "nein"
+    }
+
+    "Menu_Draft_CaptainCount_Title"
+    {
+        "en"    "Snake draft\n \nChoose captain count"
+        "es"    "Snake draft\n \nElegir cantidad de capitanes"
+        "pt"    "Snake draft\n \nEscolher quantidade de capitaes"
+        "fr"    "Snake draft\n \nChoisir le nombre de capitaines"
+        "de"    "Snake-Draft\n \nAnzahl der Kapitaene waehlen"
+    }
+
+    "Menu_Draft_CaptainCount_2"
+    {
+        "en"    "2 captains"
+        "es"    "2 capitanes"
+        "pt"    "2 capitaes"
+        "fr"    "2 capitaines"
+        "de"    "2 Kapitaene"
+    }
+
+    "Menu_Draft_CaptainCount_3"
+    {
+        "en"    "3 captains"
+        "es"    "3 capitanes"
+        "pt"    "3 capitaes"
+        "fr"    "3 capitaines"
+        "de"    "3 Kapitaene"
+    }
+
+    "Menu_Draft_CaptainCount_4"
+    {
+        "en"    "4 captains"
+        "es"    "4 capitanes"
+        "pt"    "4 capitaes"
+        "fr"    "4 capitaines"
+        "de"    "4 Kapitaene"
+    }
+
+    "Menu_Draft_CaptainCount_Custom"
+    {
+        "en"    "Custom"
+        "es"    "Custom"
+        "pt"    "Custom"
+        "fr"    "Custom"
+        "de"    "Custom"
+    }
+
+    "Menu_Draft_TeamSize_Title"
+    {
+        "#format"   "{1:d}"
+        "en"    "Snake draft\n \nCaptains: {1}\nPlayers per team"
+        "es"    "Snake draft\n \nCapitanes: {1}\nJugadores por equipo"
+        "pt"    "Snake draft\n \nCapitaes: {1}\nJogadores por time"
+        "fr"    "Snake draft\n \nCapitaines : {1}\nJoueurs par equipe"
+        "de"    "Snake-Draft\n \nKapitaene: {1}\nSpieler pro Team"
+    }
+
+    "Menu_Draft_TeamSize_3"
+    {
+        "en"    "3 players per team"
+        "es"    "3 jugadores por equipo"
+        "pt"    "3 jogadores por time"
+        "fr"    "3 joueurs par equipe"
+        "de"    "3 Spieler pro Team"
+    }
+
+    "Menu_Draft_TeamSize_4"
+    {
+        "en"    "4 players per team"
+        "es"    "4 jugadores por equipo"
+        "pt"    "4 jogadores por time"
+        "fr"    "4 joueurs par equipe"
+        "de"    "4 Spieler pro Team"
+    }
+
+    "Menu_Draft_TeamSize_5"
+    {
+        "en"    "5 players per team"
+        "es"    "5 jugadores por equipo"
+        "pt"    "5 jogadores por time"
+        "fr"    "5 joueurs par equipe"
+        "de"    "5 Spieler pro Team"
+    }
+
+    "Menu_Draft_TeamSize_6"
+    {
+        "en"    "6 players per team"
+        "es"    "6 jugadores por equipo"
+        "pt"    "6 jogadores por time"
+        "fr"    "6 joueurs par equipe"
+        "de"    "6 Spieler pro Team"
+    }
+
+    "Menu_Draft_TeamSize_Custom"
+    {
+        "en"    "Custom"
+        "es"    "Custom"
+        "pt"    "Custom"
+        "fr"    "Custom"
+        "de"    "Custom"
+    }
+
+    "Draft_CaptainCount_Custom_Prompt"
+    {
+        "en"    "Draft: write the captain count in chat (2-4), or cancel."
+        "es"    "Draft: escribi la cantidad de capitanes por chat (2-4), o cancelar."
+        "pt"    "Draft: escreva a quantidade de capitaes no chat (2-4), ou cancelar."
+        "fr"    "Draft : ecris le nombre de capitaines dans le chat (2-4), ou cancel."
+        "de"    "Draft: schreibe die Anzahl der Kapitaene in den Chat (2-4), oder cancel."
+    }
+
+    "Draft_CaptainCount_Custom_Invalid"
+    {
+        "en"    "Draft: invalid captain count. Use 2 to 4."
+        "es"    "Draft: cantidad de capitanes invalida. Usa de 2 a 4."
+        "pt"    "Draft: quantidade de capitaes invalida. Use de 2 a 4."
+        "fr"    "Draft : nombre de capitaines invalide. Utilise 2 a 4."
+        "de"    "Draft: ungueltige Anzahl Kapitaene. Nutze 2 bis 4."
+    }
+
+    "Draft_TeamSize_Custom_Prompt"
+    {
+        "en"    "Draft: write players per team in chat (1-16), or cancel."
+        "es"    "Draft: escribi jugadores por equipo por chat (1-16), o cancelar."
+        "pt"    "Draft: escreva jogadores por time no chat (1-16), ou cancelar."
+        "fr"    "Draft : ecris les joueurs par equipe dans le chat (1-16), ou cancel."
+        "de"    "Draft: schreibe Spieler pro Team in den Chat (1-16), oder cancel."
+    }
+
+    "Draft_TeamSize_Custom_Invalid"
+    {
+        "en"    "Draft: invalid players per team. Use 1 to 16."
+        "es"    "Draft: jugadores por equipo invalido. Usa de 1 a 16."
+        "pt"    "Draft: jogadores por time invalido. Use de 1 a 16."
+        "fr"    "Draft : joueurs par equipe invalide. Utilise 1 a 16."
+        "de"    "Draft: ungueltige Spielerzahl pro Team. Nutze 1 bis 16."
+    }
+
+    "Draft_Custom_Cancelled"
+    {
+        "en"    "Draft: custom input cancelled."
+        "es"    "Draft: entrada custom cancelada."
+        "pt"    "Draft: entrada custom cancelada."
+        "fr"    "Draft : saisie custom annulee."
+        "de"    "Draft: Custom-Eingabe abgebrochen."
+    }
+
+    "Draft_Not_Enough_Captains"
+    {
+        "en"    "Draft: there are not enough connected players to use that many captains."
+        "es"    "Draft: no hay suficientes jugadores conectados para usar esa cantidad de capitanes."
+        "pt"    "Draft: nao ha jogadores conectados suficientes para usar essa quantidade de capitaes."
+        "fr"    "Draft : pas assez de joueurs connectes pour autant de capitaines."
+        "de"    "Draft: nicht genug verbundene Spieler fuer diese Anzahl Kapitaene."
+    }
+
+    "Menu_StartMatch"
+    {
+        "en"    "Start match"
+        "es"    "Mandar partido"
+        "pt"    "Iniciar partida"
+        "fr"    "Lancer le match"
+        "de"    "Spiel starten"
+    }
+
+    "Menu_ResumeMatch"
+    {
+        "en"    "Resume match"
+        "es"    "Reanudar partido"
+        "pt"    "Retomar partida"
+        "fr"    "Reprendre le match"
+        "de"    "Spiel fortsetzen"
+    }
+
+    "Menu_PauseMatch"
+    {
+        "en"    "Pause match"
+        "es"    "Pausar partido"
+        "pt"    "Pausar partida"
+        "fr"    "Mettre le match en pause"
+        "de"    "Spiel pausieren"
+    }
+
+    "Menu_StopMatch"
+    {
+        "en"    "Stop match"
+        "es"    "Finalizar partido"
+        "pt"    "Encerrar partida"
+        "fr"    "Arreter le match"
+        "de"    "Spiel beenden"
+    }
+
+    "Menu_MoreOptions"
+    {
+        "en"    "More"
+        "es"    "Mas opciones"
+        "pt"    "Mais opcoes"
+        "fr"    "Options"
+        "de"    "Mehr"
+    }
+
+    "Menu_SpecAll"
+    {
+        "en"    "All to spec"
+        "es"    "Todos a spec"
+        "pt"    "Todos para spec"
+        "fr"    "Tous en spec"
+        "de"    "Alle zu Spec"
+    }
+
+    "Menu_SpecOne"
+    {
+        "en"    "Player to spec"
+        "es"    "Jugador a spec"
+        "pt"    "Jogador para spec"
+        "fr"    "Joueur en spec"
+        "de"    "Spieler zu Spec"
+    }
+
+    "Menu_RespawnPlayers"
+    {
+        "en"    "Respawn players"
+        "es"    "Respawnear jugadores"
+        "pt"    "Respawnar jogadores"
+        "fr"    "Respawn des joueurs"
+        "de"    "Spieler respawnen"
+    }
+
+    "Menu_SpawnBall"
+    {
+        "en"    "Admin ball"
+        "es"    "Pelota admin"
+        "pt"    "Bola admin"
+        "fr"    "Ballon admin"
+        "de"    "Admin-Ball"
+    }
+
+    "Ball_Spawned"
+    {
+        "en"    "Ball admin: spawned where you are aiming."
+        "es"    "Pelota admin: spawneada donde apuntas."
+        "pt"    "Bola admin: spawnada onde voce esta mirando."
+        "fr"    "Ballon admin : cree la ou vous visez."
+        "de"    "Admin-Ball: dort gespawnt, wo du hinzielst."
+    }
+
+    "Ball_Removed"
+    {
+        "en"    "Ball admin: removed."
+        "es"    "Pelota admin: eliminada."
+        "pt"    "Bola admin: removida."
+        "fr"    "Ballon admin : supprime."
+        "de"    "Admin-Ball: entfernt."
+    }
+
+    "Menu_Start_Title"
+    {
+        "en"    "Match time"
+        "es"    "Tiempo de partido"
+        "pt"    "Tempo da partida"
+        "fr"    "Temps du match"
+        "de"    "Spielzeit"
+    }
+
+    "Menu_Start_3"
+    {
+        "en"    "3 minutes per period"
+        "es"    "3 minutos por periodo"
+        "pt"    "3 minutos por periodo"
+        "fr"    "3 minutes par periode"
+        "de"    "3 Minuten pro Halbzeit"
+    }
+
+    "Menu_Start_5"
+    {
+        "en"    "5 minutes per period"
+        "es"    "5 minutos por periodo"
+        "pt"    "5 minutos por periodo"
+        "fr"    "5 minutes par periode"
+        "de"    "5 Minuten pro Halbzeit"
+    }
+
+    "Menu_Start_Custom"
+    {
+        "en"    "Custom match"
+        "es"    "Partido custom"
+        "pt"    "Partida custom"
+        "fr"    "Match personnalise"
+        "de"    "Benutzerdefiniertes Spiel"
+    }
+
+    "Menu_Start_Custom_Prompt"
+    {
+        "en"    "Type the minutes per period in chat. Example: 10. Type cancel to abort."
+        "es"    "Escribi los minutos por periodo en el chat. Ejemplo: 10. Escribi cancel para cancelar."
+        "pt"    "Digite os minutos por periodo no chat. Exemplo: 10. Digite cancel para cancelar."
+        "fr"    "Ecris les minutes par periode dans le chat. Exemple : 10. Tape cancel pour annuler."
+        "de"    "Schreibe die Minuten pro Halbzeit in den Chat. Beispiel: 10. Mit cancel abbrechen."
+    }
+
+    "Menu_Start_Custom_Cancel"
+    {
+        "en"    "Custom match input cancelled."
+        "es"    "Carga de partido custom cancelada."
+        "pt"    "Entrada de partida custom cancelada."
+        "fr"    "Saisie du match personnalise annulee."
+        "de"    "Eingabe fur benutzerdefiniertes Spiel abgebrochen."
+    }
+
+    "Menu_Start_Custom_Invalid"
+    {
+        "en"    "Invalid value. Type minutes per period from 1 to 60, for example: 10."
+        "es"    "Valor invalido. Escribi minutos por periodo de 1 a 60, por ejemplo: 10."
+        "pt"    "Valor invalido. Digite minutos por periodo de 1 a 60, por exemplo: 10."
+        "fr"    "Valeur invalide. Ecris les minutes par periode de 1 a 60, par exemple : 10."
+        "de"    "Ungueltiger Wert. Schreibe Minuten pro Halbzeit von 1 bis 60, zum Beispiel: 10."
+    }
+
+    "Menu_Back"
+    {
+        "en"    "Back"
+        "es"    "Volver"
+        "pt"    "Voltar"
+        "fr"    "Retour"
+        "de"    "Zuruck"
+    }
+
+    "Menu_Ball_Title"
+    {
+        "en"    "Umbrella Soccer - Ball"
+        "es"    "Umbrella Soccer - Pelota"
+        "pt"    "Umbrella Soccer - Bola"
+        "fr"    "Umbrella Soccer - Ballon"
+        "de"    "Umbrella Soccer - Ball"
+    }
+
+    "Menu_Ball_SaveSpawn"
+    {
+        "en"    "Save ball spawn"
+        "es"    "Guardar spawn de la pelota"
+        "pt"    "Salvar spawn da bola"
+        "fr"    "Sauver le spawn du ballon"
+        "de"    "Ball-Spawn speichern"
+    }
+
+    "Menu_ChooseSkinPlayer"
+    {
+        "en"    "Choose player skin"
+        "es"    "Elegir skin de jugador"
+        "pt"    "Escolher skin do jogador"
+        "fr"    "Choisir le skin du joueur"
+        "de"    "Spieler-Skin wahlen"
+    }
+
+    "Menu_ChooseSkinFor"
+    {
+        "#format"   "{1:N}"
+        "en"    "Choose skin for {1}"
+        "es"    "Elegir skin para {1}"
+        "pt"    "Escolher skin para {1}"
+        "fr"    "Choisir le skin pour {1}"
+        "de"    "Skin fur {1} wahlen"
+    }
+
+    "Cmd_DraftCaptains_Usage"
+    {
+        "en"    "Usage: sm_soccer_draftcaptains <c1> <c2> [c3] [c4]"
+        "es"    "Uso: sm_soccer_draftcaptains <c1> <c2> [c3] [c4]"
+        "pt"    "Uso: sm_soccer_draftcaptains <c1> <c2> [c3] [c4]"
+        "fr"    "Usage : sm_soccer_draftcaptains <c1> <c2> [c3] [c4]"
+        "de"    "Verwendung: sm_soccer_draftcaptains <c1> <c2> [c3] [c4]"
+    }
+
+    "Draft_NeedTwoCaptains"
+    {
+        "en"    "Need at least 2 captains."
+        "es"    "Hacen falta al menos 2 capitanes."
+        "pt"    "Sao necessarios pelo menos 2 capitaes."
+        "fr"    "Il faut au moins 2 capitaines."
+        "de"    "Mindestens 2 Kapitane sind noetig."
+    }
+
+    "Draft_Captains_Configured"
+    {
+        "#format"   "{1:d}"
+        "en"    "Draft captains: configured ({1}). Use sm_soccer_draftstart to begin."
+        "es"    "Capitanes del draft: configurados ({1}). Usa sm_soccer_draftstart para empezar."
+        "pt"    "Capitaes do draft: configurados ({1}). Use sm_soccer_draftstart para comecar."
+        "fr"    "Capitaines du draft : configures ({1}). Utilise sm_soccer_draftstart pour commencer."
+        "de"    "Draft-Kapitane: gesetzt ({1}). Nutze sm_soccer_draftstart zum Starten."
+    }
+
+    "Draft_Captains_First"
+    {
+        "en"    "Draft: set captains first."
+        "es"    "Draft: primero defini los capitanes."
+        "pt"    "Draft: defina primeiro os capitaes."
+        "fr"    "Draft : definis d'abord les capitaines."
+        "de"    "Draft: lege zuerst die Kapitane fest."
+    }
+
+    "Menu_Draft_Limit_Title"
+    {
+        "en"    "Snake draft\nPlayers per team"
+        "es"    "Snake draft\nJugadores por equipo"
+        "pt"    "Snake draft\nJogadores por time"
+        "fr"    "Snake draft\nJoueurs par equipe"
+        "de"    "Snake-Draft\nSpieler pro Team"
+    }
+
+    "Menu_Draft_Limit_None"
+    {
+        "en"    "No limit"
+        "es"    "Sin limite"
+        "pt"    "Sem limite"
+        "fr"    "Sans limite"
+        "de"    "Ohne Limit"
+    }
+
+    "Menu_Draft_Limit_4"
+    {
+        "en"    "4 per team"
+        "es"    "4 por equipo"
+        "pt"    "4 por time"
+        "fr"    "4 par equipe"
+        "de"    "4 pro Team"
+    }
+
+    "Menu_Draft_Limit_5"
+    {
+        "en"    "5 per team"
+        "es"    "5 por equipo"
+        "pt"    "5 por time"
+        "fr"    "5 par equipe"
+        "de"    "5 pro Team"
+    }
+
+    "Menu_Draft_Limit_6"
+    {
+        "en"    "6 per team"
+        "es"    "6 por equipo"
+        "pt"    "6 por time"
+        "fr"    "6 par equipe"
+        "de"    "6 pro Team"
+    }
+
+    "Menu_Draft_Limit_7"
+    {
+        "en"    "7 per team"
+        "es"    "7 por equipo"
+        "pt"    "7 por time"
+        "fr"    "7 par equipe"
+        "de"    "7 pro Team"
+    }
+
+    "Menu_Draft_Limit_8"
+    {
+        "en"    "8 per team"
+        "es"    "8 por equipo"
+        "pt"    "8 por time"
+        "fr"    "8 par equipe"
+        "de"    "8 pro Team"
+    }
+
+    "Menu_Draft_Limit_Custom"
+    {
+        "en"    "Custom (chat)"
+        "es"    "Custom (chat)"
+        "pt"    "Custom (chat)"
+        "fr"    "Custom (chat)"
+        "de"    "Custom (Chat)"
+    }
+
+    "Draft_Limit_Custom_Prompt"
+    {
+        "en"    "Draft: type in chat the max players per team (0 = no limit, 1-16). Write cancel to abort."
+        "es"    "Draft: escribe en chat el maximo de jugadores por equipo (0 = sin limite, 1-16). Escribe cancelar para abortar."
+        "pt"    "Draft: digite no chat o maximo de jogadores por time (0 = sem limite, 1-16). Escreva cancelar para cancelar."
+        "fr"    "Draft : ecris dans le chat le maximum de joueurs par equipe (0 = sans limite, 1-16). Ecris cancel pour annuler."
+        "de"    "Draft: schreibe im Chat das Spielerlimit pro Team (0 = kein Limit, 1-16). Schreibe cancel zum Abbrechen."
+    }
+
+    "Draft_Limit_Custom_Cancel"
+    {
+        "en"    "Draft: custom limit input cancelled."
+        "es"    "Draft: carga de limite custom cancelada."
+        "pt"    "Draft: entrada de limite custom cancelada."
+        "fr"    "Draft : saisie de limite custom annulee."
+        "de"    "Draft: benutzerdefinierte Limit-Eingabe abgebrochen."
+    }
+
+    "Draft_Limit_Custom_Invalid"
+    {
+        "en"    "Draft: invalid value. Use 0 for no limit or 1-16."
+        "es"    "Draft: valor invalido. Usa 0 para sin limite o 1-16."
+        "pt"    "Draft: valor invalido. Use 0 para sem limite ou 1-16."
+        "fr"    "Draft : valeur invalide. Utilise 0 pour sans limite ou 1-16."
+        "de"    "Draft: ungueltiger Wert. Nutze 0 fuer kein Limit oder 1-16."
+    }
+
+    "Draft_Limit_Custom_Set"
+    {
+        "#format"   "{1:d}"
+        "en"    "Draft: custom limit set to {1} players per team."
+        "es"    "Draft: limite custom configurado en {1} jugadores por equipo."
+        "pt"    "Draft: limite custom definido em {1} jogadores por time."
+        "fr"    "Draft : limite custom defini a {1} joueurs par equipe."
+        "de"    "Draft: benutzerdefiniertes Limit auf {1} Spieler pro Team gesetzt."
+    }
+
+    "Draft_Limit_Custom_Set_Unlimited"
+    {
+        "en"    "Draft: custom limit set to no limit."
+        "es"    "Draft: limite custom configurado en sin limite."
+        "pt"    "Draft: limite custom definido como sem limite."
+        "fr"    "Draft : limite custom defini sur sans limite."
+        "de"    "Draft: benutzerdefiniertes Limit auf kein Limit gesetzt."
+    }
+
+    "Draft_Turn"
+    {
+        "#format"   "{1:d},{2:N},{3:d}"
+        "en"    "Pick #{1}: {2}. Players left: {3}"
+        "es"    "Pick #{1}: {2}. Quedan {3} jugadores."
+        "pt"    "Pick #{1}: {2}. Restam {3} jogadores."
+        "fr"    "Pick #{1}: {2}. Il reste {3} joueurs."
+        "de"    "Pick #{1}: {2}. Noch {3} Spieler ubrig."
+    }
+
+    "Draft_Open_Menu"
+    {
+        "en"    "Draft: your menu is open. You can also use !draft."
+        "es"    "Draft: ya tenes el menu abierto. Tambien podes usar !draft."
+        "pt"    "Draft: seu menu ja esta aberto. Voce tambem pode usar !draft."
+        "fr"    "Draft : ton menu est deja ouvert. Tu peux aussi utiliser !draft."
+        "de"    "Draft: dein Menu ist bereits offen. Du kannst auch !draft nutzen."
+    }
+
+    "Menu_Draft_Title"
+    {
+        "en"    "Draft and captains"
+        "es"    "Draft y capitanes"
+        "pt"    "Draft e capitaes"
+        "fr"    "Draft et capitaines"
+        "de"    "Draft und Kapitane"
+    }
+
+    "Menu_Draft_Snake"
+    {
+        "en"    "Snake draft"
+        "es"    "Snake draft"
+        "pt"    "Snake draft"
+        "fr"    "Snake draft"
+        "de"    "Snake-Draft"
+    }
+
+    "Menu_Draft_Snake_Title"
+    {
+        "en"    "Snake draft\n \n2, 3 or 4 captains"
+        "es"    "Snake draft\n \n2, 3 o 4 capitanes"
+        "pt"    "Snake draft\n \n2, 3 ou 4 capitaes"
+        "fr"    "Snake draft\n \n2, 3 ou 4 capitaines"
+        "de"    "Snake-Draft\n \n2, 3 oder 4 Kapitane"
+    }
+
+    "Menu_Draft_Start2"
+    {
+        "en"    "Snake draft x2"
+        "es"    "Snake draft x2"
+        "pt"    "Snake draft x2"
+        "fr"    "Snake draft x2"
+        "de"    "Snake-Draft x2"
+    }
+
+    "Menu_Draft_Start3"
+    {
+        "en"    "Snake draft x3"
+        "es"    "Snake draft x3"
+        "pt"    "Snake draft x3"
+        "fr"    "Snake draft x3"
+        "de"    "Snake-Draft x3"
+    }
+
+    "Menu_Draft_Start4"
+    {
+        "en"    "Snake draft x4"
+        "es"    "Snake draft x4"
+        "pt"    "Snake draft x4"
+        "fr"    "Snake draft x4"
+        "de"    "Snake-Draft x4"
+    }
+
+    "Menu_Draft_Open"
+    {
+        "en"    "Open my menu"
+        "es"    "Abrir mi menu"
+        "pt"    "Abrir meu menu"
+        "fr"    "Ouvrir mon menu"
+        "de"    "Mein Menu offnen"
+    }
+
+    "Menu_Draft_Show"
+    {
+        "en"    "Show teams"
+        "es"    "Ver equipos"
+        "pt"    "Ver times"
+        "fr"    "Voir les equipes"
+        "de"    "Teams anzeigen"
+    }
+
+    "Menu_Draft_Cancel"
+    {
+        "en"    "Cancel draft"
+        "es"    "Cancelar draft"
+        "pt"    "Cancelar draft"
+        "fr"    "Annuler draft"
+        "de"    "Draft abbrechen"
+    }
+
+    "Menu_Draft_CapMode"
+    {
+        "en"    "Cap mode 1v1"
+        "es"    "Cap mode 1v1"
+        "pt"    "Cap mode 1v1"
+        "fr"    "Cap mode 1v1"
+        "de"    "Cap-Mode 1v1"
+    }
+
+    "Menu_Cap_SpecAll"
+    {
+        "en"    "Cap: all to spec"
+        "es"    "Cap: todos a spec"
+        "pt"    "Cap: todos para spec"
+        "fr"    "Cap : tous en spec"
+        "de"    "Cap: alle zu Spec"
+    }
+
+    "Menu_Cap_Random"
+    {
+        "en"    "Cap: add random"
+        "es"    "Cap: agregar random"
+        "pt"    "Cap: adicionar random"
+        "fr"    "Cap : ajouter random"
+        "de"    "Cap: random hinzufugen"
+    }
+
+    "Menu_Cap_RandomAll"
+    {
+        "en"    "Cap: add all random"
+        "es"    "Cap: agregar todos random"
+        "pt"    "Cap: adicionar todos random"
+        "fr"    "Cap : ajouter tous les random"
+        "de"    "Cap: alle random hinzufugen"
+    }
+
+    "Menu_SelectCaptains"
+    {
+        "#format"   "{1:d}"
+        "en"    "Select {1} captains"
+        "es"    "Elegir {1} capitanes"
+        "pt"    "Selecionar {1} capitaes"
+        "fr"    "Selectionner {1} capitaines"
+        "de"    "{1} Kapitane auswahlen"
+    }
+
+    "Draft_Captain_Added"
+    {
+        "#format"   "{1:N},{2:d},{3:d}"
+        "en"    "Captain added: {1} ({2}/{3})"
+        "es"    "Capitan agregado: {1} ({2}/{3})"
+        "pt"    "Capitao adicionado: {1} ({2}/{3})"
+        "fr"    "Capitaine ajoute : {1} ({2}/{3})"
+        "de"    "Kapitan hinzugefugt: {1} ({2}/{3})"
+    }
+
+    "Draft_Not_Active"
+    {
+        "en"    "Draft: is not active."
+        "es"    "Draft: no esta activo."
+        "pt"    "Draft: nao esta ativo."
+        "fr"    "Draft : n'est pas actif."
+        "de"    "Draft: ist nicht aktiv."
+    }
+
+    "Draft_Not_Captain"
+    {
+        "en"    "Draft: you are not a captain in the current draft."
+        "es"    "Draft: no sos capitan en el draft actual."
+        "pt"    "Draft: voce nao e capitao no draft atual."
+        "fr"    "Draft : tu n'es pas capitaine dans le draft actuel."
+        "de"    "Draft: du bist im aktuellen Draft kein Kapitan."
+    }
+
+    "Draft_Not_Your_Turn"
+    {
+        "en"    "Draft: it is not your turn."
+        "es"    "Draft: no es tu turno."
+        "pt"    "Draft: nao e a sua vez."
+        "fr"    "Draft : ce n'est pas ton tour."
+        "de"    "Draft: du bist nicht dran."
+    }
+
+    "Menu_DraftPick_Title"
+    {
+        "en"    "Choose player"
+        "es"    "Elegir jugador"
+        "pt"    "Escolher jogador"
+        "fr"    "Choisir un joueur"
+        "de"    "Spieler auswahlen"
+    }
+
+    "Draft_Player_Picked"
+    {
+        "#format"   "{1:N},{2:N},{3:d}"
+        "en"    "{1} picked {2} for team {3}."
+        "es"    "{1} eligio a {2} para el equipo {3}."
+        "pt"    "{1} escolheu {2} para o time {3}."
+        "fr"    "{1} a choisi {2} pour l'equipe {3}."
+        "de"    "{1} waehlte {2} fur Team {3}."
+    }
+
+    "Draft_Finished"
+    {
+        "en"    "Draft: complete."
+        "es"    "Draft: completo."
+        "pt"    "Draft: concluido."
+        "fr"    "Draft : termine."
+        "de"    "Draft: abgeschlossen."
+    }
+
+    "Draft_Cancelled"
+    {
+        "en"    "Draft: cancelled."
+        "es"    "Draft: cancelado."
+        "pt"    "Draft: cancelado."
+        "fr"    "Draft : annule."
+        "de"    "Draft: abgebrochen."
+    }
+
+    "CapFight_AlreadyStarted"
+    {
+        "en"    "Cap mode: is already running."
+        "es"    "Cap mode: ya esta en curso."
+        "pt"    "Cap mode: ja esta em andamento."
+        "fr"    "Cap mode : est deja en cours."
+        "de"    "Cap-Mode: laeuft bereits."
+    }
+
+    "CapFight_NeedPlayers"
+    {
+        "en"    "Cap mode: needs exactly 1 player in T and 1 in CT."
+        "es"    "Cap mode: necesita exactamente 1 jugador en T y 1 en CT."
+        "pt"    "Cap mode: precisa de exatamente 1 jogador no T e 1 no CT."
+        "fr"    "Cap mode : a besoin d'exactement 1 joueur en T et 1 en CT."
+        "de"    "Cap-Mode: braucht genau 1 Spieler in T und 1 in CT."
+    }
+
+    "CapFight_Start"
+    {
+        "#format"   "{1:N},{2:N}"
+        "en"    "Cap mode: {1} vs {2}. Starts in 3 seconds."
+        "es"    "Cap mode: {1} vs {2}. Arranca en 3 segundos."
+        "pt"    "Cap mode: {1} vs {2}. Comeca em 3 segundos."
+        "fr"    "Cap mode : {1} vs {2}. Debut dans 3 secondes."
+        "de"    "Cap-Mode: {1} vs {2}. Startet in 3 Sekunden."
+    }
+
+    "CapFight_Fight"
+    {
+        "en"    "FIGHT!"
+        "es"    "PELEEN!"
+        "pt"    "LUTEM!"
+        "fr"    "COMBAT!"
+        "de"    "KAMPF!"
+    }
+
+    "CapFight_WinnerPicks"
+    {
+        "#format"   "{1:N}"
+        "en"    "{1} won the cap mode and picks first."
+        "es"    "{1} gano el cap mode y elige primero."
+        "pt"    "{1} venceu o cap mode e escolhe primeiro."
+        "fr"    "{1} a gagne le cap mode et choisit en premier."
+        "de"    "{1} hat den Cap-Mode gewonnen y pickt zuerst."
+    }
+
+    "CapFight_NoSpecPlayers"
+    {
+        "en"    "Spec: there are no players in spec."
+        "es"    "Spec: no hay jugadores en spec."
+        "pt"    "Spec: nao ha jogadores em spec."
+        "fr"    "Spec : il n'y a pas de joueurs en spec."
+        "de"    "Spec: es sind keine Spieler in Spec."
+    }
+
+    "CapFight_RandomAdded"
+    {
+        "#format"   "{1:N}"
+        "en"    "Random added: {1}."
+        "es"    "Random agregado: {1}."
+        "pt"    "Random adicionado: {1}."
+        "fr"    "Random ajoute : {1}."
+        "de"    "Random hinzugefugt: {1}."
+    }
+
+    "CapFight_AllRandomAdded"
+    {
+        "en"    "Random teams: all spec players were added."
+        "es"    "Equipos random: todos los jugadores de spec fueron agregados."
+        "pt"    "Times random: todos os jogadores do spec foram adicionados."
+        "fr"    "Equipes random : tous les joueurs en spec ont ete ajoutes."
+        "de"    "Random-Teams: alle Spec-Spieler wurden hinzugefugt."
+    }
+
+    "Draft_Groups_Title"
+    {
+        "en"    "Draft teams:"
+        "es"    "Equipos del draft:"
+        "pt"    "Times do draft:"
+        "fr"    "Equipes du draft :"
+        "de"    "Draft-Teams:"
+    }
+
+    "Draft_Group_Generic"
+    {
+        "#format"   "{1:d}"
+        "en"    "Team {1}"
+        "es"    "Equipo {1}"
+        "pt"    "Time {1}"
+        "fr"    "Equipe {1}"
+        "de"    "Team {1}"
+    }
+
+    "Draft_Assigned_To_Teams"
+    {
+        "#format"   "{1:s},{2:s}"
+        "en"    "CT: {1} | T: {2}"
+        "es"    "CT: {1} | T: {2}"
+        "pt"    "CT: {1} | T: {2}"
+        "fr"    "CT: {1} | T: {2}"
+        "de"    "CT: {1} | T: {2}"
+    }
+
+    "Draft_Show_Group"
+    {
+        "#format"   "{1:d},{2:s}"
+        "en"    "Group {1}: {2}"
+        "es"    "Grupo {1}: {2}"
+        "pt"    "Grupo {1}: {2}"
+        "fr"    "Groupe {1} : {2}"
+        "de"    "Gruppe {1}: {2}"
+    }
+
+    "Menu_Penalties_Start"
+    {
+        "en"    "Start penalties"
+        "es"    "Iniciar penales"
+        "pt"    "Iniciar penaltis"
+        "fr"    "Demarrer penalties"
+        "de"    "Elfmeterschiessen starten"
+    }
+
+    "Menu_Penalties_Stop"
+    {
+        "en"    "Stop penalties"
+        "es"    "Finalizar penales"
+        "pt"    "Finalizar penaltis"
+        "fr"    "Arreter penalties"
+        "de"    "Elfmeterschiessen beenden"
+    }
+
+    "Menu_Penalty_Spot"
+    {
+        "en"    "Set penalty spot"
+        "es"    "Punto penal"
+        "pt"    "Marcar ponto penal"
+        "fr"    "Point de penalty"
+        "de"    "Elfmeterpunkt setzen"
+    }
+
+    "Penalty_Need_No_Match"
+    {
+        "en"    "Penalties: only available without an active match."
+        "es"    "Penales: solo disponible sin partido activo."
+        "pt"    "Penaltis: disponivel apenas sem partida ativa."
+        "fr"    "Penalties : disponible uniquement sans match actif."
+        "de"    "Elfmeter: nur ohne aktives Match verfugbar."
+    }
+
+    "Penalty_Need_Players"
+    {
+        "en"    "Penalties: you need players in both teams."
+        "es"    "Penales: necesitas jugadores en ambos equipos."
+        "pt"    "Penaltis: voce precisa de jogadores nos dois times."
+        "fr"    "Penalties : il faut des joueurs dans les deux equipes."
+        "de"    "Elfmeter: es werden Spieler in beiden Teams benotigt."
+    }
+
+    "Penalty_Setup_Start"
+    {
+        "en"    "Penalties: captain setup started."
+        "es"    "Penales: inicio la configuracion de capitanes."
+        "pt"    "Penaltis: configuracao dos capitaes iniciada."
+        "fr"    "Penalties : configuration des capitaines demarree."
+        "de"    "Elfmeter: Kapitan-Konfiguration gestartet."
+    }
+
+    "Penalty_Setup_Invalid"
+    {
+        "en"    "Penalties: invalid setup. cancelled."
+        "es"    "Penales: configuracion invalida. cancelado."
+        "pt"    "Penaltis: configuracao invalida. cancelado."
+        "fr"    "Penalties : configuration invalide. annule."
+        "de"    "Elfmeter: ungueltige Konfiguration. abgebrochen."
+    }
+
+    "Penalty_Menu_SelectGK"
+    {
+        "#format"   "{1:s}"
+        "en"    "Penalties ({1}) - Choose goalkeeper"
+        "es"    "Penales ({1}) - Elegi arquero"
+        "pt"    "Penaltis ({1}) - Escolha o goleiro"
+        "fr"    "Penalties ({1}) - Choisir le gardien"
+        "de"    "Elfmeter ({1}) - Torwart waehlen"
+    }
+
+    "Penalty_Menu_SelectShooter"
+    {
+        "#format"   "{1:s},{2:d},{3:d}"
+        "en"    "Penalties ({1}) - Shooter {2}/{3}"
+        "es"    "Penales ({1}) - Pateador {2}/{3}"
+        "pt"    "Penaltis ({1}) - Batedor {2}/{3}"
+        "fr"    "Penalties ({1}) - Tireur {2}/{3}"
+        "de"    "Elfmeter ({1}) - Schuetze {2}/{3}"
+    }
+
+    "Penalty_SetGK"
+    {
+        "#format"   "{1:N},{2:s}"
+        "en"    "Penalties: {1} is goalkeeper for {2}."
+        "es"    "Penales: {1} es arquero de {2}."
+        "pt"    "Penaltis: {1} e goleiro de {2}."
+        "fr"    "Penalties : {1} est gardien de {2}."
+        "de"    "Elfmeter: {1} ist Torwart von {2}."
+    }
+
+    "Penalty_SetShooter"
+    {
+        "#format"   "{1:d},{2:N}"
+        "en"    "Penalties: shooter #{1} -> {2}."
+        "es"    "Penales: pateador #{1} -> {2}."
+        "pt"    "Penaltis: batedor #{1} -> {2}."
+        "fr"    "Penalties : tireur #{1} -> {2}."
+        "de"    "Elfmeter: Schuetze #{1} -> {2}."
+    }
+
+    "Penalty_Order"
+    {
+        "#format"   "{1:s},{2:N},{3:s}"
+        "en"    "Penalties {1}: GK {2} | order: {3}"
+        "es"    "Penales {1}: Arquero {2} | orden: {3}"
+        "pt"    "Penaltis {1}: Goleiro {2} | ordem: {3}"
+        "fr"    "Penalties {1} : Gardien {2} | ordre : {3}"
+        "de"    "Elfmeter {1}: Torwart {2} | Reihenfolge: {3}"
+    }
+
+    "Penalty_Shootout_Start"
+    {
+        "en"    "Penalties: shootout started."
+        "es"    "Penales: arranco la tanda."
+        "pt"    "Penaltis: disputa iniciada."
+        "fr"    "Penalties : la seance a commence."
+        "de"    "Elfmeter: das Schiessen hat begonnen."
+    }
+
+    "Penalty_Turn"
+    {
+        "#format"   "{1:N},{2:N},{3:s}"
+        "en"    "Penalty turn: {1} shoots for {3} vs GK {2}."
+        "es"    "Turno penal: patea {1} para {3} vs arquero {2}."
+        "pt"    "Turno penalti: {1} bate por {3} contra goleiro {2}."
+        "fr"    "Tour de penalty : {1} tire pour {3} contre GK {2}."
+        "de"    "Elfmeterrunde: {1} schiesst fuer {3} gegen TW {2}."
+    }
+
+    "Penalty_Goal"
+    {
+        "#format"   "{1:N}"
+        "en"    "Penalty goal: {1} scored."
+        "es"    "Gol de penal: convirtio {1}."
+        "pt"    "Gol de penalti: {1} marcou."
+        "fr"    "But sur penalty : {1} a marque."
+        "de"    "Elfmetertor: {1} trifft."
+    }
+
+    "Penalty_Goal_Generic"
+    {
+        "en"    "Penalty goal!"
+        "es"    "Gol de penal!"
+        "pt"    "Gol de penalti!"
+        "fr"    "But sur penalty !"
+        "de"    "Elfmetertor!"
+    }
+
+    "Penalty_Miss"
+    {
+        "#format"   "{1:N}"
+        "en"    "Penalty miss: {1} missed."
+        "es"    "Penal errado: fallo {1}."
+        "pt"    "Penalti perdido: {1} errou."
+        "fr"    "Penalty manque : {1} rate."
+        "de"    "Elfmeter vergeben: {1} daneben."
+    }
+
+    "Penalty_Miss_Generic"
+    {
+        "en"    "Penalty missed."
+        "es"    "Penal errado."
+        "pt"    "Penalti perdido."
+        "fr"    "Penalty manque."
+        "de"    "Elfmeter vergeben."
+    }
+
+    "Penalty_Score"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "Penalty score: CT {1} - {2} TT"
+        "es"    "Marcador penales: CT {1} - {2} TT"
+        "pt"    "Placar penaltis: CT {1} - {2} TT"
+        "fr"    "Score penalties : CT {1} - {2} TT"
+        "de"    "Elfmeterscore: CT {1} - {2} TT"
+    }
+
+    "Penalty_Hud_Preparing"
+    {
+        "#format"   "{1:d},{2:d},{3:d}"
+        "en"    "Penalties CT {1}-{2} TT | Round {3} | Preparing shot..."
+        "es"    "Penales CT {1}-{2} TT | Ronda {3} | Preparando tiro..."
+        "pt"    "Penaltis CT {1}-{2} TT | Rodada {3} | Preparando chute..."
+        "fr"    "Penalties CT {1}-{2} TT | Tour {3} | Preparation du tir..."
+        "de"    "Elfmeter CT {1}-{2} TT | Runde {3} | Schuss wird vorbereitet..."
+    }
+
+    "Penalty_Hud_Turn"
+    {
+        "#format"   "{1:d},{2:d},{3:d},{4:s},{5:d},{6:d}"
+        "en"    "Penalties CT {1}-{2} TT | Round {3} | Turn {4} {5}/{6}"
+        "es"    "Penales CT {1}-{2} TT | Ronda {3} | Turno {4} {5}/{6}"
+        "pt"    "Penaltis CT {1}-{2} TT | Rodada {3} | Vez {4} {5}/{6}"
+        "fr"    "Penalties CT {1}-{2} TT | Tour {3} | Tour {4} {5}/{6}"
+        "de"    "Elfmeter CT {1}-{2} TT | Runde {3} | Zug {4} {5}/{6}"
+    }
+
+    "Penalty_Cycle_Tie"
+    {
+        "#format"   "{1:d}"
+        "en"    "Penalties: tie. restarting order (round {1})."
+        "es"    "Penales: empate. se reinicia el orden (ronda {1})."
+        "pt"    "Penaltis: empate. reiniciando ordem (rodada {1})."
+        "fr"    "Penalties : egalite. reprise de l'ordre (tour {1})."
+        "de"    "Elfmeter: Unentschieden. Reihenfolge neu (Runde {1})."
+    }
+
+    "Penalty_Winner"
+    {
+        "#format"   "{1:s}"
+        "en"    "Penalties winner: {1}."
+        "es"    "Ganador en penales: {1}."
+        "pt"    "Vencedor nos penaltis: {1}."
+        "fr"    "Vainqueur aux penalties : {1}."
+        "de"    "Sieger im Elfmeterschiessen: {1}."
+    }
+
+    "Penalty_No_Winner"
+    {
+        "en"    "Penalties ended without winner."
+        "es"    "La tanda termino sin ganador."
+        "pt"    "A disputa terminou sem vencedor."
+        "fr"    "La seance est terminee sans vainqueur."
+        "de"    "Elfmeterschiessen ohne Sieger beendet."
+    }
+
+    "Penalty_Cancelled"
+    {
+        "en"    "Penalties: cancelled."
+        "es"    "Penales: cancelados."
+        "pt"    "Penaltis: cancelados."
+        "fr"    "Penalties : annules."
+        "de"    "Elfmeter: abgebrochen."
+    }
+
+    "Penalty_Stop_First"
+    {
+        "en"    "Match: stop penalties first."
+        "es"    "Partido: primero finaliza la tanda de penales."
+        "pt"    "Partida: finalize os penaltis primeiro."
+        "fr"    "Match : arretez d'abord la seance de penalties."
+        "de"    "Match: zuerst Elfmeterschiessen beenden."
+    }
+
+    "Penalty_Spot_Set"
+    {
+        "en"    "Penalties: penalty spot saved from your crosshair."
+        "es"    "Penales: punto penal guardado desde tu mira."
+        "pt"    "Penaltis: ponto penal salvo da sua mira."
+        "fr"    "Penalties : point de penalty enregistre depuis votre viseur."
+        "de"    "Elfmeter: Elfmeterpunkt von deinem Fadenkreuz gespeichert."
+    }
+
+    "Penalty_Spot_Reminder"
+    {
+        "en"    "Penalties: set the ball where you want and use Punto penal before starting."
+        "es"    "Penales: coloca la pelota donde quieras y usa Punto penal antes de iniciar."
+        "pt"    "Penaltis: coloque a bola onde quiser e use Ponto penal antes de iniciar."
+        "fr"    "Penalties : placez le ballon ou vous voulez et utilisez Point de penalty avant de commencer."
+        "de"    "Elfmeter: lege den Ball an die gewuenschte Stelle und nutze Elfmeterpunkt setzen vor dem Start."
+    }
+
+    "Penalty_Captain_Fallback"
+    {
+        "#format"   "{1:N},{2:s}"
+        "en"    "Penalties: captain missing in {2}, using {1} as fallback."
+        "es"    "Penales: faltaba capitan en {2}, se usa {1} como reemplazo."
+        "pt"    "Penaltis: faltava capitao em {2}, usando {1} como substituto."
+        "fr"    "Penalties : capitaine manquant en {2}, {1} est utilise en remplacement."
+        "de"    "Elfmeter: Kapitaen in {2} fehlt, {1} wird als Ersatz genutzt."
+    }
+
+    "Penalty_Shot_Warn"
+    {
+        "#format"   "{1:d}"
+        "en"    "Hurry up: you have {1} second(s) left to shoot."
+        "es"    "Apurate: te quedan {1} segundo(s) para patear."
+        "pt"    "Rapido: voce tem {1} segundo(s) para bater."
+        "fr"    "Vite : il te reste {1} seconde(s) pour tirer."
+        "de"    "Schnell: du hast noch {1} Sekunde(n) zum Schiessen."
+    }
+
+    "Final_Result"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "Final result: CT {1} - {2} TT"
+        "es"    "Resultado final: CT {1} - {2} TT"
+        "pt"    "Resultado final: CT {1} - {2} TT"
+        "fr"    "Resultat final : CT {1} - {2} TT"
+        "de"    "Endstand: CT {1} - {2} TT"
+    }
+
+    "Match_MVP"
+    {
+        "#format"   "{1:N},{2:d}"
+        "en"    "MVP: {1} with {2} points."
+        "es"    "MVP del partido: {1} con {2} puntos."
+        "pt"    "MVP da partida: {1} com {2} pontos."
+        "fr"    "MVP du match : {1} avec {2} points."
+        "de"    "MVP des Spiels: {1} mit {2} Punkten."
+    }
+
+    "Match_MVP_None"
+    {
+        "en"    "MVP: no player scored more than 0 points this match."
+        "es"    "MVP del partido: ningun jugador hizo mas de 0 puntos."
+        "pt"    "MVP da partida: nenhum jogador fez mais de 0 pontos."
+        "fr"    "MVP du match : aucun joueur n'a marque plus de 0 point."
+        "de"    "MVP des Spiels: kein Spieler hat mehr als 0 Punkte erzielt."
+    }
+
+    "Match_Started"
+    {
+        "en"    "Match: started."
+        "es"    "Partido: iniciado."
+        "pt"    "Partida: iniciada."
+        "fr"    "Match : demarre."
+        "de"    "Match: gestartet."
+    }
+
+    "Match_Started_Time"
+    {
+        "#format"   "{1:d}"
+        "en"    "Match Time: {1} minutes per period."
+        "es"    "Tiempo Del Partido: {1} minutos por periodo."
+        "pt"    "Tempo da Partida: {1} minutos por periodo."
+        "fr"    "Temps du Match : {1} minutes par periode."
+        "de"    "Spielzeit: {1} Minuten pro Halbzeit."
+    }
+
+    "Match_Unpaused"
+    {
+        "en"    "Match: resumed."
+        "es"    "Partido: reanudado."
+        "pt"    "Partida: retomada."
+        "fr"    "Match : repris."
+        "de"    "Match: fortgesetzt."
+    }
+
+    "Menu_Player_Clean_Title"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "Umbrella Soccer\nCT {1} - {2} TT"
+        "es"    "Umbrella Soccer\nCT {1} - {2} TT"
+        "pt"    "Umbrella Soccer\nCT {1} - {2} TT"
+        "fr"    "Umbrella Soccer\nCT {1} - {2} TT"
+        "de"    "Umbrella Soccer\nCT {1} - {2} TT"
+    }
+
+    "Menu_Admin_Clean_Title"
+    {
+        "en"    "Umbrella Soccer Admin"
+        "es"    "Umbrella Soccer Admin"
+        "pt"    "Umbrella Soccer Admin"
+        "fr"    "Umbrella Soccer Admin"
+        "de"    "Umbrella Soccer Admin"
+    }
+
+    "Menu_Position"
+    {
+        "en"    "Position"
+        "es"    "Posicion"
+        "pt"    "Posicao"
+        "fr"    "Position"
+        "de"    "Position"
+    }
+
+    "Menu_Sprint"
+    {
+        "en"    "Sprint"
+        "es"    "Sprint"
+        "pt"    "Sprint"
+        "fr"    "Sprint"
+        "de"    "Sprint"
+    }
+
+    "Menu_TrainingBall"
+    {
+        "en"    "Spawn training ball"
+        "es"    "Spawnear pelota training"
+        "pt"    "Spawnar bola de treino"
+        "fr"    "Creer ballon training"
+        "de"    "Trainingsball spawnen"
+    }
+
+    "Menu_TrainingCannon"
+    {
+        "en"    "Toggle training cannon"
+        "es"    "Activar/desactivar cannon training"
+        "pt"    "Alternar canhao de treino"
+        "fr"    "Activer/desactiver canon training"
+        "de"    "Trainingskanone umschalten"
+    }
+
+    "Menu_Practice_Title"
+    {
+        "en"    "Practice"
+        "es"    "Practica"
+        "pt"    "Treino"
+        "fr"    "Entrainement"
+        "de"    "Training"
+    }
+
+    "Menu_TrainingBall_Remove"
+    {
+        "en"    "Remove training ball"
+        "es"    "Quitar pelota training"
+        "pt"    "Remover bola de treino"
+        "fr"    "Retirer ballon training"
+        "de"    "Trainingsball entfernen"
+    }
+
+    "Menu_TrainingCannon_Position"
+    {
+        "en"    "Set cannon position"
+        "es"    "Setear posicion del cannon"
+        "pt"    "Definir posicao do canhao"
+        "fr"    "Definir position canon"
+        "de"    "Kanonenposition setzen"
+    }
+
+    "Menu_TrainingCannon_Target"
+    {
+        "en"    "Set cannon target"
+        "es"    "Setear objetivo del cannon"
+        "pt"    "Definir alvo do canhao"
+        "fr"    "Definir cible canon"
+        "de"    "Kanonnenziel setzen"
+    }
+
+    "Menu_TrainingCannon_Power"
+    {
+        "en"    "Set cannon speed"
+        "es"    "Setear velocidad del cannon"
+        "pt"    "Definir velocidade do canhao"
+        "fr"    "Definir vitesse canon"
+        "de"    "Kanongeschwindigkeit setzen"
+    }
+
+    "Menu_TrainingCannon_Start"
+    {
+        "en"    "Start cannon"
+        "es"    "Iniciar cannon"
+        "pt"    "Iniciar canhao"
+        "fr"    "Demarrer canon"
+        "de"    "Kanone starten"
+    }
+
+    "Menu_TrainingCannon_Stop"
+    {
+        "en"    "Stop cannon"
+        "es"    "Detener cannon"
+        "pt"    "Parar canhao"
+        "fr"    "Arreter canon"
+        "de"    "Kanone stoppen"
+    }
+
+    "Menu_Penalty_CT"
+    {
+        "en"    "Penalty CT"
+        "es"    "Penal CT"
+        "pt"    "Penalti CT"
+        "fr"    "Penalty CT"
+        "de"    "Elfmeter CT"
+    }
+
+    "Menu_Penalty_T"
+    {
+        "en"    "Penalty T"
+        "es"    "Penal TT"
+        "pt"    "Penalti T"
+        "fr"    "Penalty T"
+        "de"    "Elfmeter T"
+    }
+
+    "Menu_DraftPick_Team_Title"
+    {
+        "#format"   "{1:s}"
+        "en"    "Draft pick - {1}"
+        "es"    "Pick de draft - {1}"
+        "pt"    "Pick do draft - {1}"
+        "fr"    "Choix draft - {1}"
+        "de"    "Draft-Pick - {1}"
+    }
+
+    "State_Stopped"
+    {
+        "en"    "stopped"
+        "es"    "detenido"
+        "pt"    "parado"
+        "fr"    "arrete"
+        "de"    "gestoppt"
+    }
+
+    "State_Paused"
+    {
+        "en"    "paused"
+        "es"    "pausado"
+        "pt"    "pausado"
+        "fr"    "pause"
+        "de"    "pausiert"
+    }
+
+    "State_Break"
+    {
+        "#format"   "{1:d}"
+        "en"    "break {1}s"
+        "es"    "descanso {1}s"
+        "pt"    "intervalo {1}s"
+        "fr"    "pause {1}s"
+        "de"    "Pause {1}s"
+    }
+
+    "State_Kickoff"
+    {
+        "#format"   "{1:s},{2:s}"
+        "en"    "Kick: {1} | {2}"
+        "es"    "Saca {1} | {2}"
+        "pt"    "Sai {1} | {2}"
+        "fr"    "Engage : {1} | {2}"
+        "de"    "Anstoss: {1} | {2}"
+    }
+
+    "State_Live"
+    {
+        "#format"   "{1:d},{2:s}"
+        "en"    "{2}"
+        "es"    "{2}"
+        "pt"    "{2}"
+        "fr"    "{2}"
+        "de"    "{2}"
+    }
+
+    "State_Stoppage"
+    {
+        "#format"   "{1:s},{2:s}"
+        "en"    "{1} +{2}"
+        "es"    "{1} +{2}"
+        "pt"    "{1} +{2}"
+        "fr"    "{1} +{2}"
+        "de"    "{1} +{2}"
+    }
+
+    "State_Overtime"
+    {
+        "#format"   "{1:s}"
+        "en"    "Overtime {1}"
+        "es"    "Prorroga {1}"
+        "pt"    "Prorrogacao {1}"
+        "fr"    "Prolongation {1}"
+        "de"    "Verlangerung {1}"
+    }
+
+    "State_GoldenGoal"
+    {
+        "en"    "Golden goal"
+        "es"    "Gol de oro"
+        "pt"    "Gol de ouro"
+        "fr"    "But en or"
+        "de"    "Golden Goal"
+    }
+
+    "State_Active"
+    {
+        "en"    "active"
+        "es"    "activo"
+        "pt"    "ativo"
+        "fr"    "actif"
+        "de"    "aktiv"
+    }
+
+    "State_Inactive"
+    {
+        "en"    "inactive"
+        "es"    "inactivo"
+        "pt"    "inativo"
+        "fr"    "inactif"
+        "de"    "inaktiv"
+    }
+
+    "Cmd_Captains_Clean_Usage"
+    {
+        "en"    "Usage: sm_soccer_captains <t captain> <ct captain>"
+        "es"    "Uso: sm_soccer_captains <capitan t> <capitan ct>"
+        "pt"    "Uso: sm_soccer_captains <capitao t> <capitao ct>"
+        "fr"    "Usage : sm_soccer_captains <capitaine t> <capitaine ct>"
+        "de"    "Verwendung: sm_soccer_captains <t kapitaen> <ct kapitaen>"
+    }
+
+    "Cmd_DraftStart_Usage"
+    {
+        "en"    "Usage: sm_soccer_draftstart <t captain> <ct captain>"
+        "es"    "Uso: sm_soccer_draftstart <capitan t> <capitan ct>"
+        "pt"    "Uso: sm_soccer_draftstart <capitao t> <capitao ct>"
+        "fr"    "Usage : sm_soccer_draftstart <capitaine t> <capitaine ct>"
+        "de"    "Verwendung: sm_soccer_draftstart <t kapitaen> <ct kapitaen>"
+    }
+
+    "Cmd_Penalties_Clean_Usage"
+    {
+        "en"    "Usage: sm_soccer_penalties <ct/t> [shooter] [goalkeeper]"
+        "es"    "Uso: sm_soccer_penalties <ct/t> [pateador] [arquero]"
+        "pt"    "Uso: sm_soccer_penalties <ct/t> [batedor] [goleiro]"
+        "fr"    "Usage : sm_soccer_penalties <ct/t> [tireur] [gardien]"
+        "de"    "Verwendung: sm_soccer_penalties <ct/t> [schuetze] [torwart]"
+    }
+
+    "Cmd_Score_Clean_Usage"
+    {
+        "en"    "Usage: sm_soccer_score <ct> <t>"
+        "es"    "Uso: sm_soccer_score <ct> <t>"
+        "pt"    "Uso: sm_soccer_score <ct> <t>"
+        "fr"    "Usage : sm_soccer_score <ct> <t>"
+        "de"    "Verwendung: sm_soccer_score <ct> <t>"
+    }
+
+    "Draft_Invalid_Captains"
+    {
+        "en"    "Draft: invalid captains."
+        "es"    "Draft: capitanes invalidos."
+        "pt"    "Draft: capitaes invalidos."
+        "fr"    "Draft : capitaines invalides."
+        "de"    "Draft: ungueltige Kapitaene."
+    }
+
+    "Draft_Captains_Set_Clean"
+    {
+        "#format"   "{1:N},{2:N}"
+        "en"    "Draft captains: T {1} | CT {2}"
+        "es"    "Capitanes draft: T {1} | CT {2}"
+        "pt"    "Capitaes draft: T {1} | CT {2}"
+        "fr"    "Capitaines draft : T {1} | CT {2}"
+        "de"    "Draft-Kapitaene: T {1} | CT {2}"
+    }
+
+    "Draft_Started_First"
+    {
+        "#format"   "{1:N}"
+        "en"    "Draft: started. First pick: {1}."
+        "es"    "Draft: iniciado. Primer pick: {1}."
+        "pt"    "Draft: iniciado. Primeiro pick: {1}."
+        "fr"    "Draft : demarre. Premier choix : {1}."
+        "de"    "Draft: gestartet. Erster Pick: {1}."
+    }
+
+    "Draft_Current_Pick"
+    {
+        "#format"   "{1:s}"
+        "en"    "Draft: current pick is {1} captain."
+        "es"    "Draft: el pick actual es del capitan {1}."
+        "pt"    "Draft: o pick atual e do capitao {1}."
+        "fr"    "Draft : le choix actuel revient au capitaine {1}."
+        "de"    "Draft: aktueller Pick ist Kapitaen {1}."
+    }
+
+    "Draft_Invalid_Pick"
+    {
+        "en"    "Draft: invalid pick."
+        "es"    "Draft: pick invalido."
+        "pt"    "Draft: pick invalido."
+        "fr"    "Draft : choix invalide."
+        "de"    "Draft: ungueltiger Pick."
+    }
+
+    "Draft_Player_Picked_Clean"
+    {
+        "#format"   "{1:s},{2:N}"
+        "en"    "Draft: {1} picked {2}."
+        "es"    "Draft: {1} eligio a {2}."
+        "pt"    "Draft: {1} escolheu {2}."
+        "fr"    "Draft : {1} a choisi {2}."
+        "de"    "Draft: {1} hat {2} gewaehlt."
+    }
+
+    "Draft_Next_Pick"
+    {
+        "#format"   "{1:N}"
+        "en"    "Draft: next pick: {1}."
+        "es"    "Draft: proximo pick: {1}."
+        "pt"    "Draft: proximo pick: {1}."
+        "fr"    "Draft : prochain choix : {1}."
+        "de"    "Draft: naechster Pick: {1}."
+    }
+
+    "Draft_Status_Clean"
+    {
+        "#format"   "{1:s},{2:s},{3:s},{4:s}"
+        "en"    "Draft: {1} | T captain: {2} | CT captain: {3} | next: {4}"
+        "es"    "Draft: {1} | capitan T: {2} | capitan CT: {3} | proximo: {4}"
+        "pt"    "Draft: {1} | capitao T: {2} | capitao CT: {3} | proximo: {4}"
+        "fr"    "Draft : {1} | capitaine T : {2} | capitaine CT : {3} | prochain : {4}"
+        "de"    "Draft: {1} | T-Kapitaen: {2} | CT-Kapitaen: {3} | naechster: {4}"
+    }
+
+    "Kickoff_Wrong_Team"
+    {
+        "#format"   "{1:s}"
+        "en"    "Match: center kick belongs to {1}."
+        "es"    "Partido: el saque le corresponde a {1}."
+        "pt"    "Partida: o saque pertence ao {1}."
+        "fr"    "Match : l'engagement appartient a {1}."
+        "de"    "Anstoss: gehoert {1}."
+    }
+
+    "Kickoff_Released"
+    {
+        "en"    "Match: center kick ready."
+        "es"    "Partido: saque listo."
+        "pt"    "Partida: saque pronto."
+        "fr"    "Match : engagement pret."
+        "de"    "Anstoss: freigegeben."
+    }
+
+    "Penalty_Live"
+    {
+        "en"    "Penalty: shot is live."
+        "es"    "Penal: el tiro esta en juego."
+        "pt"    "Penalti: chute em jogo."
+        "fr"    "Penalty : le tir est en jeu."
+        "de"    "Elfmeter: Schuss laeuft."
+    }
+
+    "Penalty_Turn_NoGk"
+    {
+        "#format"   "{1:N},{2:s}"
+        "en"    "Penalty turn: {1} shoots for {2}."
+        "es"    "Turno penal: patea {1} para {2}."
+        "pt"    "Turno penalti: {1} bate por {2}."
+        "fr"    "Tour de penalty : {1} tire pour {2}."
+        "de"    "Elfmeterrunde: {1} schiesst fuer {2}."
+    }
+
+    "Position_Set"
+    {
+        "#format"   "{1:N},{2:s}"
+        "en"    "{1} is now {2}."
+        "es"    "{1} ahora es {2}."
+        "pt"    "{1} agora e {2}."
+        "fr"    "{1} est maintenant {2}."
+        "de"    "{1} ist jetzt {2}."
+    }
+
+    "Position_Current"
+    {
+        "#format"   "{1:s}"
+        "en"    "Position: {1}"
+        "es"    "Posicion: {1}"
+        "pt"    "Posicao: {1}"
+        "fr"    "Position : {1}"
+        "de"    "Position: {1}"
+    }
+
+    "Training_Cannon_Started"
+    {
+        "en"    "Training cannon: started."
+        "es"    "Cannon training: iniciado."
+        "pt"    "Canhao treino: iniciado."
+        "fr"    "Canon training : demarre."
+        "de"    "Trainingskanone: gestartet."
+    }
+
+    "Training_Cannon_Stopped"
+    {
+        "en"    "Training cannon: stopped."
+        "es"    "Cannon training: detenido."
+        "pt"    "Canhao treino: parado."
+        "fr"    "Canon training : arrete."
+        "de"    "Trainingskanone: gestoppt."
+    }
+
+    "Training_Ball_Create_Failed"
+    {
+        "en"    "Training ball: could not create entity."
+        "es"    "Pelota training: no se pudo crear la entidad."
+        "pt"    "Bola treino: nao foi possivel criar a entidade."
+        "fr"    "Ballon training : impossible de creer l'entite."
+        "de"    "Trainingsball: Entity konnte nicht erstellt werden."
+    }
+
+    "Training_Ball_Spawned"
+    {
+        "en"    "Training ball: spawned."
+        "es"    "Pelota training: creada."
+        "pt"    "Bola treino: criada."
+        "fr"    "Ballon training : cree."
+        "de"    "Trainingsball: gespawnt."
+    }
+
+    "Training_Ball_NotFound"
+    {
+        "en"    "Training ball: no training ball found."
+        "es"    "Pelota training: no hay pelota training."
+        "pt"    "Bola treino: nenhuma bola de treino encontrada."
+        "fr"    "Ballon training : aucun ballon trouve."
+        "de"    "Trainingsball: kein Trainingsball gefunden."
+    }
+
+    "Training_Ball_Removed"
+    {
+        "en"    "Training ball: removed."
+        "es"    "Pelota training: quitada."
+        "pt"    "Bola treino: removida."
+        "fr"    "Ballon training : retire."
+        "de"    "Trainingsball: entfernt."
+    }
+
+    "Training_Cannon_Position_Set"
+    {
+        "#format"   "{1:N}"
+        "en"    "Training cannon: {1} set the position."
+        "es"    "Cannon training: {1} seteo la posicion."
+        "pt"    "Canhao treino: {1} definiu a posicao."
+        "fr"    "Canon training : {1} a defini la position."
+        "de"    "Trainingskanone: {1} hat die Position gesetzt."
+    }
+
+    "Training_Cannon_Target_Set"
+    {
+        "#format"   "{1:N}"
+        "en"    "Training cannon: {1} set the target."
+        "es"    "Cannon training: {1} seteo el objetivo."
+        "pt"    "Canhao treino: {1} definiu o alvo."
+        "fr"    "Canon training : {1} a defini la cible."
+        "de"    "Trainingskanone: {1} hat das Ziel gesetzt."
+    }
+
+    "Training_Cannon_Power_Prompt"
+    {
+        "#format"   "{1:.1f},{2:.1f},{3:.1f}"
+        "en"    "Training cannon: type speed between {1:.1f} and {2:.1f}. Current: {3:.1f}. Type cancel to abort."
+        "es"    "Cannon training: escribi la velocidad entre {1:.1f} y {2:.1f}. Actual: {3:.1f}. Escribi cancel para cancelar."
+        "pt"    "Canhao treino: digite velocidade entre {1:.1f} e {2:.1f}. Atual: {3:.1f}. Digite cancel para cancelar."
+        "fr"    "Canon training : tape la vitesse entre {1:.1f} et {2:.1f}. Actuelle : {3:.1f}. Tape cancel pour annuler."
+        "de"    "Trainingskanone: Geschwindigkeit zwischen {1:.1f} und {2:.1f} eingeben. Aktuell: {3:.1f}. cancel bricht ab."
+    }
+
+    "Training_Cannon_Power_Invalid"
+    {
+        "#format"   "{1:.1f},{2:.1f}"
+        "en"    "Training cannon: invalid speed. Type a value between {1:.1f} and {2:.1f}."
+        "es"    "Cannon training: velocidad invalida. Escribi un valor entre {1:.1f} y {2:.1f}."
+        "pt"    "Canhao treino: velocidade invalida. Digite um valor entre {1:.1f} e {2:.1f}."
+        "fr"    "Canon training : vitesse invalide. Tape une valeur entre {1:.1f} et {2:.1f}."
+        "de"    "Trainingskanone: ungueltige Geschwindigkeit. Wert zwischen {1:.1f} und {2:.1f} eingeben."
+    }
+
+    "Training_Cannon_Power_Set"
+    {
+        "#format"   "{1:N},{2:.1f}"
+        "en"    "Training cannon: {1} set speed to {2:.1f}."
+        "es"    "Cannon training: {1} seteo la velocidad en {2:.1f}."
+        "pt"    "Canhao treino: {1} definiu velocidade para {2:.1f}."
+        "fr"    "Canon training : {1} a mis la vitesse a {2:.1f}."
+        "de"    "Trainingskanone: {1} setzte Geschwindigkeit auf {2:.1f}."
+    }
+
+    "Training_Cannon_Custom_Cancelled"
+    {
+        "en"    "Training cannon: speed input cancelled."
+        "es"    "Cannon training: carga de velocidad cancelada."
+        "pt"    "Canhao treino: entrada de velocidade cancelada."
+        "fr"    "Canon training : saisie de vitesse annulee."
+        "de"    "Trainingskanone: Geschwindigkeitseingabe abgebrochen."
+    }
+
+    "Training_Cannon_Match_Live"
+    {
+        "en"    "Training cannon: disabled while a match is live."
+        "es"    "Cannon training: deshabilitado mientras hay partido en vivo."
+        "pt"    "Canhao treino: desativado enquanto ha partida ao vivo."
+        "fr"    "Canon training : desactive pendant un match en cours."
+        "de"    "Trainingskanone: waehrend eines laufenden Spiels deaktiviert."
+    }
+
+    "Training_Cannon_No_Ball"
+    {
+        "en"    "Training cannon: no valid ball found."
+        "es"    "Cannon training: no se encontro una pelota valida."
+        "pt"    "Canhao treino: nenhuma bola valida encontrada."
+        "fr"    "Canon training : aucun ballon valide trouve."
+        "de"    "Trainingskanone: kein gueltiger Ball gefunden."
+    }
+}
