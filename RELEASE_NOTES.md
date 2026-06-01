@@ -17,7 +17,6 @@ Initial stable release for Counter-Strike: Source.
 
 - `umbrella_soccer-1.0.0-server.zip`: server package for the `cstrike` folder.
 - `umbrella_soccer-1.0.0-fastdl.zip`: web-host package for FastDL.
-- `SHA256SUMS.txt`: checksums for release files.
 
 ## Installation
 
