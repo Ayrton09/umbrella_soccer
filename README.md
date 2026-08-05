@@ -29,7 +29,7 @@ Umbrella Soccer is a Counter-Strike: Source soccer plugin for SourceMod.
 
 ## Installation
 
-1. Download `umbrella_soccer-1.0.0-server.zip`.
+1. Download `umbrella_soccer-1.0.1-server.zip`.
 2. Extract it into the server `cstrike` folder.
 3. Restart the server or change the map.
 4. Open the admin menu with `!soccer`.
@@ -46,7 +46,7 @@ The server package includes:
 
 ## FastDL
 
-1. Download `umbrella_soccer-1.0.0-fastdl.zip`.
+1. Download `umbrella_soccer-1.0.1-fastdl.zip`.
 2. Extract it into the root folder used by your `sv_downloadurl`.
 3. Make sure the web host exposes the extracted folders directly:
 

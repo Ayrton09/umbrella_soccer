@@ -6,7 +6,7 @@
 #include <sdkhooks>
 #include <cstrike>
 
-#define PLUGIN_VERSION "1.0.0"
+#define PLUGIN_VERSION "1.0.1"
 
 #if !defined IN_SPEED
 #define IN_SPEED (1 << 17)
@@ -17,7 +17,9 @@
 #define MAX_ENTITY_NAME 64
 #define MAX_AUTH_ID_LENGTH 32
 #define PENALTY_MAX_SHOTS 5
+#define PENALTY_SHOOTER_DISTANCE 96.0
 #define TRAINING_BALL_CLIP_NAME "ball"
+#define STOPPAGE_TRIGGER_MODEL "models/props/cs_office/vending_machine.mdl"
 #define DRAFT_MAX_CAPTAINS 4
 #define DRAFT_INPUT_NONE 0
 #define DRAFT_INPUT_CAPTAINS 1
@@ -117,6 +119,7 @@ bool gKickoffFrozen;
 bool gKickoffQueued;
 bool gInitialRestartPending;
 bool gRoundGoalHandled;
+bool gGoalDamageRestored;
 bool gRoundEnded;
 bool gRestartingPeriod;
 bool gStoppageActive;
@@ -219,7 +222,6 @@ public void OnPluginStart()
 	gCvarAllowedMaps = CreateConVar("sm_soccer_allowed_maps", "soccer_,ka_", "Comma-separated map names or prefixes allowed for soccer mode. Empty disables the plugin on every map.", FCVAR_NONE);
 	gCvarBallName = CreateConVar("sm_soccer_ball_name", "ball", "Targetname used by the soccer ball entity.", FCVAR_NONE);
 	gCvarTouchCooldown = CreateConVar("sm_soccer_touch_cooldown", "0.0", "Minimum seconds between counted ball touches for the same player. Original behavior is 0.", FCVAR_NOTIFY, true, 0.0, true, 2.0);
-	CreateConVar("sm_soccer_assist_window", "0.0", "Compatibility cvar. Assists follow the original plugin: previous same-team ball hitter.", FCVAR_NOTIFY, true, 0.0, true, 30.0);
 	gCvarRankingPointsGoal = CreateConVar("soccer_mod_ranking_points_goal", "25", "Points received for scoring a goal. Original default: 25.", FCVAR_NOTIFY, true, -100.0, true, 100.0);
 	gCvarRankingPointsAssist = CreateConVar("soccer_mod_ranking_points_assist", "15", "Points received for giving an assist. Original default: 15.", FCVAR_NOTIFY, true, -100.0, true, 100.0);
 	gCvarRankingPointsOwnGoal = CreateConVar("soccer_mod_ranking_points_own_goal", "-50", "Points received for scoring an own goal. Original default: -50.", FCVAR_NOTIFY, true, -100.0, true, 100.0);
@@ -251,7 +253,6 @@ public void OnPluginStart()
 	gCvarPenaltyShotDelay = CreateConVar("sm_soccer_penalty_shot_delay", "4.0", "Delay in seconds before restarting to the next penalty shot.", FCVAR_NOTIFY, true, 0.2, true, 10.0);
 	gCvarPenaltyTurnSound = CreateConVar("sm_soccer_penalty_turn_sound", "buttons/blip1.wav", "Sound played to the shooter when it is their penalty turn. Empty disables.", FCVAR_NONE);
 	gCvarTrainingBallModel = CreateConVar("sm_soccer_training_ball_model", "models/ayrton09/fifa_trionda_2026/trionda_2026.mdl", "Model used for spawned training balls. Empty disables training ball spawning.", FCVAR_NONE);
-	CreateConVar("sm_soccer_training_cannon_ball_life", "20.0", "Compatibility cvar kept for older configs. The cannon reuses an existing ball.", FCVAR_NOTIFY, true, 1.0, true, 120.0);
 	gCvarTrainingCannonFireRate = CreateConVar("sm_soccer_training_cannon_fire_rate", "2.5", "Seconds between training cannon shots.", FCVAR_NOTIFY, true, 0.2, true, 30.0);
 	gCvarTrainingCannonPower = CreateConVar("sm_soccer_training_cannon_power", "900.0", "Velocity applied by the training cannon.", FCVAR_NOTIFY, true, 100.0, true, 3000.0);
 	gCvarTrainingCannonRandomness = CreateConVar("sm_soccer_training_cannon_randomness", "0.0", "Random velocity spread added to training cannon shots.", FCVAR_NOTIFY, true, 0.0, true, 500.0);
@@ -552,6 +553,12 @@ public void OutputGoalTriggerStartTouch(const char[] output, int caller, int act
 		return;
 	}
 
+	if (gGoalDamageRestored)
+	{
+		return;
+	}
+	gGoalDamageRestored = true;
+
 	for (int client = 1; client <= MaxClients; client++)
 	{
 		RestorePlayerDamage(client);
@@ -598,6 +605,7 @@ public Action EventRoundStart(Event event, const char[] name, bool dontBroadcast
 
 	gRoundEnded = false;
 	gRoundGoalHandled = false;
+	gGoalDamageRestored = false;
 	ClearLastTouchers();
 	DiscoverSoccerEntities();
 	CacheBallStartPosition();
@@ -633,17 +641,43 @@ public Action EventRoundEnd(Event event, const char[] name, bool dontBroadcast)
 	}
 
 	gRoundEnded = true;
-	if (gPaused || gInBreak || gRestartingPeriod || gPenaltyActive)
+
+	int winner = event.GetInt("winner");
+	if (winner != TEAM_T && winner != TEAM_CT)
 	{
 		return Plugin_Continue;
 	}
 
-	int winner = event.GetInt("winner");
-	if (winner == TEAM_T || winner == TEAM_CT)
+	if (!IsGoalRoundEndReason(event.GetInt("reason")))
+	{
+		return Plugin_Continue;
+	}
+
+	// A live penalty resolves from the same round end a normal goal uses.
+	if (gPenaltyActive)
 	{
 		HandleGoal(winner, true);
+		return Plugin_Continue;
 	}
+
+	if (gPaused || gInBreak || gRestartingPeriod)
+	{
+		return Plugin_Continue;
+	}
+
+	HandleGoal(winner, true);
 	return Plugin_Continue;
+}
+
+// Rounds ended by the clock, a draw or mp_restartgame are not goals.
+bool IsGoalRoundEndReason(int reason)
+{
+	return reason != view_as<int>(CSRoundEnd_Draw)
+		&& reason != view_as<int>(CSRoundEnd_TargetSaved)
+		&& reason != view_as<int>(CSRoundEnd_HostagesNotRescued)
+		&& reason != view_as<int>(CSRoundEnd_TerroristsNotEscaped)
+		&& reason != view_as<int>(CSRoundEnd_VIPNotEscaped)
+		&& reason != view_as<int>(CSRoundEnd_GameStart);
 }
 
 public Action EventPlayerSpawn(Event event, const char[] name, bool dontBroadcast)
@@ -2666,13 +2700,14 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 			AddPlayerOwnGoalScore(scorer);
 			PrintOwnGoal(scorer);
 		}
-
-		AddTeamRoundResultPoints(scoringTeam);
 	}
 	else
 	{
 		PrintToChatAll("%t", "Goal_Generic");
 	}
+
+	// The team result does not depend on identifying the scorer.
+	AddTeamRoundResultPoints(scoringTeam);
 
 	PrintScoreDisplay();
 	if (!gMatchLive)
@@ -3102,12 +3137,8 @@ void EnsureStoppageTrigger()
 	ActivateEntity(trigger);
 	TeleportEntity(trigger, gBallStartPosition, NULL_VECTOR, NULL_VECTOR);
 
-	char model[] = "models/props/cs_office/vending_machine.mdl";
-	if (!IsModelPrecached(model))
-	{
-		PrecacheModel(model);
-	}
-	SetEntityModel(trigger, model);
+	PrecacheStoppageTriggerModel();
+	SetEntityModel(trigger, STOPPAGE_TRIGGER_MODEL);
 
 	float minbounds[3] = {-2000.0, -1.0, -10.0};
 	float maxbounds[3] = {2000.0, 1.0, 5000.0};
@@ -4594,10 +4625,9 @@ void StartPenalty(int team, int shooter, int goalkeeper)
 	gPenaltyGoalkeeper = goalkeeper;
 
 	float shooterPos[3];
-	shooterPos[0] = gPenaltySpot[0] - 96.0;
-	shooterPos[1] = gPenaltySpot[1];
-	shooterPos[2] = gPenaltySpot[2];
-	TeleportEntity(shooter, shooterPos, NULL_VECTOR, NULL_VECTOR);
+	float shooterAngles[3];
+	GetPenaltyShooterPlacement(shooterPos, shooterAngles);
+	TeleportEntity(shooter, shooterPos, shooterAngles, NULL_VECTOR);
 
 	if (IsValidClient(goalkeeper))
 	{
@@ -4624,6 +4654,40 @@ void StartPenalty(int team, int shooter, int goalkeeper)
 		PrintToChatAll("%t", "Penalty_Turn_NoGk", gPenaltyShooter, teamName);
 	}
 	PlayPenaltyTurnSound(gPenaltyShooter);
+}
+
+// The attacked goal is whichever end the penalty spot sits on, so the direction from
+// the centre of the pitch to the spot points straight at it. The shooter stands that
+// far behind the ball, facing the goal. Without a usable centre we keep the old fixed
+// offset so nothing breaks on maps where the ball origin was never cached.
+void GetPenaltyShooterPlacement(float position[3], float angles[3])
+{
+	float toGoal[3];
+	toGoal[0] = 0.0;
+	toGoal[1] = 0.0;
+	toGoal[2] = 0.0;
+	if (gBallStartPositionValid)
+	{
+		toGoal[0] = gPenaltySpot[0] - gBallStartPosition[0];
+		toGoal[1] = gPenaltySpot[1] - gBallStartPosition[1];
+	}
+
+	position[0] = gPenaltySpot[0];
+	position[1] = gPenaltySpot[1];
+	position[2] = gPenaltySpot[2];
+
+	if (NormalizeVector(toGoal, toGoal) <= 0.0)
+	{
+		position[0] -= PENALTY_SHOOTER_DISTANCE;
+		angles[0] = 0.0;
+		angles[1] = 0.0;
+		angles[2] = 0.0;
+		return;
+	}
+
+	position[0] -= toGoal[0] * PENALTY_SHOOTER_DISTANCE;
+	position[1] -= toGoal[1] * PENALTY_SHOOTER_DISTANCE;
+	GetVectorAngles(toGoal, angles);
 }
 
 void ResolvePenalty(bool scored)
@@ -4705,7 +4769,7 @@ void StartNextShootoutPenalty()
 		return;
 	}
 
-	if (gShootoutTakenCT >= PENALTY_MAX_SHOTS && gShootoutTakenT >= PENALTY_MAX_SHOTS && gShootoutScoreCT != gShootoutScoreT)
+	if (IsShootoutDecided())
 	{
 		FinishShootout();
 		return;
@@ -4724,6 +4788,28 @@ void StartNextShootoutPenalty()
 	StartPenalty(team, shooter, goalkeeper);
 }
 
+// The shootout is over as soon as one team leads by more than the other can still
+// reach with the shots it is owed. Once both teams are past the regulation five and
+// level on shots taken, "owed" is zero and this reduces to a plain score comparison.
+bool IsShootoutDecided()
+{
+	int remainingCT = GetRemainingShootoutShots(gShootoutTakenCT, gShootoutTakenT);
+	int remainingT = GetRemainingShootoutShots(gShootoutTakenT, gShootoutTakenCT);
+
+	return gShootoutScoreCT > gShootoutScoreT + remainingT
+		|| gShootoutScoreT > gShootoutScoreCT + remainingCT;
+}
+
+// Shots a team still has coming: whatever is left of the regulation five, or the
+// shots it owes to match the opponent during sudden death, whichever is greater.
+int GetRemainingShootoutShots(int taken, int takenByOpponent)
+{
+	int regulation = PENALTY_MAX_SHOTS - taken;
+	int owed = takenByOpponent - taken;
+	int remaining = regulation > owed ? regulation : owed;
+	return remaining > 0 ? remaining : 0;
+}
+
 int GetNextShootoutShooter(int team)
 {
 	int start = team == TEAM_CT ? gShootoutShooterIndexCT : gShootoutShooterIndexT;
@@ -4731,7 +4817,7 @@ int GetNextShootoutShooter(int team)
 	{
 		for (int client = start + 1; client <= MaxClients; client++)
 		{
-			if (IsValidClient(client) && GetClientTeam(client) == team && !gRedCard[client])
+			if (IsValidClient(client) && !IsFakeClient(client) && GetClientTeam(client) == team && !gRedCard[client])
 			{
 				if (team == TEAM_CT)
 				{
@@ -5242,6 +5328,7 @@ void GiveRedCard(int client)
 	PrintToChatAll("%t", "Card_Red", client);
 	if (IsPlayerAlive(client))
 	{
+		RestorePlayerDamage(client);
 		ForcePlayerSuicide(client, false);
 	}
 	ChangeClientTeam(client, 1);
@@ -5466,6 +5553,17 @@ void PrecacheConfiguredModels()
 	PrecacheModelFromConVar(gCvarModelTGK);
 	PrecacheModelFromConVar(gCvarTrainingBallModel);
 	PrecacheSoundFromConVar(gCvarPenaltyTurnSound);
+	PrecacheStoppageTriggerModel();
+}
+
+// Only used to give the stoppage trigger a bounding box. Precached at map start
+// so the trigger never forces a late precache mid-round.
+void PrecacheStoppageTriggerModel()
+{
+	if (!IsModelPrecached(STOPPAGE_TRIGGER_MODEL))
+	{
+		PrecacheModel(STOPPAGE_TRIGGER_MODEL, true);
+	}
 }
 
 void PrecacheModelFromConVar(ConVar cvar)
