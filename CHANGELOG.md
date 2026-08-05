@@ -2,25 +2,25 @@
 
 ## 1.0.1
 
-### Penales
-- El gol de penal ahora se detecta solo. `EventRoundEnd` cortaba antes de tiempo cuando `gPenaltyActive`, así que la rama de penal de `HandleGoal` solo se alcanzaba con `sm_soccer_goal` a mano y todo penal terminaba en fallo por timeout. Afectaba también a la tanda completa.
-- `IsShootoutDecided` reemplaza la comprobación de cierre de la tanda. Termina en cuanto un equipo saca más ventaja de la que el otro puede recuperar con los tiros que le quedan (3-0 en tres rondas cierra sin patear las dos restantes), y la muerte súbita no se corta hasta que ambos patearon la misma cantidad. Antes faltaban las dos cosas: se pateaban los cinco siempre, y en la sexta ronda el que abría ganaba al convertir sin que el rival respondiera.
-- El tirador se ubica detrás de la pelota y mirando al arco. La dirección sale de `gBallStartPosition` (centro de la cancha) hacia el punto de penal, que es el extremo atacado; no hace falta que los arcos sean entidades con nombre. Antes se aplicaba un desplazamiento fijo de `-96.0` en X, que dejaba al tirador cruzado de costado en canchas orientadas sobre Y. Si no hay centro cacheado se conserva el desplazamiento viejo.
-- Los bots ya no pueden ser seleccionados como tiradores en la tanda (`GetNextShootoutShooter` ahora excluye `IsFakeClient`).
+### Penalties
+- Penalty goals are detected automatically again. `EventRoundEnd` returned early while `gPenaltyActive`, so the penalty branch of `HandleGoal` was only reachable through a manual `sm_soccer_goal` and every penalty ended as a timeout miss. This also made the shootout unusable.
+- `IsShootoutDecided` replaces the old shootout end check. The shootout now ends as soon as one team leads by more than the other can recover with the kicks it has left (3-0 after three rounds closes without taking the remaining two), and sudden death does not end until both teams have taken the same number of kicks. Both were missing before: all five kicks were always taken, and in the sixth round whoever kicked first won on scoring without a reply.
+- The taker is placed behind the ball, facing the goal. The direction comes from `gBallStartPosition` (pitch centre) towards the penalty spot, which is the end being attacked, so the goals do not need to be named entities. Previously a fixed `-96.0` offset on X left the taker sideways on pitches laid out along Y. Without a cached centre the old offset is kept.
+- Bots can no longer be picked as shootout takers (`GetNextShootoutShooter` now excludes `IsFakeClient`).
 
-### Goles y fin de ronda
-- Se ignoran los motivos de fin de ronda que no son gol (`Draw`, `TargetSaved`, `HostagesNotRescued`, `TerroristsNotEscaped`, `VIPNotEscaped`, `GameStart`). Antes cualquier fin de ronda con ganador contaba como gol, así que si el período duraba más que `mp_roundtime` la ronda expiraba sola y CT se llevaba un gol regalado.
-- Los puntos de resultado de ronda (`soccer_mod_ranking_points_round_won`/`_lost`) se reparten aunque no se identifique al último tocador. Antes quedaban dentro del `if (IsValidClient(scorer))`.
-- La restauración de daño del `trigger_hurt` se ejecuta una sola vez por gol (guard `gGoalDamageRestored`, reseteado en `round_start`), replicando el `goalScored` del soccermod original. Comportamiento idéntico, sin el bucle redundante.
+### Goals and round end
+- Round end reasons that are not goals are ignored (`Draw`, `TargetSaved`, `HostagesNotRescued`, `TerroristsNotEscaped`, `VIPNotEscaped`, `GameStart`). Previously any round end with a winner counted as a goal, so a period longer than `mp_roundtime` expired on its own and handed CT a free goal.
+- Round result points (`soccer_mod_ranking_points_round_won`/`_lost`) are awarded even when the last toucher cannot be identified. They used to sit inside the `if (IsValidClient(scorer))` block.
+- The `trigger_hurt` damage restore runs once per goal (`gGoalDamageRestored` guard, reset on `round_start`), matching the original soccermod `goalScored`. Same behaviour, without the redundant loop.
 
-### Otros
-- Tarjeta roja: `GiveRedCard` restaura el daño antes de `ForcePlayerSuicide`, igual que ya hacía `TimerMoveRedCardSpectator`. Con `m_takedamage` en 0 el suicidio podía no aplicarse.
-- Tiempo añadido: el modelo que le da bounding box al trigger se precachea al iniciar el mapa en vez de a mitad de ronda.
-- Limpieza: eliminados dos cvars muertos sin efecto (`sm_soccer_assist_window`, `sm_soccer_training_cannon_ball_life`).
+### Other
+- Red card: `GiveRedCard` restores damage before `ForcePlayerSuicide`, as `TimerMoveRedCardSpectator` already did. With `m_takedamage` at 0 the suicide could fail to apply.
+- Stoppage time: the model that gives the trigger its bounding box is precached on map start instead of mid-round.
+- Cleanup: removed two dead cvars with no effect (`sm_soccer_assist_window`, `sm_soccer_training_cannon_ball_life`).
 
-Compilado con SourcePawn 1.12.0.7239, sin warnings.
-SHA256 del .smx: `FC7F6423A482B8C49492C6BE30EACBC0CB0A657CF35869EF605B2514BC1245FF`
+Compiled with SourcePawn 1.12.0.7246, no warnings.
+Plugin SHA256: `C64734BE28A2247051D0239B1C6B07995ADF628B4E40179ACDC5347FF9179B61`
 
 ## 1.0.0
 
-- Release inicial del rebuild de Umbrella Soccer para Counter-Strike: Source.
+- Initial release of the Umbrella Soccer rebuild for Counter-Strike: Source.
