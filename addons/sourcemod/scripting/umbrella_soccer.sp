@@ -6,7 +6,7 @@
 #include <sdkhooks>
 #include <cstrike>
 
-#define PLUGIN_VERSION "1.0.1"
+#define PLUGIN_VERSION "1.1.0"
 
 #if !defined IN_SPEED
 #define IN_SPEED (1 << 17)
@@ -18,6 +18,9 @@
 #define MAX_AUTH_ID_LENGTH 32
 #define PENALTY_MAX_SHOTS 5
 #define PENALTY_SHOOTER_DISTANCE 96.0
+#define PENALTY_ROUND_START_DELAY 1.0
+#define OVERTIME_PERIODS 2
+#define CHAT_INPUT_TIMEOUT 30.0
 #define TRAINING_BALL_CLIP_NAME "ball"
 #define STOPPAGE_TRIGGER_MODEL "models/props/cs_office/vending_machine.mdl"
 #define DRAFT_MAX_CAPTAINS 4
@@ -26,6 +29,8 @@
 #define DRAFT_INPUT_TEAMSIZE 2
 #define PRACTICE_INPUT_NONE 0
 #define PRACTICE_INPUT_CANNON_POWER 1
+#define PRACTICE_INPUT_CANNON_RATE 2
+#define PRACTICE_INPUT_CANNON_RANDOMNESS 3
 #define MATCH_INPUT_NONE 0
 #define MATCH_INPUT_DURATION 1
 #define REF_ACTION_NONE 0
@@ -88,6 +93,14 @@ ConVar gCvarTrainingCannonPower;
 ConVar gCvarTrainingCannonRandomness;
 ConVar gCvarLiveReplacementSlots;
 ConVar gCvarCaptainModeDefault;
+ConVar gCvarMaxPlayersPerTeam;
+ConVar gCvarServerCvars;
+ConVar gCvarServerPushscale;
+ConVar gCvarServerFreezetime;
+ConVar gCvarServerRoundtime;
+ConVar gCvarServerMaxrounds;
+ConVar gCvarServerLimitteams;
+bool gServerCvarsApplied;
 
 Handle gHudSync;
 Handle gHudTimer;
@@ -99,6 +112,7 @@ Handle gPeriodRestartTimer;
 Handle gUnpauseTimer;
 Handle gStoppageTimer;
 Handle gTrainingCannonTimer;
+Handle gShootoutTimer;
 
 bool gMatchLive;
 bool gPaused;
@@ -160,8 +174,8 @@ bool gSprinting[MAXPLAYERS + 1];
 int gLastArmorValue[MAXPLAYERS + 1];
 float gNextGoalkeeperToggle[MAXPLAYERS + 1];
 SoccerPosition gPosition[MAXPLAYERS + 1];
-char gRedCardAuths[MAXPLAYERS + 1][MAX_AUTH_ID_LENGTH];
-int gRedCardAuthCount;
+StringMap gRedCards;
+char gRedCardsPath[PLATFORM_MAX_PATH];
 
 bool gDraftActive;
 int gDraftCaptainT;
@@ -180,6 +194,7 @@ int gDraftSelectedCaptainCount[MAXPLAYERS + 1];
 int gDraftSelectedCaptains[MAXPLAYERS + 1][DRAFT_MAX_CAPTAINS];
 int gPracticeInput[MAXPLAYERS + 1];
 int gMatchInput[MAXPLAYERS + 1];
+float gChatInputExpires[MAXPLAYERS + 1];
 
 bool gPenaltyActive;
 bool gPenaltyWaitingForKick;
@@ -196,8 +211,10 @@ int gShootoutTakenT;
 int gShootoutNextTeam;
 int gShootoutShooterIndexCT;
 int gShootoutShooterIndexT;
+bool gShootoutWaitingRoundStart;
 
-int gTrainingBallRef = INVALID_ENT_REFERENCE;
+int gTrainingBallRefs[MAXPLAYERS + 1];
+bool gTrainingGoalsDisabled;
 int gTrainingCannonBallRef = INVALID_ENT_REFERENCE;
 float gTrainingCannonOrigin[3];
 float gTrainingCannonTarget[3];
@@ -206,6 +223,9 @@ bool gTrainingCannonTargetSet;
 bool gTrainingCannonSet;
 
 int gRefereeAction[MAXPLAYERS + 1];
+
+#include "umbrella_soccer/ranking.sp"
+#include "umbrella_soccer/saves.sp"
 
 public void OnPluginStart()
 {
@@ -258,6 +278,17 @@ public void OnPluginStart()
 	gCvarTrainingCannonRandomness = CreateConVar("sm_soccer_training_cannon_randomness", "0.0", "Random velocity spread added to training cannon shots.", FCVAR_NOTIFY, true, 0.0, true, 500.0);
 	gCvarLiveReplacementSlots = CreateConVar("sm_soccer_live_replacement_slots", "0", "How many non-assigned replacements can join T/CT during a live match.", FCVAR_NOTIFY, true, 0.0, true, 10.0);
 	gCvarCaptainModeDefault = CreateConVar("sm_soccer_captain_mode_default", "0", "Start a captain draft automatically when valid captains are available.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	gCvarMaxPlayersPerTeam = CreateConVar("sm_soccer_max_players_per_team", "0", "Maximum players per team during a match. Extra players go to spectator. 0 disables the limit.", FCVAR_NOTIFY, true, 0.0, true, 32.0);
+	gCvarServerCvars = CreateConVar("sm_soccer_server_cvars", "1", "Apply the sm_soccer_server_* settings once when an allowed map starts.", FCVAR_NONE, true, 0.0, true, 1.0);
+	gCvarServerPushscale = CreateConVar("sm_soccer_server_phys_pushscale", "2000", "phys_pushscale used on soccer maps. Sets how hard knife hits push the ball.", FCVAR_NONE, true, 1.0, true, 10000.0);
+	gCvarServerFreezetime = CreateConVar("sm_soccer_server_freezetime", "0", "mp_freezetime used on soccer maps, in seconds.", FCVAR_NONE, true, 0.0, true, 60.0);
+	gCvarServerRoundtime = CreateConVar("sm_soccer_server_roundtime", "9", "mp_roundtime used on soccer maps, in minutes. The game caps it at its own maximum.", FCVAR_NONE, true, 1.0, true, 60.0);
+	gCvarServerMaxrounds = CreateConVar("sm_soccer_server_maxrounds", "0", "mp_maxrounds used on soccer maps. Every goal is a round, so 0 (no limit) keeps goals from ending the map.", FCVAR_NONE, true, 0.0, true, 1000.0);
+	gCvarServerLimitteams = CreateConVar("sm_soccer_server_limitteams", "0", "mp_limitteams used on soccer maps. 0 lets players join a team whatever the team sizes are.", FCVAR_NONE, true, 0.0, true, 30.0);
+	RankingOnPluginStart();
+	SavesOnPluginStart();
+	TrainingOnPluginStart();
+	LoadRedCards();
 
 	RegConsoleCmd("sm_soccer", CmdSoccerMenu, "Open the Umbrella Soccer menu.");
 	RegConsoleCmd("sm_gk", CmdToggleGoalkeeper, "Toggle goalkeeper position.");
@@ -299,6 +330,7 @@ public void OnPluginStart()
 	HookEvent("player_hurt", EventPlayerHurt, EventHookMode_Post);
 	HookEvent("player_spawn", EventPlayerSpawn, EventHookMode_Post);
 	HookEvent("player_death", EventPlayerDeath, EventHookMode_Post);
+	HookEvent("player_team", EventPlayerTeam, EventHookMode_Post);
 	AddCommandListener(CommandJoinTeam, "jointeam");
 	AddCommandListener(CommandSay, "say");
 	AddCommandListener(CommandSay, "say_team");
@@ -317,19 +349,62 @@ public void OnPluginStart()
 		{
 			HookPlayerDamage(client);
 			ApplyPlayerDamageRules(client);
+			ApplyStoredRedCard(client);
 		}
 	}
 }
 
 public void OnMapStart()
 {
+	gServerCvarsApplied = false;
 	ClearMatchRuntimeState();
+	TrainingOnMapStart();
+	SavesOnMapStart();
 	ApplyMapAllowedState();
 }
 
 public void OnConfigsExecuted()
 {
 	ApplyMapAllowedState();
+	if (gMapAllowed)
+	{
+		ApplySoccerServerCvars();
+	}
+	RankingOnConfigsExecuted();
+}
+
+// Applied once per map, after server.cfg and the plugin config have run, so
+// they are not reapplied every round and an admin can still change them live.
+void ApplySoccerServerCvars()
+{
+	if (gServerCvarsApplied || !gCvarServerCvars.BoolValue)
+	{
+		return;
+	}
+	gServerCvarsApplied = true;
+
+	SetServerCvarFrom("phys_pushscale", gCvarServerPushscale);
+	SetServerCvarFrom("mp_freezetime", gCvarServerFreezetime);
+	SetServerCvarFrom("mp_roundtime", gCvarServerRoundtime);
+	SetServerCvarFrom("mp_maxrounds", gCvarServerMaxrounds);
+	SetServerCvarFrom("mp_limitteams", gCvarServerLimitteams);
+}
+
+// Changes a game cvar without the "server cvar changed" chat notice.
+void SetServerCvarFrom(const char[] name, ConVar source)
+{
+	ConVar target = FindConVar(name);
+	if (target == null)
+	{
+		return;
+	}
+
+	char value[32];
+	source.GetString(value, sizeof(value));
+	int flags = target.Flags;
+	target.Flags = flags & ~FCVAR_NOTIFY;
+	target.SetString(value);
+	target.Flags = flags;
 }
 
 public void OnMapEnd()
@@ -343,7 +418,8 @@ public void OnMapEnd()
 	}
 	ResetEntityHooks();
 	ClearBallEntity();
-	gTrainingBallRef = INVALID_ENT_REFERENCE;
+	RankingFlushAll();
+	ClearTrainingBallRefs();
 	gTrainingCannonBallRef = INVALID_ENT_REFERENCE;
 	gTrainingCannonOriginSet = false;
 	gTrainingCannonTargetSet = false;
@@ -359,6 +435,8 @@ public void OnMapEnd()
 	gStoppageSeconds = 0;
 	gInitialRestartPending = false;
 	ClearMatchRuntimeState();
+	// phys_timescale is a global cvar: leaving it at 0 would freeze the next map.
+	UnfreezeSoccerPhysics();
 	gMapAllowed = false;
 }
 
@@ -388,6 +466,7 @@ public void OnPluginEnd()
 	KillStoppageTrigger();
 	StopTrainingCannon();
 	KillTimerSafe(gHudTimer);
+	RankingFlushAll();
 	gKickoffFrozen = false;
 	gPaused = false;
 	gInBreak = false;
@@ -407,6 +486,7 @@ public void OnClientPutInServer(int client)
 	ResetClientState(client);
 	ApplyStoredRedCard(client);
 	HookPlayerDamage(client);
+	RankingOnClientPutInServer(client);
 }
 
 public void OnClientAuthorized(int client, const char[] auth)
@@ -463,6 +543,9 @@ public void OnClientDisconnect(int client)
 	KillClientRespawnTimer(client);
 	StopSprint(client);
 	UnhookPlayerDamage(client);
+	SavesOnClientDisconnect(client);
+	RemoveClientTrainingBall(client);
+	RankingOnClientDisconnect(client);
 }
 
 public void OnEntityCreated(int entity, const char[] classname)
@@ -484,10 +567,12 @@ public void OnEntityDestroyed(int entity)
 		ClearBallEntity();
 	}
 
-	int trainingBall = EntRefToEntIndex(gTrainingBallRef);
-	if (trainingBall != INVALID_ENT_REFERENCE && entity == trainingBall)
+	for (int client = 1; client <= MaxClients; client++)
 	{
-		gTrainingBallRef = INVALID_ENT_REFERENCE;
+		if (gTrainingBallRefs[client] != INVALID_ENT_REFERENCE && EntRefToEntIndex(gTrainingBallRefs[client]) == entity)
+		{
+			gTrainingBallRefs[client] = INVALID_ENT_REFERENCE;
+		}
 	}
 	int cannonBall = EntRefToEntIndex(gTrainingCannonBallRef);
 	if (cannonBall != INVALID_ENT_REFERENCE && entity == cannonBall)
@@ -527,7 +612,7 @@ public void OutputBallDamaged(const char[] output, int caller, int activator, fl
 		return;
 	}
 
-	RegisterBallTouch(activator);
+	RegisterBallTouch(activator, caller);
 	RegisterPenaltyTouch(activator);
 }
 
@@ -607,11 +692,27 @@ public Action EventRoundStart(Event event, const char[] name, bool dontBroadcast
 	gRoundGoalHandled = false;
 	gGoalDamageRestored = false;
 	ClearLastTouchers();
+	SavesOnRoundStart();
+	RankingFlushAll();
+	if (gTrainingGoalsDisabled && !gMatchLive)
+	{
+		KillGoalTriggers();
+	}
 	DiscoverSoccerEntities();
 	CacheBallStartPosition();
 	if (gStoppageActive)
 	{
 		EnsureStoppageTrigger();
+	}
+	if (gShootoutWaitingRoundStart)
+	{
+		gShootoutWaitingRoundStart = false;
+		if (gShootoutActive)
+		{
+			// Short delay so every player has respawned before the kick is set up.
+			KillTimerSafe(gShootoutTimer);
+			gShootoutTimer = CreateTimer(PENALTY_ROUND_START_DELAY, TimerNextShootoutPenalty, _, TIMER_FLAG_NO_MAPCHANGE);
+		}
 	}
 	UpdateGameTeamScores();
 	if (gKickoffQueued && gMatchLive)
@@ -642,6 +743,14 @@ public Action EventRoundEnd(Event event, const char[] name, bool dontBroadcast)
 
 	gRoundEnded = true;
 
+	// Any round end between shootout kicks restarts the round, so the pending kick
+	// waits for round_start, the same as after a scored penalty.
+	if (gShootoutActive && !gPenaltyActive && gShootoutTimer != null)
+	{
+		KillTimerSafe(gShootoutTimer);
+		gShootoutWaitingRoundStart = true;
+	}
+
 	int winner = event.GetInt("winner");
 	if (winner != TEAM_T && winner != TEAM_CT)
 	{
@@ -660,7 +769,8 @@ public Action EventRoundEnd(Event event, const char[] name, bool dontBroadcast)
 		return Plugin_Continue;
 	}
 
-	if (gPaused || gInBreak || gRestartingPeriod)
+	// Between shootout kicks the ball is not in play, so a stray goal does not count.
+	if (gShootoutActive || gPaused || gInBreak || gRestartingPeriod)
 	{
 		return Plugin_Continue;
 	}
@@ -685,6 +795,15 @@ public Action EventPlayerSpawn(Event event, const char[] name, bool dontBroadcas
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	if (IsValidClient(client) && IsSoccerAvailable())
 	{
+		if (gRedCard[client] && GetClientTeam(client) >= TEAM_T)
+		{
+			// Covers ways onto a team that skip jointeam, such as an admin move.
+			CreateTimer(0.1, TimerMoveRedCardSpectator, GetClientUserId(client), TIMER_FLAG_NO_MAPCHANGE);
+		}
+		else if (EnforceMaxPlayersOnSpawn(client))
+		{
+			return Plugin_Continue;
+		}
 		KillClientRespawnTimer(client);
 		gStamina[client] = 100.0;
 		StopSprint(client);
@@ -749,9 +868,30 @@ public Action EventPlayerDeath(Event event, const char[] name, bool dontBroadcas
 	return Plugin_Continue;
 }
 
+// The game only spawns a late joiner at the next round start, which in soccer is
+// the next goal, so a player who joins T or CT mid-round is respawned like a death.
+public Action EventPlayerTeam(Event event, const char[] name, bool dontBroadcast)
+{
+	if (!IsSoccerAvailable() || !gCvarAutoRespawn.BoolValue || event.GetBool("disconnect"))
+	{
+		return Plugin_Continue;
+	}
+
+	int client = GetClientOfUserId(event.GetInt("userid"));
+	int team = event.GetInt("team");
+	if (!IsValidClient(client) || team < TEAM_T || gRedCard[client])
+	{
+		return Plugin_Continue;
+	}
+
+	KillClientRespawnTimer(client);
+	gRespawnTimer[client] = CreateTimer(gCvarRespawnDelay.FloatValue, TimerRespawnPlayer, GetClientUserId(client), TIMER_FLAG_NO_MAPCHANGE);
+	return Plugin_Continue;
+}
+
 public Action CommandJoinTeam(int client, const char[] command, int argc)
 {
-	if (!IsValidClient(client) || !IsSoccerAvailable() || !gMatchLive || argc < 1)
+	if (!IsValidClient(client) || !IsSoccerAvailable() || argc < 1)
 	{
 		return Plugin_Continue;
 	}
@@ -759,47 +899,119 @@ public Action CommandJoinTeam(int client, const char[] command, int argc)
 	char arg[16];
 	GetCmdArg(1, arg, sizeof(arg));
 	int team = ParseJoinTeamArg(arg);
-	if (team != TEAM_T && team != TEAM_CT)
+	bool autoAssign = team == 0;
+	if (!autoAssign && team != TEAM_T && team != TEAM_CT)
 	{
 		return Plugin_Continue;
 	}
 
+	// Red cards apply on and off a match until a referee removes them.
 	if (gRedCard[client])
 	{
 		PrintToChat(client, "%t", "Team_Join_RedCard");
 		return Plugin_Handled;
 	}
 
-	if (!HasAssignedSoccerTeams())
+	if (!gMatchLive)
 	{
 		return Plugin_Continue;
 	}
 
-	if (gDraftTeam[client] == team)
+	int maxPlayers = gCvarMaxPlayersPerTeam.IntValue;
+	bool draftTeams = HasAssignedSoccerTeams();
+	if (maxPlayers <= 0 && !draftTeams)
 	{
 		return Plugin_Continue;
 	}
 
-	if (gDraftTeam[client] != 0 && gDraftTeam[client] != team)
+	// Auto-assign would let the game pick a side behind the checks below, so the
+	// side is picked here, checked like an explicit join, and joined explicitly.
+	if (autoAssign)
 	{
-		PrintToChat(client, "%t", "Team_Join_Assigned_Other");
+		team = gDraftTeam[client] != 0 ? gDraftTeam[client] : GetAutoAssignTeam(client);
+	}
+
+	if (maxPlayers > 0 && GetClientTeam(client) != team && CountTeamPlayers(team, client) >= maxPlayers)
+	{
+		PrintToChat(client, "%t", "Team_Join_Full", maxPlayers);
 		return Plugin_Handled;
 	}
 
-	int maxReplacements = gCvarLiveReplacementSlots.IntValue;
-	if (maxReplacements <= 0 || CountLiveReplacements(team, client) >= maxReplacements)
+	if (draftTeams)
 	{
-		PrintToChat(client, "%t", "Team_Join_No_Replacements");
-		return Plugin_Handled;
+		if (gDraftTeam[client] == team)
+		{
+			return autoAssign ? JoinAutoAssignedTeam(client, team) : Plugin_Continue;
+		}
+
+		if (gDraftTeam[client] != 0 && gDraftTeam[client] != team)
+		{
+			PrintToChat(client, "%t", "Team_Join_Assigned_Other");
+			return Plugin_Handled;
+		}
+
+		int maxReplacements = gCvarLiveReplacementSlots.IntValue;
+		if (maxReplacements <= 0 || CountLiveReplacements(team, client) >= maxReplacements)
+		{
+			PrintToChat(client, "%t", "Team_Join_No_Replacements");
+			return Plugin_Handled;
+		}
 	}
 
-	return Plugin_Continue;
+	return autoAssign ? JoinAutoAssignedTeam(client, team) : Plugin_Continue;
+}
+
+// Players on a team, bots included since they take a slot too.
+int CountTeamPlayers(int team, int ignoreClient)
+{
+	int count;
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (client != ignoreClient && IsValidClient(client) && GetClientTeam(client) == team)
+		{
+			count++;
+		}
+	}
+	return count;
+}
+
+// Catches players put on a full team without jointeam (admin moves, a draft
+// larger than the limit, or teams already over it when the match starts). It
+// runs at spawn, one player at a time, so only the extra players are moved.
+bool EnforceMaxPlayersOnSpawn(int client)
+{
+	int maxPlayers = gCvarMaxPlayersPerTeam.IntValue;
+	int team = GetClientTeam(client);
+	if (!gMatchLive || maxPlayers <= 0 || team < TEAM_T || CountTeamPlayers(team, client) < maxPlayers)
+	{
+		return false;
+	}
+
+	ChangeClientTeam(client, 1);
+	PrintToChatAll("%t", "Team_Moved_Full", client, maxPlayers);
+	return true;
+}
+
+Action JoinAutoAssignedTeam(int client, int team)
+{
+	if (GetClientTeam(client) != team)
+	{
+		FakeClientCommandEx(client, "jointeam %d", team);
+	}
+	return Plugin_Handled;
 }
 
 public Action CommandSay(int client, const char[] command, int argc)
 {
 	if (!IsValidClient(client))
 	{
+		return Plugin_Continue;
+	}
+
+	if (HasPendingChatInput(client)
+		&& (GetGameTime() > gChatInputExpires[client] || !HasSoccerAdminAccess(client)))
+	{
+		ClearChatInputs(client);
 		return Plugin_Continue;
 	}
 
@@ -889,32 +1101,89 @@ public Action HandlePracticeChatInput(int client)
 		return Plugin_Handled;
 	}
 
-	if (gPracticeInput[client] == PRACTICE_INPUT_CANNON_POWER)
+	float min;
+	float max;
+	char promptPhrase[48];
+	char invalidPhrase[48];
+	char setPhrase[48];
+	ConVar setting = GetCannonSettingInfo(gPracticeInput[client], min, max, promptPhrase, invalidPhrase, setPhrase, sizeof(promptPhrase));
+	if (setting == null)
 	{
-		if (!CanUseTrainingCannon(client))
-		{
-			gPracticeInput[client] = PRACTICE_INPUT_NONE;
-			ShowPracticeMenu(client);
-			return Plugin_Handled;
-		}
-
-		float value;
-		int consumed = StringToFloatEx(message, value);
-		if (consumed != strlen(message) || value < 100.0 || value > 3000.0)
-		{
-			PrintToChat(client, "%t", "Training_Cannon_Power_Invalid", 100.0, 3000.0);
-			return Plugin_Handled;
-		}
-
-		gCvarTrainingCannonPower.SetFloat(value);
 		gPracticeInput[client] = PRACTICE_INPUT_NONE;
-		PrintToChatAll("%t", "Training_Cannon_Power_Set", client, value);
+		return Plugin_Handled;
+	}
+
+	if (!CanUseTrainingCannon(client))
+	{
+		gPracticeInput[client] = PRACTICE_INPUT_NONE;
 		ShowPracticeMenu(client);
 		return Plugin_Handled;
 	}
 
+	float value;
+	int consumed = StringToFloatEx(message, value);
+	if (consumed != strlen(message) || value < min || value > max)
+	{
+		PrintToChat(client, "%t", invalidPhrase, min, max);
+		return Plugin_Handled;
+	}
+
+	setting.SetFloat(value);
 	gPracticeInput[client] = PRACTICE_INPUT_NONE;
+	PrintToChatAll("%t", setPhrase, client, value);
+	ShowPracticeMenu(client);
 	return Plugin_Handled;
+}
+
+// The cannon settings typed in chat. Their range is the cvar's own bounds.
+ConVar GetCannonSettingInfo(int input, float &min, float &max, char[] promptPhrase, char[] invalidPhrase, char[] setPhrase, int maxlen)
+{
+	ConVar setting;
+	switch (input)
+	{
+		case PRACTICE_INPUT_CANNON_POWER:
+		{
+			setting = gCvarTrainingCannonPower;
+			strcopy(promptPhrase, maxlen, "Training_Cannon_Power_Prompt");
+			strcopy(invalidPhrase, maxlen, "Training_Cannon_Power_Invalid");
+			strcopy(setPhrase, maxlen, "Training_Cannon_Power_Set");
+		}
+		case PRACTICE_INPUT_CANNON_RATE:
+		{
+			setting = gCvarTrainingCannonFireRate;
+			strcopy(promptPhrase, maxlen, "Training_Cannon_Rate_Prompt");
+			strcopy(invalidPhrase, maxlen, "Training_Cannon_Rate_Invalid");
+			strcopy(setPhrase, maxlen, "Training_Cannon_Rate_Set");
+		}
+		case PRACTICE_INPUT_CANNON_RANDOMNESS:
+		{
+			setting = gCvarTrainingCannonRandomness;
+			strcopy(promptPhrase, maxlen, "Training_Cannon_Random_Prompt");
+			strcopy(invalidPhrase, maxlen, "Training_Cannon_Random_Invalid");
+			strcopy(setPhrase, maxlen, "Training_Cannon_Random_Set");
+		}
+		default:
+		{
+			return null;
+		}
+	}
+
+	setting.GetBounds(ConVarBound_Lower, min);
+	setting.GetBounds(ConVarBound_Upper, max);
+	return setting;
+}
+
+void PromptCannonSetting(int client, int input)
+{
+	float min;
+	float max;
+	char promptPhrase[48];
+	char invalidPhrase[48];
+	char setPhrase[48];
+	ConVar setting = GetCannonSettingInfo(input, min, max, promptPhrase, invalidPhrase, setPhrase, sizeof(promptPhrase));
+	BeginChatInput(client);
+	gPracticeInput[client] = input;
+	PrintToChat(client, "%t", promptPhrase, min, max, setting.FloatValue);
 }
 
 public Action HandleMatchChatInput(int client)
@@ -1005,6 +1274,29 @@ bool HasSoccerAdminAccess(int client)
 	return CheckCommandAccess(client, "sm_socceradmin", ADMFLAG_GENERIC, false);
 }
 
+void ClearChatInputs(int client)
+{
+	gPracticeInput[client] = PRACTICE_INPUT_NONE;
+	gMatchInput[client] = MATCH_INPUT_NONE;
+	gDraftSetupInput[client] = DRAFT_INPUT_NONE;
+	gChatInputExpires[client] = 0.0;
+}
+
+// Only one chat prompt can wait at a time, and it lapses so a number typed much
+// later goes to chat instead of starting a match or a draft.
+void BeginChatInput(int client)
+{
+	ClearChatInputs(client);
+	gChatInputExpires[client] = GetGameTime() + CHAT_INPUT_TIMEOUT;
+}
+
+bool HasPendingChatInput(int client)
+{
+	return gPracticeInput[client] != PRACTICE_INPUT_NONE
+		|| gMatchInput[client] != MATCH_INPUT_NONE
+		|| gDraftSetupInput[client] != DRAFT_INPUT_NONE;
+}
+
 public Action CmdSoccerMenu(int client, int args)
 {
 	if (!IsValidClient(client) || !CheckSoccerAvailable(client))
@@ -1022,6 +1314,8 @@ public Action CmdSoccerMenu(int client, int args)
 	Format(title, sizeof(title), "%T", "Menu_Player_Clean_Title", client, gScoreCT, gScoreT);
 	menu.SetTitle(title);
 	AddMenuItemPhrase(menu, client, "position", "Menu_Position");
+	AddMenuItemPhrase(menu, client, "rank", "Menu_Rank");
+	AddMenuItemPhrase(menu, client, "top", "Menu_Top");
 	menu.Display(client, 20);
 	return Plugin_Handled;
 }
@@ -1049,6 +1343,14 @@ public int MenuHandlerSoccer(Menu menu, MenuAction action, int client, int item)
 	if (StrEqual(info, "position"))
 	{
 		ShowPosition(client);
+	}
+	else if (StrEqual(info, "rank"))
+	{
+		ShowClientRank(client);
+	}
+	else if (StrEqual(info, "top"))
+	{
+		ShowTopScopeMenu(client);
 	}
 	return 0;
 }
@@ -1078,6 +1380,7 @@ void ShowAdminMenu(int client)
 	AddMenuItemPhrase(menu, client, "captains", "Menu_Captains");
 	AddMenuItemPhrase(menu, client, "referee", "Menu_Referee");
 	AddMenuItemPhrase(menu, client, "practice", "Menu_Practice");
+	AddMenuItemPhrase(menu, client, "gkareas", "Menu_GkAreas");
 	menu.Display(client, MENU_TIME_FOREVER);
 }
 
@@ -1117,6 +1420,10 @@ public int MenuHandlerAdmin(Menu menu, MenuAction action, int client, int item)
 	{
 		ShowPracticeMenu(client);
 	}
+	else if (StrEqual(info, "gkareas"))
+	{
+		ShowGkAreaMenu(client);
+	}
 	return 0;
 }
 
@@ -1130,6 +1437,7 @@ void ShowRefereeMenu(int client)
 	AddMenuItemPhrase(menu, client, "red", "Menu_Card_Red_Give");
 	AddMenuItemPhrase(menu, client, "score", "Menu_Referee_Score");
 	AddMenuItemPhrase(menu, client, "clearplayer", "Menu_Cards_Clear_Player");
+	AddMenuItemPhrase(menu, client, "removered", "Menu_Card_Red_Remove");
 	AddMenuItemPhrase(menu, client, "clearall", "Menu_Cards_Clear_All");
 	menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
@@ -1177,11 +1485,84 @@ public int MenuHandlerReferee(Menu menu, MenuAction action, int client, int item
 	{
 		ShowRefereeTargetMenu(client, REF_ACTION_CLEAR_PLAYER);
 	}
+	else if (StrEqual(info, "removered"))
+	{
+		ShowRedCardListMenu(client);
+	}
 	else if (StrEqual(info, "clearall"))
 	{
 		ClearAllCards();
 		ShowRefereeMenu(client);
 	}
+	return 0;
+}
+
+// Lists every stored red card, including players who are not connected.
+void ShowRedCardListMenu(int client)
+{
+	StringMapSnapshot snapshot = gRedCards.Snapshot();
+	if (snapshot.Length == 0)
+	{
+		delete snapshot;
+		PrintToChat(client, "%t", "Card_Red_None");
+		ShowRefereeMenu(client);
+		return;
+	}
+
+	Menu menu = new Menu(MenuHandlerRedCardList);
+	char title[128];
+	Format(title, sizeof(title), "%T", "Menu_RedCards_Title", client);
+	menu.SetTitle(title);
+
+	char auth[MAX_AUTH_ID_LENGTH];
+	char name[MAX_NAME_LENGTH];
+	char display[MAX_NAME_LENGTH + MAX_AUTH_ID_LENGTH + 4];
+	for (int i = 0; i < snapshot.Length; i++)
+	{
+		snapshot.GetKey(i, auth, sizeof(auth));
+		gRedCards.GetString(auth, name, sizeof(name));
+		Format(display, sizeof(display), "%s (%s)", name, auth);
+		menu.AddItem(auth, display);
+	}
+	delete snapshot;
+
+	menu.ExitBackButton = true;
+	menu.Display(client, MENU_TIME_FOREVER);
+}
+
+public int MenuHandlerRedCardList(Menu menu, MenuAction action, int client, int item)
+{
+	if (action == MenuAction_End)
+	{
+		delete menu;
+		return 0;
+	}
+
+	if (action == MenuAction_Cancel && item == MenuCancel_ExitBack && IsValidClient(client))
+	{
+		ShowRefereeMenu(client);
+		return 0;
+	}
+
+	if (action != MenuAction_Select || !IsValidClient(client))
+	{
+		return 0;
+	}
+
+	if (!CheckSoccerAvailable(client) || !HasSoccerAdminAccess(client))
+	{
+		return 0;
+	}
+
+	char auth[MAX_AUTH_ID_LENGTH];
+	char name[MAX_NAME_LENGTH];
+	menu.GetItem(item, auth, sizeof(auth));
+	gRedCards.GetString(auth, name, sizeof(name));
+	if (RemoveRedCardByAuth(auth))
+	{
+		PrintToChatAll("%t", "Card_Red_Removed", client, name);
+	}
+	ShowRedCardListMenu(client);
 	return 0;
 }
 
@@ -1339,8 +1720,11 @@ void ShowPracticeMenu(int client)
 	AddMenuItemPhrase(menu, client, "cannonpos", "Menu_TrainingCannon_Position");
 	AddMenuItemPhrase(menu, client, "cannonaim", "Menu_TrainingCannon_Target");
 	AddMenuItemPhrase(menu, client, "cannonpower", "Menu_TrainingCannon_Power");
+	AddMenuItemPhrase(menu, client, "cannonrate", "Menu_TrainingCannon_Rate");
+	AddMenuItemPhrase(menu, client, "cannonrandom", "Menu_TrainingCannon_Randomness");
 	AddMenuItemPhrase(menu, client, "cannonstart", "Menu_TrainingCannon_Start");
 	AddMenuItemPhrase(menu, client, "cannonstop", "Menu_TrainingCannon_Stop");
+	AddMenuItemPhrase(menu, client, "goals", gTrainingGoalsDisabled ? "Menu_Training_Goals_Enable" : "Menu_Training_Goals_Disable");
 	menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
 }
@@ -1393,16 +1777,28 @@ public int MenuHandlerPractice(Menu menu, MenuAction action, int client, int ite
 			SetTrainingCannonTarget(client);
 		}
 	}
-	else if (StrEqual(info, "cannonpower"))
+	else if (StrEqual(info, "cannonpower") || StrEqual(info, "cannonrate") || StrEqual(info, "cannonrandom"))
 	{
 		if (!CanUseTrainingCannon(client))
 		{
 			ShowPracticeMenu(client);
 			return 0;
 		}
-		gPracticeInput[client] = PRACTICE_INPUT_CANNON_POWER;
-		PrintToChat(client, "%t", "Training_Cannon_Power_Prompt", 100.0, 3000.0, gCvarTrainingCannonPower.FloatValue);
+		int input = PRACTICE_INPUT_CANNON_POWER;
+		if (StrEqual(info, "cannonrate"))
+		{
+			input = PRACTICE_INPUT_CANNON_RATE;
+		}
+		else if (StrEqual(info, "cannonrandom"))
+		{
+			input = PRACTICE_INPUT_CANNON_RANDOMNESS;
+		}
+		PromptCannonSetting(client, input);
 		return 0;
+	}
+	else if (StrEqual(info, "goals"))
+	{
+		SetTrainingGoalsDisabled(client, !gTrainingGoalsDisabled);
 	}
 	else if (StrEqual(info, "cannonstart"))
 	{
@@ -1522,6 +1918,7 @@ public int MenuHandlerDraftCaptainCount(Menu menu, MenuAction action, int client
 	menu.GetItem(item, info, sizeof(info));
 	if (StrEqual(info, "custom"))
 	{
+		BeginChatInput(client);
 		gDraftSetupInput[client] = DRAFT_INPUT_CAPTAINS;
 		PrintToChat(client, "%t", "Draft_CaptainCount_Custom_Prompt");
 		return 0;
@@ -1673,6 +2070,7 @@ public int MenuHandlerDraftTeamSize(Menu menu, MenuAction action, int client, in
 	menu.GetItem(item, info, sizeof(info));
 	if (StrEqual(info, "custom"))
 	{
+		BeginChatInput(client);
 		gDraftSetupInput[client] = DRAFT_INPUT_TEAMSIZE;
 		PrintToChat(client, "%t", "Draft_TeamSize_Custom_Prompt");
 		return 0;
@@ -1739,8 +2137,7 @@ public int MenuHandlerStartDuration(Menu menu, MenuAction action, int client, in
 	menu.GetItem(item, info, sizeof(info));
 	if (StrEqual(info, "custom"))
 	{
-		gPracticeInput[client] = PRACTICE_INPUT_NONE;
-		gDraftSetupInput[client] = DRAFT_INPUT_NONE;
+		BeginChatInput(client);
 		gMatchInput[client] = MATCH_INPUT_DURATION;
 		PrintToChat(client, "%t", "Menu_Start_Custom_Prompt");
 		return 0;
@@ -2353,6 +2750,8 @@ bool StartMatch()
 	}
 
 	StopTrainingCannon();
+	// The match restarts the round, which brings the goal triggers back.
+	gTrainingGoalsDisabled = false;
 	gMatchLive = true;
 	gPaused = false;
 	gUnpausing = false;
@@ -2438,10 +2837,13 @@ bool StopMatch(bool announce = true)
 	gBreakEndTime = 0.0;
 	gKickoffReasonPhrase[0] = '\0';
 	gPendingRestartKickoffReason[0] = '\0';
+	gShootoutWaitingRoundStart = false;
 	KillMatchTimers();
 	KillStoppageTrigger();
 	StopAllSprints();
 	UnfreezeAllPlayers();
+	// Draft sides only bind the match they were drafted for.
+	ClearDraftTeams();
 	if (announce)
 	{
 		PrintToChatAll("%t", "Match_Stopped");
@@ -2457,7 +2859,8 @@ void FinishMatch()
 	}
 
 	PrintToChatAll("%t", "Final_Result", gScoreCT, gScoreT);
-	PrintMatchMVP();
+	int mvp = PrintMatchMVP();
+	RankingOnMatchFinished(mvp);
 	StopMatch(false);
 	ResetFinishedMatchScoreAndRound();
 }
@@ -2490,7 +2893,7 @@ void ResetMatchTabScores()
 	}
 }
 
-void PrintMatchMVP()
+int PrintMatchMVP()
 {
 	int bestClient = 0;
 	int bestPoints = 0;
@@ -2516,6 +2919,7 @@ void PrintMatchMVP()
 	{
 		PrintToChatAll("%t", "Match_MVP_None");
 	}
+	return bestClient;
 }
 
 void ResetMatch()
@@ -2547,6 +2951,7 @@ void ResetMatch()
 	gPenaltyShooter = 0;
 	gPenaltyGoalkeeper = 0;
 	gShootoutActive = false;
+	gShootoutWaitingRoundStart = false;
 	gPeriodDuration = 0.0;
 	gPeriodElapsed = 0.0;
 	gMatchElapsed = 0.0;
@@ -2555,6 +2960,7 @@ void ResetMatch()
 	StopAllSprints();
 	UnfreezeAllPlayers();
 	ResetMatchPlayerState();
+	ClearDraftTeams();
 	UpdateGameTeamScores();
 	PrintToChatAll("%t", "Match_Reset");
 }
@@ -2665,6 +3071,7 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 	}
 	gLastGoalTime = now;
 	gRoundGoalHandled = true;
+	SavesOnGoal(scoringTeam);
 	StopPeriodClock();
 	StopStoppageClock();
 
@@ -2715,7 +3122,8 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 		return;
 	}
 
-	if (gOvertimeActive && gCvarMatchGoldenGoal.BoolValue)
+	// gOvertimeActive is already set during the break before the first half.
+	if (gOvertimeActive && gCurrentPeriod > gMaxPeriods && gCvarMatchGoldenGoal.BoolValue)
 	{
 		PrintToChatAll("%t", "GoldenGoal_Finished");
 		FinishMatch();
@@ -2733,7 +3141,7 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 	}
 }
 
-void RegisterBallTouch(int client)
+void RegisterBallTouch(int client, int ball)
 {
 	if (!IsValidClient(client) || !IsPlayerAlive(client))
 	{
@@ -2757,6 +3165,7 @@ void RegisterBallTouch(int client)
 
 	gClientLastTouch[client] = now;
 	int previousToucher = gLastToucher;
+	SavesOnBallTouch(client, ball, previousToucher);
 	if (client != previousToucher)
 	{
 		if (IsValidClient(previousToucher))
@@ -2812,6 +3221,7 @@ void ClearLastTouchers()
 
 void AddPlayerHitPoint(int client)
 {
+	RankingAddStat(client, RANK_STAT_HITS, 1);
 	AddPlayerPoints(client, gCvarRankingPointsHit.IntValue);
 }
 
@@ -2824,6 +3234,8 @@ void AddPlayerGoalScore(int client)
 
 	gPlayerGoals[client]++;
 	gPlayerPoints[client] += gCvarRankingPointsGoal.IntValue;
+	RankingAddStat(client, RANK_STAT_GOALS, 1);
+	RankingAddStat(client, RANK_STAT_POINTS, gCvarRankingPointsGoal.IntValue);
 	UpdateClientScoreboard(client);
 }
 
@@ -2836,6 +3248,8 @@ void AddPlayerAssistScore(int client)
 
 	gPlayerAssists[client]++;
 	gPlayerPoints[client] += gCvarRankingPointsAssist.IntValue;
+	RankingAddStat(client, RANK_STAT_ASSISTS, 1);
+	RankingAddStat(client, RANK_STAT_POINTS, gCvarRankingPointsAssist.IntValue);
 	UpdateClientScoreboard(client);
 }
 
@@ -2848,21 +3262,26 @@ void AddPlayerOwnGoalScore(int client)
 
 	gPlayerOwnGoals[client]++;
 	gPlayerPoints[client] += gCvarRankingPointsOwnGoal.IntValue;
+	RankingAddStat(client, RANK_STAT_OWN_GOALS, 1);
+	RankingAddStat(client, RANK_STAT_POINTS, gCvarRankingPointsOwnGoal.IntValue);
 	UpdateClientScoreboard(client);
 }
 
 void AddPlayerPassScore(int client)
 {
+	RankingAddStat(client, RANK_STAT_PASSES, 1);
 	AddPlayerPoints(client, gCvarRankingPointsPass.IntValue);
 }
 
 void AddPlayerInterceptionScore(int client)
 {
+	RankingAddStat(client, RANK_STAT_INTERCEPTIONS, 1);
 	AddPlayerPoints(client, gCvarRankingPointsInterception.IntValue);
 }
 
 void AddPlayerBallLossScore(int client)
 {
+	RankingAddStat(client, RANK_STAT_BALL_LOSSES, 1);
 	AddPlayerPoints(client, gCvarRankingPointsBallLoss.IntValue);
 }
 
@@ -2874,6 +3293,7 @@ void AddPlayerPoints(int client, int points)
 	}
 
 	gPlayerPoints[client] += points;
+	RankingAddStat(client, RANK_STAT_POINTS, points);
 	UpdateClientScoreboard(client);
 }
 
@@ -2892,6 +3312,7 @@ void AddTeamRoundResultPoints(int scoringTeam)
 			continue;
 		}
 
+		RankingAddStat(client, team == scoringTeam ? RANK_STAT_ROUNDS_WON : RANK_STAT_ROUNDS_LOST, 1);
 		AddPlayerPoints(client, team == scoringTeam ? gCvarRankingPointsRoundWon.IntValue : gCvarRankingPointsRoundLost.IntValue);
 	}
 }
@@ -3045,21 +3466,18 @@ void FinishPeriod()
 
 	ClearLastTouchers();
 	FreezeAllPlayers();
-	if (gOvertimeActive)
+	if (IsFinalPeriod())
 	{
-		FinishOvertime();
-		return;
-	}
-
-	if (gCurrentPeriod >= gMaxPeriods)
-	{
-		if (gScoreCT == gScoreT)
+		if (gOvertimeActive)
 		{
-			if (gCvarMatchOvertime.BoolValue)
-			{
-				StartOvertime();
-				return;
-			}
+			FinishOvertime();
+			return;
+		}
+
+		if (gScoreCT == gScoreT && gCvarMatchOvertime.BoolValue)
+		{
+			StartOvertime();
+			return;
 		}
 		FinishMatch();
 		return;
@@ -3068,23 +3486,51 @@ void FinishPeriod()
 	StartBreak();
 }
 
+// Overtime is played as two halves. Each one starts from a round restart like a
+// regular period, with the usual break before the first half and between them.
 void StartOvertime()
 {
 	gOvertimeActive = true;
-	gCurrentPeriod = gMaxPeriods + 1;
+	StartBreak();
+}
 
-	int overtimeSeconds = GetOvertimeLengthSeconds();
-	char overtimeDuration[16];
-	FormatDurationSeconds(overtimeSeconds, overtimeDuration, sizeof(overtimeDuration));
-	PrintToChatAll("%t", "Overtime_Start", overtimeDuration);
-	if (gCvarMatchGoldenGoal.BoolValue)
+bool IsFinalPeriod()
+{
+	int lastPeriod = gOvertimeActive ? gMaxPeriods + OVERTIME_PERIODS : gMaxPeriods;
+	return gCurrentPeriod >= lastPeriod;
+}
+
+int GetPeriodLengthSeconds(int period)
+{
+	if (period > gMaxPeriods)
 	{
-		PrintToChatAll("%t", "GoldenGoal_Start");
+		return GetOvertimeLengthSeconds() / OVERTIME_PERIODS;
 	}
-	gPeriodRemaining = float(overtimeSeconds);
-	gPeriodDuration = float(overtimeSeconds);
-	gPeriodElapsed = 0.0;
-	StartKickoff(GetScheduledKickoffTeam(), "KickoffReason_Overtime");
+	return gCvarMatchPeriodLength.IntValue * 60;
+}
+
+void StartNextPeriod()
+{
+	gCurrentPeriod++;
+	gStoppageActive = false;
+	gStoppageSeconds = 0;
+	gPendingRestartKickoffReason[0] = '\0';
+	if (gOvertimeActive)
+	{
+		if (gCurrentPeriod == gMaxPeriods + 1)
+		{
+			char overtimeDuration[16];
+			FormatDurationSeconds(GetOvertimeLengthSeconds(), overtimeDuration, sizeof(overtimeDuration));
+			PrintToChatAll("%t", "Overtime_Start", overtimeDuration);
+			if (gCvarMatchGoldenGoal.BoolValue)
+			{
+				PrintToChatAll("%t", "GoldenGoal_Start");
+			}
+		}
+		strcopy(gPendingRestartKickoffReason, sizeof(gPendingRestartKickoffReason), "KickoffReason_Overtime");
+	}
+	gPeriodRemaining = float(GetPeriodLengthSeconds(gCurrentPeriod));
+	RestartRoundBeforePeriod(gPeriodRemaining);
 }
 
 void FinishOvertime()
@@ -3179,21 +3625,20 @@ public Action TimerBreakEnd(Handle timer)
 {
 	gBreakTimer = null;
 	gInBreak = false;
-	gCurrentPeriod++;
-	gStoppageActive = false;
-	gStoppageSeconds = 0;
-	gPeriodRemaining = float(gCvarMatchPeriodLength.IntValue * 60);
-	RestartRoundBeforePeriod(gPeriodRemaining);
+	StartNextPeriod();
 	return Plugin_Stop;
 }
 
 void ForceNextPeriod()
 {
-	if (!gMatchLive)
+	// While a restart is pending the next period is already on its way; forcing
+	// again would skip one.
+	if (!gMatchLive || gRestartingPeriod)
 	{
 		return;
 	}
 
+	bool wasInBreak = gInBreak;
 	StopPeriodClock();
 	KillTimerSafe(gBreakTimer);
 	StopStoppageClock();
@@ -3202,16 +3647,24 @@ void ForceNextPeriod()
 	{
 		gCurrentPeriod = 1;
 	}
-	if (gCurrentPeriod < gMaxPeriods)
+	if (!wasInBreak)
 	{
-		gCurrentPeriod++;
+		gMatchElapsed += gPeriodElapsed;
 	}
-	gMatchElapsed += gPeriodElapsed;
 	gPeriodElapsed = 0.0;
+	gPeriodRemaining = 0.0;
 	gInBreak = false;
 	gStoppageActive = false;
 	gStoppageSeconds = 0;
-	RestartRoundBeforePeriod(float(gCvarMatchPeriodLength.IntValue * 60));
+
+	// From a break, go straight to the period it was waiting for. From the last
+	// period, end it the way the clock would: overtime or the final whistle.
+	if (!wasInBreak && IsFinalPeriod())
+	{
+		FinishPeriod();
+		return;
+	}
+	StartNextPeriod();
 }
 
 void RestartRoundBeforePeriod(float periodLength)
@@ -3253,6 +3706,12 @@ public Action TimerStartRestartedPeriod(Handle timer)
 	gPeriodElapsed = 0.0;
 	gKickoffActive = true;
 	gKickoffTeam = GetScheduledKickoffTeam();
+	if (gPendingRestartKickoffReason[0] != '\0')
+	{
+		strcopy(gKickoffReasonPhrase, sizeof(gKickoffReasonPhrase), gPendingRestartKickoffReason);
+		PrintKickoffStartChat(gKickoffTeam, gPendingRestartKickoffReason);
+		gPendingRestartKickoffReason[0] = '\0';
+	}
 	UnfreezeAllPlayers();
 	return Plugin_Stop;
 }
@@ -3481,6 +3940,7 @@ void ClearMatchRuntimeState()
 	gShootoutNextTeam = 0;
 	gShootoutShooterIndexCT = 0;
 	gShootoutShooterIndexT = 0;
+	gShootoutWaitingRoundStart = false;
 	gStoppageSeconds = 0;
 	gBallStartPositionValid = false;
 	gCurrentPeriod = 0;
@@ -3509,6 +3969,7 @@ void KillMatchTimers()
 	KillTimerSafe(gPeriodRestartTimer);
 	KillTimerSafe(gUnpauseTimer);
 	KillTimerSafe(gStoppageTimer);
+	KillTimerSafe(gShootoutTimer);
 	KillPenaltyTimer();
 	gUnpausing = false;
 	gUnpauseSecondsLeft = 0;
@@ -3628,7 +4089,9 @@ void DisableSoccerForMap()
 	ClearMatchRuntimeState();
 	ResetEntityHooks();
 	ClearBallEntity();
-	gTrainingBallRef = INVALID_ENT_REFERENCE;
+	// Once their refs are dropped leftover props would pass for the match ball.
+	KillAllTrainingBalls();
+	gTrainingGoalsDisabled = false;
 	gTrainingCannonBallRef = INVALID_ENT_REFERENCE;
 	gTrainingCannonOriginSet = false;
 	gTrainingCannonTargetSet = false;
@@ -3700,6 +4163,12 @@ void ResetEntityHooks()
 bool IsBallEntity(int entity)
 {
 	if (!IsValidEntity(entity))
+	{
+		return false;
+	}
+	// The training ball shares the "ball" targetname so map clip brushes treat it
+	// the same, but it must never be taken for the match ball.
+	if (IsTrainingBall(entity))
 	{
 		return false;
 	}
@@ -4571,11 +5040,18 @@ void ShowDraftStatus(int client)
 	ReplyToCommand(client, "%t", "Draft_Status_Clean", state, captainT, captainCT, nextGroup);
 }
 
-void StartPenalty(int team, int shooter, int goalkeeper)
+bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = false)
 {
 	if (!IsSoccerAvailable())
 	{
-		return;
+		return false;
+	}
+
+	// A manual penalty during a shootout would take the place of the next kick.
+	if (gPenaltyActive || (gShootoutActive && !fromShootout))
+	{
+		PrintToChatAll("%t", "Penalty_Already_Active");
+		return false;
 	}
 
 	if (!gPenaltySpotValid)
@@ -4592,7 +5068,7 @@ void StartPenalty(int team, int shooter, int goalkeeper)
 	if (!gPenaltySpotValid)
 	{
 		PrintToChatAll("%t", "Penalty_Spot_Reminder");
-		return;
+		return false;
 	}
 
 	if (!IsValidClient(shooter))
@@ -4602,11 +5078,11 @@ void StartPenalty(int team, int shooter, int goalkeeper)
 	else if (GetClientTeam(shooter) != team)
 	{
 		PrintToChatAll("%t", "Penalty_Need_Players");
-		return;
+		return false;
 	}
 	if (!IsValidClient(goalkeeper))
 	{
-		goalkeeper = FindFirstTeamClient(team == TEAM_CT ? TEAM_T : TEAM_CT);
+		goalkeeper = FindTeamGoalkeeper(team == TEAM_CT ? TEAM_T : TEAM_CT);
 	}
 	else if (GetClientTeam(goalkeeper) == team || GetClientTeam(goalkeeper) < TEAM_T)
 	{
@@ -4615,11 +5091,12 @@ void StartPenalty(int team, int shooter, int goalkeeper)
 	if (!IsValidClient(shooter))
 	{
 		PrintToChatAll("%t", "Penalty_Need_Players");
-		return;
+		return false;
 	}
 
 	gPenaltyActive = true;
 	gPenaltyWaitingForKick = true;
+	gPendingSaver = 0;
 	gPenaltyTeam = team;
 	gPenaltyShooter = shooter;
 	gPenaltyGoalkeeper = goalkeeper;
@@ -4654,6 +5131,7 @@ void StartPenalty(int team, int shooter, int goalkeeper)
 		PrintToChatAll("%t", "Penalty_Turn_NoGk", gPenaltyShooter, teamName);
 	}
 	PlayPenaltyTurnSound(gPenaltyShooter);
+	return true;
 }
 
 // The attacked goal is whichever end the penalty spot sits on, so the direction from
@@ -4725,7 +5203,17 @@ void ResolvePenalty(bool scored)
 	gPenaltyGoalkeeper = 0;
 	if (gShootoutActive)
 	{
-		CreateTimer(gCvarPenaltyShotDelay.FloatValue, TimerNextShootoutPenalty, _, TIMER_FLAG_NO_MAPCHANGE);
+		KillTimerSafe(gShootoutTimer);
+		if (gRoundEnded)
+		{
+			// A goal ends the round, and the restart would undo any placement made
+			// before it. The next kick is set up from round_start instead.
+			gShootoutWaitingRoundStart = true;
+		}
+		else
+		{
+			gShootoutTimer = CreateTimer(gCvarPenaltyShotDelay.FloatValue, TimerNextShootoutPenalty, _, TIMER_FLAG_NO_MAPCHANGE);
+		}
 	}
 }
 
@@ -4742,7 +5230,15 @@ void StartShootout()
 		return;
 	}
 
+	if (gPenaltyActive || gShootoutActive)
+	{
+		PrintToChatAll("%t", "Penalty_Already_Active");
+		return;
+	}
+
 	KillPenaltyTimer();
+	KillTimerSafe(gShootoutTimer);
+	gShootoutWaitingRoundStart = false;
 	gShootoutActive = true;
 	gPenaltyActive = false;
 	gShootoutScoreCT = 0;
@@ -4758,6 +5254,7 @@ void StartShootout()
 
 public Action TimerNextShootoutPenalty(Handle timer)
 {
+	gShootoutTimer = null;
 	StartNextShootoutPenalty();
 	return Plugin_Stop;
 }
@@ -4777,7 +5274,6 @@ void StartNextShootoutPenalty()
 
 	int team = gShootoutNextTeam;
 	int shooter = GetNextShootoutShooter(team);
-	int goalkeeper = FindFirstTeamClient(team == TEAM_CT ? TEAM_T : TEAM_CT);
 	if (!IsValidClient(shooter))
 	{
 		FinishShootout();
@@ -4785,7 +5281,11 @@ void StartNextShootoutPenalty()
 	}
 
 	gShootoutNextTeam = team == TEAM_CT ? TEAM_T : TEAM_CT;
-	StartPenalty(team, shooter, goalkeeper);
+	// Goalkeeper 0 lets StartPenalty pick the defending side's goalkeeper.
+	if (!StartPenalty(team, shooter, 0, true))
+	{
+		FinishShootout();
+	}
 }
 
 // The shootout is over as soon as one team leads by more than the other can still
@@ -4838,6 +5338,8 @@ int GetNextShootoutShooter(int team)
 void FinishShootout()
 {
 	gShootoutActive = false;
+	gShootoutWaitingRoundStart = false;
+	KillTimerSafe(gShootoutTimer);
 	if (gShootoutScoreCT > gShootoutScoreT)
 	{
 		char teamName[16];
@@ -4863,6 +5365,23 @@ void KillPenaltyTimer()
 		KillTimer(gPenaltyTimer);
 		gPenaltyTimer = null;
 	}
+}
+
+// Prefers whoever took the goalkeeper position with !gk over the first player found.
+int FindTeamGoalkeeper(int team)
+{
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (IsValidClient(client)
+			&& GetClientTeam(client) == team
+			&& !IsFakeClient(client)
+			&& !gRedCard[client]
+			&& gPosition[client] == SoccerPosition_Goalkeeper)
+		{
+			return client;
+		}
+	}
+	return FindFirstTeamClient(team);
 }
 
 int FindFirstTeamClient(int team)
@@ -4915,6 +5434,44 @@ int CountLiveReplacements(int team, int ignoreClient)
 		}
 	}
 	return replacements;
+}
+
+// Same rule as the game's auto-assign: the smaller side, random on a tie.
+int GetAutoAssignTeam(int ignoreClient)
+{
+	int countT;
+	int countCT;
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (client == ignoreClient || !IsValidClient(client))
+		{
+			continue;
+		}
+
+		int team = GetClientTeam(client);
+		if (team == TEAM_T)
+		{
+			countT++;
+		}
+		else if (team == TEAM_CT)
+		{
+			countCT++;
+		}
+	}
+
+	if (countT == countCT)
+	{
+		return GetRandomKickoffTeam();
+	}
+	return countT < countCT ? TEAM_T : TEAM_CT;
+}
+
+void ClearDraftTeams()
+{
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		gDraftTeam[client] = 0;
+	}
 }
 
 bool HasAssignedSoccerTeams()
@@ -5162,6 +5719,12 @@ void UpdateSprint(int client, bool wantsSprint)
 		return;
 	}
 
+	// Frozen players (break, period restart) cannot run, so they recover.
+	if (GetEntityMoveType(client) == MOVETYPE_NONE)
+	{
+		wantsSprint = false;
+	}
+
 	if (wantsSprint && gStamina[client] > 0.0)
 	{
 		if (!gSprinting[client])
@@ -5352,56 +5915,106 @@ void ClearAllCards()
 	PrintToChatAll("%t", "Card_Cleared_All");
 }
 
+// Red cards outlive the match, the map and reconnects, as in the original
+// soccermod, until a referee removes them. Stored as auth -> player name.
+void LoadRedCards()
+{
+	gRedCards = new StringMap();
+	BuildPath(Path_SM, gRedCardsPath, sizeof(gRedCardsPath), "data/umbrella_soccer_red_cards.txt");
+
+	KeyValues kv = new KeyValues("RedCards");
+	kv.SetEscapeSequences(true);
+	if (kv.ImportFromFile(gRedCardsPath) && kv.GotoFirstSubKey())
+	{
+		char auth[MAX_AUTH_ID_LENGTH];
+		char name[MAX_NAME_LENGTH];
+		do
+		{
+			kv.GetSectionName(auth, sizeof(auth));
+			kv.GetString("name", name, sizeof(name));
+			gRedCards.SetString(auth, name);
+		}
+		while (kv.GotoNextKey());
+	}
+	delete kv;
+}
+
+void SaveRedCards()
+{
+	KeyValues kv = new KeyValues("RedCards");
+	kv.SetEscapeSequences(true);
+	StringMapSnapshot snapshot = gRedCards.Snapshot();
+	char auth[MAX_AUTH_ID_LENGTH];
+	char name[MAX_NAME_LENGTH];
+	for (int i = 0; i < snapshot.Length; i++)
+	{
+		snapshot.GetKey(i, auth, sizeof(auth));
+		gRedCards.GetString(auth, name, sizeof(name));
+		kv.JumpToKey(auth, true);
+		kv.SetString("name", name);
+		kv.GoBack();
+	}
+	delete snapshot;
+	kv.ExportToFile(gRedCardsPath);
+	delete kv;
+}
+
+// Bots all report "BOT" and LAN players "STEAM_ID_LAN", so only real Steam
+// IDs are stored; anything else would red-card everyone sharing that ID.
+bool IsPersonalAuth(const char[] auth)
+{
+	return strncmp(auth, "STEAM_", 6) == 0 && !StrEqual(auth, "STEAM_ID_LAN") && !StrEqual(auth, "STEAM_ID_PENDING");
+}
+
 void RememberRedCardAuth(int client)
 {
 	char auth[MAX_AUTH_ID_LENGTH];
-	if (!GetClientAuthId(client, AuthId_Steam2, auth, sizeof(auth), true) || auth[0] == '\0' || IsRedCardAuth(auth))
+	if (IsFakeClient(client) || !GetClientAuthId(client, AuthId_Steam2, auth, sizeof(auth), true) || !IsPersonalAuth(auth))
 	{
 		return;
 	}
 
-	if (gRedCardAuthCount < sizeof(gRedCardAuths))
-	{
-		strcopy(gRedCardAuths[gRedCardAuthCount], sizeof(gRedCardAuths[]), auth);
-		gRedCardAuthCount++;
-	}
+	char name[MAX_NAME_LENGTH];
+	GetClientName(client, name, sizeof(name));
+	gRedCards.SetString(auth, name);
+	SaveRedCards();
 }
 
 bool IsRedCardAuth(const char[] auth)
 {
-	for (int i = 0; i < gRedCardAuthCount; i++)
-	{
-		if (StrEqual(gRedCardAuths[i], auth, false))
-		{
-			return true;
-		}
-	}
-	return false;
+	return IsPersonalAuth(auth) && gRedCards.ContainsKey(auth);
 }
 
 void RemoveRedCardAuth(int client)
 {
 	char auth[MAX_AUTH_ID_LENGTH];
-	if (!GetClientAuthId(client, AuthId_Steam2, auth, sizeof(auth), true) || auth[0] == '\0')
+	if (GetClientAuthId(client, AuthId_Steam2, auth, sizeof(auth), true))
 	{
-		return;
+		RemoveRedCardByAuth(auth);
 	}
+}
 
-	for (int i = 0; i < gRedCardAuthCount; i++)
+// Also lifts the card from a player who is online with that auth.
+bool RemoveRedCardByAuth(const char[] auth)
+{
+	if (!gRedCards.Remove(auth))
 	{
-		if (!StrEqual(gRedCardAuths[i], auth, false))
-		{
-			continue;
-		}
-
-		for (int j = i; j < gRedCardAuthCount - 1; j++)
-		{
-			strcopy(gRedCardAuths[j], sizeof(gRedCardAuths[]), gRedCardAuths[j + 1]);
-		}
-		gRedCardAuthCount--;
-		gRedCardAuths[gRedCardAuthCount][0] = '\0';
-		return;
+		return false;
 	}
+	SaveRedCards();
+
+	char clientAuth[MAX_AUTH_ID_LENGTH];
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (IsValidClient(client)
+			&& GetClientAuthId(client, AuthId_Steam2, clientAuth, sizeof(clientAuth), true)
+			&& StrEqual(clientAuth, auth, false))
+		{
+			gRedCard[client] = false;
+			gYellowCards[client] = 0;
+		}
+	}
+	return true;
 }
 
 void ApplyStoredRedCard(int client)
@@ -5415,7 +6028,7 @@ void ApplyStoredRedCard(int client)
 
 void ApplyStoredRedCardAuth(int client, const char[] auth)
 {
-	if (!gMatchLive || !IsValidClient(client) || !IsRedCardAuth(auth))
+	if (!IsValidClient(client) || !IsRedCardAuth(auth))
 	{
 		return;
 	}
@@ -5442,20 +6055,16 @@ public Action TimerMoveRedCardSpectator(Handle timer, any userid)
 
 void ClearRedCardAuths()
 {
-	for (int i = 0; i < gRedCardAuthCount; i++)
-	{
-		gRedCardAuths[i][0] = '\0';
-	}
-	gRedCardAuthCount = 0;
+	gRedCards.Clear();
+	SaveRedCards();
 }
 
 void ResetMatchPlayerState()
 {
-	ClearRedCardAuths();
+	// Red cards are kept: they last until a referee removes them.
 	for (int client = 1; client <= MaxClients; client++)
 	{
 		gYellowCards[client] = 0;
-		gRedCard[client] = false;
 		gClientLastTouch[client] = 0.0;
 		gPlayerGoals[client] = 0;
 		gPlayerAssists[client] = 0;
@@ -5492,6 +6101,7 @@ void ResetClientState(int client)
 	gDraftSetupCaptainCount[client] = 0;
 	gPracticeInput[client] = PRACTICE_INPUT_NONE;
 	gMatchInput[client] = MATCH_INPUT_NONE;
+	gChatInputExpires[client] = 0.0;
 	ClearDraftCaptainSelection(client);
 	gRespawnTimer[client] = null;
 	gRefereeAction[client] = REF_ACTION_NONE;
@@ -5708,6 +6318,63 @@ bool IsValidClient(int client)
 	return client >= 1 && client <= MaxClients && IsClientInGame(client);
 }
 
+// Every admin has a ball of their own, as in the original soccermod.
+void ClearTrainingBallRefs()
+{
+	for (int client = 0; client <= MAXPLAYERS; client++)
+	{
+		gTrainingBallRefs[client] = INVALID_ENT_REFERENCE;
+	}
+}
+
+int GetClientTrainingBall(int client)
+{
+	int entity = EntRefToEntIndex(gTrainingBallRefs[client]);
+	if (entity != INVALID_ENT_REFERENCE && entity > MaxClients && IsValidEntity(entity))
+	{
+		return entity;
+	}
+	gTrainingBallRefs[client] = INVALID_ENT_REFERENCE;
+	return -1;
+}
+
+bool IsTrainingBall(int entity)
+{
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (gTrainingBallRefs[client] != INVALID_ENT_REFERENCE && EntRefToEntIndex(gTrainingBallRefs[client]) == entity)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+void RemoveClientTrainingBall(int client)
+{
+	int entity = GetClientTrainingBall(client);
+	if (entity == -1)
+	{
+		return;
+	}
+
+	if (EntRefToEntIndex(gTrainingCannonBallRef) == entity)
+	{
+		gTrainingCannonBallRef = INVALID_ENT_REFERENCE;
+	}
+	AcceptEntityInput(entity, "Kill", -1, -1, 0);
+	gTrainingBallRefs[client] = INVALID_ENT_REFERENCE;
+}
+
+void KillAllTrainingBalls()
+{
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		RemoveClientTrainingBall(client);
+	}
+	ClearTrainingBallRefs();
+}
+
 void SpawnTrainingBall(int client)
 {
 	if (!IsSoccerAvailable())
@@ -5715,12 +6382,7 @@ void SpawnTrainingBall(int client)
 		return;
 	}
 
-	int previous = EntRefToEntIndex(gTrainingBallRef);
-	if (previous != INVALID_ENT_REFERENCE && previous > MaxClients && IsValidEntity(previous))
-	{
-		AcceptEntityInput(previous, "Kill", -1, -1, 0);
-	}
-	gTrainingBallRef = INVALID_ENT_REFERENCE;
+	RemoveClientTrainingBall(client);
 
 	float origin[3];
 	if (!GetAimPosition(client, origin))
@@ -5753,28 +6415,74 @@ void SpawnTrainingBall(int client)
 		PrintToChat(client, "%t", "Training_Ball_Create_Failed");
 		return;
 	}
-	gTrainingBallRef = EntIndexToEntRef(entity);
-	gTrainingCannonBallRef = gTrainingBallRef;
+	gTrainingBallRefs[client] = EntIndexToEntRef(entity);
 	PrintToChat(client, "%t", "Training_Ball_Spawned");
 }
 
 void RemoveTrainingBall(int client)
 {
-	int entity = EntRefToEntIndex(gTrainingBallRef);
-	if (entity == INVALID_ENT_REFERENCE || entity <= MaxClients || !IsValidEntity(entity))
+	if (GetClientTrainingBall(client) == -1)
 	{
-		gTrainingBallRef = INVALID_ENT_REFERENCE;
 		PrintToChat(client, "%t", "Training_Ball_NotFound");
 		return;
 	}
 
-	AcceptEntityInput(entity, "Kill", -1, -1, 0);
-	gTrainingBallRef = INVALID_ENT_REFERENCE;
-	if (EntRefToEntIndex(gTrainingCannonBallRef) == entity)
-	{
-		gTrainingCannonBallRef = INVALID_ENT_REFERENCE;
-	}
+	RemoveClientTrainingBall(client);
 	PrintToChat(client, "%t", "Training_Ball_Removed");
+}
+
+void TrainingOnPluginStart()
+{
+	ClearTrainingBallRefs();
+	gTrainingGoalsDisabled = false;
+}
+
+void TrainingOnMapStart()
+{
+	ClearTrainingBallRefs();
+	gTrainingGoalsDisabled = false;
+}
+
+// Training without goals, as in the original soccermod: the map's goal triggers
+// are removed, again on every round start, until the goals are enabled again,
+// which restarts the round so the map spawns them back.
+void SetTrainingGoalsDisabled(int client, bool disabled)
+{
+	if (gMatchLive)
+	{
+		PrintToChat(client, "%t", "Training_Goals_Match_Live");
+		return;
+	}
+	if (disabled == gTrainingGoalsDisabled)
+	{
+		return;
+	}
+
+	gTrainingGoalsDisabled = disabled;
+	if (disabled)
+	{
+		KillGoalTriggers();
+		PrintToChatAll("%t", "Training_Goals_Disabled", client);
+	}
+	else
+	{
+		ServerCommand("mp_restartgame 1");
+		PrintToChatAll("%t", "Training_Goals_Enabled", client);
+	}
+}
+
+void KillGoalTriggers()
+{
+	int entity = -1;
+	char name[MAX_ENTITY_NAME];
+	while ((entity = FindEntityByClassname(entity, "trigger_once")) != -1)
+	{
+		GetEntPropString(entity, Prop_Data, "m_iName", name, sizeof(name));
+		if (!StrEqual(name, "end_stoppage_time", false))
+		{
+			AcceptEntityInput(entity, "Kill");
+		}
+	}
 }
 
 void SetTrainingCannonPosition(int client)
@@ -5831,7 +6539,11 @@ bool StartTrainingCannon(int client)
 		SetTrainingCannonTargetFromClient(client);
 	}
 
-	int ball = GetTrainingCannonBallEntity();
+	int ball = GetClientTrainingBall(client);
+	if (ball == -1)
+	{
+		ball = GetTrainingCannonBallEntity();
+	}
 	if (ball == -1)
 	{
 		PrintToChat(client, "%t", "Training_Cannon_No_Ball");
@@ -5862,12 +6574,6 @@ bool CanUseTrainingCannon(int client)
 int GetTrainingCannonBallEntity()
 {
 	int entity = EntRefToEntIndex(gTrainingCannonBallRef);
-	if (entity != INVALID_ENT_REFERENCE && entity > MaxClients && IsValidEntity(entity))
-	{
-		return entity;
-	}
-
-	entity = EntRefToEntIndex(gTrainingBallRef);
 	if (entity != INVALID_ENT_REFERENCE && entity > MaxClients && IsValidEntity(entity))
 	{
 		return entity;
@@ -5906,6 +6612,8 @@ public Action TimerTrainingCannon(Handle timer)
 	MakeVectorFromPoints(gTrainingCannonOrigin, gTrainingCannonTarget, velocity);
 	if (NormalizeVector(velocity, velocity) <= 0.0)
 	{
+		// No direction to fire in: stop cleanly so the toggle starts it again.
+		gTrainingCannonSet = false;
 		return Plugin_Stop;
 	}
 

@@ -1,33 +1,50 @@
-# Umbrella Soccer 1.0.1
+# Umbrella Soccer 1.1.0
 
-Bug fix release over 1.0.0. No configuration changes required: no cvar was added and no default value changed.
+Feature release over 1.0.1: persistent ranking, goalkeeper saves, persistent red cards, overtime in two halves, a fuller training mode and the soccer server settings applied by the plugin. It also fixes several match flow bugs found while comparing the plugin with the original soccermod.
+
+## New
+
+- **Ranking**: persistent stats per player, stored in SQLite by default (nothing to set up) or MySQL through `databases.cfg`. Match play and public play are ranked separately. Players use `!rank` and `!top`, also available in the `!soccer` menu.
+- **Goalkeeper saves**: a player who touches the ball inside their own goalkeeper area right after an opponent touched it gets a save and 10 points. Set the two areas once per map from `!soccer` > Goalkeeper areas.
+- **Red cards**: they now persist across matches, maps and reconnects until a referee removes them. The referee menu lists every stored red card, including offline players.
+- **Overtime in two halves**: when a match ends tied with overtime enabled, there is a break, a first half, another break and a second half, each half starting from a round restart.
+- **Training**: one training ball per admin, cannon fire rate and randomness settable from the menu, and goals that can be disabled while training.
+- **Server settings**: on soccer maps the plugin applies `phys_pushscale 2000`, `mp_freezetime 0`, `mp_roundtime 9`, `mp_maxrounds 0` and `mp_limitteams 0` once when the map starts. Each value is a `sm_soccer_server_*` cvar.
+- **Players per team**: optional limit during a match with `sm_soccer_max_players_per_team` (off by default).
+- **Late joiners** are respawned after `sm_soccer_respawn_delay` instead of waiting for the next goal.
 
 ## Fixes
 
-- **Penalties**: the goal is detected automatically. It previously had to be awarded by hand with `sm_soccer_goal <ct/t>` or the penalty ended as a timeout miss, which also made the whole shootout unusable.
-- **Shootout**: it now ends once the lead is unbeatable, like a real shootout. At 3-0 after three rounds the remaining two kicks are not taken. Sudden death does not end until both teams have taken the same number of kicks: previously whoever opened the sixth round won on scoring, with no reply from the other team. Bots can no longer be picked as takers.
-- **Taker position**: the penalty taker now stands behind the ball, facing the goal. It used to be placed sideways across the pitch.
-- **Phantom goals**: a period longer than `mp_roundtime` made the round expire on its own and handed CT a goal nobody scored. Only round ends that correspond to a goal are counted now.
-- **Round points**: the ±10 for winning or losing the goal round are awarded even when the plugin cannot identify the last player to touch the ball.
-- **Red card**: the sent-off player now dies reliably before being moved to spectator.
-- **Stoppage time**: the trigger's internal model is precached on map start instead of mid-round.
+- Auto-assign (`jointeam 0`) no longer lets red-carded players or players from another draft side into a team.
+- Draft sides no longer lock players out of every later match on the same map.
+- A map change during a pause or break no longer leaves the next map with frozen ball physics.
+- Shootout: the kick after a goal is set up after the round restarts, so the ball and players are no longer sent back to their spawns; a goal between kicks no longer counts; a penalty cannot start on top of another one.
+- `sm_soccer_halftime` from the last period ends it (overtime or final whistle) instead of replaying it.
+- The training ball is never mistaken for the match ball.
+- Admin chat prompts expire after 30 seconds and no longer stack.
+- The training cannon speed messages no longer show raw `{1:.1f}` placeholders.
 
-## Cleanup
+The full list is in `CHANGELOG.md`.
 
-- Removed two cvars that had no effect: `sm_soccer_assist_window` and `sm_soccer_training_cannon_ball_life`. If your 1.0.0 `cfg/sourcemod/umbrella_soccer.cfg` still has them they are ignored; this package already ships without them.
+## Upgrading from 1.0.1
+
+- `cfg/sourcemod/umbrella_soccer.cfg` in this package has every new cvar. If you overwrite yours, re-apply any values you had changed. If you keep yours, the new cvars simply use their defaults.
+- The goalkeeper areas are not shipped: set them in game once per map. They are saved to `addons/sourcemod/configs/umbrella_soccer_gk_areas.cfg`.
+- The ranking database is created on the first map start. For MySQL, add a `databases.cfg` section and set `sm_soccer_ranking_driver "mysql"` before that.
+- Existing red cards from 1.0.1 were only kept in memory and are not carried over.
 
 ## Assets
 
-- `umbrella_soccer-1.0.1-server.zip`: server package for the `cstrike` folder.
-- `umbrella_soccer-1.0.1-fastdl.zip`: web-host package for FastDL. The assets are identical to 1.0.0, so there is no need to re-upload them if they are already hosted.
+- `umbrella_soccer-1.1.0-server.zip`: server package for the `cstrike` folder.
+- `umbrella_soccer-1.1.0-fastdl.zip`: web-host package for FastDL. The models, materials and map are identical to 1.0.1, so there is no need to re-upload them if they are already hosted.
 
 ## Installation
 
-Extract `umbrella_soccer-1.0.1-server.zip` into the server `cstrike` folder, overwriting. Reload the plugin or change the map.
+Extract `umbrella_soccer-1.1.0-server.zip` into the server `cstrike` folder, overwriting. Change the map so the new settings and the ranking database are set up.
 
-Extract `umbrella_soccer-1.0.1-fastdl.zip` into the root folder used by `sv_downloadurl`.
+Extract `umbrella_soccer-1.1.0-fastdl.zip` into the root folder used by `sv_downloadurl`.
 
 ## Build
 
-- Compiled with SourcePawn 1.12.0.7246, no warnings.
-- SHA256 (`umbrella_soccer.smx`): `C64734BE28A2247051D0239B1C6B07995ADF628B4E40179ACDC5347FF9179B61`
+- Compiled with SourcePawn 1.12.0.7255, no warnings.
+- SHA256 (`umbrella_soccer.smx`): `D9525AF122FB895489B45412C3D0F3D0CEB605CFD9262165EE49D1F087DF4472`

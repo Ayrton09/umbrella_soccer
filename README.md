@@ -1,121 +1,207 @@
-![Umbrella Soccer](assets/umbrella_soccer_cover.png)
+<div align="center">
 
-# Umbrella Soccer
+# ⚽ Umbrella Soccer
 
-Umbrella Soccer is a Counter-Strike: Source soccer plugin for SourceMod.
+**A complete soccer mode for Counter-Strike: Source, built on SourceMod.**
+
+[![Release](https://img.shields.io/github/v/release/Ayrton09/umbrella_soccer?label=release&color=2ea44f)](https://github.com/Ayrton09/umbrella_soccer/releases/latest)
+[![Build](https://github.com/Ayrton09/umbrella_soccer/actions/workflows/build.yml/badge.svg)](https://github.com/Ayrton09/umbrella_soccer/actions/workflows/build.yml)
+![Game](https://img.shields.io/badge/game-CS%3A%20Source-orange)
+![SourceMod](https://img.shields.io/badge/SourceMod-1.12-blue)
+[![License](https://img.shields.io/badge/license-GPLv3-lightgrey)](LICENSE)
+
+[Download](https://github.com/Ayrton09/umbrella_soccer/releases/latest) · [Installation](#installation) · [Commands](#commands) · [Configuration](#configuration) · [Changelog](CHANGELOG.md)
+
+</div>
+
+---
 
 ## Features
 
-- Admin soccer menu with `!soccer`.
-- Match control with selectable match time.
-- Two-period match flow with halftime break, overtime support, and optional golden goal.
-- Kickoff system with random first kickoff.
-- Live scoreboard HUD and translated chat messages.
-- Goal, assist, and own-goal announcements.
-- Goalkeeper toggle with `!gk`.
-- Stamina sprint using the normal walk/speed key.
-- Captain draft mode with automatic pick menus.
-- Referee tools for cards and score adjustment.
-- Practice tools with training ball and training cannon.
-- Default Umbrella Soccer player skins.
-- Official training ball model.
-- Official map included: `ka_soccer_world_cup_2026`.
-- FastDL package included with compressed `models`, `materials`, and `maps`.
+| | |
+| --- | --- |
+| 🏟️ **Matches** | Selectable match length, halftime break, stoppage time, kickoffs, pause with countdown, live score HUD. |
+| ⏱️ **Overtime** | Two overtime halves when a match ends tied, each starting from a restart. Optional golden goal. |
+| 🥅 **Goals** | Goal, assist and own-goal announcements, with the last touches tracked to credit the right players. |
+| 🧤 **Goalkeepers** | `!gk` toggles the goalkeeper kit. Saves are counted inside per-map goalkeeper areas. |
+| 🏆 **Ranking** | Persistent stats in SQLite or MySQL, with separate match and public rankings, `!rank` and `!top`. |
+| 🎯 **Penalties** | Single penalties and full shootouts with real shootout rules and sudden death. |
+| 🟨 **Referee** | Yellow and red cards, score adjustments. Red cards last across maps until a referee removes them. |
+| 👥 **Captains** | Snake draft with 2 to 4 captains and pick menus. Optional limit of players per team. |
+| 🏃 **Sprint** | Stamina sprint on the walk key, shown as armor. |
+| 🛠️ **Training** | A training ball per admin, a training cannon (power, fire rate, randomness) and goals that can be disabled. |
+| 🌍 **Languages** | English, Spanish, Portuguese, French and German. |
 
 ## Requirements
 
-- Counter-Strike: Source server.
-- Latest stable SourceMod release.
+- A Counter-Strike: Source dedicated server.
+- SourceMod 1.12 (latest stable).
 
 ## Installation
 
-1. Download `umbrella_soccer-1.0.1-server.zip`.
-2. Extract it into the server `cstrike` folder.
-3. Restart the server or change the map.
-4. Open the admin menu with `!soccer`.
+Download both packages from the [latest release](https://github.com/Ayrton09/umbrella_soccer/releases/latest).
 
-The server package includes:
+**Server**
 
-- `addons/sourcemod/plugins/umbrella_soccer.smx`
-- `addons/sourcemod/scripting/umbrella_soccer.sp`
-- `addons/sourcemod/translations/umbrella_soccer.phrases.txt`
-- `cfg/sourcemod/umbrella_soccer.cfg`
-- `models`
-- `materials`
-- `maps/ka_soccer_world_cup_2026.bsp`
+1. Extract `umbrella_soccer-<version>-server.zip` into the server's `cstrike` folder.
+2. Change the map (or restart the server).
+3. Type `!soccer` in game to open the menu.
 
-## FastDL
-
-1. Download `umbrella_soccer-1.0.1-fastdl.zip`.
-2. Extract it into the root folder used by your `sv_downloadurl`.
-3. Make sure the web host exposes the extracted folders directly:
+The server package contains:
 
 ```text
-materials/...
+addons/sourcemod/plugins/umbrella_soccer.smx
+addons/sourcemod/scripting/umbrella_soccer.sp
+addons/sourcemod/scripting/umbrella_soccer/ranking.sp
+addons/sourcemod/scripting/umbrella_soccer/saves.sp
+addons/sourcemod/translations/umbrella_soccer.phrases.txt
+cfg/sourcemod/umbrella_soccer.cfg
 models/...
-maps/ka_soccer_world_cup_2026.bsp.bz2
+materials/...
+maps/ka_soccer_world_cup_2026.bsp
 ```
 
-Do not serve the FastDL zip directly. The zip is only provided to make uploading easier.
+**FastDL**
 
-## Main Commands
+1. Extract `umbrella_soccer-<version>-fastdl.zip` into the root folder used by your `sv_downloadurl`.
+2. Check that the web host serves the folders directly:
 
-Player commands:
+```text
+maps/ka_soccer_world_cup_2026.bsp.bz2
+materials/...
+models/...
+```
 
-- `!gk` - toggle goalkeeper position.
-- `!position` - show your current soccer position.
+Do not serve the FastDL zip itself; it only makes uploading easier.
 
-Admin commands:
+## Commands
 
-- `!soccer` - open the Umbrella Soccer admin menu.
-- `sm_soccer_start` - start a match.
-- `sm_soccer_stop` - stop the current match.
-- `sm_soccer_pause` - pause the current match.
-- `sm_soccer_unpause` - resume the current match.
-- `sm_soccer_score <ct> <t>` - set the match score.
-- `sm_soccer_goal <ct/t>` - force a goal.
+**Players**
 
-Most administration should be done from the `!soccer` menu.
+| Command | Description |
+| --- | --- |
+| `!soccer` | Open the menu (the admin menu for admins). |
+| `!gk` | Toggle the goalkeeper position. |
+| `!position` | Show your current position. |
+| `!rank` | Show your match and public ranking. |
+| `!top` | Show the top 10. |
+| `!pick` / `!draft` | Pick a player when you are a draft captain. |
+
+**Admins** (generic admin flag)
+
+Most of the administration is done from the `!soccer` menu. The same actions are available as commands:
+
+| Command | Description |
+| --- | --- |
+| `sm_soccer_start` / `sm_soccer_stop` | Start or stop a match. |
+| `sm_soccer_pause` / `sm_soccer_unpause` | Pause or resume the match. |
+| `sm_soccer_reset` | Reset the match state. |
+| `sm_soccer_halftime` | Move on to the next period. |
+| `sm_soccer_kickoff` | Restart play with a kickoff. |
+| `sm_soccer_score <ct> <t>` | Set the score. |
+| `sm_soccer_goal <ct/t>` | Award a goal. |
+| `sm_soccer_yellow <target>` / `sm_soccer_red <target>` | Show a card. |
+| `sm_soccer_position <target> <player/gk>` | Set a player's position. |
+| `sm_soccer_captains <t> <ct>` / `sm_soccer_draftstart` | Set captains and start a draft. |
+| `sm_soccer_penaltyspot` | Set the penalty spot where you aim. |
+| `sm_soccer_penalties [ct/t] [shooter] [goalkeeper]` | Start a shootout, or a single penalty. |
+| `sm_soccer_trainingball` / `sm_soccer_cannon` | Spawn a training ball or toggle the cannon. |
 
 ## Configuration
 
-The default config is included at:
+All settings live in `cfg/sourcemod/umbrella_soccer.cfg`. The most useful ones:
 
-```text
-cfg/sourcemod/umbrella_soccer.cfg
-```
-
-Important cvars:
+**General**
 
 | Cvar | Default | Description |
 | --- | ---: | --- |
-| `sm_soccer_enabled` | `1` | Enables Umbrella Soccer. |
-| `sm_soccer_allowed_maps` | `soccer_,ka_` | Allowed map names or prefixes. |
-| `soccer_mod_match_period_length` | `3` | Match period length in minutes. |
-| `soccer_mod_match_period_break_length` | `10` | Halftime break length in seconds. |
-| `soccer_mod_match_periods` | `2` | Number of match periods. |
-| `soccer_mod_match_overtime` | `1` | Enables overtime when regulation ends tied. |
-| `soccer_mod_match_overtime_percent` | `25.0` | Overtime duration as percent of total match time. |
-| `soccer_mod_match_golden_goal` | `0` | Enables golden goal only during overtime. |
-| `sm_soccer_training_ball_model` | `models/ayrton09/fifa_trionda_2026/trionda_2026.mdl` | Training ball model. |
+| `sm_soccer_enabled` | `1` | Enables the plugin. |
+| `sm_soccer_allowed_maps` | `soccer_,ka_` | Map names or prefixes where soccer mode runs. |
+| `sm_soccer_max_players_per_team` | `0` | Max players per team during a match. `0` = no limit. |
+| `sm_soccer_live_replacement_slots` | `0` | Players outside the draft who may join a team mid-match. |
 
-## Included Default Assets
+**Match**
 
-Player models:
+| Cvar | Default | Description |
+| --- | ---: | --- |
+| `soccer_mod_match_period_length` | `3` | Period length, in minutes. |
+| `soccer_mod_match_periods` | `2` | Number of periods. |
+| `soccer_mod_match_period_break_length` | `10` | Break between periods, in seconds. |
+| `soccer_mod_match_overtime` | `1` | Play overtime when the match ends tied. |
+| `soccer_mod_match_overtime_percent` | `25.0` | Total overtime length as a percentage of the match, split in two halves. |
+| `soccer_mod_match_golden_goal` | `0` | The first overtime goal wins. |
 
-- `models/player/soccer2026/away/ct_urban.mdl`
-- `models/player/soccer2026/gkaway/ct_urban.mdl`
-- `models/player/soccer2026/home/ct_urban.mdl`
-- `models/player/soccer2026/gkhome/ct_urban.mdl`
+**Server settings** (applied once when a soccer map starts)
 
-Ball model:
+| Cvar | Default | Description |
+| --- | ---: | --- |
+| `sm_soccer_server_cvars` | `1` | Apply the settings below. |
+| `sm_soccer_server_phys_pushscale` | `2000` | Ball kick force. |
+| `sm_soccer_server_freezetime` | `0` | `mp_freezetime`. |
+| `sm_soccer_server_roundtime` | `9` | `mp_roundtime`, capped by the game. |
+| `sm_soccer_server_maxrounds` | `0` | `mp_maxrounds`. `0` so goals never end the map. |
+| `sm_soccer_server_limitteams` | `0` | `mp_limitteams`. `0` avoids "team is full". |
 
-- `models/ayrton09/fifa_trionda_2026/trionda_2026.mdl`
+**Ranking and saves**
 
-Official map:
+| Cvar | Default | Description |
+| --- | ---: | --- |
+| `sm_soccer_ranking` | `1` | Enables the ranking. |
+| `sm_soccer_ranking_driver` | `sqlite` | `sqlite` or `mysql`. |
+| `sm_soccer_ranking_database` | `umbrella_soccer` | SQLite file name, or the `databases.cfg` section for MySQL. |
+| `sm_soccer_ranking_public` | `1` | Also rank play outside matches, separately. |
+| `sm_soccer_saves` | `1` | Count goalkeeper saves. |
+| `soccer_mod_ranking_points_*` | | Points for goals, assists, saves, passes and more. |
 
-- `maps/ka_soccer_world_cup_2026.bsp`
+## Ranking
+
+The ranking works out of the box with a local SQLite file, `addons/sourcemod/data/sqlite/umbrella_soccer.sq3`.
+
+To use MySQL, add a section to `addons/sourcemod/configs/databases.cfg`:
+
+```text
+"umbrella_soccer"
+{
+    "driver"    "mysql"
+    "host"      "127.0.0.1"
+    "database"  "soccer"
+    "user"      "soccer"
+    "pass"      "password"
+}
+```
+
+Then set it in `cfg/sourcemod/umbrella_soccer.cfg` and change the map:
+
+```text
+sm_soccer_ranking_driver "mysql"
+sm_soccer_ranking_database "umbrella_soccer"
+```
+
+## Goalkeeper areas
+
+A save is counted when a player touches the ball inside their own goalkeeper area right after an opponent touched it. The areas are set once per map:
+
+1. Open `!soccer` > **Goalkeeper areas**.
+2. Aim at one floor corner of the CT area and choose *corner 1*, then the opposite corner and *corner 2*. Do the same for the TT area.
+3. Choose **Show areas** to check them, then **Save**.
+
+They are stored in `addons/sourcemod/configs/umbrella_soccer_gk_areas.cfg`.
+
+## Included assets
+
+| Asset | Path |
+| --- | --- |
+| Official map | `maps/ka_soccer_world_cup_2026.bsp` |
+| Ball | `models/ayrton09/fifa_trionda_2026/trionda_2026.mdl` |
+| Home kit | `models/player/soccer2026/home/ct_urban.mdl` |
+| Away kit | `models/player/soccer2026/away/ct_urban.mdl` |
+| Home goalkeeper | `models/player/soccer2026/gkhome/ct_urban.mdl` |
+| Away goalkeeper | `models/player/soccer2026/gkaway/ct_urban.mdl` |
 
 ## Notes
 
-Some store/player-skin plugins can override soccer skins. If players keep their store skin instead of the soccer skin, unload or disable that skin system on soccer maps.
+- Store or skin plugins can override the soccer kits. If players keep their store skin, disable that skin system on soccer maps.
+
+## License
+
+Released under the [GNU General Public License v3.0](LICENSE).
