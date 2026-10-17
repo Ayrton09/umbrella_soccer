@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.1.1
+
+### Saves
+- Saves are announced as "Salvada" ("Saved by" in English): they count for anyone, goalkeeper or defender, who touches the ball inside their own goalkeeper area right after an opponent.
+- A save is counted and announced on that touch itself, instead of waiting for the next touch or a goal. If the ball still goes in before anyone else touches it, the save and its points are quietly taken back.
+- That goal is the shooter's, not an own goal by the player who touched it last.
+- `soccer_mod_ranking_points_save` defaults to 5 instead of 10. The same touch already earns the interception and hit points, so a save is worth 9 in all: more than a pass, less than an assist.
+- Goalkeeper areas are marked with one menu choice each: stand in the middle of the goal and pick its team. The area is built in front of the goal, towards the centre spot, saved at once and outlined on the floor. Its size is set by `sm_soccer_gk_area_width` (640) and `sm_soccer_gk_area_depth` (224). Areas saved before keep working.
+
+### Kickoffs
+- The second half, and any later period, announces which team kicks off. Only the first half and overtime did.
+- When the round timer runs out during a match, the new round starts with an announced kickoff for the team that did not touch the ball last, and the match clock waits for it. Before, the ball went back to the centre spot with no kickoff and the clock running.
+
+### Penalties
+- Each penalty is taken at the end of the goal the shooting team attacks: the stored spot is mirrored through the centre spot when it sits at the shooter's own goal. That end is found from the defending team's goalkeeper area, or else from its spawn points. Before, every kick used the same goal, so in a shootout one of the two teams could never score.
+- A penalty during a match stops the clock until the kick. The kick puts the ball back in play: a goal counts on the scoreboard, is credited to whoever scored it and leads to a kickoff, like any other goal. A penalty not kicked in time is a miss and play resumes.
+- The ball is placed on the spot standing still.
+- A match penalty can only be given while the ball is in play: not after a goal, in a break or around a restart. One given while a kickoff waits replaces it. A pause also holds the time to take the kick, and when the round timer runs out before the kick, the restart's kickoff takes its place.
+
+### Other fixes
+- The HUD reads like the original soccermod's: `CT 1 - 0 T | 03:12`, with what holds play in front when something does (`Saca CT: CT 1 - 0 T | 00:00`, `Pausado: ...`, `Descanso 10s: ...`, `Prorroga: ...`). A pause shows as a pause, also while a kickoff is waiting.
+- Players with a red card can no longer be picked in a draft.
+
+Compiled with SourcePawn 1.12.0.7255, no warnings.
+Plugin SHA256: `58B78EB584BE9510B79AC5FE2CC45AEB83B872476BE8D3185EF6CE386A026D63`
+
 ## 1.1.0
 
 ### New

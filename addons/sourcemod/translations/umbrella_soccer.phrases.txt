@@ -149,11 +149,21 @@
     "Hud_Match_Line"
     {
         "#format"   "{1:d},{2:d},{3:s}"
-        "en"    "CT {1}-{2} TT | {3}"
-        "es"    "CT {1}-{2} TT | {3}"
-        "pt"    "CT {1}-{2} TT | {3}"
-        "fr"    "CT {1}-{2} TT | {3}"
-        "de"    "CT {1}-{2} TT | {3}"
+        "en"    "CT {1} - {2} T | {3}"
+        "es"    "CT {1} - {2} T | {3}"
+        "pt"    "CT {1} - {2} T | {3}"
+        "fr"    "CT {1} - {2} T | {3}"
+        "de"    "CT {1} - {2} T | {3}"
+    }
+
+    "Hud_Match_Line_State"
+    {
+        "#format"   "{1:s},{2:d},{3:d},{4:s}"
+        "en"    "{1}: CT {2} - {3} T | {4}"
+        "es"    "{1}: CT {2} - {3} T | {4}"
+        "pt"    "{1}: CT {2} - {3} T | {4}"
+        "fr"    "{1}: CT {2} - {3} T | {4}"
+        "de"    "{1}: CT {2} - {3} T | {4}"
     }
 
     "Map_Not_Allowed"
@@ -245,6 +255,33 @@
         "pt"    "Primeiro tempo"
         "fr"    "Premiere mi-temps"
         "de"    "Erste Halbzeit"
+    }
+
+    "KickoffReason_SecondHalf"
+    {
+        "en"    "Second half"
+        "es"    "Segundo tiempo"
+        "pt"    "Segundo tempo"
+        "fr"    "Seconde mi-temps"
+        "de"    "Zweite Halbzeit"
+    }
+
+    "KickoffReason_NextPeriod"
+    {
+        "en"    "Next period"
+        "es"    "Siguiente periodo"
+        "pt"    "Proximo periodo"
+        "fr"    "Periode suivante"
+        "de"    "Naechster Abschnitt"
+    }
+
+    "KickoffReason_RoundTime"
+    {
+        "en"    "Round time over"
+        "es"    "Se termino el tiempo de la ronda"
+        "pt"    "O tempo da rodada acabou"
+        "fr"    "Temps de manche ecoule"
+        "de"    "Rundenzeit abgelaufen"
     }
 
     "KickoffReason_Goal"
@@ -1133,6 +1170,15 @@
         "de"    "Elfmeter: ein Elfmeter oder Elfmeterschiessen laeuft bereits."
     }
 
+    "Penalty_Not_Now"
+    {
+        "en"    "Penalty: not now. Give it while the ball is in play, not after a goal, in a break or around a restart."
+        "es"    "Penal: ahora no. Se cobra con la pelota en juego, no despues de un gol, en el descanso ni durante un reinicio."
+        "pt"    "Penalti: agora nao. Marque com a bola em jogo, nao depois de um gol, no intervalo ou durante um reinicio."
+        "fr"    "Penalty : pas maintenant. Accorde-le quand le ballon est en jeu, pas apres un but, pendant la pause ou une reprise."
+        "de"    "Elfmeter: jetzt nicht. Nur bei laufendem Ball, nicht nach einem Tor, in der Pause oder bei einem Neustart."
+    }
+
     "Penalty_Shootout_Start"
     {
         "en"    "Penalties: shootout started."
@@ -1404,52 +1450,33 @@
         "de"    "Draft-Pick - {1}"
     }
 
-    "State_Stopped"
-    {
-        "en"    "stopped"
-        "es"    "detenido"
-        "pt"    "parado"
-        "fr"    "arrete"
-        "de"    "gestoppt"
-    }
-
     "State_Paused"
     {
-        "en"    "paused"
-        "es"    "pausado"
-        "pt"    "pausado"
-        "fr"    "pause"
-        "de"    "pausiert"
+        "en"    "Paused"
+        "es"    "Pausado"
+        "pt"    "Pausado"
+        "fr"    "Pause"
+        "de"    "Pausiert"
     }
 
     "State_Break"
     {
         "#format"   "{1:d}"
-        "en"    "break {1}s"
-        "es"    "descanso {1}s"
-        "pt"    "intervalo {1}s"
-        "fr"    "pause {1}s"
+        "en"    "Break {1}s"
+        "es"    "Descanso {1}s"
+        "pt"    "Intervalo {1}s"
+        "fr"    "Pause {1}s"
         "de"    "Pause {1}s"
     }
 
     "State_Kickoff"
     {
-        "#format"   "{1:s},{2:s}"
-        "en"    "Kick: {1} | {2}"
-        "es"    "Saca {1} | {2}"
-        "pt"    "Sai {1} | {2}"
-        "fr"    "Engage : {1} | {2}"
-        "de"    "Anstoss: {1} | {2}"
-    }
-
-    "State_Live"
-    {
-        "#format"   "{1:d},{2:s}"
-        "en"    "{2}"
-        "es"    "{2}"
-        "pt"    "{2}"
-        "fr"    "{2}"
-        "de"    "{2}"
+        "#format"   "{1:s}"
+        "en"    "Kick off {1}"
+        "es"    "Saca {1}"
+        "pt"    "Saida {1}"
+        "fr"    "Engagement {1}"
+        "de"    "Anstoss {1}"
     }
 
     "State_Stoppage"
@@ -1464,12 +1491,11 @@
 
     "State_Overtime"
     {
-        "#format"   "{1:s}"
-        "en"    "Overtime {1}"
-        "es"    "Prorroga {1}"
-        "pt"    "Prorrogacao {1}"
-        "fr"    "Prolongation {1}"
-        "de"    "Verlangerung {1}"
+        "en"    "Overtime"
+        "es"    "Prorroga"
+        "pt"    "Prorrogacao"
+        "fr"    "Prolongation"
+        "de"    "Verlaengerung"
     }
 
     "State_Active"
@@ -1820,40 +1846,22 @@
         "de"    "Torwartbereiche - CT: {1} | TT: {2}"
     }
 
-    "Menu_GkArea_CT_Corner1"
+    "Menu_GkArea_Mark_CT"
     {
-        "en"    "CT area: corner 1 (aim)"
-        "es"    "Area CT: esquina 1 (apuntando)"
-        "pt"    "Area CT: canto 1 (mira)"
-        "fr"    "Surface CT : coin 1 (visee)"
-        "de"    "CT-Bereich: Ecke 1 (Zielpunkt)"
+        "en"    "Mark CT area (stand in the middle of the CT goal)"
+        "es"    "Marcar area CT (parado en el medio del arco CT)"
+        "pt"    "Marcar area CT (parado no meio do gol CT)"
+        "fr"    "Marquer la surface CT (debout au milieu du but CT)"
+        "de"    "CT-Bereich setzen (mittig im CT-Tor stehen)"
     }
 
-    "Menu_GkArea_CT_Corner2"
+    "Menu_GkArea_Mark_T"
     {
-        "en"    "CT area: corner 2 (aim)"
-        "es"    "Area CT: esquina 2 (apuntando)"
-        "pt"    "Area CT: canto 2 (mira)"
-        "fr"    "Surface CT : coin 2 (visee)"
-        "de"    "CT-Bereich: Ecke 2 (Zielpunkt)"
-    }
-
-    "Menu_GkArea_T_Corner1"
-    {
-        "en"    "TT area: corner 1 (aim)"
-        "es"    "Area TT: esquina 1 (apuntando)"
-        "pt"    "Area TT: canto 1 (mira)"
-        "fr"    "Surface TT : coin 1 (visee)"
-        "de"    "TT-Bereich: Ecke 1 (Zielpunkt)"
-    }
-
-    "Menu_GkArea_T_Corner2"
-    {
-        "en"    "TT area: corner 2 (aim)"
-        "es"    "Area TT: esquina 2 (apuntando)"
-        "pt"    "Area TT: canto 2 (mira)"
-        "fr"    "Surface TT : coin 2 (visee)"
-        "de"    "TT-Bereich: Ecke 2 (Zielpunkt)"
+        "en"    "Mark TT area (stand in the middle of the TT goal)"
+        "es"    "Marcar area TT (parado en el medio del arco TT)"
+        "pt"    "Marcar area TT (parado no meio do gol TT)"
+        "fr"    "Marquer la surface TT (debout au milieu du but TT)"
+        "de"    "TT-Bereich setzen (mittig im TT-Tor stehen)"
     }
 
     "Menu_GkArea_Show"
@@ -1865,52 +1873,42 @@
         "de"    "Bereiche anzeigen (10 s)"
     }
 
-    "Menu_GkArea_Save"
+    "GkArea_Marked"
     {
-        "en"    "Save areas for this map"
-        "es"    "Guardar areas de este mapa"
-        "pt"    "Salvar areas deste mapa"
-        "fr"    "Enregistrer les surfaces de cette carte"
-        "de"    "Bereiche fuer diese Map speichern"
+        "#format"   "{1:s},{2:s}"
+        "en"    "Goalkeeper areas: {1} area saved for {2}. It is outlined on the floor for 10 seconds."
+        "es"    "Areas de arquero: area {1} guardada para {2}. Se ve marcada en el piso durante 10 segundos."
+        "pt"    "Areas do goleiro: area {1} salva para {2}. Ela aparece marcada no chao por 10 segundos."
+        "fr"    "Surfaces du gardien : surface {1} enregistree pour {2}. Elle est tracee au sol pendant 10 secondes."
+        "de"    "Torwartbereiche: {1}-Bereich fuer {2} gespeichert. Er wird 10 Sekunden am Boden angezeigt."
     }
 
-    "GkArea_Corner_Set"
+    "GkArea_Save_Failed"
     {
-        "#format"   "{1:s},{2:d}"
-        "en"    "Goalkeeper areas: {1} corner {2} set."
-        "es"    "Areas de arquero: esquina {2} de {1} marcada."
-        "pt"    "Areas do goleiro: canto {2} de {1} marcado."
-        "fr"    "Surfaces du gardien : coin {2} de {1} defini."
-        "de"    "Torwartbereiche: Ecke {2} von {1} gesetzt."
+        "en"    "Goalkeeper areas: the area is in use until the map changes, but configs/umbrella_soccer_gk_areas.cfg could not be written."
+        "es"    "Areas de arquero: el area queda activa hasta el cambio de mapa, pero no se pudo escribir configs/umbrella_soccer_gk_areas.cfg."
+        "pt"    "Areas do goleiro: a area fica ativa ate a troca de mapa, mas nao foi possivel gravar configs/umbrella_soccer_gk_areas.cfg."
+        "fr"    "Surfaces du gardien : la surface reste active jusqu'au changement de carte, mais configs/umbrella_soccer_gk_areas.cfg n'a pas pu etre ecrit."
+        "de"    "Torwartbereiche: der Bereich gilt bis zum Mapwechsel, aber configs/umbrella_soccer_gk_areas.cfg konnte nicht geschrieben werden."
     }
 
-    "GkArea_Incomplete"
+    "GkArea_Need_Alive"
     {
-        "en"    "Goalkeeper areas: set both corners of an area before saving."
-        "es"    "Areas de arquero: marca las dos esquinas de un area antes de guardar."
-        "pt"    "Areas do goleiro: marque os dois cantos de uma area antes de salvar."
-        "fr"    "Surfaces du gardien : definis les deux coins d'une surface avant d'enregistrer."
-        "de"    "Torwartbereiche: setze beide Ecken eines Bereichs vor dem Speichern."
-    }
-
-    "GkArea_Saved"
-    {
-        "#format"   "{1:s}"
-        "en"    "Goalkeeper areas: saved for {1}."
-        "es"    "Areas de arquero: guardadas para {1}."
-        "pt"    "Areas do goleiro: salvas para {1}."
-        "fr"    "Surfaces du gardien : enregistrees pour {1}."
-        "de"    "Torwartbereiche: fuer {1} gespeichert."
+        "en"    "Goalkeeper areas: you must be alive and standing in the goal to mark its area."
+        "es"    "Areas de arquero: tenes que estar vivo y parado en el arco para marcar su area."
+        "pt"    "Areas do goleiro: voce precisa estar vivo e parado no gol para marcar a area."
+        "fr"    "Surfaces du gardien : tu dois etre en vie et dans le but pour marquer sa surface."
+        "de"    "Torwartbereiche: du musst leben und im Tor stehen, um seinen Bereich zu setzen."
     }
 
     "Save_Announce"
     {
         "#format"   "{1:N}"
-        "en"    "Save by {1}"
-        "es"    "Atajada de {1}"
-        "pt"    "Defesa de {1}"
-        "fr"    "Arret de {1}"
-        "de"    "Parade von {1}"
+        "en"    "Saved by {1}"
+        "es"    "Salvada de {1}"
+        "pt"    "Salvamento de {1}"
+        "fr"    "Sauvetage de {1}"
+        "de"    "Rettungstat von {1}"
     }
 
     "Menu_Rank"
@@ -2001,10 +1999,10 @@
     {
         "#format"   "{1:s},{2:d},{3:d},{4:d},{5:d},{6:d},{7:d}"
         "en"    "Ranking {1}: #{2} of {3} - {4} pts, {5} goals, {6} assists, {7} saves."
-        "es"    "Ranking {1}: #{2} de {3} - {4} pts, {5} goles, {6} asistencias, {7} atajadas."
-        "pt"    "Ranking {1}: #{2} de {3} - {4} pts, {5} gols, {6} assistencias, {7} defesas."
-        "fr"    "Classement {1} : #{2} sur {3} - {4} pts, {5} buts, {6} passes decisives, {7} arrets."
-        "de"    "Ranking {1}: #{2} von {3} - {4} Pkt, {5} Tore, {6} Vorlagen, {7} Paraden."
+        "es"    "Ranking {1}: #{2} de {3} - {4} pts, {5} goles, {6} asistencias, {7} salvadas."
+        "pt"    "Ranking {1}: #{2} de {3} - {4} pts, {5} gols, {6} assistencias, {7} salvamentos."
+        "fr"    "Classement {1} : #{2} sur {3} - {4} pts, {5} buts, {6} passes decisives, {7} sauvetages."
+        "de"    "Ranking {1}: #{2} von {3} - {4} Pkt, {5} Tore, {6} Vorlagen, {7} Rettungstaten."
     }
 
     "Menu_TrainingCannon_Rate"
@@ -2150,5 +2148,23 @@
         "pt"    "Times: {1} foi movido para espectador: maximo {2} por time durante a partida."
         "fr"    "Equipes : {1} a ete mis en spectateur : max {2} par equipe pendant le match."
         "de"    "Teams: {1} wurde zum Zuschauer verschoben: max. {2} pro Team waehrend des Spiels."
+    }
+
+    "GkArea_Help"
+    {
+        "en"    "Goalkeeper areas: stand in the middle of a goal, on the line, and pick its team. The area is built in front of it and saved right away; mark it again to fix it. Size: sm_soccer_gk_area_width and sm_soccer_gk_area_depth."
+        "es"    "Areas de arquero: parate en el medio del arco, sobre la linea, y elegi su equipo. El area se arma delante del arco y se guarda en el momento; si no quedo bien, marcala de nuevo. Tamano: sm_soccer_gk_area_width y sm_soccer_gk_area_depth."
+        "pt"    "Areas do goleiro: fique no meio do gol, sobre a linha, e escolha o time dele. A area e criada na frente do gol e salva na hora; para corrigir, marque de novo. Tamanho: sm_soccer_gk_area_width e sm_soccer_gk_area_depth."
+        "fr"    "Surfaces du gardien : place-toi au milieu d'un but, sur la ligne, et choisis son equipe. La surface est creee devant le but et enregistree tout de suite ; marque-la de nouveau pour la corriger. Taille : sm_soccer_gk_area_width et sm_soccer_gk_area_depth."
+        "de"    "Torwartbereiche: stell dich mittig auf die Torlinie und waehle das Team des Tors. Der Bereich wird davor erstellt und sofort gespeichert; zum Korrigieren einfach neu setzen. Groesse: sm_soccer_gk_area_width und sm_soccer_gk_area_depth."
+    }
+
+    "GkArea_Nothing_To_Show"
+    {
+        "en"    "Goalkeeper areas: this map has none yet. Stand in a goal and mark its area first."
+        "es"    "Areas de arquero: este mapa todavia no tiene. Primero parate en un arco y marca su area."
+        "pt"    "Areas do goleiro: este mapa ainda nao tem. Primeiro fique em um gol e marque a area."
+        "fr"    "Surfaces du gardien : cette carte n'en a pas encore. Place-toi d'abord dans un but et marque sa surface."
+        "de"    "Torwartbereiche: diese Map hat noch keine. Stell dich zuerst in ein Tor und setze seinen Bereich."
     }
 }

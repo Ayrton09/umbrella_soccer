@@ -150,7 +150,9 @@ All settings live in `cfg/sourcemod/umbrella_soccer.cfg`. The most useful ones:
 | `sm_soccer_ranking_driver` | `sqlite` | `sqlite` or `mysql`. |
 | `sm_soccer_ranking_database` | `umbrella_soccer` | SQLite file name, or the `databases.cfg` section for MySQL. |
 | `sm_soccer_ranking_public` | `1` | Also rank play outside matches, separately. |
-| `sm_soccer_saves` | `1` | Count goalkeeper saves. |
+| `sm_soccer_saves` | `1` | Count saves inside the goalkeeper areas. |
+| `sm_soccer_gk_area_width` | `640` | Width of a goalkeeper area marked from the menu. |
+| `sm_soccer_gk_area_depth` | `224` | Depth of a goalkeeper area marked from the menu. |
 | `soccer_mod_ranking_points_*` | | Points for goals, assists, saves, passes and more. |
 
 ## Ranking
@@ -179,13 +181,17 @@ sm_soccer_ranking_database "umbrella_soccer"
 
 ## Goalkeeper areas
 
-A save is counted when a player touches the ball inside their own goalkeeper area right after an opponent touched it. The areas are set once per map:
+A save is counted, and announced, the moment a player, goalkeeper or defender, touches the ball inside their own goalkeeper area right after an opponent touched it. If the ball still goes in before anyone else touches it, the save is quietly taken back and the goal goes to the shooter instead of an own goal.
 
-1. Open `!soccer` > **Goalkeeper areas**.
-2. Aim at one floor corner of the CT area and choose *corner 1*, then the opposite corner and *corner 2*. Do the same for the TT area.
-3. Choose **Show areas** to check them, then **Save**.
+The areas also tell the plugin which end each team defends, so a penalty is always taken towards the goal the shooting team attacks.
 
-They are stored in `addons/sourcemod/configs/umbrella_soccer_gk_areas.cfg`.
+The areas are set once per map:
+
+1. Stand in the middle of the CT goal, on the goal line.
+2. Open `!soccer` > **Goalkeeper areas** and choose **Mark CT area**. The area is built in front of the goal, saved and outlined on the floor for 10 seconds.
+3. Do the same in the TT goal with **Mark TT area**.
+
+Mark an area again to replace it, and use **Show areas** to see both. Their size is `sm_soccer_gk_area_width` (640) by `sm_soccer_gk_area_depth` (224). They are stored in `addons/sourcemod/configs/umbrella_soccer_gk_areas.cfg`.
 
 ## Included assets
 

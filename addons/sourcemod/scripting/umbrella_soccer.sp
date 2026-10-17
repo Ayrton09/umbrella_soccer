@@ -6,7 +6,7 @@
 #include <sdkhooks>
 #include <cstrike>
 
-#define PLUGIN_VERSION "1.1.0"
+#define PLUGIN_VERSION "1.1.1"
 
 #if !defined IN_SPEED
 #define IN_SPEED (1 << 17)
@@ -203,6 +203,10 @@ int gPenaltyTeam;
 int gPenaltyShooter;
 int gPenaltyGoalkeeper;
 float gPenaltySpot[3];
+// Where the current kick is taken: the stored spot, or its mirror through the
+// centre spot when the stored one is at the shooting team's own goal.
+float gPenaltyKickSpot[3];
+bool gPenaltyKickSpotOriented;
 bool gPenaltySpotValid;
 int gShootoutScoreCT;
 int gShootoutScoreT;
@@ -371,6 +375,7 @@ public void OnConfigsExecuted()
 		ApplySoccerServerCvars();
 	}
 	RankingOnConfigsExecuted();
+	SavesOnConfigsExecuted();
 }
 
 // Applied once per map, after server.cfg and the plugin config have run, so
@@ -751,19 +756,25 @@ public Action EventRoundEnd(Event event, const char[] name, bool dontBroadcast)
 		gShootoutWaitingRoundStart = true;
 	}
 
+	int reason = event.GetInt("reason");
+	if (!IsGoalRoundEndReason(reason))
+	{
+		if (reason != view_as<int>(CSRoundEnd_GameStart))
+		{
+			QueueKickoffAfterRoundTimeout();
+		}
+		return Plugin_Continue;
+	}
+
 	int winner = event.GetInt("winner");
 	if (winner != TEAM_T && winner != TEAM_CT)
 	{
 		return Plugin_Continue;
 	}
 
-	if (!IsGoalRoundEndReason(event.GetInt("reason")))
-	{
-		return Plugin_Continue;
-	}
-
-	// A live penalty resolves from the same round end a normal goal uses.
-	if (gPenaltyActive)
+	// A live penalty resolves from the same round end a normal goal uses. A match
+	// penalty goes through the usual checks below like any other goal.
+	if (gPenaltyActive && !IsMatchPenalty())
 	{
 		HandleGoal(winner, true);
 		return Plugin_Continue;
@@ -777,6 +788,46 @@ public Action EventRoundEnd(Event event, const char[] name, bool dontBroadcast)
 
 	HandleGoal(winner, true);
 	return Plugin_Continue;
+}
+
+// The round timer ran out during a match. The new round puts the ball back on
+// the centre spot, so play resumes with a kickoff, announced like any other, for
+// the team that did not touch the ball last, and the clock waits for it.
+void QueueKickoffAfterRoundTimeout()
+{
+	if (!gMatchLive || gRestartingPeriod || gInBreak || gShootoutActive || gKickoffQueued)
+	{
+		return;
+	}
+
+	// The new round moves the ball off the spot, so a match penalty not yet
+	// kicked is dropped in favour of the kickoff.
+	if (IsMatchPenalty())
+	{
+		EndMatchPenalty(false);
+	}
+
+	StopPeriodClock();
+	StopStoppageClock();
+
+	// A kickoff nobody took yet is simply announced again.
+	int team;
+	char reason[64];
+	if (gKickoffActive)
+	{
+		team = gKickoffTeam;
+		strcopy(reason, sizeof(reason), gKickoffReasonPhrase);
+	}
+	else
+	{
+		int lastTeam = IsValidClient(gLastToucher) ? GetClientTeam(gLastToucher) : 0;
+		team = lastTeam == TEAM_CT || lastTeam == TEAM_T ? GetOppositeTeam(lastTeam) : GetScheduledKickoffTeam();
+	}
+	if (reason[0] == '\0')
+	{
+		strcopy(reason, sizeof(reason), "KickoffReason_RoundTime");
+	}
+	QueueKickoff(team, reason);
 }
 
 // Rounds ended by the clock, a draw or mp_restartgame are not goals.
@@ -1251,11 +1302,9 @@ public Action TimerHud(Handle timer)
 	{
 		if (IsClientInGame(client) && !IsFakeClient(client))
 		{
-			char state[64];
-			FormatMatchState(client, state, sizeof(state));
 			SetHudTextParams(0.42, 0.08, 1.1, 20, 180, 255, 180);
 			char hudLine[128];
-			Format(hudLine, sizeof(hudLine), "%T", "Hud_Match_Line", client, gScoreCT, gScoreT, state);
+			FormatHudLine(client, hudLine, sizeof(hudLine));
 			if (gCvarHudUseHint.BoolValue)
 			{
 				PrintHintText(client, "%s", hudLine);
@@ -1422,6 +1471,7 @@ public int MenuHandlerAdmin(Menu menu, MenuAction action, int client, int item)
 	}
 	else if (StrEqual(info, "gkareas"))
 	{
+		PrintToChat(client, "%t", "GkArea_Help");
 		ShowGkAreaMenu(client);
 	}
 	return 0;
@@ -3033,14 +3083,7 @@ public Action TimerUnpauseCountdown(Handle timer)
 		gUnpauseSecondsLeft = 0;
 		gPaused = false;
 		UnfreezeAllPlayers();
-		if (gStoppageActive && !gKickoffActive)
-		{
-			StartStoppageClock();
-		}
-		else if (gMatchLive && gPeriodRemaining > 0.0 && !gKickoffActive)
-		{
-			StartPeriodClock(gPeriodRemaining, true);
-		}
+		ResumeMatchClock();
 		PrintCenterTextAll("%t", "Resume_Play");
 		PrintToChatAll("%t", "Match_Unpaused");
 		return Plugin_Stop;
@@ -3060,9 +3103,18 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 
 	if (gPenaltyActive)
 	{
-		gLastGoalTime = now;
-		ResolvePenalty(scoringTeam == gPenaltyTeam);
-		return;
+		if (!IsMatchPenalty())
+		{
+			// The round winner is whoever attacks the goal the ball went into. With
+			// the kick spot at the defending team's goal that is the shooting team;
+			// without a known orientation any goal during the kick counts.
+			gLastGoalTime = now;
+			ResolvePenalty(!gPenaltyKickSpotOriented || scoringTeam == gPenaltyTeam);
+			return;
+		}
+
+		// A match penalty nobody kicked yet: the goal is played as a normal one.
+		EndMatchPenalty(false);
 	}
 
 	if (gRoundGoalHandled)
@@ -3071,7 +3123,7 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 	}
 	gLastGoalTime = now;
 	gRoundGoalHandled = true;
-	SavesOnGoal(scoringTeam);
+	int saveShooter = SavesOnGoal(scoringTeam);
 	StopPeriodClock();
 	StopStoppageClock();
 
@@ -3086,6 +3138,14 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 	UpdateGameTeamScores();
 
 	int scorer = gLastToucher;
+	int assist = gPreviousToucher;
+	// A shot the goalkeeper only touched on its way in is the shooter's goal,
+	// not an own goal; with the shooter gone it has no named scorer.
+	if (saveShooter != 0)
+	{
+		scorer = saveShooter > 0 ? saveShooter : 0;
+		assist = 0;
+	}
 	if (IsValidClient(scorer))
 	{
 		if (GetClientTeam(scorer) == scoringTeam)
@@ -3093,7 +3153,6 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 			AddPlayerGoalScore(scorer);
 			PrintToChatAll("%t", "Goal_Scorer", scorer);
 
-			int assist = gPreviousToucher;
 			if (IsValidClient(assist)
 				&& assist != scorer
 				&& GetClientTeam(assist) == scoringTeam)
@@ -3197,7 +3256,7 @@ bool CanRegisterMatchBallTouch()
 
 void BeginPeriodClockAfterKickoff()
 {
-	if (!gMatchLive || gPaused || gInBreak || gRestartingPeriod || !gKickoffActive || gKickoffFrozen)
+	if (!gMatchLive || gPaused || gInBreak || gRestartingPeriod || !gKickoffActive || gKickoffFrozen || gPenaltyActive)
 	{
 		return;
 	}
@@ -3342,15 +3401,68 @@ void RegisterPenaltyTouch(int client)
 		return;
 	}
 
+	PrintToChatAll("%t", "Penalty_Live");
+	// In a match the kick puts the ball back in play: what follows is normal
+	// play, scored, credited and restarted like any other goal.
+	if (IsMatchPenalty())
+	{
+		EndMatchPenalty();
+		return;
+	}
+
 	gPenaltyWaitingForKick = false;
 	KillPenaltyTimer();
 	gPenaltyTimer = CreateTimer(gCvarPenaltyShotTime.FloatValue, TimerPenaltyTimeout, _, TIMER_FLAG_NO_MAPCHANGE);
-	PrintToChatAll("%t", "Penalty_Live");
+}
+
+// A penalty awarded during a live match, as opposed to practice or a shootout.
+bool IsMatchPenalty()
+{
+	return gPenaltyActive && gMatchLive && !gShootoutActive;
+}
+
+void EndMatchPenalty(bool resumeClock = true)
+{
+	KillPenaltyTimer();
+	gPenaltyActive = false;
+	gPenaltyWaitingForKick = false;
+	gPenaltyShooter = 0;
+	gPenaltyGoalkeeper = 0;
+	if (resumeClock)
+	{
+		ResumeMatchClock();
+	}
+}
+
+// Restarts whichever match clock was stopped, unless something else still
+// holds play: a pause, a break, a restart or a kickoff (whose first touch
+// starts the clock instead).
+void ResumeMatchClock()
+{
+	if (!gMatchLive || gPaused || gUnpausing || gInBreak || gRestartingPeriod || gKickoffActive || gPenaltyActive)
+	{
+		return;
+	}
+
+	if (gStoppageActive)
+	{
+		StartStoppageClock();
+	}
+	else if (gPeriodTimer == null && gPeriodRemaining > 0.0)
+	{
+		StartPeriodClock(gPeriodRemaining, true);
+	}
 }
 
 public Action TimerPenaltyTimeout(Handle timer)
 {
 	gPenaltyTimer = null;
+	// A pause holds the kick too: the shooter gets the full time again after it.
+	if (gPenaltyActive && (gPaused || gUnpausing))
+	{
+		gPenaltyTimer = CreateTimer(gCvarPenaltyShotTime.FloatValue, TimerPenaltyTimeout, _, TIMER_FLAG_NO_MAPCHANGE);
+		return Plugin_Stop;
+	}
 	if (gPenaltyActive)
 	{
 		ResolvePenalty(false);
@@ -3528,6 +3640,14 @@ void StartNextPeriod()
 			}
 		}
 		strcopy(gPendingRestartKickoffReason, sizeof(gPendingRestartKickoffReason), "KickoffReason_Overtime");
+	}
+	else if (gCurrentPeriod == 2 && gMaxPeriods == 2)
+	{
+		strcopy(gPendingRestartKickoffReason, sizeof(gPendingRestartKickoffReason), "KickoffReason_SecondHalf");
+	}
+	else
+	{
+		strcopy(gPendingRestartKickoffReason, sizeof(gPendingRestartKickoffReason), "KickoffReason_NextPeriod");
 	}
 	gPeriodRemaining = float(GetPeriodLengthSeconds(gCurrentPeriod));
 	RestartRoundBeforePeriod(gPeriodRemaining);
@@ -4746,7 +4866,7 @@ public int MenuHandlerDraftPick(Menu menu, MenuAction action, int client, int it
 
 bool IsDraftEligible(int client)
 {
-	return IsValidClient(client) && !gDraftPicked[client] && !IsFakeClient(client);
+	return IsValidClient(client) && !gDraftPicked[client] && !IsFakeClient(client) && !gRedCard[client];
 }
 
 void DraftPick(int captain, int target)
@@ -5054,6 +5174,14 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 		return false;
 	}
 
+	// In a match a penalty is given while the ball is in play, not after a goal,
+	// in a break or around a restart, whose new round would undo the placement.
+	if (gMatchLive && !fromShootout && (gRoundEnded || gKickoffQueued || gInBreak || gRestartingPeriod))
+	{
+		PrintToChatAll("%t", "Penalty_Not_Now");
+		return false;
+	}
+
 	if (!gPenaltySpotValid)
 	{
 		FindBallEntity();
@@ -5096,7 +5224,19 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 
 	gPenaltyActive = true;
 	gPenaltyWaitingForKick = true;
-	gPendingSaver = 0;
+	ClearLastSave();
+	gPenaltyKickSpotOriented = GetPenaltyKickSpot(team, gPenaltyKickSpot);
+	if (gMatchLive && !fromShootout)
+	{
+		// The penalty replaces a kickoff still waiting, and the clock waits for
+		// the kick as it would for that kickoff.
+		if (gKickoffActive)
+		{
+			EndKickoff();
+		}
+		StopPeriodClock();
+		StopStoppageClock();
+	}
 	gPenaltyTeam = team;
 	gPenaltyShooter = shooter;
 	gPenaltyGoalkeeper = goalkeeper;
@@ -5115,7 +5255,8 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 	int ball = GetTrackedBallEntity();
 	if (ball != -1)
 	{
-		TeleportEntity(ball, gPenaltySpot, NULL_VECTOR, NULL_VECTOR);
+		float still[3];
+		TeleportEntity(ball, gPenaltyKickSpot, NULL_VECTOR, still);
 	}
 
 	KillPenaltyTimer();
@@ -5134,7 +5275,71 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 	return true;
 }
 
-// The attacked goal is whichever end the penalty spot sits on, so the direction from
+// One spot serves both teams: each kick is taken at the end of the goal the shooting
+// team attacks, the one the other team defends. That end is found from the defending
+// team's goalkeeper area, or else from where its players spawn. Returns whether the
+// end could be told apart; if not, the stored spot is used as it is.
+bool GetPenaltyKickSpot(int team, float spot[3])
+{
+	spot = gPenaltySpot;
+	float defended[3];
+	if (!gBallStartPositionValid || !GetTeamGoalReference(GetOppositeTeam(team), defended))
+	{
+		return false;
+	}
+
+	float mirrored[3];
+	mirrored[0] = 2.0 * gBallStartPosition[0] - gPenaltySpot[0];
+	mirrored[1] = 2.0 * gBallStartPosition[1] - gPenaltySpot[1];
+	mirrored[2] = gPenaltySpot[2];
+	if (GetFlatDistance(mirrored, defended) < GetFlatDistance(gPenaltySpot, defended))
+	{
+		spot = mirrored;
+	}
+	return true;
+}
+
+bool GetTeamGoalReference(int team, float point[3])
+{
+	int area = GetTeamGkArea(team);
+	if (area != -1 && gGkAreaValid[area])
+	{
+		for (int axis = 0; axis < 3; axis++)
+		{
+			point[axis] = (gGkAreaMin[area][axis] + gGkAreaMax[area][axis]) / 2.0;
+		}
+		return true;
+	}
+
+	char classname[32];
+	strcopy(classname, sizeof(classname), team == TEAM_CT ? "info_player_counterterrorist" : "info_player_terrorist");
+	float sum[3];
+	int count;
+	int entity = -1;
+	while ((entity = FindEntityByClassname(entity, classname)) != -1)
+	{
+		float origin[3];
+		GetEntPropVector(entity, Prop_Data, "m_vecOrigin", origin);
+		AddVectors(sum, origin, sum);
+		count++;
+	}
+	if (count == 0)
+	{
+		return false;
+	}
+	ScaleVector(sum, 1.0 / float(count));
+	point = sum;
+	return true;
+}
+
+float GetFlatDistance(const float a[3], const float b[3])
+{
+	float dx = a[0] - b[0];
+	float dy = a[1] - b[1];
+	return SquareRoot(dx * dx + dy * dy);
+}
+
+// The attacked goal is whichever end the kick spot sits on, so the direction from
 // the centre of the pitch to the spot points straight at it. The shooter stands that
 // far behind the ball, facing the goal. Without a usable centre we keep the old fixed
 // offset so nothing breaks on maps where the ball origin was never cached.
@@ -5146,13 +5351,13 @@ void GetPenaltyShooterPlacement(float position[3], float angles[3])
 	toGoal[2] = 0.0;
 	if (gBallStartPositionValid)
 	{
-		toGoal[0] = gPenaltySpot[0] - gBallStartPosition[0];
-		toGoal[1] = gPenaltySpot[1] - gBallStartPosition[1];
+		toGoal[0] = gPenaltyKickSpot[0] - gBallStartPosition[0];
+		toGoal[1] = gPenaltyKickSpot[1] - gBallStartPosition[1];
 	}
 
-	position[0] = gPenaltySpot[0];
-	position[1] = gPenaltySpot[1];
-	position[2] = gPenaltySpot[2];
+	position[0] = gPenaltyKickSpot[0];
+	position[1] = gPenaltyKickSpot[1];
+	position[2] = gPenaltyKickSpot[2];
 
 	if (NormalizeVector(toGoal, toGoal) <= 0.0)
 	{
@@ -5177,6 +5382,11 @@ void ResolvePenalty(bool scored)
 
 	KillPenaltyTimer();
 	PrintToChatAll("%t", scored ? "Penalty_Goal" : "Penalty_Miss", gPenaltyShooter);
+	if (IsMatchPenalty())
+	{
+		EndMatchPenalty();
+		return;
+	}
 	if (gShootoutActive)
 	{
 		if (gPenaltyTeam == TEAM_CT)
@@ -5576,51 +5786,53 @@ void FormatPositionName(int client, SoccerPosition position, char[] buffer, int 
 	Format(buffer, maxlen, "%T", position == SoccerPosition_Goalkeeper ? "Skin_Goalkeeper" : "Skin_Player", client);
 }
 
-void FormatMatchState(int client, char[] buffer, int maxlen)
+// The HUD line as the original soccermod showed it: "CT 1 - 0 T | 03:12", led
+// by what holds play when something does ("Saca CT: CT 1 - 0 T | 03:12").
+void FormatHudLine(int client, char[] buffer, int maxlen)
 {
-	if (!gMatchLive)
+	char elapsed[16];
+	char time[32];
+	FormatDurationSeconds(GetPeriodElapsedSeconds(), elapsed, sizeof(elapsed));
+	if (gStoppageActive && !gInBreak)
 	{
-		Format(buffer, maxlen, "%T", "State_Stopped", client);
-	}
-	else if (gUnpausing)
-	{
-		Format(buffer, maxlen, "%T", "Resume_Center", client, gUnpauseSecondsLeft);
-	}
-	else if (gInBreak)
-	{
-		Format(buffer, maxlen, "%T", "State_Break", client, RoundToCeil(gBreakEndTime - GetGameTime()));
-	}
-	else if (gKickoffActive)
-	{
-		char teamName[16];
-		char elapsed[16];
-		FormatKickoffTeamName(client, gKickoffTeam, teamName, sizeof(teamName));
-		FormatDurationSeconds(GetPeriodElapsedSeconds(), elapsed, sizeof(elapsed));
-		Format(buffer, maxlen, "%T", "State_Kickoff", client, teamName, elapsed);
-	}
-	else if (gPaused)
-	{
-		Format(buffer, maxlen, "%T", "State_Paused", client);
-	}
-	else if (gStoppageActive)
-	{
-		char elapsed[16];
 		char stoppage[16];
-		FormatDurationSeconds(GetPeriodElapsedSeconds(), elapsed, sizeof(elapsed));
 		FormatDurationSeconds(gStoppageSeconds, stoppage, sizeof(stoppage));
-		Format(buffer, maxlen, "%T", "State_Stoppage", client, elapsed, stoppage);
-	}
-	else if (gOvertimeActive)
-	{
-		char elapsed[16];
-		FormatDurationSeconds(GetPeriodElapsedSeconds(), elapsed, sizeof(elapsed));
-		Format(buffer, maxlen, "%T", "State_Overtime", client, elapsed);
+		Format(time, sizeof(time), "%T", "State_Stoppage", client, elapsed, stoppage);
 	}
 	else
 	{
-		char elapsed[16];
-		FormatDurationSeconds(GetPeriodElapsedSeconds(), elapsed, sizeof(elapsed));
-		Format(buffer, maxlen, "%T", "State_Live", client, gCurrentPeriod, elapsed);
+		strcopy(time, sizeof(time), elapsed);
+	}
+
+	char state[64];
+	if (gUnpausing)
+	{
+		Format(state, sizeof(state), "%T", "Resume_Center", client, gUnpauseSecondsLeft);
+	}
+	else if (gInBreak)
+	{
+		Format(state, sizeof(state), "%T", "State_Break", client, RoundToCeil(gBreakEndTime - GetGameTime()));
+	}
+	else if (gPaused)
+	{
+		Format(state, sizeof(state), "%T", "State_Paused", client);
+	}
+	else if (gKickoffActive)
+	{
+		Format(state, sizeof(state), "%T", "State_Kickoff", client, gKickoffTeam == TEAM_CT ? "CT" : "T");
+	}
+	else if (gOvertimeActive)
+	{
+		Format(state, sizeof(state), "%T", "State_Overtime", client);
+	}
+
+	if (state[0] == '\0')
+	{
+		Format(buffer, maxlen, "%T", "Hud_Match_Line", client, gScoreCT, gScoreT, time);
+	}
+	else
+	{
+		Format(buffer, maxlen, "%T", "Hud_Match_Line_State", client, state, gScoreCT, gScoreT, time);
 	}
 }
 

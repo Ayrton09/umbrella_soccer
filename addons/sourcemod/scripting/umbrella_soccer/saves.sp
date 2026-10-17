@@ -1,61 +1,87 @@
-// Goalkeeper saves.
+// Saves.
 //
 // Each goal has a goalkeeper area: a box in front of it, stored per map in
-// configs/umbrella_soccer_gk_areas.cfg and set in game from the admin menu. A
-// player who touches the ball inside their own area right after an opponent
-// touched it makes a save. The save is confirmed by the next touch from anyone
-// else, or by a goal at the other end, and dropped if their team concedes.
+// configs/umbrella_soccer_gk_areas.cfg and marked in game from the admin menu.
+// A player, goalkeeper or defender, who touches the ball inside their own area
+// right after an opponent touched it makes a save, counted and announced on
+// that touch. If the ball still goes into their goal before anyone else touches
+// it, the save is quietly taken back and the goal goes to the opponent who shot.
 
 #define GK_AREA_T 0
 #define GK_AREA_CT 1
 #define GK_AREA_FLOOR_MARGIN 32.0
 #define GK_AREA_HEIGHT 256.0
+#define GK_AREA_BEHIND 48.0
 #define GK_AREA_BEAM_TIME 10.0
 
 ConVar gCvarSaves;
 ConVar gCvarRankingPointsSave;
+ConVar gCvarGkAreaWidth;
+ConVar gCvarGkAreaDepth;
 
 char gGkAreasPath[PLATFORM_MAX_PATH];
 float gGkAreaMin[2][3];
 float gGkAreaMax[2][3];
 bool gGkAreaValid[2];
 
-float gGkCorner[MAXPLAYERS + 1][2][2][3];
-bool gGkCornerSet[MAXPLAYERS + 1][2][2];
-
-int gPendingSaver;
+// The goalkeeper whose save nobody else has touched since, the team whose
+// goal it was, and who shot.
+int gLastSaver;
+int gLastSaveTeam;
+int gLastSaveShooter;
 int gBeamSprite = -1;
+int gHaloSprite = -1;
 
 void SavesOnPluginStart()
 {
-	gCvarSaves = CreateConVar("sm_soccer_saves", "1", "Count goalkeeper saves inside the goalkeeper areas.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	gCvarRankingPointsSave = CreateConVar("soccer_mod_ranking_points_save", "10", "Points received for a save. Original default: 10.", FCVAR_NOTIFY, true, -100.0, true, 100.0);
+	gCvarSaves = CreateConVar("sm_soccer_saves", "1", "Count saves: touching the ball inside your own goalkeeper area right after an opponent.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	gCvarRankingPointsSave = CreateConVar("soccer_mod_ranking_points_save", "5", "Points received for a save, on top of the interception and hit points of that touch. Original default: 10.", FCVAR_NOTIFY, true, -100.0, true, 100.0);
+	gCvarGkAreaWidth = CreateConVar("sm_soccer_gk_area_width", "640", "Width of a goalkeeper area marked from the admin menu, in units, centred on the goal.", FCVAR_NONE, true, 64.0, true, 4096.0);
+	gCvarGkAreaDepth = CreateConVar("sm_soccer_gk_area_depth", "224", "Depth of a goalkeeper area marked from the admin menu, in units, from the goal line towards the pitch.", FCVAR_NONE, true, 64.0, true, 4096.0);
 	BuildPath(Path_SM, gGkAreasPath, sizeof(gGkAreasPath), "configs/umbrella_soccer_gk_areas.cfg");
 }
 
 void SavesOnMapStart()
 {
-	gPendingSaver = 0;
-	gBeamSprite = PrecacheModel("sprites/laserbeam.vmt", true);
+	ClearLastSave();
+	gBeamSprite = PrecacheModel("sprites/laser.vmt", true);
+	gHaloSprite = PrecacheModel("sprites/halo01.vmt", true);
 	LoadGoalkeeperAreas();
+}
+
+// Safety net for a plugin loaded mid-map: if the sprites and the areas were
+// not set up yet, nothing could be drawn or counted until a map change.
+void SavesOnConfigsExecuted()
+{
+	if (gBeamSprite == -1)
+	{
+		SavesOnMapStart();
+	}
 }
 
 void SavesOnRoundStart()
 {
-	gPendingSaver = 0;
+	ClearLastSave();
 }
 
 void SavesOnClientDisconnect(int client)
 {
-	if (gPendingSaver == client)
+	if (gLastSaver == client)
 	{
-		gPendingSaver = 0;
+		ClearLastSave();
 	}
-	for (int area = 0; area < 2; area++)
+	else if (gLastSaveShooter == client)
 	{
-		gGkCornerSet[client][area][0] = false;
-		gGkCornerSet[client][area][1] = false;
+		// The save can still be taken back; the goal just has no known scorer.
+		gLastSaveShooter = 0;
 	}
+}
+
+void ClearLastSave()
+{
+	gLastSaver = 0;
+	gLastSaveTeam = 0;
+	gLastSaveShooter = 0;
 }
 
 int GetTeamGkArea(int team)
@@ -91,12 +117,13 @@ bool IsPointInGkArea(int area, const float point[3])
 // Called for every counted touch, before the toucher history moves on.
 void SavesOnBallTouch(int client, int ball, int previousToucher)
 {
-	if (gPendingSaver != 0 && client != gPendingSaver)
+	// Anyone else touching the ball makes the last save final.
+	if (gLastSaver != 0 && client != gLastSaver)
 	{
-		ConfirmPendingSave();
+		ClearLastSave();
 	}
 
-	if (!gCvarSaves.BoolValue || gPenaltyActive || gShootoutActive || gPendingSaver == client || !IsValidClient(previousToucher))
+	if (!gCvarSaves.BoolValue || gPenaltyActive || gShootoutActive || !IsValidClient(previousToucher))
 	{
 		return;
 	}
@@ -110,39 +137,41 @@ void SavesOnBallTouch(int client, int ball, int previousToucher)
 
 	float origin[3];
 	GetEntPropVector(ball, Prop_Send, "m_vecOrigin", origin);
-	if (IsPointInGkArea(GetTeamGkArea(team), origin))
-	{
-		gPendingSaver = client;
-	}
-}
-
-// A goal at the other end confirms a pending save; conceding drops it.
-void SavesOnGoal(int scoringTeam)
-{
-	if (gPendingSaver == 0)
+	if (!IsPointInGkArea(GetTeamGkArea(team), origin))
 	{
 		return;
 	}
 
-	if (IsValidClient(gPendingSaver) && GetClientTeam(gPendingSaver) == scoringTeam)
-	{
-		ConfirmPendingSave();
-	}
-	gPendingSaver = 0;
+	gLastSaver = client;
+	gLastSaveTeam = team;
+	gLastSaveShooter = previousToucher;
+	AddPlayerPoints(client, gCvarRankingPointsSave.IntValue);
+	RankingAddStat(client, RANK_STAT_SAVES, 1);
+	PrintToChatAll("%t", "Save_Announce", client);
 }
 
-void ConfirmPendingSave()
+// Called for every goal. When the ball went in straight off a save, the save is
+// taken back and the opponent who shot is returned as the scorer, or -1 when
+// they are gone or changed sides. Any other goal returns 0.
+int SavesOnGoal(int scoringTeam)
 {
-	int saver = gPendingSaver;
-	gPendingSaver = 0;
-	if (!IsValidClient(saver))
+	int saver = gLastSaver;
+	int saveTeam = gLastSaveTeam;
+	int shooter = gLastSaveShooter;
+	ClearLastSave();
+	if (!IsValidClient(saver) || saveTeam == scoringTeam)
 	{
-		return;
+		return 0;
 	}
 
-	AddPlayerPoints(saver, gCvarRankingPointsSave.IntValue);
-	RankingAddStat(saver, RANK_STAT_SAVES, 1);
-	PrintToChatAll("%t", "Save_Announce", saver);
+	AddPlayerPoints(saver, -gCvarRankingPointsSave.IntValue);
+	RankingAddStat(saver, RANK_STAT_SAVES, -1);
+
+	if (IsValidClient(shooter) && GetClientTeam(shooter) == scoringTeam)
+	{
+		return shooter;
+	}
+	return -1;
 }
 
 void LoadGoalkeeperAreas()
@@ -206,26 +235,41 @@ void WriteGkArea(KeyValues kv, const char[] key, int area)
 	kv.GoBack();
 }
 
-// Builds an area from two opposite floor corners. The box reaches a little
-// below the floor and high enough to cover balls in the air.
-bool BuildGkAreaFromCorners(int client, int area)
+// Builds an area from where the admin stands: the middle of the goal line. It
+// runs along the pitch towards the centre spot, so where the admin looks does
+// not matter; only without a known centre spot is the view direction used.
+void BuildGkAreaFromPosition(int client, int area)
 {
-	if (!gGkCornerSet[client][area][0] || !gGkCornerSet[client][area][1])
+	float origin[3];
+	GetClientAbsOrigin(client, origin);
+
+	float toPitch[3];
+	if (gBallStartPositionValid)
 	{
-		return false;
+		toPitch[0] = gBallStartPosition[0] - origin[0];
+		toPitch[1] = gBallStartPosition[1] - origin[1];
+	}
+	if (!gBallStartPositionValid || (toPitch[0] == 0.0 && toPitch[1] == 0.0))
+	{
+		float angles[3];
+		GetClientEyeAngles(client, angles);
+		GetAngleVectors(angles, toPitch, NULL_VECTOR, NULL_VECTOR);
 	}
 
-	for (int axis = 0; axis < 3; axis++)
-	{
-		float a = gGkCorner[client][area][0][axis];
-		float b = gGkCorner[client][area][1][axis];
-		gGkAreaMin[area][axis] = a < b ? a : b;
-		gGkAreaMax[area][axis] = a > b ? a : b;
-	}
-	gGkAreaMin[area][2] -= GK_AREA_FLOOR_MARGIN;
-	gGkAreaMax[area][2] += GK_AREA_HEIGHT;
-	gGkAreaValid[area] = gGkAreaMin[area][0] < gGkAreaMax[area][0] && gGkAreaMin[area][1] < gGkAreaMax[area][1];
-	return gGkAreaValid[area];
+	int depthAxis = FloatAbs(toPitch[0]) >= FloatAbs(toPitch[1]) ? 0 : 1;
+	int widthAxis = 1 - depthAxis;
+	float direction = toPitch[depthAxis] < 0.0 ? -1.0 : 1.0;
+	float back = origin[depthAxis] - direction * GK_AREA_BEHIND;
+	float front = origin[depthAxis] + direction * gCvarGkAreaDepth.FloatValue;
+	float halfWidth = gCvarGkAreaWidth.FloatValue / 2.0;
+
+	gGkAreaMin[area][depthAxis] = back < front ? back : front;
+	gGkAreaMax[area][depthAxis] = back > front ? back : front;
+	gGkAreaMin[area][widthAxis] = origin[widthAxis] - halfWidth;
+	gGkAreaMax[area][widthAxis] = origin[widthAxis] + halfWidth;
+	gGkAreaMin[area][2] = origin[2] - GK_AREA_FLOOR_MARGIN;
+	gGkAreaMax[area][2] = origin[2] + GK_AREA_HEIGHT;
+	gGkAreaValid[area] = true;
 }
 
 void ShowGkAreaMenu(int client)
@@ -238,12 +282,9 @@ void ShowGkAreaMenu(int client)
 	char title[128];
 	Format(title, sizeof(title), "%T", "Menu_GkAreas_Title", client, stateCT, stateT);
 	menu.SetTitle(title);
-	AddMenuItemPhrase(menu, client, "ct0", "Menu_GkArea_CT_Corner1");
-	AddMenuItemPhrase(menu, client, "ct1", "Menu_GkArea_CT_Corner2");
-	AddMenuItemPhrase(menu, client, "t0", "Menu_GkArea_T_Corner1");
-	AddMenuItemPhrase(menu, client, "t1", "Menu_GkArea_T_Corner2");
+	AddMenuItemPhrase(menu, client, "ct", "Menu_GkArea_Mark_CT");
+	AddMenuItemPhrase(menu, client, "t", "Menu_GkArea_Mark_T");
 	AddMenuItemPhrase(menu, client, "show", "Menu_GkArea_Show");
-	AddMenuItemPhrase(menu, client, "save", "Menu_GkArea_Save");
 	menu.ExitBackButton = true;
 	menu.Display(client, MENU_TIME_FOREVER);
 }
@@ -278,44 +319,36 @@ public int MenuHandlerGkArea(Menu menu, MenuAction action, int client, int item)
 	{
 		DrawGkAreas(client);
 	}
-	else if (StrEqual(info, "save"))
+	else if (!IsPlayerAlive(client))
 	{
-		bool builtCT = BuildGkAreaFromCorners(client, GK_AREA_CT);
-		bool builtT = BuildGkAreaFromCorners(client, GK_AREA_T);
-		if (!builtCT && !builtT)
-		{
-			PrintToChat(client, "%t", "GkArea_Incomplete");
-		}
-		else if (SaveGoalkeeperAreas())
-		{
-			char map[PLATFORM_MAX_PATH];
-			GetCurrentMap(map, sizeof(map));
-			PrintToChat(client, "%t", "GkArea_Saved", map);
-			DrawGkAreas(client);
-		}
+		PrintToChat(client, "%t", "GkArea_Need_Alive");
 	}
 	else
 	{
-		int area = info[0] == 'c' ? GK_AREA_CT : GK_AREA_T;
-		int corner = info[strlen(info) - 1] == '1' ? 1 : 0;
-		float position[3];
-		if (!GetAimPosition(client, position))
-		{
-			GetClientAbsOrigin(client, position);
-		}
-		gGkCorner[client][area][corner] = position;
-		gGkCornerSet[client][area][corner] = true;
+		int area = StrEqual(info, "ct") ? GK_AREA_CT : GK_AREA_T;
+		BuildGkAreaFromPosition(client, area);
 
 		char teamName[16];
 		GetTeamNameServer(area == GK_AREA_CT ? TEAM_CT : TEAM_T, teamName, sizeof(teamName));
-		PrintToChat(client, "%t", "GkArea_Corner_Set", teamName, corner + 1);
+		char map[PLATFORM_MAX_PATH];
+		GetCurrentMap(map, sizeof(map));
+		if (SaveGoalkeeperAreas())
+		{
+			PrintToChat(client, "%t", "GkArea_Marked", teamName, map);
+		}
+		else
+		{
+			PrintToChat(client, "%t", "GkArea_Save_Failed");
+		}
+		DrawGkAreas(client);
 	}
 
 	ShowGkAreaMenu(client);
 	return 0;
 }
 
-// Outlines both areas for the admin only, for GK_AREA_BEAM_TIME seconds.
+// Outlines both areas on the floor for the admin only, for GK_AREA_BEAM_TIME
+// seconds: CT in blue, TT in red.
 void DrawGkAreas(int client)
 {
 	if (gBeamSprite == -1)
@@ -323,40 +356,46 @@ void DrawGkAreas(int client)
 		return;
 	}
 
+	if (!gGkAreaValid[GK_AREA_CT] && !gGkAreaValid[GK_AREA_T])
+	{
+		PrintToChat(client, "%t", "GkArea_Nothing_To_Show");
+		return;
+	}
+
 	int colorCT[4] = {74, 163, 255, 255};
 	int colorT[4] = {255, 74, 74, 255};
-	if (gGkAreaValid[GK_AREA_CT])
+	for (int area = 0; area < 2; area++)
 	{
-		DrawBox(client, gGkAreaMin[GK_AREA_CT], gGkAreaMax[GK_AREA_CT], colorCT);
-	}
-	if (gGkAreaValid[GK_AREA_T])
-	{
-		DrawBox(client, gGkAreaMin[GK_AREA_T], gGkAreaMax[GK_AREA_T], colorT);
+		if (gGkAreaValid[area])
+		{
+			DrawBox(client, gGkAreaMin[area], gGkAreaMax[area], area == GK_AREA_CT ? colorCT : colorT);
+		}
 	}
 }
 
+void DrawBeam(int client, const float start[3], const float end[3], const int color[4])
+{
+	TE_SetupBeamPoints(start, end, gBeamSprite, gHaloSprite, 0, 15, GK_AREA_BEAM_TIME, 3.0, 3.0, 1, 0.0, color, 0);
+	TE_SendToClient(client);
+}
+
+// Outlines the area on the floor: four beams, so several areas can be shown at
+// once without hitting the engine's limit of temp entities per update.
 void DrawBox(int client, const float mins[3], const float maxs[3], const int color[4])
 {
-	float corners[8][3];
-	for (int i = 0; i < 8; i++)
+	float z = mins[2] + GK_AREA_FLOOR_MARGIN + 4.0;
+	float corners[4][3];
+	corners[0][0] = mins[0]; corners[0][1] = mins[1];
+	corners[1][0] = maxs[0]; corners[1][1] = mins[1];
+	corners[2][0] = maxs[0]; corners[2][1] = maxs[1];
+	corners[3][0] = mins[0]; corners[3][1] = maxs[1];
+	for (int i = 0; i < 4; i++)
 	{
-		corners[i][0] = (i & 1) ? maxs[0] : mins[0];
-		corners[i][1] = (i & 2) ? maxs[1] : mins[1];
-		corners[i][2] = (i & 4) ? maxs[2] : mins[2];
+		corners[i][2] = z;
 	}
 
-	// Each edge joins two corners that differ in exactly one axis bit.
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 4; i++)
 	{
-		for (int bit = 1; bit <= 4; bit <<= 1)
-		{
-			int j = i | bit;
-			if (j == i)
-			{
-				continue;
-			}
-			TE_SetupBeamPoints(corners[i], corners[j], gBeamSprite, 0, 0, 0, GK_AREA_BEAM_TIME, 2.0, 2.0, 0, 0.0, color, 0);
-			TE_SendToClient(client);
-		}
+		DrawBeam(client, corners[i], corners[(i + 1) % 4], color);
 	}
 }
