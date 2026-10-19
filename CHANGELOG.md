@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.1.2
+
+### Match flow
+- A goal in stoppage time ends the period right there: break, overtime or final whistle. Before, play went on with a kickoff and the period only ended when that kickoff crossed the halfway line.
+
+### Languages
+- Added Russian (`ru`), Simplified Chinese (`chi`), Italian (`it`) and Japanese (`jp`) for every message, menu and HUD line, on top of English, Spanish, Portuguese, French and German. They use the stock SourceMod language codes, so a player whose game is in one of them sees the plugin in it.
+- The goalkeeper areas help is sent as three short chat lines instead of one, since a long line could be cut off at the chat limit (the French one already was).
+
+### Configuration
+- Every cvar description in `cfg/sourcemod/umbrella_soccer.cfg` is now in English and identical to the plugin's own: a few were in Spanish and others no longer matched the code. The overtime and golden goal descriptions carry the examples the Spanish ones had.
+
+Compiled with SourcePawn 1.12.0.7255, no warnings.
+Plugin SHA256: `574958D32BC0186F6ACC6D084A34F024E4F4B08AD301ED7A62C904B7D132D2B1`
+
 ## 1.1.1
 
 ### Saves
@@ -20,7 +35,7 @@
 - A match penalty can only be given while the ball is in play: not after a goal, in a break or around a restart. One given while a kickoff waits replaces it. A pause also holds the time to take the kick, and when the round timer runs out before the kick, the restart's kickoff takes its place.
 
 ### Other fixes
-- The HUD reads like the original soccermod's: `CT 1 - 0 T | 03:12`, with what holds play in front when something does (`Saca CT: CT 1 - 0 T | 00:00`, `Pausado: ...`, `Descanso 10s: ...`, `Prorroga: ...`). A pause shows as a pause, also while a kickoff is waiting.
+- The HUD reads like the original soccermod's: `CT 1 - 0 T | 03:12`, with what holds play in front when something does (`Kick off CT: CT 1 - 0 T | 00:00`, `Paused: ...`, `Break 10s: ...`, `Overtime: ...` in English). A pause shows as a pause, also while a kickoff is waiting.
 - Players with a red card can no longer be picked in a draft.
 
 Compiled with SourcePawn 1.12.0.7255, no warnings.

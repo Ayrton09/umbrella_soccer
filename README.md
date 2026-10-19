@@ -30,7 +30,7 @@
 | 👥 **Captains** | Snake draft with 2 to 4 captains and pick menus. Optional limit of players per team. |
 | 🏃 **Sprint** | Stamina sprint on the walk key, shown as armor. |
 | 🛠️ **Training** | A training ball per admin, a training cannon (power, fire rate, randomness) and goals that can be disabled. |
-| 🌍 **Languages** | English, Spanish, Portuguese, French and German. |
+| 🌍 **Languages** | English, Spanish, Portuguese, French, German, Russian, Simplified Chinese, Italian and Japanese. Each player sees the plugin in their game language. |
 
 ## Requirements
 

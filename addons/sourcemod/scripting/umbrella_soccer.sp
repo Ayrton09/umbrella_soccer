@@ -6,7 +6,7 @@
 #include <sdkhooks>
 #include <cstrike>
 
-#define PLUGIN_VERSION "1.1.1"
+#define PLUGIN_VERSION "1.1.2"
 
 #if !defined IN_SPEED
 #define IN_SPEED (1 << 17)
@@ -269,11 +269,11 @@ public void OnPluginStart()
 	gCvarGoalkeeperCooldown = CreateConVar("sm_soccer_gk_cooldown", "5.0", "Seconds a player must wait before toggling goalkeeper position again.", FCVAR_NOTIFY, true, 0.0, true, 60.0);
 	gCvarMatchPeriods = CreateConVar("soccer_mod_match_periods", "2", "Number of match periods.", FCVAR_NOTIFY, true, 1.0, true, 8.0);
 	gCvarMatchPeriodLength = CreateConVar("soccer_mod_match_period_length", "3", "Match period length in MINUTES. Example: 3 = 3 minutes per period.", FCVAR_NOTIFY, true, 1.0, true, 60.0);
-	gCvarMatchBreakLength = CreateConVar("soccer_mod_match_period_break_length", "10", "Break length between periods in SECONDS. Example: 10 = 10 seconds.", FCVAR_NOTIFY, true, 0.0, true, 600.0);
+	gCvarMatchBreakLength = CreateConVar("soccer_mod_match_period_break_length", "10", "Break length between periods in SECONDS, not minutes. Example: 10 = 10 seconds.", FCVAR_NOTIFY, true, 0.0, true, 600.0);
 	gCvarMatchOvertime = CreateConVar("soccer_mod_match_overtime", "1", "Play overtime when a match is tied after regulation.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	gCvarMatchOvertimePercent = CreateConVar("soccer_mod_match_overtime_percent", "25.0", "Overtime length as a percentage of total match time, rounded up to full minutes.", FCVAR_NOTIFY, true, 1.0, true, 100.0);
-	gCvarMatchGoldenGoal = CreateConVar("soccer_mod_match_golden_goal", "0", "If enabled, the first goal during overtime wins. If overtime ends tied, the match remains tied.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	gCvarPenaltyShotTime = CreateConVar("sm_soccer_penalty_shot_time", "15", "Seconds allowed after a penalty kick starts.", FCVAR_NOTIFY, true, 3.0, true, 45.0);
+	gCvarMatchOvertimePercent = CreateConVar("soccer_mod_match_overtime_percent", "25.0", "Overtime length as a percentage of total match time, rounded up to full minutes and played in two halves. Example: 2 periods of 3 minutes = 6 minutes; 25% = 1:30, rounded up to 2 minutes of overtime.", FCVAR_NOTIFY, true, 1.0, true, 100.0);
+	gCvarMatchGoldenGoal = CreateConVar("soccer_mod_match_golden_goal", "0", "1 = the first goal during overtime wins; if overtime ends tied, the match remains tied. 0 = overtime is played in full.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
+	gCvarPenaltyShotTime = CreateConVar("sm_soccer_penalty_shot_time", "15", "Seconds the shooter has to take a penalty, and then for the ball to go in, before it counts as a miss.", FCVAR_NOTIFY, true, 3.0, true, 45.0);
 	gCvarPenaltyShotDelay = CreateConVar("sm_soccer_penalty_shot_delay", "4.0", "Delay in seconds before restarting to the next penalty shot.", FCVAR_NOTIFY, true, 0.2, true, 10.0);
 	gCvarPenaltyTurnSound = CreateConVar("sm_soccer_penalty_turn_sound", "buttons/blip1.wav", "Sound played to the shooter when it is their penalty turn. Empty disables.", FCVAR_NONE);
 	gCvarTrainingBallModel = CreateConVar("sm_soccer_training_ball_model", "models/ayrton09/fifa_trionda_2026/trionda_2026.mdl", "Model used for spawned training balls. Empty disables training ball spawning.", FCVAR_NONE);
@@ -1472,6 +1472,8 @@ public int MenuHandlerAdmin(Menu menu, MenuAction action, int client, int item)
 	else if (StrEqual(info, "gkareas"))
 	{
 		PrintToChat(client, "%t", "GkArea_Help");
+		PrintToChat(client, "%t", "GkArea_Help_Saved");
+		PrintToChat(client, "%t", "GkArea_Help_Size");
 		ShowGkAreaMenu(client);
 	}
 	return 0;
@@ -3186,6 +3188,14 @@ void HandleGoal(int scoringTeam, bool waitForRoundStart)
 	{
 		PrintToChatAll("%t", "GoldenGoal_Finished");
 		FinishMatch();
+		return;
+	}
+
+	// A goal in stoppage time ends the period right there, instead of waiting
+	// for the kickoff to cross the halfway line.
+	if (gStoppageActive)
+	{
+		EndStoppageTime();
 		return;
 	}
 

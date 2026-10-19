@@ -7,6 +7,10 @@
         "pt"    "CT"
         "fr"    "CT"
         "de"    "CT"
+        "ru"    "CT"
+        "chi"   "CT"
+        "it"    "CT"
+        "jp"    "CT"
     }
 
     "Team_T"
@@ -16,6 +20,10 @@
         "pt"    "TT"
         "fr"    "TT"
         "de"    "TT"
+        "ru"    "TT"
+        "chi"   "TT"
+        "it"    "TT"
+        "jp"    "TT"
     }
 
     "Team_Blue"
@@ -25,6 +33,10 @@
         "pt"    "Azul"
         "fr"    "Bleu"
         "de"    "Blau"
+        "ru"    "Синие"
+        "chi"   "蓝队"
+        "it"    "Blu"
+        "jp"    "青"
     }
 
     "Team_Red"
@@ -34,6 +46,10 @@
         "pt"    "Vermelho"
         "fr"    "Rouge"
         "de"    "Rot"
+        "ru"    "Красные"
+        "chi"   "红队"
+        "it"    "Rosso"
+        "jp"    "赤"
     }
 
     "Team_Join_Assigned_Other"
@@ -43,6 +59,10 @@
         "pt"    "Times: voce esta designado para o outro time."
         "fr"    "Equipes : tu es assigne a l'autre equipe."
         "de"    "Teams: du bist dem anderen Team zugeteilt."
+        "ru"    "Команды: ты распределён в другую команду."
+        "chi"   "队伍：你已被分配到另一支队伍。"
+        "it"    "Squadre: sei assegnato all'altra squadra."
+        "jp"    "チーム: あなたは相手チームに割り当てられている。"
     }
 
     "Team_Join_No_Replacements"
@@ -52,6 +72,10 @@
         "pt"    "Times: nao ha vagas de substituicao disponiveis durante a partida."
         "fr"    "Equipes : aucun remplacement n'est disponible pendant le match."
         "de"    "Teams: es sind keine Ersatzplaetze im laufenden Spiel frei."
+        "ru"    "Команды: свободных мест для замены во время матча нет."
+        "chi"   "队伍：比赛中已没有可用的替补名额。"
+        "it"    "Squadre: non ci sono posti per sostituti disponibili durante la partita."
+        "jp"    "チーム: 試合中に入れる交代枠がない。"
     }
 
     "Team_Join_RedCard"
@@ -61,6 +85,10 @@
         "pt"    "Times: voce nao pode entrar enquanto esta expulso."
         "fr"    "Equipes : tu ne peux pas entrer apres une expulsion."
         "de"    "Teams: du kannst nach einem Platzverweis nicht beitreten."
+        "ru"    "Команды: нельзя войти, пока ты удалён."
+        "chi"   "队伍：你已被罚下，无法加入。"
+        "it"    "Squadre: non puoi entrare mentre sei espulso."
+        "jp"    "チーム: 退場中は参加できない。"
     }
 
     "Client_None"
@@ -70,6 +98,10 @@
         "pt"    "nenhum"
         "fr"    "aucun"
         "de"    "keiner"
+        "ru"    "нет"
+        "chi"   "无"
+        "it"    "nessuno"
+        "jp"    "なし"
     }
 
     "Skin_Player"
@@ -79,6 +111,10 @@
         "pt"    "Jogador"
         "fr"    "Joueur"
         "de"    "Spieler"
+        "ru"    "Игрок"
+        "chi"   "球员"
+        "it"    "Giocatore"
+        "jp"    "選手"
     }
 
     "Skin_Goalkeeper"
@@ -88,6 +124,10 @@
         "pt"    "Goleiro"
         "fr"    "Gardien"
         "de"    "Torwart"
+        "ru"    "Вратарь"
+        "chi"   "守门员"
+        "it"    "Portiere"
+        "jp"    "ゴールキーパー"
     }
 
     "Goal_Own_Label"
@@ -97,6 +137,10 @@
         "pt"    "Gol contra!"
         "fr"    "But contre son camp !"
         "de"    "Eigentor!"
+        "ru"    "Автогол!"
+        "chi"   "乌龙球！"
+        "it"    "Autogol!"
+        "jp"    "オウンゴール！"
     }
 
     "Goal_By"
@@ -106,6 +150,10 @@
         "pt"    "de:"
         "fr"    "par :"
         "de"    "von:"
+        "ru"    "автор:"
+        "chi"   "进球者："
+        "it"    "di:"
+        "jp"    "得点:"
     }
 
     "Goal_Scorer"
@@ -116,6 +164,10 @@
         "pt"    "Gol de {1}"
         "fr"    "But de {1}"
         "de"    "Tor von {1}"
+        "ru"    "Гол забил {1}"
+        "chi"   "进球：{1}"
+        "it"    "Gol di {1}"
+        "jp"    "ゴール 得点者: {1}"
     }
 
     "Goal_Generic"
@@ -125,6 +177,10 @@
         "pt"    "Gol!"
         "fr"    "But !"
         "de"    "Tor!"
+        "ru"    "Гол!"
+        "chi"   "进球！"
+        "it"    "Gol!"
+        "jp"    "ゴール！"
     }
 
     "Goal_Assist"
@@ -135,6 +191,10 @@
         "pt"    "Assistencia de {1}"
         "fr"    "Passe decisive de {1}"
         "de"    "Vorlage von {1}"
+        "ru"    "Передача от {1}"
+        "chi"   "助攻：{1}"
+        "it"    "Assist di {1}"
+        "jp"    "アシスト: {1}"
     }
 
     "Score_Label"
@@ -144,6 +204,10 @@
         "pt"    "Placar"
         "fr"    "Score"
         "de"    "Spielstand"
+        "ru"    "Счёт"
+        "chi"   "比分"
+        "it"    "Punteggio"
+        "jp"    "スコア"
     }
 
     "Hud_Match_Line"
@@ -154,6 +218,10 @@
         "pt"    "CT {1} - {2} T | {3}"
         "fr"    "CT {1} - {2} T | {3}"
         "de"    "CT {1} - {2} T | {3}"
+        "ru"    "CT {1} - {2} T | {3}"
+        "chi"   "CT {1} - {2} T | {3}"
+        "it"    "CT {1} - {2} T | {3}"
+        "jp"    "CT {1} - {2} T | {3}"
     }
 
     "Hud_Match_Line_State"
@@ -164,6 +232,10 @@
         "pt"    "{1}: CT {2} - {3} T | {4}"
         "fr"    "{1}: CT {2} - {3} T | {4}"
         "de"    "{1}: CT {2} - {3} T | {4}"
+        "ru"    "{1}: CT {2} - {3} T | {4}"
+        "chi"   "{1}: CT {2} - {3} T | {4}"
+        "it"    "{1}: CT {2} - {3} T | {4}"
+        "jp"    "{1}: CT {2} - {3} T | {4}"
     }
 
     "Map_Not_Allowed"
@@ -173,6 +245,10 @@
         "pt"    "Mapa bloqueado: este mapa nao esta permitido para Soccer Mod."
         "fr"    "Map bloquee : cette map n'est pas autorisee pour Soccer Mod."
         "de"    "Map gesperrt: diese Map ist fur Soccer Mod nicht erlaubt."
+        "ru"    "Карта заблокирована: эта карта не разрешена для Soccer Mod."
+        "chi"   "地图被禁用：Soccer Mod 不允许使用此地图。"
+        "it"    "Mappa bloccata: questa mappa non è consentita per Soccer Mod."
+        "jp"    "マップ不可: このマップはSoccer Modで使用できない。"
     }
 
     "Soccer_Disabled"
@@ -182,6 +258,10 @@
         "pt"    "Soccer: o plugin esta desativado."
         "fr"    "Soccer : le plugin est desactive."
         "de"    "Soccer: das Plugin ist deaktiviert."
+        "ru"    "Soccer: плагин отключён."
+        "chi"   "Soccer：插件已禁用。"
+        "it"    "Soccer: il plugin è disattivato."
+        "jp"    "Soccer: プラグインは無効になっている。"
     }
 
     "Match_Already_Live"
@@ -191,6 +271,10 @@
         "pt"    "Partida: ja existe uma partida em andamento."
         "fr"    "Match : il y a deja un match en cours."
         "de"    "Spiel: es lauft bereits ein Spiel."
+        "ru"    "Матч: матч уже идёт."
+        "chi"   "比赛：已有一场比赛正在进行。"
+        "it"    "Partita: c'è già una partita in corso."
+        "jp"    "試合: すでに試合が進行中。"
     }
 
     "Overtime_Tied"
@@ -200,6 +284,10 @@
         "pt"    "Prorrogacao: terminou empatada."
         "fr"    "Prolongation : terminee sur une egalite."
         "de"    "Verlangerung: endete unentschieden."
+        "ru"    "Овертайм: завершился вничью."
+        "chi"   "加时赛：以平局结束。"
+        "it"    "Supplementari: finiti in parità."
+        "jp"    "延長戦: 同点で終了。"
     }
 
     "Overtime_Finished"
@@ -209,6 +297,10 @@
         "pt"    "Prorrogacao: terminou."
         "fr"    "Prolongation : terminee."
         "de"    "Verlangerung: ist beendet."
+        "ru"    "Овертайм: завершён."
+        "chi"   "加时赛：已结束。"
+        "it"    "Supplementari: terminati."
+        "jp"    "延長戦: 終了。"
     }
 
     "Overtime_Start"
@@ -219,6 +311,10 @@
         "pt"    "Partida empatada: a prorrogacao comeca agora por {1}."
         "fr"    "Match nul : la prolongation commence pour {1}."
         "de"    "Spiel unentschieden: die Verlangerung startet fur {1}."
+        "ru"    "Ничья: начинается овертайм на {1}."
+        "chi"   "比赛战平：现在开始 {1} 的加时赛。"
+        "it"    "Pareggio: iniziano i tempi supplementari di {1}."
+        "jp"    "同点: {1}の延長戦を開始。"
     }
 
     "GoldenGoal_Start"
@@ -228,6 +324,10 @@
         "pt"    "Gol de ouro: o proximo gol vence."
         "fr"    "But en or : le prochain but gagne."
         "de"    "Golden Goal: das nachste Tor gewinnt."
+        "ru"    "Золотой гол: следующий гол решает всё."
+        "chi"   "金球：下一个进球获胜。"
+        "it"    "Golden gol: chi segna vince."
+        "jp"    "ゴールデンゴール: 次のゴールで決着。"
     }
 
     "GoldenGoal_Finished"
@@ -237,6 +337,10 @@
         "pt"    "Gol de ouro: partida decidida."
         "fr"    "But en or : match decide."
         "de"    "Golden Goal: Spiel entschieden."
+        "ru"    "Золотой гол: победитель определён."
+        "chi"   "金球：胜负已分。"
+        "it"    "Golden gol: partita decisa."
+        "jp"    "ゴールデンゴール: 決着。"
     }
 
     "KickoffReason_Overtime"
@@ -246,6 +350,10 @@
         "pt"    "Prorrogacao"
         "fr"    "Prolongation"
         "de"    "Verlangerung"
+        "ru"    "Овертайм"
+        "chi"   "加时赛"
+        "it"    "Supplementari"
+        "jp"    "延長戦"
     }
 
     "KickoffReason_FirstHalf"
@@ -255,6 +363,10 @@
         "pt"    "Primeiro tempo"
         "fr"    "Premiere mi-temps"
         "de"    "Erste Halbzeit"
+        "ru"    "Первый тайм"
+        "chi"   "上半场"
+        "it"    "Primo tempo"
+        "jp"    "前半"
     }
 
     "KickoffReason_SecondHalf"
@@ -264,6 +376,10 @@
         "pt"    "Segundo tempo"
         "fr"    "Seconde mi-temps"
         "de"    "Zweite Halbzeit"
+        "ru"    "Второй тайм"
+        "chi"   "下半场"
+        "it"    "Secondo tempo"
+        "jp"    "後半"
     }
 
     "KickoffReason_NextPeriod"
@@ -273,6 +389,10 @@
         "pt"    "Proximo periodo"
         "fr"    "Periode suivante"
         "de"    "Naechster Abschnitt"
+        "ru"    "Следующий период"
+        "chi"   "下一节"
+        "it"    "Periodo successivo"
+        "jp"    "次のピリオド"
     }
 
     "KickoffReason_RoundTime"
@@ -282,6 +402,10 @@
         "pt"    "O tempo da rodada acabou"
         "fr"    "Temps de manche ecoule"
         "de"    "Rundenzeit abgelaufen"
+        "ru"    "Время раунда вышло"
+        "chi"   "回合时间结束"
+        "it"    "Tempo del round scaduto"
+        "jp"    "ラウンド時間終了"
     }
 
     "KickoffReason_Goal"
@@ -291,6 +415,10 @@
         "pt"    "Apos o gol"
         "fr"    "Apres le but"
         "de"    "Nach dem Tor"
+        "ru"    "После гола"
+        "chi"   "进球后"
+        "it"    "Dopo il gol"
+        "jp"    "ゴール後"
     }
 
     "KickoffReason_Manual"
@@ -300,6 +428,10 @@
         "pt"    "Saque manual"
         "fr"    "Engagement manuel"
         "de"    "Manueller Anstoss"
+        "ru"    "Ручной розыгрыш"
+        "chi"   "手动开球"
+        "it"    "Calcio d'inizio manuale"
+        "jp"    "手動キックオフ"
     }
 
     "Match_Stopped"
@@ -309,6 +441,10 @@
         "pt"    "Partida: encerrada."
         "fr"    "Match : arrete."
         "de"    "Spiel: gestoppt."
+        "ru"    "Матч: остановлен."
+        "chi"   "比赛：已停止。"
+        "it"    "Partita: interrotta."
+        "jp"    "試合: 終了。"
     }
 
     "Match_Paused"
@@ -318,6 +454,10 @@
         "pt"    "Partida: pausada."
         "fr"    "Match : en pause."
         "de"    "Spiel: pausiert."
+        "ru"    "Матч: на паузе."
+        "chi"   "比赛：已暂停。"
+        "it"    "Partita: in pausa."
+        "jp"    "試合: 一時停止。"
     }
 
     "Resume_Center"
@@ -328,6 +468,10 @@
         "pt"    "Retornando em {1}"
         "fr"    "Reprise dans {1}"
         "de"    "Fortsetzung in {1}"
+        "ru"    "Продолжение через {1}"
+        "chi"   "{1} 后继续"
+        "it"    "Si riprende tra {1}"
+        "jp"    "{1}秒後に再開"
     }
 
     "Resume_Announce"
@@ -338,6 +482,10 @@
         "pt"    "Retornando: em {1} segundo(s)."
         "fr"    "Reprise : dans {1} seconde(s)."
         "de"    "Fortsetzung: in {1} Sekunde(n)."
+        "ru"    "Продолжение: через {1} сек."
+        "chi"   "继续：{1} 秒后继续比赛。"
+        "it"    "Ripresa: tra {1} secondo/i."
+        "jp"    "再開: {1}秒後。"
     }
 
     "Resume_Play"
@@ -347,6 +495,10 @@
         "pt"    "Joguem!"
         "fr"    "Jouez !"
         "de"    "Spielen!"
+        "ru"    "Играем!"
+        "chi"   "开始！"
+        "it"    "Si gioca!"
+        "jp"    "プレー！"
     }
 
     "Resume_Countdown"
@@ -357,6 +509,10 @@
         "pt"    "Retornando em {1}..."
         "fr"    "Reprise dans {1}..."
         "de"    "Fortsetzung in {1}..."
+        "ru"    "Продолжение через {1}..."
+        "chi"   "{1} 后继续……"
+        "it"    "Si riprende tra {1}..."
+        "jp"    "{1}秒後に再開..."
     }
 
     "Match_Reset"
@@ -366,6 +522,10 @@
         "pt"    "Partida: reiniciada."
         "fr"    "Match : reinitialise."
         "de"    "Spiel: zuruckgesetzt."
+        "ru"    "Матч: сброшен."
+        "chi"   "比赛：已重置。"
+        "it"    "Partita: azzerata."
+        "jp"    "試合: リセット。"
     }
 
     "Cmd_Ball_NotFound"
@@ -375,6 +535,10 @@
         "pt"    "Bola: nao encontrada."
         "fr"    "Ballon : introuvable."
         "de"    "Ball: nicht gefunden."
+        "ru"    "Мяч: не найден."
+        "chi"   "球：未找到。"
+        "it"    "Pallone: non trovato."
+        "jp"    "ボール: 見つからない。"
     }
 
     "Cmd_BallSpawn_MapControlled"
@@ -384,6 +548,10 @@
         "pt"    "Spawn da bola: controlado pelo mapa."
         "fr"    "Spawn du ballon : controle par la map."
         "de"    "Ball-Spawn: wird von der Map gesteuert."
+        "ru"    "Появление мяча: управляется картой."
+        "chi"   "球的生成：由地图控制。"
+        "it"    "Spawn del pallone: gestito dalla mappa."
+        "jp"    "ボール出現位置: マップが管理している。"
     }
 
     "Score_Goal_Added"
@@ -394,6 +562,10 @@
         "pt"    "Arbitro: {1} adicionou um gol para {2}. Placar: CT {3} - {4} TT"
         "fr"    "Arbitre : {1} a ajoute un but a {2}. Score : CT {3} - {4} TT"
         "de"    "Schiedsrichter: {1} hat ein Tor fuer {2} hinzugefuegt. Spielstand: CT {3} - {4} TT"
+        "ru"    "Судья: {1} добавил гол команде {2}. Счёт: CT {3} - {4} TT"
+        "chi"   "裁判：{1} 为 {2} 加了一球。比分：CT {3} - {4} TT"
+        "it"    "Arbitro: {1} ha aggiunto un gol a {2}. Punteggio: CT {3} - {4} TT"
+        "jp"    "審判: {1}が{2}にゴールを追加。スコア: CT {3} - {4} TT"
     }
 
     "Score_Goal_Removed"
@@ -404,6 +576,10 @@
         "pt"    "Arbitro: {1} removeu um gol de {2}. Placar: CT {3} - {4} TT"
         "fr"    "Arbitre : {1} a retire un but a {2}. Score : CT {3} - {4} TT"
         "de"    "Schiedsrichter: {1} hat ein Tor von {2} entfernt. Spielstand: CT {3} - {4} TT"
+        "ru"    "Судья: {1} отменил гол команды {2}. Счёт: CT {3} - {4} TT"
+        "chi"   "裁判：{1} 为 {2} 减了一球。比分：CT {3} - {4} TT"
+        "it"    "Arbitro: {1} ha tolto un gol a {2}. Punteggio: CT {3} - {4} TT"
+        "jp"    "審判: {1}が{2}のゴールを取り消し。スコア: CT {3} - {4} TT"
     }
 
     "Score_Already_Zero"
@@ -414,6 +590,10 @@
         "pt"    "Placar: {1} ja esta em 0."
         "fr"    "Score : {1} est deja a 0."
         "de"    "Spielstand: {1} ist bereits bei 0."
+        "ru"    "Счёт: у {1} уже 0."
+        "chi"   "比分：{1} 已经是 0。"
+        "it"    "Punteggio: {1} è già a 0."
+        "jp"    "スコア: {1}はすでに0。"
     }
 
     "Cmd_Goal_Usage"
@@ -423,6 +603,10 @@
         "pt"    "Uso: sm_soccer_goal <t/ct>"
         "fr"    "Usage : sm_soccer_goal <t/ct>"
         "de"    "Verwendung: sm_soccer_goal <t/ct>"
+        "ru"    "Использование: sm_soccer_goal <t/ct>"
+        "chi"   "用法：sm_soccer_goal <t/ct>"
+        "it"    "Uso: sm_soccer_goal <t/ct>"
+        "jp"    "使い方: sm_soccer_goal <t/ct>"
     }
 
     "Cmd_Yellow_Usage"
@@ -432,6 +616,10 @@
         "pt"    "Uso: sm_soccer_yellow <target>"
         "fr"    "Usage : sm_soccer_yellow <cible>"
         "de"    "Verwendung: sm_soccer_yellow <ziel>"
+        "ru"    "Использование: sm_soccer_yellow <игрок>"
+        "chi"   "用法：sm_soccer_yellow <目标>"
+        "it"    "Uso: sm_soccer_yellow <giocatore>"
+        "jp"    "使い方: sm_soccer_yellow <target>"
     }
 
     "Card_Yellow"
@@ -442,6 +630,10 @@
         "pt"    "Cartao amarelo: {1} ({2}/2)"
         "fr"    "Carton jaune : {1} ({2}/2)"
         "de"    "Gelbe Karte: {1} ({2}/2)"
+        "ru"    "Жёлтая карточка: {1} ({2}/2)"
+        "chi"   "黄牌：{1}（{2}/2）"
+        "it"    "Cartellino giallo: {1} ({2}/2)"
+        "jp"    "イエローカード: {1} ({2}/2)"
     }
 
     "Cmd_Red_Usage"
@@ -451,6 +643,10 @@
         "pt"    "Uso: sm_soccer_red <target>"
         "fr"    "Usage : sm_soccer_red <cible>"
         "de"    "Verwendung: sm_soccer_red <ziel>"
+        "ru"    "Использование: sm_soccer_red <игрок>"
+        "chi"   "用法：sm_soccer_red <目标>"
+        "it"    "Uso: sm_soccer_red <giocatore>"
+        "jp"    "使い方: sm_soccer_red <target>"
     }
 
     "Card_Red"
@@ -461,6 +657,10 @@
         "pt"    "Vermelho! para {1}"
         "fr"    "Rouge ! pour {1}"
         "de"    "Rot! fur {1}"
+        "ru"    "Красная карточка! для {1}"
+        "chi"   "红牌！给 {1}"
+        "it"    "Cartellino rosso! per {1}"
+        "jp"    "レッドカード！ {1}"
     }
 
     "Card_Cleared_Player"
@@ -471,6 +671,10 @@
         "pt"    "Cartoes limpos: {1}."
         "fr"    "Cartons effaces : {1}."
         "de"    "Karten geloescht: {1}."
+        "ru"    "Карточки сняты: {1}."
+        "chi"   "已清除牌：{1}。"
+        "it"    "Cartellini azzerati: {1}."
+        "jp"    "カード消去: {1}。"
     }
 
     "Card_Cleared_All"
@@ -480,6 +684,10 @@
         "pt"    "Cartoes: todos foram limpos."
         "fr"    "Cartons : tous les cartons ont ete effaces."
         "de"    "Karten: alle Karten wurden geloescht."
+        "ru"    "Карточки: все карточки сняты."
+        "chi"   "牌：已清除所有牌。"
+        "it"    "Cartellini: tutti i cartellini sono stati azzerati."
+        "jp"    "カード: すべてのカードを消去した。"
     }
 
     "Cmd_Position_Usage"
@@ -489,6 +697,10 @@
         "pt"    "Uso: sm_soccer_position <target> <gk/none>"
         "fr"    "Usage : sm_soccer_position <cible> <gk/none>"
         "de"    "Verwendung: sm_soccer_position <ziel> <gk/none>"
+        "ru"    "Использование: sm_soccer_position <игрок> <gk/none>"
+        "chi"   "用法：sm_soccer_position <目标> <gk/none>"
+        "it"    "Uso: sm_soccer_position <giocatore> <gk/none>"
+        "jp"    "使い方: sm_soccer_position <target> <gk/none>"
     }
 
     "Skin_Cooldown"
@@ -499,6 +711,10 @@
         "pt"    "Espere {1} segundo(s) para trocar a skin de novo."
         "fr"    "Attends {1} seconde(s) avant de rechanger de skin."
         "de"    "Warte {1} Sekunde(n), bevor du den Skin erneut wechselst."
+        "ru"    "Подожди {1} сек., прежде чем снова сменить скин."
+        "chi"   "请等待 {1} 秒后再更换皮肤。"
+        "it"    "Aspetta {1} secondo/i prima di cambiare di nuovo skin."
+        "jp"    "待機: スキンを再変更するまで{1}秒待つこと。"
     }
 
     "Match_Not_Live"
@@ -508,6 +724,10 @@
         "pt"    "Partida: nao esta em jogo."
         "fr"    "Match : n'est pas en cours."
         "de"    "Spiel: laeuft nicht."
+        "ru"    "Матч: не идёт."
+        "chi"   "比赛：未在进行中。"
+        "it"    "Partita: non è in corso."
+        "jp"    "試合: 進行中ではない。"
     }
 
     "Kickoff_Chat_Team"
@@ -518,6 +738,10 @@
         "pt"    "Partida: {1}. O time {2} comeca."
         "fr"    "Match : {1}. L'equipe {2} engage."
         "de"    "Spiel: {1}. Team {2} beginnt."
+        "ru"    "Матч: {1}. Начинает {2}."
+        "chi"   "比赛：{1}。由 {2} 开球。"
+        "it"    "Partita: {1}. Batte il calcio d'inizio {2}."
+        "jp"    "試合: {1}。{2}のキックオフ。"
     }
 
     "Break_Start"
@@ -528,6 +752,10 @@
         "pt"    "Periodo {1}: descanso de {2} segundo(s)."
         "fr"    "Periode {1} : pause de {2} seconde(s)."
         "de"    "Periode {1}: Pause fur {2} Sekunde(n)."
+        "ru"    "Период {1}: перерыв {2} сек."
+        "chi"   "第 {1} 节：休息 {2} 秒。"
+        "it"    "Periodo {1}: pausa di {2} secondo/i."
+        "jp"    "ピリオド{1}: {2}秒の休憩。"
     }
 
     "Menu_Match_Title"
@@ -538,6 +766,10 @@
         "pt"    "Controle da partida | P{1} | CT {2} - {3} TT"
         "fr"    "Controle du match | P{1} | CT {2} - {3} TT"
         "de"    "Spielkontrolle | P{1} | CT {2} - {3} TT"
+        "ru"    "Управление матчем | P{1} | CT {2} - {3} TT"
+        "chi"   "比赛控制 | 第{1}节 | CT {2} - {3} TT"
+        "it"    "Gestione partita | P{1} | CT {2} - {3} TT"
+        "jp"    "試合管理 | P{1} | CT {2} - {3} TT"
     }
 
     "Menu_Match"
@@ -547,6 +779,10 @@
         "pt"    "Partida"
         "fr"    "Match"
         "de"    "Spiel"
+        "ru"    "Матч"
+        "chi"   "比赛"
+        "it"    "Partita"
+        "jp"    "試合"
     }
 
     "Menu_Penalties"
@@ -556,6 +792,10 @@
         "pt"    "Penaltis"
         "fr"    "Penalties"
         "de"    "Elfmeter"
+        "ru"    "Пенальти"
+        "chi"   "点球"
+        "it"    "Rigori"
+        "jp"    "PK"
     }
 
     "Menu_Penalties_Title"
@@ -565,6 +805,10 @@
         "pt"    "Partida - penaltis"
         "fr"    "Match - penalties"
         "de"    "Spiel - Elfmeter"
+        "ru"    "Матч - пенальти"
+        "chi"   "比赛 - 点球"
+        "it"    "Partita - rigori"
+        "jp"    "試合 - PK"
     }
 
     "Menu_Captains"
@@ -574,6 +818,10 @@
         "pt"    "Capitaes"
         "fr"    "Capitaines"
         "de"    "Kapitaene"
+        "ru"    "Капитаны"
+        "chi"   "队长"
+        "it"    "Capitani"
+        "jp"    "キャプテン"
     }
 
     "Menu_Referee"
@@ -583,6 +831,10 @@
         "pt"    "Arbitro"
         "fr"    "Arbitre"
         "de"    "Schiedsrichter"
+        "ru"    "Судья"
+        "chi"   "裁判"
+        "it"    "Arbitro"
+        "jp"    "審判"
     }
 
     "Menu_Practice"
@@ -592,6 +844,10 @@
         "pt"    "Treino"
         "fr"    "Entrainement"
         "de"    "Training"
+        "ru"    "Тренировка"
+        "chi"   "训练"
+        "it"    "Allenamento"
+        "jp"    "練習"
     }
 
     "Menu_Captains_Title"
@@ -601,6 +857,10 @@
         "pt"    "Capitaes"
         "fr"    "Capitaines"
         "de"    "Kapitaene"
+        "ru"    "Капитаны"
+        "chi"   "队长"
+        "it"    "Capitani"
+        "jp"    "キャプテン"
     }
 
     "Menu_Referee_Title"
@@ -610,6 +870,10 @@
         "pt"    "Arbitro"
         "fr"    "Arbitre"
         "de"    "Schiedsrichter"
+        "ru"    "Судья"
+        "chi"   "裁判"
+        "it"    "Arbitro"
+        "jp"    "審判"
     }
 
     "Menu_Referee_Score"
@@ -619,6 +883,10 @@
         "pt"    "Placar"
         "fr"    "Score"
         "de"    "Spielstand"
+        "ru"    "Счёт"
+        "chi"   "比分"
+        "it"    "Punteggio"
+        "jp"    "スコア"
     }
 
     "Menu_Referee_Score_Title"
@@ -629,6 +897,10 @@
         "pt"    "Placar\nCT {1} - {2} TT"
         "fr"    "Score\nCT {1} - {2} TT"
         "de"    "Spielstand\nCT {1} - {2} TT"
+        "ru"    "Счёт\nCT {1} - {2} TT"
+        "chi"   "比分\nCT {1} - {2} TT"
+        "it"    "Punteggio\nCT {1} - {2} TT"
+        "jp"    "スコア\nCT {1} - {2} TT"
     }
 
     "Menu_Score_Add_CT"
@@ -638,6 +910,10 @@
         "pt"    "Adicionar gol ao CT"
         "fr"    "Ajouter but aux CT"
         "de"    "Tor fuer CT hinzufuegen"
+        "ru"    "Добавить гол CT"
+        "chi"   "CT 加一球"
+        "it"    "Aggiungi gol a CT"
+        "jp"    "CTにゴール追加"
     }
 
     "Menu_Score_Remove_CT"
@@ -647,6 +923,10 @@
         "pt"    "Remover gol do CT"
         "fr"    "Retirer but aux CT"
         "de"    "Tor von CT entfernen"
+        "ru"    "Отменить гол CT"
+        "chi"   "CT 减一球"
+        "it"    "Togli gol a CT"
+        "jp"    "CTのゴール取消"
     }
 
     "Menu_Score_Add_TT"
@@ -656,6 +936,10 @@
         "pt"    "Adicionar gol ao TT"
         "fr"    "Ajouter but aux TT"
         "de"    "Tor fuer TT hinzufuegen"
+        "ru"    "Добавить гол TT"
+        "chi"   "TT 加一球"
+        "it"    "Aggiungi gol a TT"
+        "jp"    "TTにゴール追加"
     }
 
     "Menu_Score_Remove_TT"
@@ -665,6 +949,10 @@
         "pt"    "Remover gol do TT"
         "fr"    "Retirer but aux TT"
         "de"    "Tor von TT entfernen"
+        "ru"    "Отменить гол TT"
+        "chi"   "TT 减一球"
+        "it"    "Togli gol a TT"
+        "jp"    "TTのゴール取消"
     }
 
     "Menu_Card_Yellow_Give"
@@ -674,6 +962,10 @@
         "pt"    "Dar amarelo"
         "fr"    "Donner jaune"
         "de"    "Gelb geben"
+        "ru"    "Дать жёлтую карточку"
+        "chi"   "出示黄牌"
+        "it"    "Dai cartellino giallo"
+        "jp"    "イエローカードを出す"
     }
 
     "Menu_Card_Red_Give"
@@ -683,6 +975,10 @@
         "pt"    "Dar vermelho"
         "fr"    "Donner rouge"
         "de"    "Rot geben"
+        "ru"    "Дать красную карточку"
+        "chi"   "出示红牌"
+        "it"    "Dai cartellino rosso"
+        "jp"    "レッドカードを出す"
     }
 
     "Menu_Cards_Clear_Player"
@@ -692,6 +988,10 @@
         "pt"    "Limpar cartoes jogador"
         "fr"    "Effacer cartons joueur"
         "de"    "Spielerkarten loeschen"
+        "ru"    "Снять карточки игрока"
+        "chi"   "清除球员的牌"
+        "it"    "Azzera cartellini giocatore"
+        "jp"    "選手のカードを消去"
     }
 
     "Menu_Cards_Clear_All"
@@ -701,6 +1001,10 @@
         "pt"    "Limpar todos os cartoes"
         "fr"    "Effacer tous les cartons"
         "de"    "Alle Karten loeschen"
+        "ru"    "Снять все карточки"
+        "chi"   "清除所有牌"
+        "it"    "Azzera tutti i cartellini"
+        "jp"    "全カードを消去"
     }
 
     "Menu_Referee_Target_Title"
@@ -710,6 +1014,10 @@
         "pt"    "Escolher jogador"
         "fr"    "Choisir joueur"
         "de"    "Spieler waehlen"
+        "ru"    "Выбери игрока"
+        "chi"   "选择球员"
+        "it"    "Scegli giocatore"
+        "jp"    "選手を選択"
     }
 
     "Menu_Referee_Target_Display"
@@ -720,6 +1028,10 @@
         "pt"    "{1} | amarelos: {2} | vermelho: {3}"
         "fr"    "{1} | jaunes : {2} | rouge : {3}"
         "de"    "{1} | Gelb: {2} | Rot: {3}"
+        "ru"    "{1} | жёлтые: {2} | красная: {3}"
+        "chi"   "{1} | 黄牌：{2} | 红牌：{3}"
+        "it"    "{1} | gialli: {2} | rosso: {3}"
+        "jp"    "{1} | イエロー: {2} | レッド: {3}"
     }
 
     "State_Yes"
@@ -729,6 +1041,10 @@
         "pt"    "sim"
         "fr"    "oui"
         "de"    "ja"
+        "ru"    "да"
+        "chi"   "是"
+        "it"    "sì"
+        "jp"    "はい"
     }
 
     "State_No"
@@ -738,6 +1054,10 @@
         "pt"    "nao"
         "fr"    "non"
         "de"    "nein"
+        "ru"    "нет"
+        "chi"   "否"
+        "it"    "no"
+        "jp"    "いいえ"
     }
 
     "Menu_Draft_CaptainCount_Title"
@@ -747,6 +1067,10 @@
         "pt"    "Snake draft\n \nEscolher quantidade de capitaes"
         "fr"    "Snake draft\n \nChoisir le nombre de capitaines"
         "de"    "Snake-Draft\n \nAnzahl der Kapitaene waehlen"
+        "ru"    "Змейка-драфт\n \nЧисло капитанов"
+        "chi"   "蛇形选人\n \n选择队长人数"
+        "it"    "Scelta a serpentina\n \nScegli il numero di capitani"
+        "jp"    "スネークドラフト\n \nキャプテン数を選択"
     }
 
     "Menu_Draft_CaptainCount_2"
@@ -756,6 +1080,10 @@
         "pt"    "2 capitaes"
         "fr"    "2 capitaines"
         "de"    "2 Kapitaene"
+        "ru"    "2 капитана"
+        "chi"   "2 名队长"
+        "it"    "2 capitani"
+        "jp"    "キャプテン2人"
     }
 
     "Menu_Draft_CaptainCount_3"
@@ -765,6 +1093,10 @@
         "pt"    "3 capitaes"
         "fr"    "3 capitaines"
         "de"    "3 Kapitaene"
+        "ru"    "3 капитана"
+        "chi"   "3 名队长"
+        "it"    "3 capitani"
+        "jp"    "キャプテン3人"
     }
 
     "Menu_Draft_CaptainCount_4"
@@ -774,6 +1106,10 @@
         "pt"    "4 capitaes"
         "fr"    "4 capitaines"
         "de"    "4 Kapitaene"
+        "ru"    "4 капитана"
+        "chi"   "4 名队长"
+        "it"    "4 capitani"
+        "jp"    "キャプテン4人"
     }
 
     "Menu_Draft_CaptainCount_Custom"
@@ -783,6 +1119,10 @@
         "pt"    "Custom"
         "fr"    "Custom"
         "de"    "Custom"
+        "ru"    "Своё значение"
+        "chi"   "自定义"
+        "it"    "Personalizzato"
+        "jp"    "カスタム"
     }
 
     "Menu_Draft_TeamSize_Title"
@@ -793,6 +1133,10 @@
         "pt"    "Snake draft\n \nCapitaes: {1}\nJogadores por time"
         "fr"    "Snake draft\n \nCapitaines : {1}\nJoueurs par equipe"
         "de"    "Snake-Draft\n \nKapitaene: {1}\nSpieler pro Team"
+        "ru"    "Змейка-драфт\n \nКапитанов: {1}\nИгроков в команде"
+        "chi"   "蛇形选人\n \n队长：{1}\n每队人数"
+        "it"    "Scelta a serpentina\n \nCapitani: {1}\nGiocatori per squadra"
+        "jp"    "スネークドラフト\n \nキャプテン: {1}\n1チームの人数"
     }
 
     "Menu_Draft_TeamSize_3"
@@ -802,6 +1146,10 @@
         "pt"    "3 jogadores por time"
         "fr"    "3 joueurs par equipe"
         "de"    "3 Spieler pro Team"
+        "ru"    "3 игрока в команде"
+        "chi"   "每队 3 人"
+        "it"    "3 giocatori per squadra"
+        "jp"    "1チーム3人"
     }
 
     "Menu_Draft_TeamSize_4"
@@ -811,6 +1159,10 @@
         "pt"    "4 jogadores por time"
         "fr"    "4 joueurs par equipe"
         "de"    "4 Spieler pro Team"
+        "ru"    "4 игрока в команде"
+        "chi"   "每队 4 人"
+        "it"    "4 giocatori per squadra"
+        "jp"    "1チーム4人"
     }
 
     "Menu_Draft_TeamSize_5"
@@ -820,6 +1172,10 @@
         "pt"    "5 jogadores por time"
         "fr"    "5 joueurs par equipe"
         "de"    "5 Spieler pro Team"
+        "ru"    "5 игроков в команде"
+        "chi"   "每队 5 人"
+        "it"    "5 giocatori per squadra"
+        "jp"    "1チーム5人"
     }
 
     "Menu_Draft_TeamSize_6"
@@ -829,6 +1185,10 @@
         "pt"    "6 jogadores por time"
         "fr"    "6 joueurs par equipe"
         "de"    "6 Spieler pro Team"
+        "ru"    "6 игроков в команде"
+        "chi"   "每队 6 人"
+        "it"    "6 giocatori per squadra"
+        "jp"    "1チーム6人"
     }
 
     "Menu_Draft_TeamSize_Custom"
@@ -838,6 +1198,10 @@
         "pt"    "Custom"
         "fr"    "Custom"
         "de"    "Custom"
+        "ru"    "Своё значение"
+        "chi"   "自定义"
+        "it"    "Personalizzato"
+        "jp"    "カスタム"
     }
 
     "Draft_CaptainCount_Custom_Prompt"
@@ -847,6 +1211,10 @@
         "pt"    "Draft: escreva a quantidade de capitaes no chat (2-4), ou cancelar."
         "fr"    "Draft : ecris le nombre de capitaines dans le chat (2-4), ou cancel."
         "de"    "Draft: schreibe die Anzahl der Kapitaene in den Chat (2-4), oder cancel."
+        "ru"    "Драфт: напиши в чат число капитанов (2-4) или cancel."
+        "chi"   "选人：请在聊天中输入队长人数（2-4），或输入 cancel 取消。"
+        "it"    "Scelta giocatori: scrivi in chat il numero di capitani (2-4), oppure cancel."
+        "jp"    "ドラフト: キャプテン数をチャットに入力 (2-4)、またはcancel。"
     }
 
     "Draft_CaptainCount_Custom_Invalid"
@@ -856,6 +1224,10 @@
         "pt"    "Draft: quantidade de capitaes invalida. Use de 2 a 4."
         "fr"    "Draft : nombre de capitaines invalide. Utilise 2 a 4."
         "de"    "Draft: ungueltige Anzahl Kapitaene. Nutze 2 bis 4."
+        "ru"    "Драфт: неверное число капитанов. Укажи от 2 до 4."
+        "chi"   "选人：队长人数无效。请输入 2 到 4。"
+        "it"    "Scelta giocatori: numero di capitani non valido. Usa da 2 a 4."
+        "jp"    "ドラフト: キャプテン数が無効。2～4を入力。"
     }
 
     "Draft_TeamSize_Custom_Prompt"
@@ -865,6 +1237,10 @@
         "pt"    "Draft: escreva jogadores por time no chat (1-16), ou cancelar."
         "fr"    "Draft : ecris les joueurs par equipe dans le chat (1-16), ou cancel."
         "de"    "Draft: schreibe Spieler pro Team in den Chat (1-16), oder cancel."
+        "ru"    "Драфт: напиши в чат число игроков в команде (1-16) или cancel."
+        "chi"   "选人：请在聊天中输入每队人数（1-16），或输入 cancel 取消。"
+        "it"    "Scelta giocatori: scrivi in chat i giocatori per squadra (1-16), oppure cancel."
+        "jp"    "ドラフト: 1チームの人数をチャットに入力 (1-16)、またはcancel。"
     }
 
     "Draft_TeamSize_Custom_Invalid"
@@ -874,6 +1250,10 @@
         "pt"    "Draft: jogadores por time invalido. Use de 1 a 16."
         "fr"    "Draft : joueurs par equipe invalide. Utilise 1 a 16."
         "de"    "Draft: ungueltige Spielerzahl pro Team. Nutze 1 bis 16."
+        "ru"    "Драфт: неверное число игроков в команде. Укажи от 1 до 16."
+        "chi"   "选人：每队人数无效。请输入 1 到 16。"
+        "it"    "Scelta giocatori: numero di giocatori per squadra non valido. Usa da 1 a 16."
+        "jp"    "ドラフト: 1チームの人数が無効。1～16を入力。"
     }
 
     "Draft_Custom_Cancelled"
@@ -883,6 +1263,10 @@
         "pt"    "Draft: entrada custom cancelada."
         "fr"    "Draft : saisie custom annulee."
         "de"    "Draft: Custom-Eingabe abgebrochen."
+        "ru"    "Драфт: ввод отменён."
+        "chi"   "选人：已取消自定义输入。"
+        "it"    "Scelta giocatori: inserimento annullato."
+        "jp"    "ドラフト: カスタム入力をキャンセルした。"
     }
 
     "Draft_Not_Enough_Captains"
@@ -892,6 +1276,10 @@
         "pt"    "Draft: nao ha jogadores conectados suficientes para usar essa quantidade de capitaes."
         "fr"    "Draft : pas assez de joueurs connectes pour autant de capitaines."
         "de"    "Draft: nicht genug verbundene Spieler fuer diese Anzahl Kapitaene."
+        "ru"    "Драфт: недостаточно игроков на сервере для такого числа капитанов."
+        "chi"   "选人：在线玩家不足，无法设置这么多队长。"
+        "it"    "Scelta giocatori: non ci sono abbastanza giocatori connessi per così tanti capitani."
+        "jp"    "ドラフト: その数のキャプテンを使うには接続中の選手が足りない。"
     }
 
     "Menu_StartMatch"
@@ -901,6 +1289,10 @@
         "pt"    "Iniciar partida"
         "fr"    "Lancer le match"
         "de"    "Spiel starten"
+        "ru"    "Начать матч"
+        "chi"   "开始比赛"
+        "it"    "Avvia partita"
+        "jp"    "試合開始"
     }
 
     "Menu_ResumeMatch"
@@ -910,6 +1302,10 @@
         "pt"    "Retomar partida"
         "fr"    "Reprendre le match"
         "de"    "Spiel fortsetzen"
+        "ru"    "Продолжить матч"
+        "chi"   "继续比赛"
+        "it"    "Riprendi partita"
+        "jp"    "試合再開"
     }
 
     "Menu_PauseMatch"
@@ -919,6 +1315,10 @@
         "pt"    "Pausar partida"
         "fr"    "Mettre le match en pause"
         "de"    "Spiel pausieren"
+        "ru"    "Пауза матча"
+        "chi"   "暂停比赛"
+        "it"    "Metti in pausa"
+        "jp"    "試合を一時停止"
     }
 
     "Menu_StopMatch"
@@ -928,6 +1328,10 @@
         "pt"    "Encerrar partida"
         "fr"    "Arreter le match"
         "de"    "Spiel beenden"
+        "ru"    "Остановить матч"
+        "chi"   "结束比赛"
+        "it"    "Termina partita"
+        "jp"    "試合終了"
     }
 
     "Menu_Start_Title"
@@ -937,6 +1341,10 @@
         "pt"    "Tempo da partida"
         "fr"    "Temps du match"
         "de"    "Spielzeit"
+        "ru"    "Время матча"
+        "chi"   "比赛时长"
+        "it"    "Durata partita"
+        "jp"    "試合時間"
     }
 
     "Menu_Start_3"
@@ -946,6 +1354,10 @@
         "pt"    "3 minutos por periodo"
         "fr"    "3 minutes par periode"
         "de"    "3 Minuten pro Halbzeit"
+        "ru"    "3 минуты на период"
+        "chi"   "每节 3 分钟"
+        "it"    "3 minuti per tempo"
+        "jp"    "1ピリオド3分"
     }
 
     "Menu_Start_5"
@@ -955,6 +1367,10 @@
         "pt"    "5 minutos por periodo"
         "fr"    "5 minutes par periode"
         "de"    "5 Minuten pro Halbzeit"
+        "ru"    "5 минут на период"
+        "chi"   "每节 5 分钟"
+        "it"    "5 minuti per tempo"
+        "jp"    "1ピリオド5分"
     }
 
     "Menu_Start_Custom"
@@ -964,6 +1380,10 @@
         "pt"    "Partida custom"
         "fr"    "Match personnalise"
         "de"    "Benutzerdefiniertes Spiel"
+        "ru"    "Свой матч"
+        "chi"   "自定义比赛"
+        "it"    "Partita personalizzata"
+        "jp"    "カスタム試合"
     }
 
     "Menu_Start_Custom_Prompt"
@@ -973,6 +1393,10 @@
         "pt"    "Digite os minutos por periodo no chat. Exemplo: 10. Digite cancel para cancelar."
         "fr"    "Ecris les minutes par periode dans le chat. Exemple : 10. Tape cancel pour annuler."
         "de"    "Schreibe die Minuten pro Halbzeit in den Chat. Beispiel: 10. Mit cancel abbrechen."
+        "ru"    "Напиши в чат число минут на период. Например: 10. Напиши cancel для отмены."
+        "chi"   "请在聊天中输入每节分钟数，例如：10。输入 cancel 取消。"
+        "it"    "Scrivi in chat i minuti per tempo. Esempio: 10. Scrivi cancel per annullare."
+        "jp"    "1ピリオドの分数をチャットに入力。例: 10。中止するにはcancelと入力。"
     }
 
     "Menu_Start_Custom_Cancel"
@@ -982,6 +1406,10 @@
         "pt"    "Entrada de partida custom cancelada."
         "fr"    "Saisie du match personnalise annulee."
         "de"    "Eingabe fur benutzerdefiniertes Spiel abgebrochen."
+        "ru"    "Ввод своего матча отменён."
+        "chi"   "已取消自定义比赛输入。"
+        "it"    "Inserimento partita personalizzata annullato."
+        "jp"    "カスタム試合の入力をキャンセルした。"
     }
 
     "Menu_Start_Custom_Invalid"
@@ -991,6 +1419,10 @@
         "pt"    "Valor invalido. Digite minutos por periodo de 1 a 60, por exemplo: 10."
         "fr"    "Valeur invalide. Ecris les minutes par periode de 1 a 60, par exemple : 10."
         "de"    "Ungueltiger Wert. Schreibe Minuten pro Halbzeit von 1 bis 60, zum Beispiel: 10."
+        "ru"    "Неверное значение. Укажи минуты на период от 1 до 60, например: 10."
+        "chi"   "数值无效。请输入每节 1 到 60 分钟，例如：10。"
+        "it"    "Valore non valido. Scrivi i minuti per tempo da 1 a 60, per esempio: 10."
+        "jp"    "無効な値。1ピリオドの分数を1～60で入力。例: 10。"
     }
 
     "Menu_Draft_Snake"
@@ -1000,6 +1432,10 @@
         "pt"    "Snake draft"
         "fr"    "Snake draft"
         "de"    "Snake-Draft"
+        "ru"    "Змейка-драфт"
+        "chi"   "蛇形选人"
+        "it"    "Scelta a serpentina"
+        "jp"    "スネークドラフト"
     }
 
     "Menu_Draft_Open"
@@ -1009,6 +1445,10 @@
         "pt"    "Abrir meu menu"
         "fr"    "Ouvrir mon menu"
         "de"    "Mein Menu offnen"
+        "ru"    "Открыть моё меню"
+        "chi"   "打开我的菜单"
+        "it"    "Apri il mio menu"
+        "jp"    "自分のメニューを開く"
     }
 
     "Menu_Draft_Show"
@@ -1018,6 +1458,10 @@
         "pt"    "Ver times"
         "fr"    "Voir les equipes"
         "de"    "Teams anzeigen"
+        "ru"    "Показать команды"
+        "chi"   "查看队伍"
+        "it"    "Mostra squadre"
+        "jp"    "チームを表示"
     }
 
     "Menu_Draft_Cancel"
@@ -1027,6 +1471,10 @@
         "pt"    "Cancelar draft"
         "fr"    "Annuler draft"
         "de"    "Draft abbrechen"
+        "ru"    "Отменить драфт"
+        "chi"   "取消选人"
+        "it"    "Annulla scelta"
+        "jp"    "ドラフトを中止"
     }
 
     "Menu_SelectCaptains"
@@ -1037,6 +1485,10 @@
         "pt"    "Selecionar {1} capitaes"
         "fr"    "Selectionner {1} capitaines"
         "de"    "{1} Kapitane auswahlen"
+        "ru"    "Выбрать капитанов: {1}"
+        "chi"   "选择 {1} 名队长"
+        "it"    "Scegli {1} capitani"
+        "jp"    "キャプテンを{1}人選択"
     }
 
     "Draft_Captain_Added"
@@ -1047,6 +1499,10 @@
         "pt"    "Capitao adicionado: {1} ({2}/{3})"
         "fr"    "Capitaine ajoute : {1} ({2}/{3})"
         "de"    "Kapitan hinzugefugt: {1} ({2}/{3})"
+        "ru"    "Капитан добавлен: {1} ({2}/{3})"
+        "chi"   "已添加队长：{1}（{2}/{3}）"
+        "it"    "Capitano aggiunto: {1} ({2}/{3})"
+        "jp"    "キャプテン追加: {1} ({2}/{3})"
     }
 
     "Draft_Not_Active"
@@ -1056,6 +1512,10 @@
         "pt"    "Draft: nao esta ativo."
         "fr"    "Draft : n'est pas actif."
         "de"    "Draft: ist nicht aktiv."
+        "ru"    "Драфт: не активен."
+        "chi"   "选人：未在进行中。"
+        "it"    "Scelta giocatori: non è attiva."
+        "jp"    "ドラフト: 実施されていない。"
     }
 
     "Draft_Not_Your_Turn"
@@ -1065,6 +1525,10 @@
         "pt"    "Draft: nao e a sua vez."
         "fr"    "Draft : ce n'est pas ton tour."
         "de"    "Draft: du bist nicht dran."
+        "ru"    "Драфт: сейчас не твой ход."
+        "chi"   "选人：还没轮到你。"
+        "it"    "Scelta giocatori: non è il tuo turno."
+        "jp"    "ドラフト: あなたの番ではない。"
     }
 
     "Draft_Player_Picked"
@@ -1075,6 +1539,10 @@
         "pt"    "{1} escolheu {2} para o time {3}."
         "fr"    "{1} a choisi {2} pour l'equipe {3}."
         "de"    "{1} waehlte {2} fur Team {3}."
+        "ru"    "{1} выбрал {2} в команду {3}."
+        "chi"   "{1} 为第 {3} 队选中了 {2}。"
+        "it"    "{1} ha scelto {2} per la squadra {3}."
+        "jp"    "{1}が{2}をチーム{3}に指名。"
     }
 
     "Draft_Finished"
@@ -1084,6 +1552,10 @@
         "pt"    "Draft: concluido."
         "fr"    "Draft : termine."
         "de"    "Draft: abgeschlossen."
+        "ru"    "Драфт: завершён."
+        "chi"   "选人：已完成。"
+        "it"    "Scelta giocatori: completata."
+        "jp"    "ドラフト: 完了。"
     }
 
     "Draft_Cancelled"
@@ -1093,6 +1565,10 @@
         "pt"    "Draft: cancelado."
         "fr"    "Draft : annule."
         "de"    "Draft: abgebrochen."
+        "ru"    "Драфт: отменён."
+        "chi"   "选人：已取消。"
+        "it"    "Scelta giocatori: annullata."
+        "jp"    "ドラフト: 中止。"
     }
 
     "Draft_Groups_Title"
@@ -1102,6 +1578,10 @@
         "pt"    "Times do draft:"
         "fr"    "Equipes du draft :"
         "de"    "Draft-Teams:"
+        "ru"    "Команды драфта:"
+        "chi"   "选人队伍："
+        "it"    "Squadre della scelta:"
+        "jp"    "ドラフトのチーム:"
     }
 
     "Draft_Group_Generic"
@@ -1112,6 +1592,10 @@
         "pt"    "Time {1}"
         "fr"    "Equipe {1}"
         "de"    "Team {1}"
+        "ru"    "Команда {1}"
+        "chi"   "第 {1} 队"
+        "it"    "Squadra {1}"
+        "jp"    "チーム{1}"
     }
 
     "Draft_Assigned_To_Teams"
@@ -1122,6 +1606,10 @@
         "pt"    "CT: {1} | T: {2}"
         "fr"    "CT: {1} | T: {2}"
         "de"    "CT: {1} | T: {2}"
+        "ru"    "CT: {1} | T: {2}"
+        "chi"   "CT：{1} | T：{2}"
+        "it"    "CT: {1} | T: {2}"
+        "jp"    "CT: {1} | T: {2}"
     }
 
     "Draft_Show_Group"
@@ -1132,6 +1620,10 @@
         "pt"    "Grupo {1}: {2}"
         "fr"    "Groupe {1} : {2}"
         "de"    "Gruppe {1}: {2}"
+        "ru"    "Группа {1}: {2}"
+        "chi"   "第 {1} 组：{2}"
+        "it"    "Gruppo {1}: {2}"
+        "jp"    "グループ{1}: {2}"
     }
 
     "Menu_Penalties_Start"
@@ -1141,6 +1633,10 @@
         "pt"    "Iniciar penaltis"
         "fr"    "Demarrer penalties"
         "de"    "Elfmeterschiessen starten"
+        "ru"    "Начать серию пенальти"
+        "chi"   "开始点球"
+        "it"    "Avvia calci di rigore"
+        "jp"    "PK戦を開始"
     }
 
     "Menu_Penalty_Spot"
@@ -1150,6 +1646,10 @@
         "pt"    "Marcar ponto penal"
         "fr"    "Point de penalty"
         "de"    "Elfmeterpunkt setzen"
+        "ru"    "Точка пенальти"
+        "chi"   "设置点球点"
+        "it"    "Imposta dischetto"
+        "jp"    "PKスポット設定"
     }
 
     "Penalty_Need_Players"
@@ -1159,6 +1659,10 @@
         "pt"    "Penaltis: voce precisa de jogadores nos dois times."
         "fr"    "Penalties : il faut des joueurs dans les deux equipes."
         "de"    "Elfmeter: es werden Spieler in beiden Teams benotigt."
+        "ru"    "Пенальти: нужны игроки в обеих командах."
+        "chi"   "点球：两支队伍都需要有球员。"
+        "it"    "Rigori: servono giocatori in entrambe le squadre."
+        "jp"    "PK: 両チームに選手が必要。"
     }
 
     "Penalty_Already_Active"
@@ -1168,6 +1672,10 @@
         "pt"    "Penaltis: ja existe um penalti ou disputa em andamento."
         "fr"    "Penalties : un penalty ou une seance de tirs est deja en cours."
         "de"    "Elfmeter: ein Elfmeter oder Elfmeterschiessen laeuft bereits."
+        "ru"    "Пенальти: пенальти или серия пенальти уже идёт."
+        "chi"   "点球：已有点球或点球大战正在进行。"
+        "it"    "Rigori: c'è già un rigore o una serie di rigori in corso."
+        "jp"    "PK: すでにPKまたはPK戦が進行中。"
     }
 
     "Penalty_Not_Now"
@@ -1177,6 +1685,10 @@
         "pt"    "Penalti: agora nao. Marque com a bola em jogo, nao depois de um gol, no intervalo ou durante um reinicio."
         "fr"    "Penalty : pas maintenant. Accorde-le quand le ballon est en jeu, pas apres un but, pendant la pause ou une reprise."
         "de"    "Elfmeter: jetzt nicht. Nur bei laufendem Ball, nicht nach einem Tor, in der Pause oder bei einem Neustart."
+        "ru"    "Пенальти: не сейчас. Назначай, пока мяч в игре, а не после гола, в перерыве или при возобновлении игры."
+        "chi"   "点球：现在不行。请在球处于比赛状态时判罚，不能在进球后、休息时或重新开球前后。"
+        "it"    "Rigore: non ora. Si assegna a palla in gioco, non dopo un gol, durante una pausa o una ripresa del gioco."
+        "jp"    "PK: 今は不可。ボールがインプレー中に与えること。ゴール直後、休憩中、リスタート前後は不可。"
     }
 
     "Penalty_Shootout_Start"
@@ -1186,6 +1698,10 @@
         "pt"    "Penaltis: disputa iniciada."
         "fr"    "Penalties : la seance a commence."
         "de"    "Elfmeter: das Schiessen hat begonnen."
+        "ru"    "Пенальти: серия пенальти началась."
+        "chi"   "点球：点球大战开始。"
+        "it"    "Rigori: iniziano i calci di rigore."
+        "jp"    "PK戦: 開始。"
     }
 
     "Penalty_Turn"
@@ -1196,6 +1712,10 @@
         "pt"    "Turno penalti: {1} bate por {3} contra goleiro {2}."
         "fr"    "Tour de penalty : {1} tire pour {3} contre GK {2}."
         "de"    "Elfmeterrunde: {1} schiesst fuer {3} gegen TW {2}."
+        "ru"    "Пенальти: {1} бьёт за {3}, вратарь {2}."
+        "chi"   "点球轮次：{1} 代表 {3} 主罚，对阵守门员 {2}。"
+        "it"    "Turno rigore: {1} tira per {3} contro il portiere {2}."
+        "jp"    "PKの番: {3}のキッカー{1} vs GK {2}。"
     }
 
     "Penalty_Goal"
@@ -1206,6 +1726,10 @@
         "pt"    "Gol de penalti: {1} marcou."
         "fr"    "But sur penalty : {1} a marque."
         "de"    "Elfmetertor: {1} trifft."
+        "ru"    "Гол с пенальти: {1} забил."
+        "chi"   "点球命中：{1} 罚进了。"
+        "it"    "Rigore segnato: {1} ha segnato."
+        "jp"    "PK成功: {1}が決めた。"
     }
 
     "Penalty_Miss"
@@ -1216,6 +1740,10 @@
         "pt"    "Penalti perdido: {1} errou."
         "fr"    "Penalty manque : {1} rate."
         "de"    "Elfmeter vergeben: {1} daneben."
+        "ru"    "Промах с пенальти: {1} не забил."
+        "chi"   "点球未进：{1} 罚丢了。"
+        "it"    "Rigore sbagliato: {1} ha sbagliato."
+        "jp"    "PK失敗: {1}が外した。"
     }
 
     "Penalty_Score"
@@ -1226,6 +1754,10 @@
         "pt"    "Placar penaltis: CT {1} - {2} TT"
         "fr"    "Score penalties : CT {1} - {2} TT"
         "de"    "Elfmeterscore: CT {1} - {2} TT"
+        "ru"    "Счёт серии пенальти: CT {1} - {2} TT"
+        "chi"   "点球比分：CT {1} - {2} TT"
+        "it"    "Punteggio rigori: CT {1} - {2} TT"
+        "jp"    "PKスコア: CT {1} - {2} TT"
     }
 
     "Penalty_Winner"
@@ -1236,6 +1768,10 @@
         "pt"    "Vencedor nos penaltis: {1}."
         "fr"    "Vainqueur aux penalties : {1}."
         "de"    "Sieger im Elfmeterschiessen: {1}."
+        "ru"    "Победитель серии пенальти: {1}."
+        "chi"   "点球大战胜者：{1}。"
+        "it"    "Vince ai rigori: {1}."
+        "jp"    "PK戦の勝者: {1}。"
     }
 
     "Penalty_No_Winner"
@@ -1245,6 +1781,10 @@
         "pt"    "A disputa terminou sem vencedor."
         "fr"    "La seance est terminee sans vainqueur."
         "de"    "Elfmeterschiessen ohne Sieger beendet."
+        "ru"    "Серия пенальти завершилась без победителя."
+        "chi"   "点球大战结束，没有胜者。"
+        "it"    "Calci di rigore finiti senza vincitore."
+        "jp"    "PK戦は勝者なしで終了。"
     }
 
     "Penalty_Spot_Set"
@@ -1254,6 +1794,10 @@
         "pt"    "Penaltis: ponto penal salvo da sua mira."
         "fr"    "Penalties : point de penalty enregistre depuis votre viseur."
         "de"    "Elfmeter: Elfmeterpunkt von deinem Fadenkreuz gespeichert."
+        "ru"    "Пенальти: точка пенальти сохранена по твоему прицелу."
+        "chi"   "点球：已按你的准星位置保存点球点。"
+        "it"    "Rigori: dischetto salvato dal tuo mirino."
+        "jp"    "PK: 照準の位置をPKスポットとして保存した。"
     }
 
     "Penalty_Spot_Reminder"
@@ -1263,6 +1807,10 @@
         "pt"    "Penaltis: coloque a bola onde quiser e use Ponto penal antes de iniciar."
         "fr"    "Penalties : placez le ballon ou vous voulez et utilisez Point de penalty avant de commencer."
         "de"    "Elfmeter: lege den Ball an die gewuenschte Stelle und nutze Elfmeterpunkt setzen vor dem Start."
+        "ru"    "Пенальти: поставь мяч куда нужно и нажми Точка пенальти перед началом."
+        "chi"   "点球：把球放到想要的位置，开始前先使用设置点球点。"
+        "it"    "Rigori: metti il pallone dove vuoi e usa Imposta dischetto prima di iniziare."
+        "jp"    "PK: ボールを好きな位置に置き、開始前にPKスポット設定を使うこと。"
     }
 
     "Final_Result"
@@ -1273,6 +1821,10 @@
         "pt"    "Resultado final: CT {1} - {2} TT"
         "fr"    "Resultat final : CT {1} - {2} TT"
         "de"    "Endstand: CT {1} - {2} TT"
+        "ru"    "Итоговый счёт: CT {1} - {2} TT"
+        "chi"   "最终比分：CT {1} - {2} TT"
+        "it"    "Risultato finale: CT {1} - {2} TT"
+        "jp"    "最終結果: CT {1} - {2} TT"
     }
 
     "Match_MVP"
@@ -1283,6 +1835,10 @@
         "pt"    "MVP da partida: {1} com {2} pontos."
         "fr"    "MVP du match : {1} avec {2} points."
         "de"    "MVP des Spiels: {1} mit {2} Punkten."
+        "ru"    "MVP: {1}, очков: {2}."
+        "chi"   "MVP：{1}，得分 {2}。"
+        "it"    "MVP: {1} con {2} punti."
+        "jp"    "MVP: {1} ({2}ポイント)。"
     }
 
     "Match_MVP_None"
@@ -1292,6 +1848,10 @@
         "pt"    "MVP da partida: nenhum jogador fez mais de 0 pontos."
         "fr"    "MVP du match : aucun joueur n'a marque plus de 0 point."
         "de"    "MVP des Spiels: kein Spieler hat mehr als 0 Punkte erzielt."
+        "ru"    "MVP: никто не набрал больше 0 очков в этом матче."
+        "chi"   "MVP：本场没有球员得分超过 0。"
+        "it"    "MVP: nessun giocatore ha fatto più di 0 punti in questa partita."
+        "jp"    "MVP: この試合で0ポイントを超えた選手はいない。"
     }
 
     "Match_Started"
@@ -1301,6 +1861,10 @@
         "pt"    "Partida: iniciada."
         "fr"    "Match : demarre."
         "de"    "Match: gestartet."
+        "ru"    "Матч: начался."
+        "chi"   "比赛：已开始。"
+        "it"    "Partita: iniziata."
+        "jp"    "試合: 開始。"
     }
 
     "Match_Started_Time"
@@ -1311,6 +1875,10 @@
         "pt"    "Tempo da Partida: {1} minutos por periodo."
         "fr"    "Temps du Match : {1} minutes par periode."
         "de"    "Spielzeit: {1} Minuten pro Halbzeit."
+        "ru"    "Время матча: {1} мин. на период."
+        "chi"   "比赛时长：每节 {1} 分钟。"
+        "it"    "Durata partita: {1} minuti per tempo."
+        "jp"    "試合時間: 1ピリオド{1}分。"
     }
 
     "Match_Unpaused"
@@ -1320,6 +1888,10 @@
         "pt"    "Partida: retomada."
         "fr"    "Match : repris."
         "de"    "Match: fortgesetzt."
+        "ru"    "Матч: продолжен."
+        "chi"   "比赛：已继续。"
+        "it"    "Partita: ripresa."
+        "jp"    "試合: 再開。"
     }
 
     "Menu_Player_Clean_Title"
@@ -1330,6 +1902,10 @@
         "pt"    "Umbrella Soccer\nCT {1} - {2} TT"
         "fr"    "Umbrella Soccer\nCT {1} - {2} TT"
         "de"    "Umbrella Soccer\nCT {1} - {2} TT"
+        "ru"    "Umbrella Soccer\nCT {1} - {2} TT"
+        "chi"   "Umbrella Soccer\nCT {1} - {2} TT"
+        "it"    "Umbrella Soccer\nCT {1} - {2} TT"
+        "jp"    "Umbrella Soccer\nCT {1} - {2} TT"
     }
 
     "Menu_Admin_Clean_Title"
@@ -1339,6 +1915,10 @@
         "pt"    "Umbrella Soccer Admin"
         "fr"    "Umbrella Soccer Admin"
         "de"    "Umbrella Soccer Admin"
+        "ru"    "Umbrella Soccer Админ"
+        "chi"   "Umbrella Soccer 管理"
+        "it"    "Umbrella Soccer Admin"
+        "jp"    "Umbrella Soccer 管理"
     }
 
     "Menu_Position"
@@ -1348,6 +1928,10 @@
         "pt"    "Posicao"
         "fr"    "Position"
         "de"    "Position"
+        "ru"    "Позиция"
+        "chi"   "位置"
+        "it"    "Posizione"
+        "jp"    "ポジション"
     }
 
     "Menu_TrainingBall"
@@ -1357,6 +1941,10 @@
         "pt"    "Spawnar bola de treino"
         "fr"    "Creer ballon training"
         "de"    "Trainingsball spawnen"
+        "ru"    "Создать тренировочный мяч"
+        "chi"   "生成训练球"
+        "it"    "Crea pallone di allenamento"
+        "jp"    "練習用ボールを出す"
     }
 
     "Menu_Practice_Title"
@@ -1366,6 +1954,10 @@
         "pt"    "Treino"
         "fr"    "Entrainement"
         "de"    "Training"
+        "ru"    "Тренировка"
+        "chi"   "训练"
+        "it"    "Allenamento"
+        "jp"    "練習"
     }
 
     "Menu_TrainingBall_Remove"
@@ -1375,6 +1967,10 @@
         "pt"    "Remover bola de treino"
         "fr"    "Retirer ballon training"
         "de"    "Trainingsball entfernen"
+        "ru"    "Убрать тренировочный мяч"
+        "chi"   "移除训练球"
+        "it"    "Rimuovi pallone di allenamento"
+        "jp"    "練習用ボールを削除"
     }
 
     "Menu_TrainingCannon_Position"
@@ -1384,6 +1980,10 @@
         "pt"    "Definir posicao do canhao"
         "fr"    "Definir position canon"
         "de"    "Kanonenposition setzen"
+        "ru"    "Позиция пушки"
+        "chi"   "设置发球机位置"
+        "it"    "Imposta posizione cannone"
+        "jp"    "キャノンの位置を設定"
     }
 
     "Menu_TrainingCannon_Target"
@@ -1393,6 +1993,10 @@
         "pt"    "Definir alvo do canhao"
         "fr"    "Definir cible canon"
         "de"    "Kanonnenziel setzen"
+        "ru"    "Цель пушки"
+        "chi"   "设置发球机目标"
+        "it"    "Imposta bersaglio cannone"
+        "jp"    "キャノンの目標を設定"
     }
 
     "Menu_TrainingCannon_Power"
@@ -1402,6 +2006,10 @@
         "pt"    "Definir velocidade do canhao"
         "fr"    "Definir vitesse canon"
         "de"    "Kanongeschwindigkeit setzen"
+        "ru"    "Скорость пушки"
+        "chi"   "设置发球机速度"
+        "it"    "Imposta velocità cannone"
+        "jp"    "キャノンの速度を設定"
     }
 
     "Menu_TrainingCannon_Start"
@@ -1411,6 +2019,10 @@
         "pt"    "Iniciar canhao"
         "fr"    "Demarrer canon"
         "de"    "Kanone starten"
+        "ru"    "Запустить пушку"
+        "chi"   "启动发球机"
+        "it"    "Avvia cannone"
+        "jp"    "キャノン開始"
     }
 
     "Menu_TrainingCannon_Stop"
@@ -1420,6 +2032,10 @@
         "pt"    "Parar canhao"
         "fr"    "Arreter canon"
         "de"    "Kanone stoppen"
+        "ru"    "Остановить пушку"
+        "chi"   "停止发球机"
+        "it"    "Ferma cannone"
+        "jp"    "キャノン停止"
     }
 
     "Menu_Penalty_CT"
@@ -1429,6 +2045,10 @@
         "pt"    "Penalti CT"
         "fr"    "Penalty CT"
         "de"    "Elfmeter CT"
+        "ru"    "Пенальти CT"
+        "chi"   "CT 点球"
+        "it"    "Rigore CT"
+        "jp"    "PK CT"
     }
 
     "Menu_Penalty_T"
@@ -1438,6 +2058,10 @@
         "pt"    "Penalti T"
         "fr"    "Penalty T"
         "de"    "Elfmeter T"
+        "ru"    "Пенальти T"
+        "chi"   "T 点球"
+        "it"    "Rigore T"
+        "jp"    "PK T"
     }
 
     "Menu_DraftPick_Team_Title"
@@ -1448,6 +2072,10 @@
         "pt"    "Pick do draft - {1}"
         "fr"    "Choix draft - {1}"
         "de"    "Draft-Pick - {1}"
+        "ru"    "Выбор в драфте - {1}"
+        "chi"   "选人 - {1}"
+        "it"    "Scelta giocatori - {1}"
+        "jp"    "ドラフト指名 - {1}"
     }
 
     "State_Paused"
@@ -1457,6 +2085,10 @@
         "pt"    "Pausado"
         "fr"    "Pause"
         "de"    "Pausiert"
+        "ru"    "Пауза"
+        "chi"   "已暂停"
+        "it"    "In pausa"
+        "jp"    "一時停止"
     }
 
     "State_Break"
@@ -1467,6 +2099,10 @@
         "pt"    "Intervalo {1}s"
         "fr"    "Pause {1}s"
         "de"    "Pause {1}s"
+        "ru"    "Перерыв {1}s"
+        "chi"   "休息 {1}s"
+        "it"    "Pausa {1}s"
+        "jp"    "休憩 {1}s"
     }
 
     "State_Kickoff"
@@ -1477,6 +2113,10 @@
         "pt"    "Saida {1}"
         "fr"    "Engagement {1}"
         "de"    "Anstoss {1}"
+        "ru"    "Начинает {1}"
+        "chi"   "开球 {1}"
+        "it"    "Batte {1}"
+        "jp"    "キックオフ {1}"
     }
 
     "State_Stoppage"
@@ -1487,6 +2127,10 @@
         "pt"    "{1} +{2}"
         "fr"    "{1} +{2}"
         "de"    "{1} +{2}"
+        "ru"    "{1} +{2}"
+        "chi"   "{1} +{2}"
+        "it"    "{1} +{2}"
+        "jp"    "{1} +{2}"
     }
 
     "State_Overtime"
@@ -1496,6 +2140,10 @@
         "pt"    "Prorrogacao"
         "fr"    "Prolongation"
         "de"    "Verlaengerung"
+        "ru"    "Овертайм"
+        "chi"   "加时赛"
+        "it"    "Supplementari"
+        "jp"    "延長戦"
     }
 
     "State_Active"
@@ -1505,6 +2153,10 @@
         "pt"    "ativo"
         "fr"    "actif"
         "de"    "aktiv"
+        "ru"    "вкл."
+        "chi"   "已启用"
+        "it"    "attivo"
+        "jp"    "有効"
     }
 
     "State_Inactive"
@@ -1514,6 +2166,10 @@
         "pt"    "inativo"
         "fr"    "inactif"
         "de"    "inaktiv"
+        "ru"    "выкл."
+        "chi"   "未启用"
+        "it"    "inattivo"
+        "jp"    "無効"
     }
 
     "Cmd_Captains_Clean_Usage"
@@ -1523,6 +2179,10 @@
         "pt"    "Uso: sm_soccer_captains <capitao t> <capitao ct>"
         "fr"    "Usage : sm_soccer_captains <capitaine t> <capitaine ct>"
         "de"    "Verwendung: sm_soccer_captains <t kapitaen> <ct kapitaen>"
+        "ru"    "Использование: sm_soccer_captains <капитан t> <капитан ct>"
+        "chi"   "用法：sm_soccer_captains <T 队长> <CT 队长>"
+        "it"    "Uso: sm_soccer_captains <capitano t> <capitano ct>"
+        "jp"    "使い方: sm_soccer_captains <Tキャプテン> <CTキャプテン>"
     }
 
     "Cmd_DraftStart_Usage"
@@ -1532,6 +2192,10 @@
         "pt"    "Uso: sm_soccer_draftstart <capitao t> <capitao ct>"
         "fr"    "Usage : sm_soccer_draftstart <capitaine t> <capitaine ct>"
         "de"    "Verwendung: sm_soccer_draftstart <t kapitaen> <ct kapitaen>"
+        "ru"    "Использование: sm_soccer_draftstart <капитан t> <капитан ct>"
+        "chi"   "用法：sm_soccer_draftstart <T 队长> <CT 队长>"
+        "it"    "Uso: sm_soccer_draftstart <capitano t> <capitano ct>"
+        "jp"    "使い方: sm_soccer_draftstart <Tキャプテン> <CTキャプテン>"
     }
 
     "Cmd_Penalties_Clean_Usage"
@@ -1541,6 +2205,10 @@
         "pt"    "Uso: sm_soccer_penalties <ct/t> [batedor] [goleiro]"
         "fr"    "Usage : sm_soccer_penalties <ct/t> [tireur] [gardien]"
         "de"    "Verwendung: sm_soccer_penalties <ct/t> [schuetze] [torwart]"
+        "ru"    "Использование: sm_soccer_penalties <ct/t> [бьющий] [вратарь]"
+        "chi"   "用法：sm_soccer_penalties <ct/t> [主罚者] [守门员]"
+        "it"    "Uso: sm_soccer_penalties <ct/t> [tiratore] [portiere]"
+        "jp"    "使い方: sm_soccer_penalties <ct/t> [キッカー] [GK]"
     }
 
     "Cmd_Score_Clean_Usage"
@@ -1550,6 +2218,10 @@
         "pt"    "Uso: sm_soccer_score <ct> <t>"
         "fr"    "Usage : sm_soccer_score <ct> <t>"
         "de"    "Verwendung: sm_soccer_score <ct> <t>"
+        "ru"    "Использование: sm_soccer_score <ct> <t>"
+        "chi"   "用法：sm_soccer_score <ct> <t>"
+        "it"    "Uso: sm_soccer_score <ct> <t>"
+        "jp"    "使い方: sm_soccer_score <ct> <t>"
     }
 
     "Draft_Invalid_Captains"
@@ -1559,6 +2231,10 @@
         "pt"    "Draft: capitaes invalidos."
         "fr"    "Draft : capitaines invalides."
         "de"    "Draft: ungueltige Kapitaene."
+        "ru"    "Драфт: неверные капитаны."
+        "chi"   "选人：队长无效。"
+        "it"    "Scelta giocatori: capitani non validi."
+        "jp"    "ドラフト: キャプテンが無効。"
     }
 
     "Draft_Captains_Set_Clean"
@@ -1569,6 +2245,10 @@
         "pt"    "Capitaes draft: T {1} | CT {2}"
         "fr"    "Capitaines draft : T {1} | CT {2}"
         "de"    "Draft-Kapitaene: T {1} | CT {2}"
+        "ru"    "Капитаны драфта: T {1} | CT {2}"
+        "chi"   "选人队长：T {1} | CT {2}"
+        "it"    "Capitani: T {1} | CT {2}"
+        "jp"    "ドラフトのキャプテン: T {1} | CT {2}"
     }
 
     "Draft_Started_First"
@@ -1579,6 +2259,10 @@
         "pt"    "Draft: iniciado. Primeiro pick: {1}."
         "fr"    "Draft : demarre. Premier choix : {1}."
         "de"    "Draft: gestartet. Erster Pick: {1}."
+        "ru"    "Драфт: начался. Первый выбор: {1}."
+        "chi"   "选人：已开始。首先选人：{1}。"
+        "it"    "Scelta giocatori: iniziata. Prima scelta: {1}."
+        "jp"    "ドラフト: 開始。最初の指名: {1}。"
     }
 
     "Draft_Current_Pick"
@@ -1589,6 +2273,10 @@
         "pt"    "Draft: o pick atual e do capitao {1}."
         "fr"    "Draft : le choix actuel revient au capitaine {1}."
         "de"    "Draft: aktueller Pick ist Kapitaen {1}."
+        "ru"    "Драфт: сейчас выбирает капитан {1}."
+        "chi"   "选人：当前轮到 {1} 队长选人。"
+        "it"    "Scelta giocatori: tocca al capitano {1}."
+        "jp"    "ドラフト: 現在の指名は{1}のキャプテン。"
     }
 
     "Draft_Invalid_Pick"
@@ -1598,6 +2286,10 @@
         "pt"    "Draft: pick invalido."
         "fr"    "Draft : choix invalide."
         "de"    "Draft: ungueltiger Pick."
+        "ru"    "Драфт: неверный выбор."
+        "chi"   "选人：选择无效。"
+        "it"    "Scelta giocatori: scelta non valida."
+        "jp"    "ドラフト: 無効な指名。"
     }
 
     "Draft_Next_Pick"
@@ -1608,6 +2300,10 @@
         "pt"    "Draft: proximo pick: {1}."
         "fr"    "Draft : prochain choix : {1}."
         "de"    "Draft: naechster Pick: {1}."
+        "ru"    "Драфт: следующий выбирает {1}."
+        "chi"   "选人：下一位选人：{1}。"
+        "it"    "Scelta giocatori: prossima scelta: {1}."
+        "jp"    "ドラフト: 次の指名: {1}。"
     }
 
     "Draft_Status_Clean"
@@ -1618,6 +2314,10 @@
         "pt"    "Draft: {1} | capitao T: {2} | capitao CT: {3} | proximo: {4}"
         "fr"    "Draft : {1} | capitaine T : {2} | capitaine CT : {3} | prochain : {4}"
         "de"    "Draft: {1} | T-Kapitaen: {2} | CT-Kapitaen: {3} | naechster: {4}"
+        "ru"    "Драфт: {1} | капитан T: {2} | капитан CT: {3} | следующий: {4}"
+        "chi"   "选人：{1} | T 队长：{2} | CT 队长：{3} | 下一位：{4}"
+        "it"    "Scelta giocatori: {1} | capitano T: {2} | capitano CT: {3} | prossimo: {4}"
+        "jp"    "ドラフト: {1} | Tキャプテン: {2} | CTキャプテン: {3} | 次: {4}"
     }
 
     "Penalty_Live"
@@ -1627,6 +2327,10 @@
         "pt"    "Penalti: chute em jogo."
         "fr"    "Penalty : le tir est en jeu."
         "de"    "Elfmeter: Schuss laeuft."
+        "ru"    "Пенальти: удар в игре."
+        "chi"   "点球：可以射门了。"
+        "it"    "Rigore: il tiro è in gioco."
+        "jp"    "PK: キック可能。"
     }
 
     "Penalty_Turn_NoGk"
@@ -1637,6 +2341,10 @@
         "pt"    "Turno penalti: {1} bate por {2}."
         "fr"    "Tour de penalty : {1} tire pour {2}."
         "de"    "Elfmeterrunde: {1} schiesst fuer {2}."
+        "ru"    "Пенальти: {1} бьёт за {2}."
+        "chi"   "点球轮次：{1} 代表 {2} 主罚。"
+        "it"    "Turno rigore: {1} tira per {2}."
+        "jp"    "PKの番: {2}のキッカー{1}。"
     }
 
     "Position_Set"
@@ -1647,6 +2355,10 @@
         "pt"    "{1} agora e {2}."
         "fr"    "{1} est maintenant {2}."
         "de"    "{1} ist jetzt {2}."
+        "ru"    "{1} теперь {2}."
+        "chi"   "{1} 现在是{2}。"
+        "it"    "{1} ora è {2}."
+        "jp"    "{1}のポジションは{2}になった。"
     }
 
     "Position_Current"
@@ -1657,6 +2369,10 @@
         "pt"    "Posicao: {1}"
         "fr"    "Position : {1}"
         "de"    "Position: {1}"
+        "ru"    "Позиция: {1}"
+        "chi"   "位置：{1}"
+        "it"    "Posizione: {1}"
+        "jp"    "ポジション: {1}"
     }
 
     "Training_Cannon_Started"
@@ -1666,6 +2382,10 @@
         "pt"    "Canhao treino: iniciado."
         "fr"    "Canon training : demarre."
         "de"    "Trainingskanone: gestartet."
+        "ru"    "Тренировочная пушка: запущена."
+        "chi"   "训练发球机：已启动。"
+        "it"    "Cannone di allenamento: avviato."
+        "jp"    "練習キャノン: 開始。"
     }
 
     "Training_Cannon_Stopped"
@@ -1675,6 +2395,10 @@
         "pt"    "Canhao treino: parado."
         "fr"    "Canon training : arrete."
         "de"    "Trainingskanone: gestoppt."
+        "ru"    "Тренировочная пушка: остановлена."
+        "chi"   "训练发球机：已停止。"
+        "it"    "Cannone di allenamento: fermato."
+        "jp"    "練習キャノン: 停止。"
     }
 
     "Training_Ball_Create_Failed"
@@ -1684,6 +2408,10 @@
         "pt"    "Bola treino: nao foi possivel criar a entidade."
         "fr"    "Ballon training : impossible de creer l'entite."
         "de"    "Trainingsball: Entity konnte nicht erstellt werden."
+        "ru"    "Тренировочный мяч: не удалось создать объект."
+        "chi"   "训练球：无法创建实体。"
+        "it"    "Pallone di allenamento: impossibile creare l'entità."
+        "jp"    "練習用ボール: エンティティを作成できなかった。"
     }
 
     "Training_Ball_Spawned"
@@ -1693,6 +2421,10 @@
         "pt"    "Bola treino: criada."
         "fr"    "Ballon training : cree."
         "de"    "Trainingsball: gespawnt."
+        "ru"    "Тренировочный мяч: создан."
+        "chi"   "训练球：已生成。"
+        "it"    "Pallone di allenamento: creato."
+        "jp"    "練習用ボール: 出現。"
     }
 
     "Training_Ball_NotFound"
@@ -1702,6 +2434,10 @@
         "pt"    "Bola treino: nenhuma bola de treino encontrada."
         "fr"    "Ballon training : aucun ballon trouve."
         "de"    "Trainingsball: kein Trainingsball gefunden."
+        "ru"    "Тренировочный мяч: тренировочный мяч не найден."
+        "chi"   "训练球：未找到训练球。"
+        "it"    "Pallone di allenamento: nessun pallone di allenamento trovato."
+        "jp"    "練習用ボール: 練習用ボールが見つからない。"
     }
 
     "Training_Ball_Removed"
@@ -1711,6 +2447,10 @@
         "pt"    "Bola treino: removida."
         "fr"    "Ballon training : retire."
         "de"    "Trainingsball: entfernt."
+        "ru"    "Тренировочный мяч: убран."
+        "chi"   "训练球：已移除。"
+        "it"    "Pallone di allenamento: rimosso."
+        "jp"    "練習用ボール: 削除した。"
     }
 
     "Training_Cannon_Position_Set"
@@ -1721,6 +2461,10 @@
         "pt"    "Canhao treino: {1} definiu a posicao."
         "fr"    "Canon training : {1} a defini la position."
         "de"    "Trainingskanone: {1} hat die Position gesetzt."
+        "ru"    "Тренировочная пушка: {1} задал позицию."
+        "chi"   "训练发球机：{1} 设置了位置。"
+        "it"    "Cannone di allenamento: {1} ha impostato la posizione."
+        "jp"    "練習キャノン: {1}が位置を設定した。"
     }
 
     "Training_Cannon_Target_Set"
@@ -1731,6 +2475,10 @@
         "pt"    "Canhao treino: {1} definiu o alvo."
         "fr"    "Canon training : {1} a defini la cible."
         "de"    "Trainingskanone: {1} hat das Ziel gesetzt."
+        "ru"    "Тренировочная пушка: {1} задал цель."
+        "chi"   "训练发球机：{1} 设置了目标。"
+        "it"    "Cannone di allenamento: {1} ha impostato il bersaglio."
+        "jp"    "練習キャノン: {1}が目標を設定した。"
     }
 
     "Training_Cannon_Power_Prompt"
@@ -1741,6 +2489,10 @@
         "pt"    "Canhao treino: digite velocidade entre {1} e {2}. Atual: {3}. Digite cancel para cancelar."
         "fr"    "Canon training : tape la vitesse entre {1} et {2}. Actuelle : {3}. Tape cancel pour annuler."
         "de"    "Trainingskanone: Geschwindigkeit zwischen {1} und {2} eingeben. Aktuell: {3}. cancel bricht ab."
+        "ru"    "Тренировочная пушка: напиши скорость от {1} до {2}. Сейчас: {3}. Напиши cancel для отмены."
+        "chi"   "训练发球机：请输入 {1} 到 {2} 之间的速度。当前：{3}。输入 cancel 取消。"
+        "it"    "Cannone di allenamento: scrivi la velocità tra {1} e {2}. Attuale: {3}. Scrivi cancel per annullare."
+        "jp"    "練習キャノン: 速度を{1}～{2}で入力。現在: {3}。中止するにはcancelと入力。"
     }
 
     "Training_Cannon_Power_Invalid"
@@ -1751,6 +2503,10 @@
         "pt"    "Canhao treino: velocidade invalida. Digite um valor entre {1} e {2}."
         "fr"    "Canon training : vitesse invalide. Tape une valeur entre {1} et {2}."
         "de"    "Trainingskanone: ungueltige Geschwindigkeit. Wert zwischen {1} und {2} eingeben."
+        "ru"    "Тренировочная пушка: неверная скорость. Укажи значение от {1} до {2}."
+        "chi"   "训练发球机：速度无效。请输入 {1} 到 {2} 之间的数值。"
+        "it"    "Cannone di allenamento: velocità non valida. Scrivi un valore tra {1} e {2}."
+        "jp"    "練習キャノン: 無効な速度。{1}～{2}の値を入力。"
     }
 
     "Training_Cannon_Power_Set"
@@ -1761,6 +2517,10 @@
         "pt"    "Canhao treino: {1} definiu velocidade para {2}."
         "fr"    "Canon training : {1} a mis la vitesse a {2}."
         "de"    "Trainingskanone: {1} setzte Geschwindigkeit auf {2}."
+        "ru"    "Тренировочная пушка: {1} задал скорость {2}."
+        "chi"   "训练发球机：{1} 将速度设为 {2}。"
+        "it"    "Cannone di allenamento: {1} ha impostato la velocità a {2}."
+        "jp"    "練習キャノン: {1}が速度を{2}に設定した。"
     }
 
     "Training_Cannon_Custom_Cancelled"
@@ -1770,6 +2530,10 @@
         "pt"    "Canhao treino: entrada cancelada."
         "fr"    "Canon training : saisie annulee."
         "de"    "Trainingskanone: Eingabe abgebrochen."
+        "ru"    "Тренировочная пушка: ввод отменён."
+        "chi"   "训练发球机：已取消输入。"
+        "it"    "Cannone di allenamento: inserimento annullato."
+        "jp"    "練習キャノン: 入力をキャンセルした。"
     }
 
     "Training_Cannon_Match_Live"
@@ -1779,6 +2543,10 @@
         "pt"    "Canhao treino: desativado enquanto ha partida ao vivo."
         "fr"    "Canon training : desactive pendant un match en cours."
         "de"    "Trainingskanone: waehrend eines laufenden Spiels deaktiviert."
+        "ru"    "Тренировочная пушка: недоступна во время матча."
+        "chi"   "训练发球机：比赛进行中无法使用。"
+        "it"    "Cannone di allenamento: disattivato durante una partita."
+        "jp"    "練習キャノン: 試合中は使用できない。"
     }
 
     "Training_Cannon_No_Ball"
@@ -1788,6 +2556,10 @@
         "pt"    "Canhao treino: nenhuma bola valida encontrada."
         "fr"    "Canon training : aucun ballon valide trouve."
         "de"    "Trainingskanone: kein gueltiger Ball gefunden."
+        "ru"    "Тренировочная пушка: подходящий мяч не найден."
+        "chi"   "训练发球机：未找到有效的球。"
+        "it"    "Cannone di allenamento: nessun pallone valido trovato."
+        "jp"    "練習キャノン: 有効なボールが見つからない。"
     }
 
     "Menu_Card_Red_Remove"
@@ -1797,6 +2569,10 @@
         "pt"    "Remover um vermelho"
         "fr"    "Retirer un carton rouge"
         "de"    "Rote Karte entfernen"
+        "ru"    "Снять красную карточку"
+        "chi"   "撤销一张红牌"
+        "it"    "Togli un cartellino rosso"
+        "jp"    "レッドカードを取り消す"
     }
 
     "Menu_RedCards_Title"
@@ -1806,6 +2582,10 @@
         "pt"    "Cartoes vermelhos"
         "fr"    "Cartons rouges"
         "de"    "Rote Karten"
+        "ru"    "Красные карточки"
+        "chi"   "红牌"
+        "it"    "Cartellini rossi"
+        "jp"    "レッドカード"
     }
 
     "Card_Red_None"
@@ -1815,6 +2595,10 @@
         "pt"    "Cartoes: ninguem tem cartao vermelho."
         "fr"    "Cartons : aucun joueur n'a de carton rouge."
         "de"    "Karten: kein Spieler hat eine rote Karte."
+        "ru"    "Карточки: ни у кого нет красной карточки."
+        "chi"   "牌：没有球员持有红牌。"
+        "it"    "Cartellini: nessun giocatore ha un cartellino rosso."
+        "jp"    "カード: レッドカードを受けた選手はいない。"
     }
 
     "Card_Red_Removed"
@@ -1825,6 +2609,10 @@
         "pt"    "Cartoes: {1} removeu o vermelho de {2}."
         "fr"    "Cartons : {1} a retire le carton rouge de {2}."
         "de"    "Karten: {1} hat die rote Karte von {2} entfernt."
+        "ru"    "Карточки: {1} снял красную карточку с {2}."
+        "chi"   "牌：{1} 撤销了 {2} 的红牌。"
+        "it"    "Cartellini: {1} ha tolto il cartellino rosso a {2}."
+        "jp"    "カード: {1}が{2}のレッドカードを取り消した。"
     }
 
     "Menu_GkAreas"
@@ -1834,6 +2622,10 @@
         "pt"    "Areas do goleiro"
         "fr"    "Surfaces du gardien"
         "de"    "Torwartbereiche"
+        "ru"    "Вратарские зоны"
+        "chi"   "守门员区域"
+        "it"    "Aree del portiere"
+        "jp"    "GKエリア"
     }
 
     "Menu_GkAreas_Title"
@@ -1844,6 +2636,10 @@
         "pt"    "Areas do goleiro - CT: {1} | TT: {2}"
         "fr"    "Surfaces du gardien - CT : {1} | TT : {2}"
         "de"    "Torwartbereiche - CT: {1} | TT: {2}"
+        "ru"    "Вратарские зоны - CT: {1} | TT: {2}"
+        "chi"   "守门员区域 - CT：{1} | TT：{2}"
+        "it"    "Aree del portiere - CT: {1} | TT: {2}"
+        "jp"    "GKエリア - CT: {1} | TT: {2}"
     }
 
     "Menu_GkArea_Mark_CT"
@@ -1853,6 +2649,10 @@
         "pt"    "Marcar area CT (parado no meio do gol CT)"
         "fr"    "Marquer la surface CT (debout au milieu du but CT)"
         "de"    "CT-Bereich setzen (mittig im CT-Tor stehen)"
+        "ru"    "Отметить зону CT (встань в центре ворот CT)"
+        "chi"   "标记 CT 区域（站在 CT 球门正中）"
+        "it"    "Segna area CT (mettiti al centro della porta CT)"
+        "jp"    "CTエリアを設定 (CTゴールの中央に立つ)"
     }
 
     "Menu_GkArea_Mark_T"
@@ -1862,6 +2662,10 @@
         "pt"    "Marcar area TT (parado no meio do gol TT)"
         "fr"    "Marquer la surface TT (debout au milieu du but TT)"
         "de"    "TT-Bereich setzen (mittig im TT-Tor stehen)"
+        "ru"    "Отметить зону TT (встань в центре ворот TT)"
+        "chi"   "标记 TT 区域（站在 TT 球门正中）"
+        "it"    "Segna area TT (mettiti al centro della porta TT)"
+        "jp"    "TTエリアを設定 (TTゴールの中央に立つ)"
     }
 
     "Menu_GkArea_Show"
@@ -1871,6 +2675,10 @@
         "pt"    "Mostrar areas (10 s)"
         "fr"    "Afficher les surfaces (10 s)"
         "de"    "Bereiche anzeigen (10 s)"
+        "ru"    "Показать зоны (10 s)"
+        "chi"   "显示区域（10 秒）"
+        "it"    "Mostra aree (10 s)"
+        "jp"    "エリアを表示 (10 s)"
     }
 
     "GkArea_Marked"
@@ -1881,6 +2689,10 @@
         "pt"    "Areas do goleiro: area {1} salva para {2}. Ela aparece marcada no chao por 10 segundos."
         "fr"    "Surfaces du gardien : surface {1} enregistree pour {2}. Elle est tracee au sol pendant 10 secondes."
         "de"    "Torwartbereiche: {1}-Bereich fuer {2} gespeichert. Er wird 10 Sekunden am Boden angezeigt."
+        "ru"    "Вратарские зоны: зона {1} сохранена для {2}. Её контур виден на полу 10 секунд."
+        "chi"   "守门员区域：已为 {2} 保存 {1} 区域，地面上会显示轮廓 10 秒。"
+        "it"    "Aree del portiere: area {1} salvata per {2}. Resta evidenziata sul terreno per 10 secondi."
+        "jp"    "GKエリア: {1}エリアを{2}用に保存した。10秒間床に表示される。"
     }
 
     "GkArea_Save_Failed"
@@ -1890,6 +2702,10 @@
         "pt"    "Areas do goleiro: a area fica ativa ate a troca de mapa, mas nao foi possivel gravar configs/umbrella_soccer_gk_areas.cfg."
         "fr"    "Surfaces du gardien : la surface reste active jusqu'au changement de carte, mais configs/umbrella_soccer_gk_areas.cfg n'a pas pu etre ecrit."
         "de"    "Torwartbereiche: der Bereich gilt bis zum Mapwechsel, aber configs/umbrella_soccer_gk_areas.cfg konnte nicht geschrieben werden."
+        "ru"    "Вратарские зоны: зона действует до смены карты, но не удалось записать configs/umbrella_soccer_gk_areas.cfg."
+        "chi"   "守门员区域：该区域在换图前有效，但无法写入 configs/umbrella_soccer_gk_areas.cfg。"
+        "it"    "Aree del portiere: l'area resta attiva fino al cambio mappa, ma non è stato possibile scrivere configs/umbrella_soccer_gk_areas.cfg."
+        "jp"    "GKエリア: エリアはマップ変更まで有効だが、configs/umbrella_soccer_gk_areas.cfg に書き込めなかった。"
     }
 
     "GkArea_Need_Alive"
@@ -1899,6 +2715,10 @@
         "pt"    "Areas do goleiro: voce precisa estar vivo e parado no gol para marcar a area."
         "fr"    "Surfaces du gardien : tu dois etre en vie et dans le but pour marquer sa surface."
         "de"    "Torwartbereiche: du musst leben und im Tor stehen, um seinen Bereich zu setzen."
+        "ru"    "Вратарские зоны: чтобы отметить зону, нужно быть живым и стоять в воротах."
+        "chi"   "守门员区域：你必须存活并站在球门内才能标记其区域。"
+        "it"    "Aree del portiere: devi essere vivo e dentro la porta per segnarne l'area."
+        "jp"    "GKエリア: エリアを設定するには生存した状態でゴール内に立つ必要がある。"
     }
 
     "Save_Announce"
@@ -1909,6 +2729,10 @@
         "pt"    "Salvamento de {1}"
         "fr"    "Sauvetage de {1}"
         "de"    "Rettungstat von {1}"
+        "ru"    "Сейв: {1}"
+        "chi"   "扑救：{1}"
+        "it"    "Salvataggio di {1}"
+        "jp"    "セーブ: {1}"
     }
 
     "Menu_Rank"
@@ -1918,6 +2742,10 @@
         "pt"    "Meu ranking"
         "fr"    "Mon classement"
         "de"    "Mein Ranking"
+        "ru"    "Мой рейтинг"
+        "chi"   "我的排名"
+        "it"    "La mia classifica"
+        "jp"    "自分のランキング"
     }
 
     "Menu_Top"
@@ -1927,6 +2755,10 @@
         "pt"    "Top 10"
         "fr"    "Top 10"
         "de"    "Top 10"
+        "ru"    "Топ 10"
+        "chi"   "前 10 名"
+        "it"    "Top 10"
+        "jp"    "Top 10"
     }
 
     "Menu_Top_Choose"
@@ -1936,6 +2768,10 @@
         "pt"    "Top 10 - escolha um ranking"
         "fr"    "Top 10 - choisis un classement"
         "de"    "Top 10 - Ranking waehlen"
+        "ru"    "Топ 10 - выбери рейтинг"
+        "chi"   "前 10 名 - 选择排行榜"
+        "it"    "Top 10 - scegli una classifica"
+        "jp"    "Top 10 - ランキングを選択"
     }
 
     "Menu_Top_Title"
@@ -1946,6 +2782,10 @@
         "pt"    "Top 10 - {1}"
         "fr"    "Top 10 - {1}"
         "de"    "Top 10 - {1}"
+        "ru"    "Топ 10 - {1}"
+        "chi"   "前 10 名 - {1}"
+        "it"    "Top 10 - {1}"
+        "jp"    "Top 10 - {1}"
     }
 
     "Menu_Top_Line"
@@ -1956,6 +2796,10 @@
         "pt"    "{1}. {2} - {3} pts ({4} G, {5} A, {6} D)"
         "fr"    "{1}. {2} - {3} pts ({4} B, {5} PD, {6} A)"
         "de"    "{1}. {2} - {3} Pkt ({4} T, {5} V, {6} P)"
+        "ru"    "{1}. {2} - {3} очк. ({4} Г, {5} П, {6} С)"
+        "chi"   "{1}. {2} - {3} 分（进球 {4}，助攻 {5}，扑救 {6}）"
+        "it"    "{1}. {2} - {3} pt ({4} G, {5} A, {6} S)"
+        "jp"    "{1}. {2} - {3} pts ({4} G, {5} A, {6} S)"
     }
 
     "Ranking_Scope_Match"
@@ -1965,6 +2809,10 @@
         "pt"    "Partidas"
         "fr"    "Matchs"
         "de"    "Spiele"
+        "ru"    "Матчи"
+        "chi"   "正式比赛"
+        "it"    "Partite"
+        "jp"    "試合"
     }
 
     "Ranking_Scope_Public"
@@ -1974,6 +2822,10 @@
         "pt"    "Publico"
         "fr"    "Public"
         "de"    "Oeffentlich"
+        "ru"    "Паблик"
+        "chi"   "公共模式"
+        "it"    "Pubblico"
+        "jp"    "パブリック"
     }
 
     "Ranking_Unavailable"
@@ -1983,6 +2835,10 @@
         "pt"    "Ranking: nao disponivel agora."
         "fr"    "Classement : indisponible pour le moment."
         "de"    "Ranking: derzeit nicht verfuegbar."
+        "ru"    "Рейтинг: сейчас недоступен."
+        "chi"   "排名：当前不可用。"
+        "it"    "Classifica: non disponibile al momento."
+        "jp"    "ランキング: 現在利用できない。"
     }
 
     "Ranking_NoData"
@@ -1993,6 +2849,10 @@
         "pt"    "Ranking {1}: ainda sem estatisticas."
         "fr"    "Classement {1} : pas encore de stats."
         "de"    "Ranking {1}: noch keine Statistiken."
+        "ru"    "Рейтинг {1}: статистики пока нет."
+        "chi"   "排名 {1}：暂无数据。"
+        "it"    "Classifica {1}: ancora nessuna statistica."
+        "jp"    "ランキング {1}: まだ記録がない。"
     }
 
     "Ranking_Line"
@@ -2003,6 +2863,10 @@
         "pt"    "Ranking {1}: #{2} de {3} - {4} pts, {5} gols, {6} assistencias, {7} salvamentos."
         "fr"    "Classement {1} : #{2} sur {3} - {4} pts, {5} buts, {6} passes decisives, {7} sauvetages."
         "de"    "Ranking {1}: #{2} von {3} - {4} Pkt, {5} Tore, {6} Vorlagen, {7} Rettungstaten."
+        "ru"    "Рейтинг {1}: #{2} из {3} - {4} очк., голов: {5}, передач: {6}, сейвов: {7}."
+        "chi"   "排名 {1}：第 {2} 名，共 {3} 人 - {4} 分，进球 {5}，助攻 {6}，扑救 {7}。"
+        "it"    "Classifica {1}: #{2} su {3} - {4} pt, {5} gol, {6} assist, {7} salvataggi."
+        "jp"    "ランキング {1}: {3}人中 #{2} - {4} pts、ゴール{5}、アシスト{6}、セーブ{7}。"
     }
 
     "Menu_TrainingCannon_Rate"
@@ -2012,6 +2876,10 @@
         "pt"    "Definir cadencia do canhao"
         "fr"    "Definir cadence canon"
         "de"    "Kanonenfeuerrate setzen"
+        "ru"    "Частота выстрелов пушки"
+        "chi"   "设置发球机射速"
+        "it"    "Imposta cadenza cannone"
+        "jp"    "キャノンの発射間隔を設定"
     }
 
     "Menu_TrainingCannon_Randomness"
@@ -2021,6 +2889,10 @@
         "pt"    "Definir dispersao do canhao"
         "fr"    "Definir dispersion canon"
         "de"    "Kanonenstreuung setzen"
+        "ru"    "Разброс пушки"
+        "chi"   "设置发球机随机度"
+        "it"    "Imposta dispersione cannone"
+        "jp"    "キャノンのばらつきを設定"
     }
 
     "Training_Cannon_Rate_Prompt"
@@ -2031,6 +2903,10 @@
         "pt"    "Canhao treino: digite os segundos entre tiros, de {1} a {2}. Atual: {3}. Digite cancel para cancelar."
         "fr"    "Canon training : tape les secondes entre les tirs, de {1} a {2}. Actuelle : {3}. Tape cancel pour annuler."
         "de"    "Trainingskanone: Sekunden zwischen Schuessen eingeben, von {1} bis {2}. Aktuell: {3}. cancel bricht ab."
+        "ru"    "Тренировочная пушка: напиши число секунд между выстрелами, от {1} до {2}. Сейчас: {3}. Напиши cancel для отмены."
+        "chi"   "训练发球机：请输入两次发球间隔秒数，范围 {1} 到 {2}。当前：{3}。输入 cancel 取消。"
+        "it"    "Cannone di allenamento: scrivi i secondi tra un tiro e l'altro, da {1} a {2}. Attuale: {3}. Scrivi cancel per annullare."
+        "jp"    "練習キャノン: 発射間隔の秒数を{1}～{2}で入力。現在: {3}。中止するにはcancelと入力。"
     }
 
     "Training_Cannon_Rate_Invalid"
@@ -2041,6 +2917,10 @@
         "pt"    "Canhao treino: cadencia invalida. Digite um valor entre {1} e {2}."
         "fr"    "Canon training : cadence invalide. Tape une valeur entre {1} et {2}."
         "de"    "Trainingskanone: ungueltige Feuerrate. Wert zwischen {1} und {2} eingeben."
+        "ru"    "Тренировочная пушка: неверная частота. Укажи значение от {1} до {2}."
+        "chi"   "训练发球机：射速无效。请输入 {1} 到 {2} 之间的数值。"
+        "it"    "Cannone di allenamento: cadenza non valida. Scrivi un valore tra {1} e {2}."
+        "jp"    "練習キャノン: 無効な発射間隔。{1}～{2}の値を入力。"
     }
 
     "Training_Cannon_Rate_Set"
@@ -2051,6 +2931,10 @@
         "pt"    "Canhao treino: {1} definiu a cadencia para {2} s."
         "fr"    "Canon training : {1} a mis la cadence a {2} s."
         "de"    "Trainingskanone: {1} setzte die Feuerrate auf {2} s."
+        "ru"    "Тренировочная пушка: {1} задал интервал {2} s."
+        "chi"   "训练发球机：{1} 将发球间隔设为 {2} 秒。"
+        "it"    "Cannone di allenamento: {1} ha impostato la cadenza a {2} s."
+        "jp"    "練習キャノン: {1}が発射間隔を{2} sに設定した。"
     }
 
     "Training_Cannon_Random_Prompt"
@@ -2061,6 +2945,10 @@
         "pt"    "Canhao treino: digite a dispersao, de {1} a {2}. Atual: {3}. Digite cancel para cancelar."
         "fr"    "Canon training : tape la dispersion, de {1} a {2}. Actuelle : {3}. Tape cancel pour annuler."
         "de"    "Trainingskanone: Streuung eingeben, von {1} bis {2}. Aktuell: {3}. cancel bricht ab."
+        "ru"    "Тренировочная пушка: напиши разброс, от {1} до {2}. Сейчас: {3}. Напиши cancel для отмены."
+        "chi"   "训练发球机：请输入随机度，范围 {1} 到 {2}。当前：{3}。输入 cancel 取消。"
+        "it"    "Cannone di allenamento: scrivi la dispersione, da {1} a {2}. Attuale: {3}. Scrivi cancel per annullare."
+        "jp"    "練習キャノン: ばらつきを{1}～{2}で入力。現在: {3}。中止するにはcancelと入力。"
     }
 
     "Training_Cannon_Random_Invalid"
@@ -2071,6 +2959,10 @@
         "pt"    "Canhao treino: dispersao invalida. Digite um valor entre {1} e {2}."
         "fr"    "Canon training : dispersion invalide. Tape une valeur entre {1} et {2}."
         "de"    "Trainingskanone: ungueltige Streuung. Wert zwischen {1} und {2} eingeben."
+        "ru"    "Тренировочная пушка: неверный разброс. Укажи значение от {1} до {2}."
+        "chi"   "训练发球机：随机度无效。请输入 {1} 到 {2} 之间的数值。"
+        "it"    "Cannone di allenamento: dispersione non valida. Scrivi un valore tra {1} e {2}."
+        "jp"    "練習キャノン: 無効なばらつき。{1}～{2}の値を入力。"
     }
 
     "Training_Cannon_Random_Set"
@@ -2081,6 +2973,10 @@
         "pt"    "Canhao treino: {1} definiu a dispersao para {2}."
         "fr"    "Canon training : {1} a mis la dispersion a {2}."
         "de"    "Trainingskanone: {1} setzte die Streuung auf {2}."
+        "ru"    "Тренировочная пушка: {1} задал разброс {2}."
+        "chi"   "训练发球机：{1} 将随机度设为 {2}。"
+        "it"    "Cannone di allenamento: {1} ha impostato la dispersione a {2}."
+        "jp"    "練習キャノン: {1}がばらつきを{2}に設定した。"
     }
 
     "Menu_Training_Goals_Disable"
@@ -2090,6 +2986,10 @@
         "pt"    "Desativar gols"
         "fr"    "Desactiver les buts"
         "de"    "Tore deaktivieren"
+        "ru"    "Отключить ворота"
+        "chi"   "禁用球门"
+        "it"    "Disattiva porte"
+        "jp"    "ゴールを無効化"
     }
 
     "Menu_Training_Goals_Enable"
@@ -2099,6 +2999,10 @@
         "pt"    "Ativar gols"
         "fr"    "Activer les buts"
         "de"    "Tore aktivieren"
+        "ru"    "Включить ворота"
+        "chi"   "启用球门"
+        "it"    "Attiva porte"
+        "jp"    "ゴールを有効化"
     }
 
     "Training_Goals_Disabled"
@@ -2109,6 +3013,10 @@
         "pt"    "Treino: {1} desativou os gols."
         "fr"    "Entrainement : {1} a desactive les buts."
         "de"    "Training: {1} hat die Tore deaktiviert."
+        "ru"    "Тренировка: {1} отключил ворота."
+        "chi"   "训练：{1} 禁用了球门。"
+        "it"    "Allenamento: {1} ha disattivato le porte."
+        "jp"    "練習: {1}がゴールを無効化した。"
     }
 
     "Training_Goals_Enabled"
@@ -2119,6 +3027,10 @@
         "pt"    "Treino: {1} ativou os gols."
         "fr"    "Entrainement : {1} a active les buts."
         "de"    "Training: {1} hat die Tore aktiviert."
+        "ru"    "Тренировка: {1} включил ворота."
+        "chi"   "训练：{1} 启用了球门。"
+        "it"    "Allenamento: {1} ha attivato le porte."
+        "jp"    "練習: {1}がゴールを有効化した。"
     }
 
     "Training_Goals_Match_Live"
@@ -2128,6 +3040,10 @@
         "pt"    "Treino: os gols nao podem ser alterados durante uma partida."
         "fr"    "Entrainement : les buts ne peuvent pas etre modifies pendant un match."
         "de"    "Training: Tore koennen waehrend eines Spiels nicht geaendert werden."
+        "ru"    "Тренировка: во время матча ворота менять нельзя."
+        "chi"   "训练：比赛中无法更改球门。"
+        "it"    "Allenamento: le porte non si possono cambiare durante una partita."
+        "jp"    "練習: 試合中はゴールを変更できない。"
     }
 
     "Team_Join_Full"
@@ -2138,6 +3054,10 @@
         "pt"    "Times: esse time esta cheio (maximo {1} por time durante a partida)."
         "fr"    "Equipes : cette equipe est pleine (max {1} par equipe pendant le match)."
         "de"    "Teams: dieses Team ist voll (max. {1} pro Team waehrend des Spiels)."
+        "ru"    "Команды: эта команда заполнена (максимум {1} на команду во время матча)."
+        "chi"   "队伍：该队已满（比赛中每队最多 {1} 人）。"
+        "it"    "Squadre: quella squadra è piena (massimo {1} per squadra durante la partita)."
+        "jp"    "チーム: そのチームは満員 (試合中は1チーム最大{1}人)。"
     }
 
     "Team_Moved_Full"
@@ -2148,15 +3068,49 @@
         "pt"    "Times: {1} foi movido para espectador: maximo {2} por time durante a partida."
         "fr"    "Equipes : {1} a ete mis en spectateur : max {2} par equipe pendant le match."
         "de"    "Teams: {1} wurde zum Zuschauer verschoben: max. {2} pro Team waehrend des Spiels."
+        "ru"    "Команды: {1} переведён в наблюдатели: максимум {2} на команду во время матча."
+        "chi"   "队伍：{1} 已被移至观察者：比赛中每队最多 {2} 人。"
+        "it"    "Squadre: {1} è stato spostato tra gli spettatori: massimo {2} per squadra durante la partita."
+        "jp"    "チーム: {1}を観戦に移動した: 試合中は1チーム最大{2}人。"
     }
 
     "GkArea_Help"
     {
-        "en"    "Goalkeeper areas: stand in the middle of a goal, on the line, and pick its team. The area is built in front of it and saved right away; mark it again to fix it. Size: sm_soccer_gk_area_width and sm_soccer_gk_area_depth."
-        "es"    "Areas de arquero: parate en el medio del arco, sobre la linea, y elegi su equipo. El area se arma delante del arco y se guarda en el momento; si no quedo bien, marcala de nuevo. Tamano: sm_soccer_gk_area_width y sm_soccer_gk_area_depth."
-        "pt"    "Areas do goleiro: fique no meio do gol, sobre a linha, e escolha o time dele. A area e criada na frente do gol e salva na hora; para corrigir, marque de novo. Tamanho: sm_soccer_gk_area_width e sm_soccer_gk_area_depth."
-        "fr"    "Surfaces du gardien : place-toi au milieu d'un but, sur la ligne, et choisis son equipe. La surface est creee devant le but et enregistree tout de suite ; marque-la de nouveau pour la corriger. Taille : sm_soccer_gk_area_width et sm_soccer_gk_area_depth."
-        "de"    "Torwartbereiche: stell dich mittig auf die Torlinie und waehle das Team des Tors. Der Bereich wird davor erstellt und sofort gespeichert; zum Korrigieren einfach neu setzen. Groesse: sm_soccer_gk_area_width und sm_soccer_gk_area_depth."
+        "en"    "Goalkeeper areas: stand in the middle of a goal, on the line, and pick its team."
+        "es"    "Areas de arquero: parate en el medio del arco, sobre la linea, y elegi su equipo."
+        "pt"    "Areas do goleiro: fique no meio do gol, sobre a linha, e escolha o time dele."
+        "fr"    "Surfaces du gardien : place-toi au milieu d'un but, sur la ligne, et choisis son equipe."
+        "de"    "Torwartbereiche: stell dich mittig auf die Torlinie und waehle das Team des Tors."
+        "ru"    "Вратарские зоны: встань в центре ворот, на линии, и выбери их команду."
+        "chi"   "守门员区域：站在球门线正中，然后选择该球门所属队伍。"
+        "it"    "Aree del portiere: mettiti al centro di una porta, sulla linea, e scegli la sua squadra."
+        "jp"    "GKエリア: ゴール中央のライン上に立ち、そのチームを選ぶ。"
+    }
+
+    "GkArea_Help_Saved"
+    {
+        "en"    "The area is built in front of it and saved right away; mark it again to fix it."
+        "es"    "El area se arma delante del arco y se guarda en el momento; si no quedo bien, marcala de nuevo."
+        "pt"    "A area e criada na frente do gol e salva na hora; para corrigir, marque de novo."
+        "fr"    "La surface est creee devant le but et enregistree tout de suite ; marque-la de nouveau pour la corriger."
+        "de"    "Der Bereich wird davor erstellt und sofort gespeichert; zum Korrigieren einfach neu setzen."
+        "ru"    "Зона строится перед воротами и сразу сохраняется; если вышло неточно, отметь заново."
+        "chi"   "区域会在球门前生成并立即保存；如不合适，重新标记即可。"
+        "it"    "L'area viene creata davanti alla porta e salvata subito; se non va bene, segnala di nuovo."
+        "jp"    "エリアはゴール前に作成され、すぐ保存される。ずれたら再設定すること。"
+    }
+
+    "GkArea_Help_Size"
+    {
+        "en"    "Size: sm_soccer_gk_area_width and sm_soccer_gk_area_depth."
+        "es"    "Tamano: sm_soccer_gk_area_width y sm_soccer_gk_area_depth."
+        "pt"    "Tamanho: sm_soccer_gk_area_width e sm_soccer_gk_area_depth."
+        "fr"    "Taille : sm_soccer_gk_area_width et sm_soccer_gk_area_depth."
+        "de"    "Groesse: sm_soccer_gk_area_width und sm_soccer_gk_area_depth."
+        "ru"    "Размер: sm_soccer_gk_area_width и sm_soccer_gk_area_depth."
+        "chi"   "尺寸：sm_soccer_gk_area_width 和 sm_soccer_gk_area_depth。"
+        "it"    "Dimensioni: sm_soccer_gk_area_width e sm_soccer_gk_area_depth."
+        "jp"    "サイズ: sm_soccer_gk_area_width と sm_soccer_gk_area_depth。"
     }
 
     "GkArea_Nothing_To_Show"
@@ -2166,5 +3120,9 @@
         "pt"    "Areas do goleiro: este mapa ainda nao tem. Primeiro fique em um gol e marque a area."
         "fr"    "Surfaces du gardien : cette carte n'en a pas encore. Place-toi d'abord dans un but et marque sa surface."
         "de"    "Torwartbereiche: diese Map hat noch keine. Stell dich zuerst in ein Tor und setze seinen Bereich."
+        "ru"    "Вратарские зоны: на этой карте их пока нет. Сначала встань в ворота и отметь зону."
+        "chi"   "守门员区域：此地图尚未设置。请先站到球门内标记其区域。"
+        "it"    "Aree del portiere: questa mappa non ne ha ancora. Prima mettiti in una porta e segnane l'area."
+        "jp"    "GKエリア: このマップにはまだない。まずゴール内に立ってエリアを設定すること。"
     }
 }
