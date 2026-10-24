@@ -98,6 +98,8 @@ Most of the administration is done from the `!soccer` menu. The same actions are
 | `sm_soccer_reset` | Reset the match state. |
 | `sm_soccer_halftime` | Move on to the next period. |
 | `sm_soccer_kickoff` | Restart play with a kickoff. |
+| `sm_soccer_spec_all` | Move every player on a team to spectator (not during a match or a draft). Also in the admin menu, under Captains. |
+| `sm_soccer_spec <player>` | Move one player to spectator, also during a match. Also in the admin menu, under Captains, as a player list. |
 | `sm_soccer_score <ct> <t>` | Set the score. |
 | `sm_soccer_goal <ct/t>` | Award a goal. |
 | `sm_soccer_yellow <target>` / `sm_soccer_red <target>` | Show a card. |

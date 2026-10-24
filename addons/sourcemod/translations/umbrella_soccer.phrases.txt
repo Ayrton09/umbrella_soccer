@@ -3060,6 +3060,164 @@
         "jp"    "チーム: そのチームは満員 (試合中は1チーム最大{1}人)。"
     }
 
+    "Menu_SpecAll"
+    {
+        "en"    "Send everyone to spectator"
+        "es"    "Mandar a todos a espectador"
+        "pt"    "Mandar todos para espectador"
+        "fr"    "Envoyer tout le monde en spectateur"
+        "de"    "Alle zu Zuschauern verschieben"
+        "ru"    "Отправить всех в наблюдатели"
+        "chi"   "将所有人移至观察者"
+        "it"    "Manda tutti tra gli spettatori"
+        "jp"    "全員を観戦に移動"
+    }
+
+    "Menu_SpecAll_Confirm_Title"
+    {
+        "en"    "Send every player on a team to spectator?"
+        "es"    "Mandar a todos los jugadores a espectador?"
+        "pt"    "Mandar todos os jogadores para espectador?"
+        "fr"    "Envoyer tous les joueurs en spectateur ?"
+        "de"    "Alle Spieler zu Zuschauern verschieben?"
+        "ru"    "Отправить всех игроков в наблюдатели?"
+        "chi"   "将所有队伍中的玩家移至观察者？"
+        "it"    "Mandare tutti i giocatori tra gli spettatori?"
+        "jp"    "チームの全プレイヤーを観戦に移動する？"
+    }
+
+    "Menu_SpecAll_Confirm_Yes"
+    {
+        "en"    "Yes, send everyone"
+        "es"    "Si, mandar a todos"
+        "pt"    "Sim, mandar todos"
+        "fr"    "Oui, envoyer tout le monde"
+        "de"    "Ja, alle verschieben"
+        "ru"    "Да, отправить всех"
+        "chi"   "是，全部移动"
+        "it"    "Sì, manda tutti"
+        "jp"    "はい、全員移動"
+    }
+
+    "Menu_SpecAll_Confirm_No"
+    {
+        "en"    "No, go back"
+        "es"    "No, volver"
+        "pt"    "Nao, voltar"
+        "fr"    "Non, retour"
+        "de"    "Nein, zurueck"
+        "ru"    "Нет, назад"
+        "chi"   "否，返回"
+        "it"    "No, indietro"
+        "jp"    "いいえ、戻る"
+    }
+
+    "SpecAll_Done"
+    {
+        "#format"   "{1:s}"
+        "en"    "Teams: {1} sent everyone to spectator."
+        "es"    "Equipos: {1} mando a todos a espectador."
+        "pt"    "Times: {1} mandou todos para espectador."
+        "fr"    "Equipes : {1} a envoye tout le monde en spectateur."
+        "de"    "Teams: {1} hat alle zu Zuschauern verschoben."
+        "ru"    "Команды: {1} отправил всех в наблюдатели."
+        "chi"   "队伍：{1} 已将所有人移至观察者。"
+        "it"    "Squadre: {1} ha mandato tutti tra gli spettatori."
+        "jp"    "チーム: {1}が全員を観戦に移動した。"
+    }
+
+    "SpecAll_Not_Now"
+    {
+        "en"    "Teams: stop the match or the draft before sending everyone to spectator."
+        "es"    "Equipos: deten el partido o el draft antes de mandar a todos a espectador."
+        "pt"    "Times: pare a partida ou o draft antes de mandar todos para espectador."
+        "fr"    "Equipes : arrete le match ou le draft avant d'envoyer tout le monde en spectateur."
+        "de"    "Teams: beende das Spiel oder den Draft, bevor du alle zu Zuschauern verschiebst."
+        "ru"    "Команды: сначала останови матч или драфт, потом отправляй всех в наблюдатели."
+        "chi"   "队伍：请先停止比赛或选人，再将所有人移至观察者。"
+        "it"    "Squadre: ferma la partita o la scelta dei giocatori prima di mandare tutti tra gli spettatori."
+        "jp"    "チーム: 全員を観戦に移す前に、試合かドラフトを止めること。"
+    }
+
+    "SpecAll_Nobody"
+    {
+        "en"    "Teams: nobody is on a team."
+        "es"    "Equipos: no hay nadie en un equipo."
+        "pt"    "Times: nao ha ninguem em um time."
+        "fr"    "Equipes : personne n'est dans une equipe."
+        "de"    "Teams: niemand ist in einem Team."
+        "ru"    "Команды: в командах никого нет."
+        "chi"   "队伍：没有玩家在队伍中。"
+        "it"    "Squadre: nessuno è in una squadra."
+        "jp"    "チーム: チームに誰もいない。"
+    }
+
+    "Menu_SpecPlayer"
+    {
+        "en"    "Send a player to spectator"
+        "es"    "Mandar a un jugador a espectador"
+        "pt"    "Mandar um jogador para espectador"
+        "fr"    "Envoyer un joueur en spectateur"
+        "de"    "Einen Spieler zu Zuschauern verschieben"
+        "ru"    "Отправить игрока в наблюдатели"
+        "chi"   "将一名玩家移至观察者"
+        "it"    "Manda un giocatore tra gli spettatori"
+        "jp"    "プレイヤーを観戦に移動"
+    }
+
+    "Menu_SpecPlayer_Title"
+    {
+        "en"    "Send to spectator:"
+        "es"    "Mandar a espectador:"
+        "pt"    "Mandar para espectador:"
+        "fr"    "Envoyer en spectateur :"
+        "de"    "Zu Zuschauern verschieben:"
+        "ru"    "Отправить в наблюдатели:"
+        "chi"   "移至观察者："
+        "it"    "Manda tra gli spettatori:"
+        "jp"    "観戦に移動:"
+    }
+
+    "SpecPlayer_Done"
+    {
+        "#format"   "{1:s},{2:N}"
+        "en"    "Teams: {1} sent {2} to spectator."
+        "es"    "Equipos: {1} mando a {2} a espectador."
+        "pt"    "Times: {1} mandou {2} para espectador."
+        "fr"    "Equipes : {1} a envoye {2} en spectateur."
+        "de"    "Teams: {1} hat {2} zu den Zuschauern verschoben."
+        "ru"    "Команды: {1} отправил {2} в наблюдатели."
+        "chi"   "队伍：{1} 已将 {2} 移至观察者。"
+        "it"    "Squadre: {1} ha mandato {2} tra gli spettatori."
+        "jp"    "チーム: {1}が{2}を観戦に移動した。"
+    }
+
+    "SpecPlayer_Not_On_Team"
+    {
+        "en"    "Teams: that player is not on a team."
+        "es"    "Equipos: ese jugador no esta en un equipo."
+        "pt"    "Times: esse jogador nao esta em um time."
+        "fr"    "Equipes : ce joueur n'est dans aucune equipe."
+        "de"    "Teams: dieser Spieler ist in keinem Team."
+        "ru"    "Команды: этот игрок не в команде."
+        "chi"   "队伍：该玩家不在任何队伍中。"
+        "it"    "Squadre: quel giocatore non è in una squadra."
+        "jp"    "チーム: そのプレイヤーはチームにいない。"
+    }
+
+    "SpecPlayer_Usage"
+    {
+        "en"    "Usage: sm_soccer_spec <player>"
+        "es"    "Uso: sm_soccer_spec <jugador>"
+        "pt"    "Uso: sm_soccer_spec <jogador>"
+        "fr"    "Usage : sm_soccer_spec <joueur>"
+        "de"    "Verwendung: sm_soccer_spec <Spieler>"
+        "ru"    "Использование: sm_soccer_spec <игрок>"
+        "chi"   "用法：sm_soccer_spec <玩家>"
+        "it"    "Uso: sm_soccer_spec <giocatore>"
+        "jp"    "使い方: sm_soccer_spec <プレイヤー>"
+    }
+
     "Team_Moved_Full"
     {
         "#format"   "{1:N},{2:d}"

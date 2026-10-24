@@ -4,3 +4,35 @@
 *.log
 *.tmp
 
+# Private keys, certificates and credentials
+*.pem
+*.key
+*.pfx
+*.p12
+*.ppk
+id_rsa*
+id_ed25519*
+.env
+.env.*
+!.env.example
+*credentials*
+*secret*
+
+# Local databases and backups
+*.db
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.sq3
+*.bak
+
+# Written by the plugin at runtime on a server
+addons/sourcemod/data/
+addons/sourcemod/logs/
+addons/sourcemod/configs/umbrella_soccer_gk_areas.cfg
+
+# Assistant and editor folders
+.claude/
+.vs/
+.idea/
+.vscode/

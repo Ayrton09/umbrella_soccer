@@ -1,5 +1,14 @@
 # Changelog
 
+## Unreleased
+
+### New
+- Send everyone to spectator, from the Captains section of the admin menu (with a confirmation) or with `sm_soccer_spec_all`, to set teams up again from scratch. It moves every human player on T or CT; bots stay, since the bot quota would add them back. It is refused during a match or a draft, which depend on the teams as they are.
+- Send one player to spectator, for example an AFK one: a player list in the same Captains section, or `sm_soccer_spec <player>`. This one also works during a match or a draft.
+
+### Fixes
+- A spawned training ball and a ball placed for a penalty now sit on the floor and stay still, asleep like the match ball before kickoff, until someone touches it. Before, the training ball dropped from above the aim point and the penalty ball could fall or roll off the spot.
+
 ## 1.1.2
 
 ### Match flow

@@ -310,6 +310,8 @@ public void OnPluginStart()
 	RegAdminCmd("sm_soccer_position", CmdAdminPosition, ADMFLAG_GENERIC, "Set player position: sm_soccer_position <target> <player/gk>.");
 	RegAdminCmd("sm_soccer_halftime", CmdHalftime, ADMFLAG_GENERIC, "Force the next match period.");
 	RegAdminCmd("sm_soccer_kickoff", CmdKickoff, ADMFLAG_GENERIC, "Start a manual center kick.");
+	RegAdminCmd("sm_soccer_spec_all", CmdSpecAll, ADMFLAG_GENERIC, "Move every player on a team to spectator. Not during a match or a draft.");
+	RegAdminCmd("sm_soccer_spec", CmdSpecPlayer, ADMFLAG_GENERIC, "Move one player to spectator: sm_soccer_spec <player>.");
 	RegAdminCmd("sm_soccer_yellow", CmdYellow, ADMFLAG_GENERIC, "Give a yellow card: sm_soccer_yellow <target>.");
 	RegAdminCmd("sm_soccer_red", CmdRed, ADMFLAG_GENERIC, "Give a red card: sm_soccer_red <target>.");
 	RegAdminCmd("sm_soccer_captains", CmdCaptains, ADMFLAG_GENERIC, "Set draft captains: sm_soccer_captains <t captain> <ct captain>.");
@@ -1479,6 +1481,227 @@ public int MenuHandlerAdmin(Menu menu, MenuAction action, int client, int item)
 	return 0;
 }
 
+void ShowSpecAllConfirmMenu(int client)
+{
+	Menu menu = new Menu(MenuHandlerSpecAllConfirm);
+	char title[128];
+	Format(title, sizeof(title), "%T", "Menu_SpecAll_Confirm_Title", client);
+	menu.SetTitle(title);
+	AddMenuItemPhrase(menu, client, "yes", "Menu_SpecAll_Confirm_Yes");
+	AddMenuItemPhrase(menu, client, "no", "Menu_SpecAll_Confirm_No");
+	menu.ExitBackButton = true;
+	menu.Display(client, MENU_TIME_FOREVER);
+}
+
+public int MenuHandlerSpecAllConfirm(Menu menu, MenuAction action, int client, int item)
+{
+	if (action == MenuAction_End)
+	{
+		delete menu;
+		return 0;
+	}
+
+	if (action == MenuAction_Cancel && item == MenuCancel_ExitBack && IsValidClient(client))
+	{
+		ShowCaptainMenu(client);
+		return 0;
+	}
+
+	if (action != MenuAction_Select || !IsValidClient(client))
+	{
+		return 0;
+	}
+
+	if (!CheckSoccerAvailable(client) || !HasSoccerAdminAccess(client))
+	{
+		return 0;
+	}
+
+	char info[8];
+	menu.GetItem(item, info, sizeof(info));
+	if (StrEqual(info, "yes"))
+	{
+		MoveAllToSpectator(client);
+	}
+	ShowCaptainMenu(client);
+	return 0;
+}
+
+public Action CmdSpecAll(int client, int args)
+{
+	if (!CheckSoccerAvailable(client))
+	{
+		return Plugin_Handled;
+	}
+
+	MoveAllToSpectator(client);
+	return Plugin_Handled;
+}
+
+// Moves every human player on T or CT to spectator, to set teams up again from
+// scratch. A match or a draft depends on the teams as they are, so it has to be
+// stopped first. Bots are left alone: the bot quota would only add them back.
+void MoveAllToSpectator(int admin)
+{
+	if (gMatchLive || gDraftActive)
+	{
+		ReplySpecAll(admin, "SpecAll_Not_Now");
+		return;
+	}
+
+	int moved;
+	for (int client = 1; client <= MaxClients; client++)
+	{
+		if (IsClientInGame(client) && !IsFakeClient(client) && GetClientTeam(client) >= TEAM_T)
+		{
+			ChangeClientTeam(client, 1);
+			moved++;
+		}
+	}
+
+	if (moved == 0)
+	{
+		ReplySpecAll(admin, "SpecAll_Nobody");
+		return;
+	}
+
+	char adminName[MAX_NAME_LENGTH];
+	GetAdminDisplayName(admin, adminName, sizeof(adminName));
+	PrintToChatAll("%t", "SpecAll_Done", adminName);
+}
+
+// Lists the human players on a team; picking one moves them to spectator and
+// shows the list again, so several can be moved in a row.
+void ShowSpecPlayerMenu(int client)
+{
+	Menu menu = new Menu(MenuHandlerSpecPlayer);
+	char title[128];
+	Format(title, sizeof(title), "%T", "Menu_SpecPlayer_Title", client);
+	menu.SetTitle(title);
+
+	int count;
+	for (int target = 1; target <= MaxClients; target++)
+	{
+		if (!IsClientInGame(target) || IsFakeClient(target) || GetClientTeam(target) < TEAM_T)
+		{
+			continue;
+		}
+
+		char info[16];
+		IntToString(GetClientUserId(target), info, sizeof(info));
+		char display[MAX_NAME_LENGTH + 8];
+		Format(display, sizeof(display), "%N (%s)", target, GetClientTeam(target) == TEAM_CT ? "CT" : "TT");
+		menu.AddItem(info, display);
+		count++;
+	}
+
+	if (count == 0)
+	{
+		delete menu;
+		PrintToChat(client, "%t", "SpecAll_Nobody");
+		ShowCaptainMenu(client);
+		return;
+	}
+
+	menu.ExitBackButton = true;
+	menu.Display(client, MENU_TIME_FOREVER);
+}
+
+public int MenuHandlerSpecPlayer(Menu menu, MenuAction action, int client, int item)
+{
+	if (action == MenuAction_End)
+	{
+		delete menu;
+		return 0;
+	}
+
+	if (action == MenuAction_Cancel && item == MenuCancel_ExitBack && IsValidClient(client))
+	{
+		ShowCaptainMenu(client);
+		return 0;
+	}
+
+	if (action != MenuAction_Select || !IsValidClient(client))
+	{
+		return 0;
+	}
+
+	if (!CheckSoccerAvailable(client) || !HasSoccerAdminAccess(client))
+	{
+		return 0;
+	}
+
+	char info[16];
+	menu.GetItem(item, info, sizeof(info));
+	MoveClientToSpectator(client, GetClientOfUserId(StringToInt(info)));
+	ShowSpecPlayerMenu(client);
+	return 0;
+}
+
+public Action CmdSpecPlayer(int client, int args)
+{
+	if (!CheckSoccerAvailable(client))
+	{
+		return Plugin_Handled;
+	}
+
+	if (args < 1)
+	{
+		ReplyToCommand(client, "%t", "SpecPlayer_Usage");
+		return Plugin_Handled;
+	}
+
+	char arg[MAX_NAME_LENGTH];
+	GetCmdArg(1, arg, sizeof(arg));
+	int target = FindTarget(client, arg, false, true);
+	if (target != -1)
+	{
+		MoveClientToSpectator(client, target);
+	}
+	return Plugin_Handled;
+}
+
+// Moves one player to spectator, for example an AFK one. Unlike moving
+// everyone, this is allowed during a match or a draft.
+void MoveClientToSpectator(int admin, int target)
+{
+	if (target <= 0 || !IsClientInGame(target) || GetClientTeam(target) < TEAM_T)
+	{
+		ReplySpecAll(admin, "SpecPlayer_Not_On_Team");
+		return;
+	}
+
+	char adminName[MAX_NAME_LENGTH];
+	GetAdminDisplayName(admin, adminName, sizeof(adminName));
+	PrintToChatAll("%t", "SpecPlayer_Done", adminName, target);
+	ChangeClientTeam(target, 1);
+}
+
+void GetAdminDisplayName(int admin, char[] buffer, int maxlen)
+{
+	if (admin > 0 && IsClientInGame(admin))
+	{
+		GetClientName(admin, buffer, maxlen);
+	}
+	else
+	{
+		strcopy(buffer, maxlen, "Console");
+	}
+}
+
+// The admin may come from a menu, a chat command or the server console.
+void ReplySpecAll(int admin, const char[] phrase)
+{
+	if (admin > 0 && IsClientInGame(admin))
+	{
+		PrintToChat(admin, "%t", phrase);
+	}
+	else
+	{
+		PrintToServer("%T", phrase, LANG_SERVER);
+	}
+}
+
 void ShowRefereeMenu(int client)
 {
 	Menu menu = new Menu(MenuHandlerReferee);
@@ -1872,6 +2095,8 @@ void ShowCaptainMenu(int client)
 	char title[128];
 	Format(title, sizeof(title), "%T", "Menu_Captains_Title", client);
 	menu.SetTitle(title);
+	AddMenuItemPhrase(menu, client, "specall", "Menu_SpecAll");
+	AddMenuItemPhrase(menu, client, "specplayer", "Menu_SpecPlayer");
 	AddMenuItemPhrase(menu, client, "snake", "Menu_Draft_Snake");
 	AddMenuItemPhrase(menu, client, "open", "Menu_Draft_Open");
 	AddMenuItemPhrase(menu, client, "show", "Menu_Draft_Show");
@@ -1906,7 +2131,15 @@ public int MenuHandlerCaptain(Menu menu, MenuAction action, int client, int item
 
 	char info[32];
 	menu.GetItem(item, info, sizeof(info));
-	if (StrEqual(info, "snake"))
+	if (StrEqual(info, "specall"))
+	{
+		ShowSpecAllConfirmMenu(client);
+	}
+	else if (StrEqual(info, "specplayer"))
+	{
+		ShowSpecPlayerMenu(client);
+	}
+	else if (StrEqual(info, "snake"))
 	{
 		ShowDraftCaptainCountMenu(client);
 	}
@@ -5265,8 +5498,7 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 	int ball = GetTrackedBallEntity();
 	if (ball != -1)
 	{
-		float still[3];
-		TeleportEntity(ball, gPenaltyKickSpot, NULL_VECTOR, still);
+		PlaceBallAtRest(ball, gPenaltyKickSpot);
 	}
 
 	KillPenaltyTimer();
@@ -5882,6 +6114,41 @@ void FormatClientNameOrNone(int viewer, int client, char[] buffer, int maxlen)
 	{
 		Format(buffer, maxlen, "%T", "Client_None", viewer);
 	}
+}
+
+// Sets a ball down on the floor under a point and puts it to sleep, as the map
+// does with the match ball before kickoff: it stays still there, without
+// falling or rolling, until someone touches it.
+void PlaceBallAtRest(int ball, const float point[3])
+{
+	float position[3];
+	position = point;
+
+	float top[3];
+	float bottom[3];
+	top = point;
+	bottom = point;
+	top[2] += 48.0;
+	bottom[2] -= 256.0;
+	Handle trace = TR_TraceRayFilterEx(top, bottom, MASK_SOLID, RayType_EndPoint, TraceFilterNoPlayersOrEntity, ball);
+	if (TR_DidHit(trace))
+	{
+		float floorPoint[3];
+		TR_GetEndPosition(floorPoint, trace);
+		float mins[3];
+		GetEntPropVector(ball, Prop_Send, "m_vecMins", mins);
+		position[2] = floorPoint[2] - mins[2] + 1.0;
+	}
+	delete trace;
+
+	float still[3];
+	TeleportEntity(ball, position, NULL_VECTOR, still);
+	AcceptEntityInput(ball, "Sleep", -1, -1, 0);
+}
+
+public bool TraceFilterNoPlayersOrEntity(int entity, int contentsMask, any ignored)
+{
+	return entity > MaxClients && entity != ignored;
 }
 
 bool GetAimPosition(int client, float position[3])
@@ -6611,6 +6878,8 @@ void SpawnTrainingBall(int client)
 	{
 		GetClientAbsOrigin(client, origin);
 	}
+	float aimed[3];
+	aimed = origin;
 	origin[2] += 24.0;
 
 	char model[PLATFORM_MAX_PATH];
@@ -6631,12 +6900,15 @@ void SpawnTrainingBall(int client)
 	DispatchKeyValue(entity, "targetname", TRAINING_BALL_CLIP_NAME);
 	DispatchKeyValue(entity, "model", model);
 	DispatchKeyValueVector(entity, "origin", origin);
+	// Start asleep, like the match ball: it stays where it is put until touched.
+	DispatchKeyValue(entity, "spawnflags", "1");
 	if (!DispatchSpawn(entity))
 	{
 		AcceptEntityInput(entity, "Kill", -1, -1, 0);
 		PrintToChat(client, "%t", "Training_Ball_Create_Failed");
 		return;
 	}
+	PlaceBallAtRest(entity, aimed);
 	gTrainingBallRefs[client] = EntIndexToEntRef(entity);
 	PrintToChat(client, "%t", "Training_Ball_Spawned");
 }
