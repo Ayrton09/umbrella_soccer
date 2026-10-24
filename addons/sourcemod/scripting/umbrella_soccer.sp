@@ -6,7 +6,7 @@
 #include <sdkhooks>
 #include <cstrike>
 
-#define PLUGIN_VERSION "1.1.2"
+#define PLUGIN_VERSION "1.1.3"
 
 #if !defined IN_SPEED
 #define IN_SPEED (1 << 17)
