@@ -25,7 +25,7 @@
 | 🥅 **Goals** | Goal, assist and own-goal announcements, with the last touches tracked to credit the right players. |
 | 🧤 **Goalkeepers** | `!gk` toggles the goalkeeper kit. Saves are counted inside per-map goalkeeper areas. |
 | 🏆 **Ranking** | Persistent stats in SQLite or MySQL, with separate match and public rankings, `!rank` and `!top`. |
-| 🎯 **Penalties** | Single penalties and full shootouts with real shootout rules and sudden death. |
+| 🎯 **Penalties** | Shootouts that start by themselves after a tied overtime: captains line up their kickers, a TV-style board on the HUD, a referee whistle, and goals called by the plugin without killing anyone. Single penalties too. |
 | 🟨 **Referee** | Yellow and red cards, score adjustments. Red cards last across maps until a referee removes them. |
 | 👥 **Captains** | Snake draft with 2 to 4 captains and pick menus. Optional limit of players per team. |
 | 🏃 **Sprint** | Stamina sprint on the walk key, shown as armor. |
@@ -54,8 +54,10 @@ addons/sourcemod/plugins/umbrella_soccer.smx
 addons/sourcemod/scripting/umbrella_soccer.sp
 addons/sourcemod/scripting/umbrella_soccer/ranking.sp
 addons/sourcemod/scripting/umbrella_soccer/saves.sp
+addons/sourcemod/scripting/umbrella_soccer/shootout.sp
 addons/sourcemod/translations/umbrella_soccer.phrases.txt
 cfg/sourcemod/umbrella_soccer.cfg
+sound/umbrella_soccer/...
 models/...
 materials/...
 maps/ka_soccer_world_cup_2026.bsp
@@ -86,6 +88,7 @@ Do not serve the FastDL zip itself; it only makes uploading easier.
 | `!rank` | Show your match and public ranking. |
 | `!top` | Show the top 10. |
 | `!pick` / `!draft` | Pick a player when you are a draft captain. |
+| `!kickers` | Captains: line up the penalty shootout kickers (reopens the menu). |
 
 **Admins** (generic admin flag)
 
@@ -105,8 +108,9 @@ Most of the administration is done from the `!soccer` menu. The same actions are
 | `sm_soccer_yellow <target>` / `sm_soccer_red <target>` | Show a card. |
 | `sm_soccer_position <target> <player/gk>` | Set a player's position. |
 | `sm_soccer_captains <t> <ct>` / `sm_soccer_draftstart` | Set captains and start a draft. |
-| `sm_soccer_penaltyspot` | Set the penalty spot where you aim. |
-| `sm_soccer_penalties [ct/t] [shooter] [goalkeeper]` | Start a shootout, or a single penalty. |
+| `sm_soccer_penaltyspot` | Set the penalty spot where you aim (saved per map). |
+| `sm_soccer_penalties [kickers]` | Start a penalty shootout, with that many kickers per team. |
+| `sm_soccer_penalties <ct/t> [shooter] [goalkeeper]` | Start a single penalty. |
 | `sm_soccer_trainingball` / `sm_soccer_cannon` | Spawn a training ball or toggle the cannon. |
 
 ## Configuration
@@ -132,6 +136,19 @@ All settings live in `cfg/sourcemod/umbrella_soccer.cfg`. The most useful ones:
 | `soccer_mod_match_overtime` | `1` | Play overtime when the match ends tied. |
 | `soccer_mod_match_overtime_percent` | `25.0` | Total overtime length as a percentage of the match, split in two halves. |
 | `soccer_mod_match_golden_goal` | `0` | The first overtime goal wins. |
+
+**Penalties**
+
+| Cvar | Default | Description |
+| --- | ---: | --- |
+| `sm_soccer_penalty_shot_time` | `20` | Seconds to take a penalty. |
+| `sm_soccer_penalty_warning_time` | `10` | Seconds left when the whistle blows again to hurry the kicker. `0` = off. |
+| `sm_soccer_penalty_result_time` | `5` | Seconds after the kick for the ball to go in. |
+| `sm_soccer_shootout_kickers` | `5` | Kickers per team when the shootout starts by itself or no number is given. |
+| `sm_soccer_shootout_after_overtime` | `1` | Start a shootout by itself when overtime ends tied. |
+| `sm_soccer_shootout_order_time` | `120` | Seconds to line up the kickers before the rest is filled in automatically. `0` = wait. |
+| `sm_soccer_penalty_whistle` | `umbrella_soccer/whistle_short.wav` | Whistle for each kick and for the warning. Empty = off. |
+| `sm_soccer_shootout_end_whistle` | `umbrella_soccer/whistle_long.wav` | Whistle when the shootout ends. Empty = off. |
 
 **Server settings** (applied once when a soccer map starts)
 
@@ -195,6 +212,24 @@ The areas are set once per map:
 
 Mark an area again to replace it, and use **Show areas** to see both. Their size is `sm_soccer_gk_area_width` (640) by `sm_soccer_gk_area_depth` (224). They are stored in `addons/sourcemod/configs/umbrella_soccer_gk_areas.cfg`.
 
+## Penalty shootout
+
+A shootout starts by itself when overtime ends tied, or from `!soccer` > Match > Penalties, where you also choose how many kickers each team has.
+
+1. Each team's captain gets a menu to pick its kickers in order (`!kickers` opens it again). A team without a captain is lined up by an admin, and the penalty menu can fill in any order still open. Nothing is kicked until both orders are set, or until `sm_soccer_shootout_order_time` (2 minutes) runs out and the rest is filled in automatically.
+2. The order is shown in chat, a coin toss picks who kicks first, and the kicks start 5 seconds later.
+3. Everyone waits frozen at the waiting spot. The kicker is placed behind the ball and the defending goalkeeper on the goal line. A whistle opens each kick, and blows again with 10 seconds left. After the kick the kicker stays still, so there are no rebounds.
+4. The HUD shows each team's kicks: `O` goal, `X` miss, `-` still to come. After the set kicks it goes to sudden death, and the winner is announced with the final whistle.
+
+Goals do not kill anyone during penalties: the plugin sees the ball go in and calls it. On maps whose goals are not made with a ball trigger, the goal works as usual instead.
+
+Before a shootout, mark from the penalties menu, once per map:
+
+- **The penalty spot**: aim at it in front of either goal; the other goal uses the same spot mirrored. Without it, kicks are taken about 11 m in front of each goal, worked out from the goalkeeper areas.
+- **Where players wait**: stand there. Without it they wait at the centre spot.
+
+**Show the marks** draws both. They are stored in `addons/sourcemod/configs/umbrella_soccer_penalty_spots.cfg`.
+
 ## Included assets
 
 | Asset | Path |
@@ -205,6 +240,7 @@ Mark an area again to replace it, and use **Show areas** to see both. Their size
 | Away kit | `models/player/soccer2026/away/ct_urban.mdl` |
 | Home goalkeeper | `models/player/soccer2026/gkhome/ct_urban.mdl` |
 | Away goalkeeper | `models/player/soccer2026/gkaway/ct_urban.mdl` |
+| Referee whistles | `sound/umbrella_soccer/whistle_short.wav`, `sound/umbrella_soccer/whistle_long.wav` |
 
 ## Notes
 

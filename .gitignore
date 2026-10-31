@@ -30,6 +30,7 @@ id_ed25519*
 addons/sourcemod/data/
 addons/sourcemod/logs/
 addons/sourcemod/configs/umbrella_soccer_gk_areas.cfg
+addons/sourcemod/configs/umbrella_soccer_penalty_spots.cfg
 
 # Assistant and editor folders
 .claude/

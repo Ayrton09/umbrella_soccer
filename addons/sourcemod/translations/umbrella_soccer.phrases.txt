@@ -800,15 +800,16 @@
 
     "Menu_Penalties_Title"
     {
-        "en"    "Match - penalties"
-        "es"    "Partido - penales"
-        "pt"    "Partida - penaltis"
-        "fr"    "Match - penalties"
-        "de"    "Spiel - Elfmeter"
-        "ru"    "Матч - пенальти"
-        "chi"   "比赛 - 点球"
-        "it"    "Partita - rigori"
-        "jp"    "試合 - PK"
+        "#format"   "{1:s},{2:s}"
+        "en"    "Match - penalties\nPenalty spot: {1}\nPlayers wait at: {2}"
+        "es"    "Partido - penales\nPunto penal: {1}\nLos jugadores esperan en: {2}"
+        "pt"    "Partida - penaltis\nPonto penal: {1}\nLocal de espera dos jogadores: {2}"
+        "fr"    "Match - penalties\nPoint de penalty : {1}\nPoint d'attente des joueurs : {2}"
+        "de"    "Spiel - Elfmeter\nElfmeterpunkt: {1}\nWartepunkt der Spieler: {2}"
+        "ru"    "Матч - пенальти\nТочка пенальти: {1}\nТочка ожидания: {2}"
+        "chi"   "比赛 - 点球\n点球点：{1}\n球员等候位置：{2}"
+        "it"    "Partita - rigori\nDischetto: {1}\nPunto di attesa dei giocatori: {2}"
+        "jp"    "試合 - PK\nPKスポット: {1}\n選手の待機場所: {2}"
     }
 
     "Menu_Captains"
@@ -1628,28 +1629,28 @@
 
     "Menu_Penalties_Start"
     {
-        "en"    "Start penalties"
-        "es"    "Iniciar penales"
-        "pt"    "Iniciar penaltis"
-        "fr"    "Demarrer penalties"
+        "en"    "Start a penalty shootout"
+        "es"    "Empezar una tanda de penales"
+        "pt"    "Iniciar disputa de penaltis"
+        "fr"    "Lancer une seance de tirs au but"
         "de"    "Elfmeterschiessen starten"
         "ru"    "Начать серию пенальти"
-        "chi"   "开始点球"
-        "it"    "Avvia calci di rigore"
+        "chi"   "开始点球大战"
+        "it"    "Avvia i calci di rigore"
         "jp"    "PK戦を開始"
     }
 
     "Menu_Penalty_Spot"
     {
-        "en"    "Set penalty spot"
-        "es"    "Punto penal"
-        "pt"    "Marcar ponto penal"
-        "fr"    "Point de penalty"
-        "de"    "Elfmeterpunkt setzen"
-        "ru"    "Точка пенальти"
-        "chi"   "设置点球点"
-        "it"    "Imposta dischetto"
-        "jp"    "PKスポット設定"
+        "en"    "Mark the penalty spot (where you aim, either goal)"
+        "es"    "Marcar el punto penal (donde apuntas, en cualquier arco)"
+        "pt"    "Marcar o ponto penal (onde voce mira, em qualquer gol)"
+        "fr"    "Marquer le point de penalty (la ou tu vises, peu importe le but)"
+        "de"    "Elfmeterpunkt setzen (wohin du zielst, egal an welchem Tor)"
+        "ru"    "Отметить точку пенальти прицелом (у любых ворот)"
+        "chi"   "标记点球点（准星所指处，任一球门均可）"
+        "it"    "Segna il dischetto (dove miri, in una delle due porte)"
+        "jp"    "PKスポットを設定 (照準の位置、どちらのゴールでも可)"
     }
 
     "Penalty_Need_Players"
@@ -1689,19 +1690,6 @@
         "chi"   "点球：现在不行。请在球处于比赛状态时判罚，不能在进球后、休息时或重新开球前后。"
         "it"    "Rigore: non ora. Si assegna a palla in gioco, non dopo un gol, durante una pausa o una ripresa del gioco."
         "jp"    "PK: 今は不可。ボールがインプレー中に与えること。ゴール直後、休憩中、リスタート前後は不可。"
-    }
-
-    "Penalty_Shootout_Start"
-    {
-        "en"    "Penalties: shootout started."
-        "es"    "Penales: arranco la tanda."
-        "pt"    "Penaltis: disputa iniciada."
-        "fr"    "Penalties : la seance a commence."
-        "de"    "Elfmeter: das Schiessen hat begonnen."
-        "ru"    "Пенальти: серия пенальти началась."
-        "chi"   "点球：点球大战开始。"
-        "it"    "Rigori: iniziano i calci di rigore."
-        "jp"    "PK戦: 開始。"
     }
 
     "Penalty_Turn"
@@ -1762,16 +1750,16 @@
 
     "Penalty_Winner"
     {
-        "#format"   "{1:s}"
-        "en"    "Penalties winner: {1}."
-        "es"    "Ganador en penales: {1}."
-        "pt"    "Vencedor nos penaltis: {1}."
-        "fr"    "Vainqueur aux penalties : {1}."
-        "de"    "Sieger im Elfmeterschiessen: {1}."
-        "ru"    "Победитель серии пенальти: {1}."
-        "chi"   "点球大战胜者：{1}。"
-        "it"    "Vince ai rigori: {1}."
-        "jp"    "PK戦の勝者: {1}。"
+        "#format"   "{1:s},{2:d},{3:d}"
+        "en"    "Penalty shootout: {1} wins {2}-{3}."
+        "es"    "Tanda de penales: gana {1} {2}-{3}."
+        "pt"    "Disputa de penaltis: o {1} vence por {2}-{3}."
+        "fr"    "Tirs au but : {1} l'emporte {2}-{3}."
+        "de"    "Elfmeterschiessen: {1} gewinnt {2}-{3}."
+        "ru"    "Серия пенальти: {1} побеждает со счётом {2}-{3}."
+        "chi"   "点球大战：{1} 以 {2}-{3} 获胜。"
+        "it"    "Calci di rigore: {1} vince {2}-{3}."
+        "jp"    "PK戦: {1}が{2}-{3}で勝利。"
     }
 
     "Penalty_No_Winner"
@@ -1789,15 +1777,15 @@
 
     "Penalty_Spot_Set"
     {
-        "en"    "Penalties: penalty spot saved from your crosshair."
-        "es"    "Penales: punto penal guardado desde tu mira."
-        "pt"    "Penaltis: ponto penal salvo da sua mira."
-        "fr"    "Penalties : point de penalty enregistre depuis votre viseur."
-        "de"    "Elfmeter: Elfmeterpunkt von deinem Fadenkreuz gespeichert."
-        "ru"    "Пенальти: точка пенальти сохранена по твоему прицелу."
-        "chi"   "点球：已按你的准星位置保存点球点。"
-        "it"    "Rigori: dischetto salvato dal tuo mirino."
-        "jp"    "PK: 照準の位置をPKスポットとして保存した。"
+        "en"    "Penalties: penalty spot saved for this map; the other goal uses the same spot mirrored."
+        "es"    "Penales: punto penal guardado para este mapa; el otro arco usa el mismo punto espejado."
+        "pt"    "Penaltis: ponto penal salvo para este mapa; o outro gol usa o mesmo ponto espelhado."
+        "fr"    "Penalties : point de penalty enregistre pour cette carte ; l'autre but utilise le meme point en miroir."
+        "de"    "Elfmeter: Elfmeterpunkt fuer diese Map gespeichert; das andere Tor nutzt denselben Punkt gespiegelt."
+        "ru"    "Пенальти: точка пенальти сохранена для этой карты; для других ворот она отражается зеркально."
+        "chi"   "点球：已为此地图保存点球点；另一侧球门使用镜像对称的位置。"
+        "it"    "Rigori: dischetto salvato per questa mappa; l'altra porta usa lo stesso punto, specchiato."
+        "jp"    "PK: このマップのPKスポットを保存した。反対側のゴールでは対称の位置を使う。"
     }
 
     "Penalty_Spot_Reminder"
@@ -2200,15 +2188,15 @@
 
     "Cmd_Penalties_Clean_Usage"
     {
-        "en"    "Usage: sm_soccer_penalties <ct/t> [shooter] [goalkeeper]"
-        "es"    "Uso: sm_soccer_penalties <ct/t> [pateador] [arquero]"
-        "pt"    "Uso: sm_soccer_penalties <ct/t> [batedor] [goleiro]"
-        "fr"    "Usage : sm_soccer_penalties <ct/t> [tireur] [gardien]"
-        "de"    "Verwendung: sm_soccer_penalties <ct/t> [schuetze] [torwart]"
-        "ru"    "Использование: sm_soccer_penalties <ct/t> [бьющий] [вратарь]"
-        "chi"   "用法：sm_soccer_penalties <ct/t> [主罚者] [守门员]"
-        "it"    "Uso: sm_soccer_penalties <ct/t> [tiratore] [portiere]"
-        "jp"    "使い方: sm_soccer_penalties <ct/t> [キッカー] [GK]"
+        "en"    "Usage: sm_soccer_penalties [kickers per team] or sm_soccer_penalties <ct/t> [shooter] [goalkeeper]"
+        "es"    "Uso: sm_soccer_penalties [pateadores por equipo] o sm_soccer_penalties <ct/t> [pateador] [arquero]"
+        "pt"    "Uso: sm_soccer_penalties [batedores por time] ou sm_soccer_penalties <ct/t> [batedor] [goleiro]"
+        "fr"    "Usage : sm_soccer_penalties [tireurs par equipe] ou sm_soccer_penalties <ct/t> [tireur] [gardien]"
+        "de"    "Verwendung: sm_soccer_penalties [schuetzen pro team] oder sm_soccer_penalties <ct/t> [schuetze] [torwart]"
+        "ru"    "Использование: sm_soccer_penalties [бьющих в команде] или sm_soccer_penalties <ct/t> [бьющий] [вратарь]"
+        "chi"   "用法：sm_soccer_penalties [每队主罚人数] 或 sm_soccer_penalties <ct/t> [主罚者] [守门员]"
+        "it"    "Uso: sm_soccer_penalties [tiratori per squadra] oppure sm_soccer_penalties <ct/t> [tiratore] [portiere]"
+        "jp"    "使い方: sm_soccer_penalties [1チームのキッカー数] または sm_soccer_penalties <ct/t> [キッカー] [GK]"
     }
 
     "Cmd_Score_Clean_Usage"
@@ -3282,5 +3270,598 @@
         "chi"   "守门员区域：此地图尚未设置。请先站到球门内标记其区域。"
         "it"    "Aree del portiere: questa mappa non ne ha ancora. Prima mettiti in una porta e segnane l'area."
         "jp"    "GKエリア: このマップにはまだない。まずゴール内に立ってエリアを設定すること。"
+    }
+
+    "Penalty_Mark_Set"
+    {
+        "en"    "marked"
+        "es"    "marcado"
+        "pt"    "marcado"
+        "fr"    "marque"
+        "de"    "gesetzt"
+        "ru"    "отмечена"
+        "chi"   "已标记"
+        "it"    "segnato"
+        "jp"    "設定済み"
+    }
+
+    "Penalty_Mark_Ball"
+    {
+        "en"    "not marked (wherever the ball is)"
+        "es"    "sin marcar (donde este la pelota)"
+        "pt"    "nao marcado (onde estiver a bola)"
+        "fr"    "non marque (la ou se trouve le ballon)"
+        "de"    "nicht gesetzt (wo der Ball gerade liegt)"
+        "ru"    "не отмечена (где лежит мяч)"
+        "chi"   "未标记（以球的位置为准）"
+        "it"    "non segnato (dove si trova il pallone)"
+        "jp"    "未設定 (ボールのある位置)"
+    }
+
+    "Penalty_Mark_Auto"
+    {
+        "en"    "not marked (in front of each goal)"
+        "es"    "sin marcar (frente a cada arco)"
+        "pt"    "nao marcado (na frente de cada gol)"
+        "fr"    "non marque (devant chaque but)"
+        "de"    "nicht gesetzt (vor jedem Tor)"
+        "ru"    "не отмечена (перед каждыми воротами)"
+        "chi"   "未标记（每个球门前）"
+        "it"    "non segnato (davanti a ogni porta)"
+        "jp"    "未設定（各ゴールの前）"
+    }
+
+    "Penalty_Mark_Centre"
+    {
+        "en"    "the centre spot"
+        "es"    "el centro de la cancha"
+        "pt"    "centro do campo"
+        "fr"    "le centre du terrain"
+        "de"    "der Anstosspunkt"
+        "ru"    "центр поля"
+        "chi"   "中圈开球点"
+        "it"    "centro del campo"
+        "jp"    "センターマーク"
+    }
+
+    "Menu_Penalty_WaitSpot"
+    {
+        "en"    "Mark where players wait (where you stand)"
+        "es"    "Marcar donde esperan los jugadores (donde estas parado)"
+        "pt"    "Marcar onde os jogadores esperam (onde voce esta)"
+        "fr"    "Marquer le point d'attente des joueurs (la ou tu es)"
+        "de"    "Wartepunkt der Spieler setzen (wo du stehst)"
+        "ru"    "Отметить точку ожидания (где стоишь)"
+        "chi"   "标记球员等候位置（你所站的位置）"
+        "it"    "Segna dove aspettano i giocatori (dove ti trovi)"
+        "jp"    "選手の待機場所を設定 (自分の立ち位置)"
+    }
+
+    "Menu_Penalty_ShowMarks"
+    {
+        "en"    "Show the marks (10 s)"
+        "es"    "Mostrar las marcas (10 s)"
+        "pt"    "Mostrar as marcas (10 s)"
+        "fr"    "Afficher les marques (10 s)"
+        "de"    "Markierungen anzeigen (10 s)"
+        "ru"    "Показать отметки (10 сек.)"
+        "chi"   "显示标记（10 秒）"
+        "it"    "Mostra i punti segnati (10 s)"
+        "jp"    "設定位置を表示 (10 s)"
+    }
+
+    "Menu_Shootout_AutoOrder"
+    {
+        "en"    "Fill in the kicking orders and start"
+        "es"    "Completar el orden de pateadores y empezar"
+        "pt"    "Completar a ordem dos batedores e iniciar"
+        "fr"    "Completer l'ordre des tireurs et lancer"
+        "de"    "Reihenfolge der Schuetzen vervollstaendigen und starten"
+        "ru"    "Заполнить порядок бьющих и начать"
+        "chi"   "自动补全主罚顺序并开始"
+        "it"    "Completa l'ordine dei tiratori e avvia"
+        "jp"    "キッカーの順番を自動で埋めて開始"
+    }
+
+    "Menu_Shootout_Cancel"
+    {
+        "en"    "Cancel the penalty shootout"
+        "es"    "Cancelar la tanda de penales"
+        "pt"    "Cancelar a disputa de penaltis"
+        "fr"    "Annuler la seance de tirs au but"
+        "de"    "Elfmeterschiessen abbrechen"
+        "ru"    "Отменить серию пенальти"
+        "chi"   "取消点球大战"
+        "it"    "Annulla i calci di rigore"
+        "jp"    "PK戦を中止"
+    }
+
+    "Menu_Shootout_Kickers_Title"
+    {
+        "en"    "Penalty shootout: kickers per team"
+        "es"    "Tanda de penales: pateadores por equipo"
+        "pt"    "Disputa de penaltis: batedores por time"
+        "fr"    "Tirs au but : tireurs par equipe"
+        "de"    "Elfmeterschiessen: Schuetzen pro Team"
+        "ru"    "Серия пенальти: число бьющих в команде"
+        "chi"   "点球大战：每队主罚人数"
+        "it"    "Calci di rigore: tiratori per squadra"
+        "jp"    "PK戦: 1チームのキッカー数"
+    }
+
+    "Menu_Shootout_Kickers_Count"
+    {
+        "#format"   "{1:d}"
+        "en"    "{1} per team"
+        "es"    "{1} por equipo"
+        "pt"    "{1} por time"
+        "fr"    "{1} par equipe"
+        "de"    "{1} pro Team"
+        "ru"    "по {1} в команде"
+        "chi"   "每队 {1} 人"
+        "it"    "{1} per squadra"
+        "jp"    "1チーム{1}人"
+    }
+
+    "Menu_Shootout_Kickers_Custom"
+    {
+        "en"    "Another number (type it in chat)"
+        "es"    "Otra cantidad (escribirla en el chat)"
+        "pt"    "Outro numero (digite no chat)"
+        "fr"    "Autre nombre (ecris-le dans le chat)"
+        "de"    "Andere Anzahl (in den Chat schreiben)"
+        "ru"    "Другое число (напиши в чат)"
+        "chi"   "其他人数（在聊天中输入）"
+        "it"    "Altro numero (scrivilo in chat)"
+        "jp"    "その他の人数 (チャットに入力)"
+    }
+
+    "Shootout_Kickers_Prompt"
+    {
+        "#format"   "{1:d}"
+        "en"    "Penalties: type in chat how many kickers per team (1-{1}), or 'cancel'."
+        "es"    "Penales: escribi en el chat cuantos pateadores por equipo (1-{1}), o 'cancelar'."
+        "pt"    "Penaltis: digite no chat quantos batedores por time (1-{1}), ou 'cancel'."
+        "fr"    "Penalties : ecris le nombre de tireurs par equipe dans le chat (1-{1}), ou 'cancel'."
+        "de"    "Elfmeter: schreibe die Anzahl der Schuetzen pro Team in den Chat (1-{1}), oder 'cancel'."
+        "ru"    "Пенальти: напиши в чат, сколько бьющих в команде (1-{1}), или 'cancel'."
+        "chi"   "点球：请在聊天中输入每队主罚人数（1-{1}），或输入 'cancel' 取消。"
+        "it"    "Rigori: scrivi in chat quanti tiratori per squadra (1-{1}), oppure 'cancel'."
+        "jp"    "PK: 1チームのキッカー数をチャットに入力 (1-{1})、または'cancel'。"
+    }
+
+    "Shootout_Kickers_Invalid"
+    {
+        "#format"   "{1:d}"
+        "en"    "Penalties: type a number from 1 to {1}, or 'cancel'."
+        "es"    "Penales: escribi un numero de 1 a {1}, o 'cancelar'."
+        "pt"    "Penaltis: digite um numero de 1 a {1}, ou 'cancel'."
+        "fr"    "Penalties : ecris un nombre de 1 a {1}, ou 'cancel'."
+        "de"    "Elfmeter: schreibe eine Zahl von 1 bis {1}, oder 'cancel'."
+        "ru"    "Пенальти: напиши число от 1 до {1} или 'cancel'."
+        "chi"   "点球：请输入 1 到 {1} 之间的数字，或输入 'cancel' 取消。"
+        "it"    "Rigori: scrivi un numero da 1 a {1}, oppure 'cancel'."
+        "jp"    "PK: 1～{1}の数字を入力、または'cancel'。"
+    }
+
+    "Shootout_Kickers_Cancelled"
+    {
+        "en"    "Penalties: cancelled."
+        "es"    "Penales: cancelado."
+        "pt"    "Penaltis: entrada cancelada."
+        "fr"    "Penalties : annule."
+        "de"    "Elfmeter: abgebrochen."
+        "ru"    "Пенальти: отменено."
+        "chi"   "点球：已取消。"
+        "it"    "Rigori: inserimento annullato."
+        "jp"    "PK: キャンセルした。"
+    }
+
+    "Menu_Shootout_Order_Title"
+    {
+        "#format"   "{1:s},{2:d},{3:d}"
+        "en"    "Penalties - {1} kickers\nPick kicker #{2} of {3}"
+        "es"    "Penales - pateadores de {1}\nElegi el pateador #{2} de {3}"
+        "pt"    "Penaltis - batedores do {1}\nEscolha o batedor #{2} de {3}"
+        "fr"    "Penalties - tireurs {1}\nChoisis le tireur #{2} sur {3}"
+        "de"    "Elfmeter - {1}-Schuetzen\nWaehle den Schuetzen #{2} von {3}"
+        "ru"    "Пенальти - бьющие {1}\nВыбери бьющего #{2} из {3}"
+        "chi"   "点球 - {1} 主罚球员\n选择主罚球员 #{2}（共 {3} 人）"
+        "it"    "Rigori - tiratori {1}\nScegli il tiratore #{2} su {3}"
+        "jp"    "PK - {1}のキッカー\nキッカー#{2}を選択 ({3}人中)"
+    }
+
+    "Menu_Shootout_Order_Auto"
+    {
+        "en"    "Fill in the rest automatically"
+        "es"    "Completar el resto automaticamente"
+        "pt"    "Completar o resto automaticamente"
+        "fr"    "Completer le reste automatiquement"
+        "de"    "Rest automatisch auffuellen"
+        "ru"    "Заполнить остальное автоматически"
+        "chi"   "自动补全剩余顺序"
+        "it"    "Completa il resto in automatico"
+        "jp"    "残りを自動で埋める"
+    }
+
+    "Shootout_Setup_Start"
+    {
+        "#format"   "{1:d}"
+        "en"    "Penalty shootout: {1} kickers per team. The captains line up their kickers; the kicks start once both are done."
+        "es"    "Tanda de penales: {1} pateadores por equipo. Los capitanes eligen el orden y los penales arrancan cuando terminen los dos."
+        "pt"    "Disputa de penaltis: {1} batedores por time. Os capitaes escolhem a ordem dos batedores; a disputa comeca quando os dois terminarem."
+        "fr"    "Tirs au but : {1} tireurs par equipe. Les capitaines fixent l'ordre de passage de leurs tireurs ; les tirs commencent quand les deux ont termine."
+        "de"    "Elfmeterschiessen: {1} Schuetzen pro Team. Die Kapitaene legen die Reihenfolge ihrer Schuetzen fest; geschossen wird, sobald beide fertig sind."
+        "ru"    "Серия пенальти: бьющих в команде - {1}. Капитаны выбирают порядок бьющих; удары начнутся, когда оба закончат."
+        "chi"   "点球大战：每队 {1} 名主罚球员。双方队长安排主罚顺序，两队都完成后开始罚球。"
+        "it"    "Calci di rigore: {1} tiratori per squadra. I capitani stabiliscono l'ordine dei tiratori; si comincia quando hanno finito entrambi."
+        "jp"    "PK戦: キッカーは1チーム{1}人。キャプテンがキッカーの順番を決め、両チームとも決まったら開始。"
+    }
+
+    "Shootout_Order_Prompt"
+    {
+        "#format"   "{1:s}"
+        "en"    "Penalties: pick the {1} kickers in order from the menu. If you closed it, type !kickers."
+        "es"    "Penales: elegi en orden a los pateadores de {1} en el menu. Si lo cerraste, escribi !kickers."
+        "pt"    "Penaltis: escolha no menu os batedores do {1}, em ordem. Se fechou o menu, digite !kickers."
+        "fr"    "Penalties : choisis les tireurs {1} dans l'ordre depuis le menu. Si tu l'as ferme, tape !kickers."
+        "de"    "Elfmeter: waehle die {1}-Schuetzen der Reihe nach im Menue. Falls du es geschlossen hast, schreibe !kickers."
+        "ru"    "Пенальти: выбери в меню бьющих {1} по порядку. Если меню закрыто, напиши !kickers."
+        "chi"   "点球：请在菜单中按顺序选择 {1} 的主罚球员。如果关闭了菜单，请输入 !kickers。"
+        "it"    "Rigori: scegli dal menu, in ordine, i tiratori di {1}. Se l'hai chiuso, scrivi !kickers."
+        "jp"    "PK: メニューから{1}のキッカーを順番に選択。閉じた場合は!kickersと入力。"
+    }
+
+    "Shootout_Order_NoCaptain"
+    {
+        "#format"   "{1:s}"
+        "en"    "Penalties: {1} has no captain on the team: an admin lines up its kickers with !kickers."
+        "es"    "Penales: {1} no tiene capitan en el equipo: un admin elige sus pateadores con !kickers."
+        "pt"    "Penaltis: o {1} esta sem capitao: um admin escolhe a ordem dos batedores com !kickers."
+        "fr"    "Penalties : l'equipe {1} n'a aucun capitaine dans ses rangs : un admin fixe l'ordre des tireurs avec !kickers."
+        "de"    "Elfmeter: im {1}-Team ist kein Kapitaen: ein Admin legt die Reihenfolge der Schuetzen mit !kickers fest."
+        "ru"    "Пенальти: в команде {1} нет капитана: бьющих выбирает админ через !kickers."
+        "chi"   "点球：{1} 队内没有队长：由管理员使用 !kickers 安排其主罚顺序。"
+        "it"    "Rigori: {1} è senza capitano: un admin sceglie l'ordine dei tiratori con !kickers."
+        "jp"    "PK: {1}にキャプテンがいない。管理者が!kickersでキッカーを選ぶ。"
+    }
+
+    "Shootout_Order_Pick"
+    {
+        "#format"   "{1:s},{2:d},{3:N}"
+        "en"    "Penalties {1}: kicker #{2} is {3}."
+        "es"    "Penales {1}: el pateador #{2} es {3}."
+        "pt"    "Penaltis {1}: o batedor #{2} sera {3}."
+        "fr"    "Penalties {1} : le tireur #{2} est {3}."
+        "de"    "Elfmeter {1}: Schuetze #{2} ist {3}."
+        "ru"    "Пенальти {1}: бьющий #{2} - {3}."
+        "chi"   "点球 {1}：主罚球员 #{2} 是 {3}。"
+        "it"    "Rigori {1}: il tiratore #{2} è {3}."
+        "jp"    "PK {1}: キッカー#{2}は{3}。"
+    }
+
+    "Shootout_Order_Done"
+    {
+        "#format"   "{1:s}"
+        "en"    "Penalties: the {1} order is ready."
+        "es"    "Penales: el orden de {1} esta listo."
+        "pt"    "Penaltis: a ordem do {1} esta pronta."
+        "fr"    "Penalties : l'ordre des tireurs {1} est pret."
+        "de"    "Elfmeter: die Reihenfolge der {1}-Schuetzen steht."
+        "ru"    "Пенальти: порядок бьющих {1} готов."
+        "chi"   "点球：{1} 的主罚顺序已确定。"
+        "it"    "Rigori: l'ordine di {1} è pronto."
+        "jp"    "PK: {1}のキッカーの順番が決まった。"
+    }
+
+    "Shootout_Order_Auto_Done"
+    {
+        "#format"   "{1:s}"
+        "en"    "Penalties: the {1} order was filled in automatically."
+        "es"    "Penales: el orden de {1} se completo automaticamente."
+        "pt"    "Penaltis: a ordem do {1} foi completada automaticamente."
+        "fr"    "Penalties : l'ordre des tireurs {1} a ete complete automatiquement."
+        "de"    "Elfmeter: die Reihenfolge der {1}-Schuetzen wurde automatisch vervollstaendigt."
+        "ru"    "Пенальти: порядок бьющих {1} заполнен автоматически."
+        "chi"   "点球：{1} 的主罚顺序已自动补全。"
+        "it"    "Rigori: l'ordine di {1} è stato completato in automatico."
+        "jp"    "PK: {1}のキッカーの順番を自動で埋めた。"
+    }
+
+    "Shootout_Order_Timeout"
+    {
+        "en"    "Penalties: time is up for lining up kickers: the rest of the order was filled in automatically."
+        "es"    "Penales: se termino el tiempo para elegir: el resto del orden se completo automaticamente."
+        "pt"    "Penaltis: acabou o tempo para escolher: o resto da ordem foi completado automaticamente."
+        "fr"    "Penalties : le temps pour choisir est ecoule : le reste de l'ordre a ete complete automatiquement."
+        "de"    "Elfmeter: die Zeit zum Auswaehlen ist um: der Rest der Reihenfolge wurde automatisch vervollstaendigt."
+        "ru"    "Пенальти: время на выбор вышло: остальной порядок заполнен автоматически."
+        "chi"   "点球：选人时间已到：剩余顺序已自动补全。"
+        "it"    "Rigori: il tempo per scegliere è scaduto: il resto dell'ordine è stato completato in automatico."
+        "jp"    "PK: 選択時間が終了。残りの順番を自動で埋めた。"
+    }
+
+    "Shootout_Order_Line"
+    {
+        "#format"   "{1:s},{2:s}"
+        "en"    "Order {1}: {2}"
+        "es"    "Orden {1}: {2}"
+        "pt"    "Ordem {1}: {2}"
+        "fr"    "Ordre {1} : {2}"
+        "de"    "Reihenfolge {1}: {2}"
+        "ru"    "Порядок {1}: {2}"
+        "chi"   "{1} 主罚顺序：{2}"
+        "it"    "Ordine {1}: {2}"
+        "jp"    "{1}の順番: {2}"
+    }
+
+    "Shootout_Coin_Toss"
+    {
+        "#format"   "{1:s}"
+        "en"    "Coin toss: {1} kicks first."
+        "es"    "Sorteo: empieza pateando {1}."
+        "pt"    "Sorteio: o {1} bate primeiro."
+        "fr"    "Tirage au sort : {1} tire en premier."
+        "de"    "Muenzwurf: {1} schiesst zuerst."
+        "ru"    "Жребий: первой бьёт команда {1}."
+        "chi"   "掷硬币：{1} 先罚。"
+        "it"    "Sorteggio: inizia a tirare {1}."
+        "jp"    "コイントス: {1}が先攻。"
+    }
+
+    "Shootout_Starting"
+    {
+        "#format"   "{1:d}"
+        "en"    "Penalties: the shootout starts in {1} seconds."
+        "es"    "Penales: la tanda arranca en {1} segundos."
+        "pt"    "Penaltis: a disputa comeca em {1} segundos."
+        "fr"    "Penalties : la seance de tirs au but commence dans {1} secondes."
+        "de"    "Elfmeter: das Elfmeterschiessen beginnt in {1} Sekunden."
+        "ru"    "Пенальти: серия начнётся через {1} сек."
+        "chi"   "点球：点球大战将在 {1} 秒后开始。"
+        "it"    "Rigori: si comincia tra {1} secondi."
+        "jp"    "PK: {1}秒後にPK戦開始。"
+    }
+
+    "Shootout_Kickers_Not_Choosing"
+    {
+        "en"    "Penalties: nobody is lining up kickers right now."
+        "es"    "Penales: ahora no se estan eligiendo pateadores."
+        "pt"    "Penaltis: ninguem esta escolhendo batedores agora."
+        "fr"    "Penalties : personne ne fixe l'ordre des tireurs en ce moment."
+        "de"    "Elfmeter: gerade legt niemand die Reihenfolge der Schuetzen fest."
+        "ru"    "Пенальти: сейчас никто не выбирает бьющих."
+        "chi"   "点球：当前没有人在安排主罚顺序。"
+        "it"    "Rigori: al momento nessuno sta scegliendo i tiratori."
+        "jp"    "PK: 今はキッカー選択中ではない。"
+    }
+
+    "Shootout_Kickers_Not_Yours"
+    {
+        "en"    "Penalties: only the captains and the admins line up the kickers."
+        "es"    "Penales: solo los capitanes y los admins eligen a los pateadores."
+        "pt"    "Penaltis: apenas os capitaes e os admins escolhem os batedores."
+        "fr"    "Penalties : seuls les capitaines et les admins fixent l'ordre des tireurs."
+        "de"    "Elfmeter: nur die Kapitaene und die Admins legen die Reihenfolge der Schuetzen fest."
+        "ru"    "Пенальти: бьющих выбирают только капитаны и админы."
+        "chi"   "点球：只有队长和管理员可以安排主罚顺序。"
+        "it"    "Rigori: solo i capitani e gli admin scelgono i tiratori."
+        "jp"    "PK: キッカーを選べるのはキャプテンと管理者のみ。"
+    }
+
+    "Shootout_Match_Live"
+    {
+        "en"    "Penalties: finish or stop the match before a shootout."
+        "es"    "Penales: termina o deten el partido antes de una tanda."
+        "pt"    "Penaltis: termine ou pare a partida antes de iniciar a disputa."
+        "fr"    "Penalties : le match doit etre termine ou arrete avant une seance de tirs au but."
+        "de"    "Elfmeter: vor einem Elfmeterschiessen muss das Spiel vorbei oder gestoppt sein."
+        "ru"    "Пенальти: перед серией пенальти заверши или останови матч."
+        "chi"   "点球：请先结束或停止比赛，再开始点球大战。"
+        "it"    "Rigori: concludi o ferma la partita prima dei calci di rigore."
+        "jp"    "PK: PK戦の前に試合を終えるか止めること。"
+    }
+
+    "Shootout_Cancelled"
+    {
+        "#format"   "{1:s}"
+        "en"    "Penalties: {1} cancelled the shootout."
+        "es"    "Penales: {1} cancelo la tanda."
+        "pt"    "Penaltis: {1} cancelou a disputa."
+        "fr"    "Penalties : {1} a annule la seance de tirs au but."
+        "de"    "Elfmeter: {1} hat das Elfmeterschiessen abgebrochen."
+        "ru"    "Пенальти: {1} отменил серию пенальти."
+        "chi"   "点球：{1} 取消了点球大战。"
+        "it"    "Rigori: {1} ha annullato i calci di rigore."
+        "jp"    "PK: {1}がPK戦を中止した。"
+    }
+
+    "Shootout_Not_Active"
+    {
+        "en"    "Penalties: there is no shootout going on."
+        "es"    "Penales: no hay una tanda en curso."
+        "pt"    "Penaltis: nao ha nenhuma disputa em andamento."
+        "fr"    "Penalties : aucune seance de tirs au but en cours."
+        "de"    "Elfmeter: es laeuft kein Elfmeterschiessen."
+        "ru"    "Пенальти: серия пенальти сейчас не идёт."
+        "chi"   "点球：当前没有进行中的点球大战。"
+        "it"    "Rigori: non c'è nessuna serie di rigori in corso."
+        "jp"    "PK: 進行中のPK戦はない。"
+    }
+
+    "Shootout_Winner_Center"
+    {
+        "#format"   "{1:s}"
+        "en"    "{1} WINS THE SHOOTOUT"
+        "es"    "{1} GANA LOS PENALES"
+        "pt"    "{1} VENCE NOS PENALTIS"
+        "fr"    "{1} GAGNE AUX TIRS AU BUT"
+        "de"    "{1} GEWINNT DAS ELFMETERSCHIESSEN"
+        "ru"    "{1} ПОБЕЖДАЕТ В СЕРИИ ПЕНАЛЬТИ"
+        "chi"   "{1} 赢得点球大战！"
+        "it"    "{1} VINCE AI RIGORI"
+        "jp"    "{1}がPK戦に勝利！"
+    }
+
+    "Penalty_Hurry"
+    {
+        "#format"   "{1:d}"
+        "en"    "Kick it! {1} seconds left"
+        "es"    "Pateala! Quedan {1} segundos"
+        "pt"    "Chute logo! Faltam {1} segundos"
+        "fr"    "Tire ! Plus que {1} secondes"
+        "de"    "Schiess! Noch {1} Sekunden"
+        "ru"    "Бей! Осталось {1} сек."
+        "chi"   "快射门！还剩 {1} 秒"
+        "it"    "Tira! Mancano {1} secondi"
+        "jp"    "早く蹴って！残り{1}秒"
+    }
+
+    "Penalty_WaitSpot_Set"
+    {
+        "en"    "Penalties: during a shootout, players wait here (saved for this map)."
+        "es"    "Penales: durante la tanda, los jugadores esperan aca (guardado para este mapa)."
+        "pt"    "Penaltis: durante a disputa, os jogadores esperam aqui (salvo para este mapa)."
+        "fr"    "Penalties : pendant une seance de tirs au but, les joueurs attendent ici (enregistre pour cette carte)."
+        "de"    "Elfmeter: waehrend eines Elfmeterschiessens warten die Spieler hier (fuer diese Map gespeichert)."
+        "ru"    "Пенальти: во время серии игроки ждут здесь (сохранено для этой карты)."
+        "chi"   "点球：点球大战期间，球员将在此处等候（已为此地图保存）。"
+        "it"    "Rigori: durante i calci di rigore, i giocatori aspettano qui (salvato per questa mappa)."
+        "jp"    "PK: PK戦中、選手はここで待機する (このマップに保存済み)。"
+    }
+
+    "Penalty_WaitSpot_Need_Alive"
+    {
+        "en"    "Penalties: you must be alive to mark where players wait."
+        "es"    "Penales: tenes que estar vivo para marcar donde esperan los jugadores."
+        "pt"    "Penaltis: voce precisa estar vivo para marcar onde os jogadores esperam."
+        "fr"    "Penalties : tu dois etre en vie pour marquer le point d'attente des joueurs."
+        "de"    "Elfmeter: du musst leben, um den Wartepunkt der Spieler zu setzen."
+        "ru"    "Пенальти: чтобы отметить точку ожидания, нужно быть живым."
+        "chi"   "点球：你必须存活才能标记球员等候位置。"
+        "it"    "Rigori: devi essere vivo per segnare dove aspettano i giocatori."
+        "jp"    "PK: 選手の待機場所を設定するには生存している必要がある。"
+    }
+
+    "Penalty_Marks_None"
+    {
+        "en"    "Penalties: nothing is marked on this map yet."
+        "es"    "Penales: todavia no hay nada marcado en este mapa."
+        "pt"    "Penaltis: ainda nao ha nada marcado neste mapa."
+        "fr"    "Penalties : rien n'est encore marque sur cette carte."
+        "de"    "Elfmeter: auf dieser Map ist noch nichts gesetzt."
+        "ru"    "Пенальти: на этой карте пока ничего не отмечено."
+        "chi"   "点球：此地图尚未标记任何位置。"
+        "it"    "Rigori: su questa mappa non è ancora stato segnato nulla."
+        "jp"    "PK: このマップにはまだ何も設定されていない。"
+    }
+
+    "Hud_Shootout_Title"
+    {
+        "#format"   "{1:d},{2:d}"
+        "en"    "PENALTIES   CT {1} - {2} T"
+        "es"    "PENALES   CT {1} - {2} T"
+        "pt"    "PENALTIS   CT {1} - {2} T"
+        "fr"    "TIRS AU BUT   CT {1} - {2} T"
+        "de"    "ELFMETERSCHIESSEN   CT {1} - {2} T"
+        "ru"    "ПЕНАЛЬТИ   CT {1} - {2} T"
+        "chi"   "点球大战   CT {1} - {2} T"
+        "it"    "RIGORI   CT {1} - {2} T"
+        "jp"    "PK戦   CT {1} - {2} T"
+    }
+
+    "Hud_Shootout_Choosing"
+    {
+        "en"    "Captains are lining up kickers"
+        "es"    "Los capitanes eligen pateadores"
+        "pt"    "Capitaes escolhendo os batedores"
+        "fr"    "Les capitaines choisissent les tireurs"
+        "de"    "Kapitaene bestimmen die Schuetzen"
+        "ru"    "Капитаны выбирают бьющих"
+        "chi"   "队长正在安排主罚顺序"
+        "it"    "I capitani scelgono i tiratori"
+        "jp"    "キャプテンがキッカーを選択中"
+    }
+
+    "Hud_Shootout_Starting"
+    {
+        "#format"   "{1:d}"
+        "en"    "Starts in {1} s"
+        "es"    "Arranca en {1} s"
+        "pt"    "Comeca em {1} s"
+        "fr"    "Debut dans {1} s"
+        "de"    "Start in {1} s"
+        "ru"    "Старт через {1} сек."
+        "chi"   "{1} 秒后开始"
+        "it"    "Si inizia tra {1} s"
+        "jp"    "{1}秒後に開始"
+    }
+
+    "Hud_Shootout_Kick"
+    {
+        "#format"   "{1:N},{2:s},{3:d}"
+        "en"    "Kicking: {1} ({2}) - {3} s"
+        "es"    "Patea: {1} ({2}) - {3} s"
+        "pt"    "Batendo: {1} ({2}) - {3} s"
+        "fr"    "Tireur : {1} ({2}) - {3} s"
+        "de"    "Schuetze: {1} ({2}) - {3} s"
+        "ru"    "Бьёт: {1} ({2}) - {3} сек."
+        "chi"   "主罚：{1}（{2}） - {3} 秒"
+        "it"    "Al tiro: {1} ({2}) - {3} s"
+        "jp"    "キッカー: {1} ({2}) - {3}秒"
+    }
+
+    "Hud_Shootout_Shot"
+    {
+        "#format"   "{1:N},{2:s}"
+        "en"    "Kicked: {1} ({2})"
+        "es"    "Pateo: {1} ({2})"
+        "pt"    "Bateu: {1} ({2})"
+        "fr"    "Tir effectue : {1} ({2})"
+        "de"    "Geschossen hat: {1} ({2})"
+        "ru"    "Пробил: {1} ({2})"
+        "chi"   "已射门：{1}（{2}）"
+        "it"    "Ha tirato: {1} ({2})"
+        "jp"    "キック済み: {1} ({2})"
+    }
+
+    "Hud_Shootout_Next"
+    {
+        "en"    "Next kick coming up"
+        "es"    "Ya viene el siguiente penal"
+        "pt"    "Ja vem o proximo penalti"
+        "fr"    "Prochain tir dans un instant"
+        "de"    "Gleich folgt der naechste Schuss"
+        "ru"    "Скоро следующий удар"
+        "chi"   "下一个点球即将开始"
+        "it"    "Prossimo rigore in arrivo"
+        "jp"    "まもなく次のキック"
+    }
+
+    "Hud_Shootout_Winner"
+    {
+        "#format"   "{1:s}"
+        "en"    "{1} wins"
+        "es"    "Gana {1}"
+        "pt"    "{1} vence"
+        "fr"    "{1} gagne"
+        "de"    "{1} gewinnt"
+        "ru"    "Победа {1}"
+        "chi"   "{1} 获胜"
+        "it"    "Vince {1}"
+        "jp"    "{1}の勝利"
+    }
+
+    "Hud_Shootout_NoWinner"
+    {
+        "en"    "No winner"
+        "es"    "Sin ganador"
+        "pt"    "Sem vencedor"
+        "fr"    "Pas de vainqueur"
+        "de"    "Kein Sieger"
+        "ru"    "Без победителя"
+        "chi"   "没有胜者"
+        "it"    "Nessun vincitore"
+        "jp"    "勝者なし"
     }
 }

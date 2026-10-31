@@ -33,6 +33,7 @@
 #define PRACTICE_INPUT_CANNON_RANDOMNESS 3
 #define MATCH_INPUT_NONE 0
 #define MATCH_INPUT_DURATION 1
+#define MATCH_INPUT_SHOOTOUT_KICKERS 2
 #define REF_ACTION_NONE 0
 #define REF_ACTION_YELLOW 1
 #define REF_ACTION_RED 2
@@ -213,8 +214,6 @@ int gShootoutScoreT;
 int gShootoutTakenCT;
 int gShootoutTakenT;
 int gShootoutNextTeam;
-int gShootoutShooterIndexCT;
-int gShootoutShooterIndexT;
 bool gShootoutWaitingRoundStart;
 
 int gTrainingBallRefs[MAXPLAYERS + 1];
@@ -230,6 +229,7 @@ int gRefereeAction[MAXPLAYERS + 1];
 
 #include "umbrella_soccer/ranking.sp"
 #include "umbrella_soccer/saves.sp"
+#include "umbrella_soccer/shootout.sp"
 
 public void OnPluginStart()
 {
@@ -273,7 +273,7 @@ public void OnPluginStart()
 	gCvarMatchOvertime = CreateConVar("soccer_mod_match_overtime", "1", "Play overtime when a match is tied after regulation.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
 	gCvarMatchOvertimePercent = CreateConVar("soccer_mod_match_overtime_percent", "25.0", "Overtime length as a percentage of total match time, rounded up to full minutes and played in two halves. Example: 2 periods of 3 minutes = 6 minutes; 25% = 1:30, rounded up to 2 minutes of overtime.", FCVAR_NOTIFY, true, 1.0, true, 100.0);
 	gCvarMatchGoldenGoal = CreateConVar("soccer_mod_match_golden_goal", "0", "1 = the first goal during overtime wins; if overtime ends tied, the match remains tied. 0 = overtime is played in full.", FCVAR_NOTIFY, true, 0.0, true, 1.0);
-	gCvarPenaltyShotTime = CreateConVar("sm_soccer_penalty_shot_time", "15", "Seconds the shooter has to take a penalty, and then for the ball to go in, before it counts as a miss.", FCVAR_NOTIFY, true, 3.0, true, 45.0);
+	gCvarPenaltyShotTime = CreateConVar("sm_soccer_penalty_shot_time", "20", "Seconds the shooter has to take a penalty before it counts as a miss.", FCVAR_NOTIFY, true, 3.0, true, 60.0);
 	gCvarPenaltyShotDelay = CreateConVar("sm_soccer_penalty_shot_delay", "4.0", "Delay in seconds before restarting to the next penalty shot.", FCVAR_NOTIFY, true, 0.2, true, 10.0);
 	gCvarPenaltyTurnSound = CreateConVar("sm_soccer_penalty_turn_sound", "buttons/blip1.wav", "Sound played to the shooter when it is their penalty turn. Empty disables.", FCVAR_NONE);
 	gCvarTrainingBallModel = CreateConVar("sm_soccer_training_ball_model", "models/ayrton09/fifa_trionda_2026/trionda_2026.mdl", "Model used for spawned training balls. Empty disables training ball spawning.", FCVAR_NONE);
@@ -291,6 +291,7 @@ public void OnPluginStart()
 	gCvarServerLimitteams = CreateConVar("sm_soccer_server_limitteams", "0", "mp_limitteams used on soccer maps. 0 lets players join a team whatever the team sizes are.", FCVAR_NONE, true, 0.0, true, 30.0);
 	RankingOnPluginStart();
 	SavesOnPluginStart();
+	ShootoutOnPluginStart();
 	TrainingOnPluginStart();
 	LoadRedCards();
 
@@ -317,7 +318,7 @@ public void OnPluginStart()
 	RegAdminCmd("sm_soccer_captains", CmdCaptains, ADMFLAG_GENERIC, "Set draft captains: sm_soccer_captains <t captain> <ct captain>.");
 	RegAdminCmd("sm_soccer_draftstart", CmdDraftStart, ADMFLAG_GENERIC, "Start a snake draft.");
 	RegAdminCmd("sm_soccer_penaltyspot", CmdPenaltySpot, ADMFLAG_GENERIC, "Set the penalty spot at your aim position.");
-	RegAdminCmd("sm_soccer_penalties", CmdPenalties, ADMFLAG_GENERIC, "Start one penalty: sm_soccer_penalties <ct/t> [shooter] [goalkeeper].");
+	RegAdminCmd("sm_soccer_penalties", CmdPenalties, ADMFLAG_GENERIC, "Start a shootout: sm_soccer_penalties [kickers per team], or one penalty: sm_soccer_penalties <ct/t> [shooter] [goalkeeper].");
 	RegAdminCmd("sm_soccer_trainingball", CmdTrainingBall, ADMFLAG_GENERIC, "Spawn a training ball at your aim position.");
 	RegAdminCmd("sm_soccer_cannon", CmdTrainingCannon, ADMFLAG_GENERIC, "Toggle a simple training cannon from your aim direction.");
 	RegConsoleCmd("sm_pick", CmdPick, "Draft captain pick command.");
@@ -366,6 +367,7 @@ public void OnMapStart()
 	ClearMatchRuntimeState();
 	TrainingOnMapStart();
 	SavesOnMapStart();
+	ShootoutOnMapStart();
 	ApplyMapAllowedState();
 }
 
@@ -503,6 +505,7 @@ public void OnClientAuthorized(int client, const char[] auth)
 
 public void OnClientDisconnect(int client)
 {
+	ShootoutOnClientDisconnect(client);
 	if (gPenaltyActive)
 	{
 		if (client == gPenaltyShooter)
@@ -711,6 +714,11 @@ public Action EventRoundStart(Event event, const char[] name, bool dontBroadcast
 	{
 		EnsureStoppageTrigger();
 	}
+	if (gShootoutActive && gPenaltyActive)
+	{
+		VoidShootoutKick();
+		gShootoutWaitingRoundStart = true;
+	}
 	if (gShootoutWaitingRoundStart)
 	{
 		gShootoutWaitingRoundStart = false;
@@ -750,15 +758,22 @@ public Action EventRoundEnd(Event event, const char[] name, bool dontBroadcast)
 
 	gRoundEnded = true;
 
+	int reason = event.GetInt("reason");
 	// Any round end between shootout kicks restarts the round, so the pending kick
-	// waits for round_start, the same as after a scored penalty.
-	if (gShootoutActive && !gPenaltyActive && gShootoutTimer != null)
+	// waits for round_start, the same as after a scored penalty. One that cuts a
+	// kick short (the round timer, an admin restart) has that kick taken again.
+	if (gShootoutActive && gPenaltyActive && !IsGoalRoundEndReason(reason))
+	{
+		VoidShootoutKick();
+		KillTimerSafe(gShootoutTimer);
+		gShootoutWaitingRoundStart = true;
+	}
+	else if (gShootoutActive && !gPenaltyActive && gShootoutTimer != null)
 	{
 		KillTimerSafe(gShootoutTimer);
 		gShootoutWaitingRoundStart = true;
 	}
 
-	int reason = event.GetInt("reason");
 	if (!IsGoalRoundEndReason(reason))
 	{
 		if (reason != view_as<int>(CSRoundEnd_GameStart))
@@ -848,6 +863,7 @@ public Action EventPlayerSpawn(Event event, const char[] name, bool dontBroadcas
 	int client = GetClientOfUserId(event.GetInt("userid"));
 	if (IsValidClient(client) && IsSoccerAvailable())
 	{
+		ShootoutOnPlayerSpawn(client);
 		if (gRedCard[client] && GetClientTeam(client) >= TEAM_T)
 		{
 			// Covers ways onto a team that skip jointeam, such as an admin move.
@@ -900,6 +916,7 @@ public void FrameApplySpawnState(any userid)
 		ApplySoccerModel(client);
 		ApplyPlayerDamageRules(client);
 		ApplyPlayerFreezeState(client);
+		ShootoutOnSpawnApplied(client);
 		ForceUpdateArmor(client);
 		UpdateClientScoreboard(client);
 	}
@@ -1252,9 +1269,23 @@ public Action HandleMatchChatInput(int client)
 
 	if (StrEqual(message, "cancel", false) || StrEqual(message, "cancelar", false))
 	{
+		if (gMatchInput[client] == MATCH_INPUT_SHOOTOUT_KICKERS)
+		{
+			gMatchInput[client] = MATCH_INPUT_NONE;
+			PrintToChat(client, "%t", "Shootout_Kickers_Cancelled");
+			ShowPenaltyMenu(client);
+			return Plugin_Handled;
+		}
+
 		gMatchInput[client] = MATCH_INPUT_NONE;
 		PrintToChat(client, "%t", "Menu_Start_Custom_Cancel");
 		ShowStartDurationMenu(client);
+		return Plugin_Handled;
+	}
+
+	if (gMatchInput[client] == MATCH_INPUT_SHOOTOUT_KICKERS)
+	{
+		HandleShootoutKickersInput(client, message);
 		return Plugin_Handled;
 	}
 
@@ -1295,7 +1326,13 @@ public Action TimerRespawnPlayer(Handle timer, any userid)
 
 public Action TimerHud(Handle timer)
 {
-	if (!gCvarShowHud.BoolValue || !IsSoccerAvailable() || !gMatchLive)
+	if (!gCvarShowHud.BoolValue || !IsSoccerAvailable())
+	{
+		return Plugin_Continue;
+	}
+
+	bool board = IsShootoutBoardVisible();
+	if (!board && !gMatchLive)
 	{
 		return Plugin_Continue;
 	}
@@ -1305,8 +1342,15 @@ public Action TimerHud(Handle timer)
 		if (IsClientInGame(client) && !IsFakeClient(client))
 		{
 			SetHudTextParams(0.42, 0.08, 1.1, 20, 180, 255, 180);
-			char hudLine[128];
-			FormatHudLine(client, hudLine, sizeof(hudLine));
+			char hudLine[256];
+			if (board)
+			{
+				FormatShootoutBoard(client, hudLine, sizeof(hudLine));
+			}
+			else
+			{
+				FormatHudLine(client, hudLine, sizeof(hudLine));
+			}
 			if (gCvarHudUseHint.BoolValue)
 			{
 				PrintHintText(client, "%s", hudLine);
@@ -2485,11 +2529,35 @@ public int MenuHandlerMatch(Menu menu, MenuAction action, int client, int item)
 void ShowPenaltyMenu(int client)
 {
 	Menu menu = new Menu(MenuHandlerPenalty);
-	char title[128];
-	Format(title, sizeof(title), "%T", "Menu_Penalties_Title", client);
+	char spotState[128];
+	char waitState[128];
+	if (gPenaltySpotValid)
+	{
+		Format(spotState, sizeof(spotState), "%T", "Penalty_Mark_Set", client);
+	}
+	else
+	{
+		Format(spotState, sizeof(spotState), "%T", HasDefaultPenaltySpots() ? "Penalty_Mark_Auto" : "Penalty_Mark_Ball", client);
+	}
+	Format(waitState, sizeof(waitState), "%T", gShootoutWaitSpotValid ? "Penalty_Mark_Set" : "Penalty_Mark_Centre", client);
+	char title[256];
+	Format(title, sizeof(title), "%T", "Menu_Penalties_Title", client, spotState, waitState);
 	menu.SetTitle(title);
 	AddMenuItemPhrase(menu, client, "penaltyspot", "Menu_Penalty_Spot");
-	AddMenuItemPhrase(menu, client, "shootout", "Menu_Penalties_Start");
+	AddMenuItemPhrase(menu, client, "waitspot", "Menu_Penalty_WaitSpot");
+	AddMenuItemPhrase(menu, client, "showmarks", "Menu_Penalty_ShowMarks");
+	if (gShootoutChoosing)
+	{
+		AddMenuItemPhrase(menu, client, "autoorder", "Menu_Shootout_AutoOrder");
+	}
+	if (gShootoutActive)
+	{
+		AddMenuItemPhrase(menu, client, "cancelshootout", "Menu_Shootout_Cancel");
+	}
+	else
+	{
+		AddMenuItemPhrase(menu, client, "shootout", "Menu_Penalties_Start");
+	}
 	AddMenuItemPhrase(menu, client, "penaltyct", "Menu_Penalty_CT");
 	AddMenuItemPhrase(menu, client, "penaltyt", "Menu_Penalty_T");
 	menu.ExitBackButton = true;
@@ -2526,9 +2594,26 @@ public int MenuHandlerPenalty(Menu menu, MenuAction action, int client, int item
 	{
 		CmdPenaltySpot(client, 0);
 	}
+	else if (StrEqual(info, "waitspot"))
+	{
+		SetShootoutWaitSpot(client);
+	}
+	else if (StrEqual(info, "showmarks"))
+	{
+		DrawPenaltyMarks(client);
+	}
 	else if (StrEqual(info, "shootout"))
 	{
-		StartShootout();
+		ShowShootoutKickersMenu(client);
+		return 0;
+	}
+	else if (StrEqual(info, "autoorder"))
+	{
+		CompleteShootoutOrders();
+	}
+	else if (StrEqual(info, "cancelshootout"))
+	{
+		CancelShootout(client);
 	}
 	else if (StrEqual(info, "penaltyct"))
 	{
@@ -2660,7 +2745,9 @@ public Action CmdPenaltySpot(int client, int args)
 		GetClientAbsOrigin(client, gPenaltySpot);
 	}
 	gPenaltySpotValid = true;
+	SavePenaltySpots();
 	ReplyToCommand(client, "%t", "Penalty_Spot_Set");
+	DrawPenaltyMarks(client);
 	return Plugin_Handled;
 }
 
@@ -2673,12 +2760,20 @@ public Action CmdPenalties(int client, int args)
 
 	if (args < 1)
 	{
-		StartShootout();
+		StartShootoutSetup(client, gCvarShootoutKickers.IntValue);
 		return Plugin_Handled;
 	}
 
 	char teamArg[16];
 	GetCmdArg(1, teamArg, sizeof(teamArg));
+	// A number is a shootout with that many kickers per team.
+	int kickers;
+	if (StringToIntEx(teamArg, kickers) == strlen(teamArg) && kickers > 0)
+	{
+		StartShootoutSetup(client, kickers);
+		return Plugin_Handled;
+	}
+
 	int team = ParseTeamArg(teamArg);
 	if (team != TEAM_CT && team != TEAM_T)
 	{
@@ -3051,7 +3146,7 @@ bool StartMatch()
 	gStoppageSeconds = 0;
 	gOpeningKickoffTeam = GetRandomKickoffTeam();
 	gPenaltyActive = false;
-	gShootoutActive = false;
+	EndShootoutState();
 	gMaxPeriods = gCvarMatchPeriods.IntValue;
 	gCurrentPeriod = 1;
 	gMatchElapsed = 0.0;
@@ -3111,8 +3206,6 @@ bool StopMatch(bool announce = true)
 	gShootoutTakenCT = 0;
 	gShootoutTakenT = 0;
 	gShootoutNextTeam = 0;
-	gShootoutShooterIndexCT = 0;
-	gShootoutShooterIndexT = 0;
 	gPeriodRemaining = 0.0;
 	gPeriodDuration = 0.0;
 	gPeriodElapsed = 0.0;
@@ -3235,8 +3328,7 @@ void ResetMatch()
 	gPenaltyWaitingForKick = false;
 	gPenaltyShooter = 0;
 	gPenaltyGoalkeeper = 0;
-	gShootoutActive = false;
-	gShootoutWaitingRoundStart = false;
+	EndShootoutState();
 	gPeriodDuration = 0.0;
 	gPeriodElapsed = 0.0;
 	gMatchElapsed = 0.0;
@@ -3654,8 +3746,11 @@ void RegisterPenaltyTouch(int client)
 	}
 
 	gPenaltyWaitingForKick = false;
-	KillPenaltyTimer();
-	gPenaltyTimer = CreateTimer(gCvarPenaltyShotTime.FloatValue, TimerPenaltyTimeout, _, TIMER_FLAG_NO_MAPCHANGE);
+	StartPenaltyResultClock();
+	if (gShootoutActive)
+	{
+		FreezeShootoutShooter(client);
+	}
 }
 
 // A penalty awarded during a live match, as opposed to practice or a shootout.
@@ -3703,7 +3798,14 @@ public Action TimerPenaltyTimeout(Handle timer)
 	// A pause holds the kick too: the shooter gets the full time again after it.
 	if (gPenaltyActive && (gPaused || gUnpausing))
 	{
-		gPenaltyTimer = CreateTimer(gCvarPenaltyShotTime.FloatValue, TimerPenaltyTimeout, _, TIMER_FLAG_NO_MAPCHANGE);
+		if (gPenaltyWaitingForKick)
+		{
+			StartPenaltyKickClock();
+		}
+		else
+		{
+			StartPenaltyResultClock();
+		}
 		return Plugin_Stop;
 	}
 	if (gPenaltyActive)
@@ -3899,7 +4001,8 @@ void StartNextPeriod()
 void FinishOvertime()
 {
 	gOvertimeActive = false;
-	if (gScoreCT == gScoreT)
+	bool tied = gScoreCT == gScoreT;
+	if (tied)
 	{
 		PrintToChatAll("%t", "Overtime_Tied");
 	}
@@ -3908,6 +4011,11 @@ void FinishOvertime()
 		PrintToChatAll("%t", "Overtime_Finished");
 	}
 	FinishMatch();
+	// After the restart that ends the match, so it does not undo the setup.
+	if (tied && gCvarShootoutAfterOvertime.BoolValue)
+	{
+		CreateTimer(SHOOTOUT_AFTER_OVERTIME_DELAY, TimerShootoutAfterOvertime, _, TIMER_FLAG_NO_MAPCHANGE);
+	}
 }
 
 int GetOvertimeLengthSeconds()
@@ -4301,9 +4409,7 @@ void ClearMatchRuntimeState()
 	gShootoutTakenCT = 0;
 	gShootoutTakenT = 0;
 	gShootoutNextTeam = 0;
-	gShootoutShooterIndexCT = 0;
-	gShootoutShooterIndexT = 0;
-	gShootoutWaitingRoundStart = false;
+	EndShootoutState();
 	gStoppageSeconds = 0;
 	gBallStartPositionValid = false;
 	gCurrentPeriod = 0;
@@ -4333,6 +4439,9 @@ void KillMatchTimers()
 	KillTimerSafe(gUnpauseTimer);
 	KillTimerSafe(gStoppageTimer);
 	KillTimerSafe(gShootoutTimer);
+	KillTimerSafe(gShootoutReminderTimer);
+	KillTimerSafe(gShootoutOrderTimer);
+	KillTimerSafe(gShootoutRestartTimer);
 	KillPenaltyTimer();
 	gUnpausing = false;
 	gUnpauseSecondsLeft = 0;
@@ -4482,6 +4591,7 @@ void DiscoverSoccerEntities()
 			}
 		}
 	}
+	HookShootoutGoalTriggers();
 }
 
 void CacheBallStartPosition()
@@ -5425,21 +5535,30 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 		return false;
 	}
 
-	if (!gPenaltySpotValid)
+	// The marked spot; unmarked, the spot in front of the attacked goal, or else
+	// wherever the ball is. Only a marked spot is kept for the next kicks.
+	float kickSpot[3];
+	bool oriented;
+	if (gPenaltySpotValid)
+	{
+		oriented = GetPenaltyKickSpot(team, gPenaltySpot, kickSpot);
+	}
+	else if (GetDefaultPenaltySpot(GetOppositeTeam(team), kickSpot))
+	{
+		oriented = true;
+	}
+	else
 	{
 		FindBallEntity();
-		int ball = GetTrackedBallEntity();
-		if (ball != -1)
+		int spotBall = GetTrackedBallEntity();
+		if (spotBall == -1)
 		{
-			GetEntPropVector(ball, Prop_Send, "m_vecOrigin", gPenaltySpot);
-			gPenaltySpotValid = true;
+			PrintToChatAll("%t", "Penalty_Spot_Reminder");
+			return false;
 		}
-	}
-
-	if (!gPenaltySpotValid)
-	{
-		PrintToChatAll("%t", "Penalty_Spot_Reminder");
-		return false;
+		float ballOrigin[3];
+		GetEntPropVector(spotBall, Prop_Send, "m_vecOrigin", ballOrigin);
+		oriented = GetPenaltyKickSpot(team, ballOrigin, kickSpot);
 	}
 
 	if (!IsValidClient(shooter))
@@ -5468,7 +5587,8 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 	gPenaltyActive = true;
 	gPenaltyWaitingForKick = true;
 	ClearLastSave();
-	gPenaltyKickSpotOriented = GetPenaltyKickSpot(team, gPenaltyKickSpot);
+	gPenaltyKickSpot = kickSpot;
+	gPenaltyKickSpotOriented = oriented;
 	if (gMatchLive && !fromShootout)
 	{
 		// The penalty replaces a kickoff still waiting, and the clock waits for
@@ -5501,8 +5621,7 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 		PlaceBallAtRest(ball, gPenaltyKickSpot);
 	}
 
-	KillPenaltyTimer();
-	gPenaltyTimer = CreateTimer(gCvarPenaltyShotTime.FloatValue, TimerPenaltyTimeout, _, TIMER_FLAG_NO_MAPCHANGE);
+	StartPenaltyKickClock();
 	char teamName[16];
 	GetTeamNameServer(team, teamName, sizeof(teamName));
 	if (IsValidClient(gPenaltyGoalkeeper))
@@ -5514,6 +5633,7 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 		PrintToChatAll("%t", "Penalty_Turn_NoGk", gPenaltyShooter, teamName);
 	}
 	PlayPenaltyTurnSound(gPenaltyShooter);
+	PlayPenaltyWhistle();
 	return true;
 }
 
@@ -5521,9 +5641,9 @@ bool StartPenalty(int team, int shooter, int goalkeeper, bool fromShootout = fal
 // team attacks, the one the other team defends. That end is found from the defending
 // team's goalkeeper area, or else from where its players spawn. Returns whether the
 // end could be told apart; if not, the stored spot is used as it is.
-bool GetPenaltyKickSpot(int team, float spot[3])
+bool GetPenaltyKickSpot(int team, const float base[3], float spot[3])
 {
-	spot = gPenaltySpot;
+	spot = base;
 	float defended[3];
 	if (!gBallStartPositionValid || !GetTeamGoalReference(GetOppositeTeam(team), defended))
 	{
@@ -5531,10 +5651,10 @@ bool GetPenaltyKickSpot(int team, float spot[3])
 	}
 
 	float mirrored[3];
-	mirrored[0] = 2.0 * gBallStartPosition[0] - gPenaltySpot[0];
-	mirrored[1] = 2.0 * gBallStartPosition[1] - gPenaltySpot[1];
-	mirrored[2] = gPenaltySpot[2];
-	if (GetFlatDistance(mirrored, defended) < GetFlatDistance(gPenaltySpot, defended))
+	mirrored[0] = 2.0 * gBallStartPosition[0] - base[0];
+	mirrored[1] = 2.0 * gBallStartPosition[1] - base[1];
+	mirrored[2] = base[2];
+	if (GetFlatDistance(mirrored, defended) < GetFlatDistance(base, defended))
 	{
 		spot = mirrored;
 	}
@@ -5647,6 +5767,7 @@ void ResolvePenalty(bool scored)
 				gShootoutScoreT++;
 			}
 		}
+		RecordShootoutResult(gPenaltyTeam, (gPenaltyTeam == TEAM_CT ? gShootoutTakenCT : gShootoutTakenT) - 1, scored);
 		PrintToChatAll("%t", "Penalty_Score", gShootoutScoreCT, gShootoutScoreT);
 	}
 	gPenaltyActive = false;
@@ -5656,7 +5777,11 @@ void ResolvePenalty(bool scored)
 	if (gShootoutActive)
 	{
 		KillTimerSafe(gShootoutTimer);
-		if (gRoundEnded)
+		if (IsShootoutDecided())
+		{
+			FinishShootout();
+		}
+		else if (gRoundEnded)
 		{
 			// A goal ends the round, and the restart would undo any placement made
 			// before it. The next kick is set up from round_start instead.
@@ -5669,41 +5794,6 @@ void ResolvePenalty(bool scored)
 	}
 }
 
-void StartShootout()
-{
-	if (!IsSoccerAvailable())
-	{
-		return;
-	}
-
-	if (!IsValidClient(FindFirstTeamClient(TEAM_CT)) || !IsValidClient(FindFirstTeamClient(TEAM_T)))
-	{
-		PrintToChatAll("%t", "Penalty_Need_Players");
-		return;
-	}
-
-	if (gPenaltyActive || gShootoutActive)
-	{
-		PrintToChatAll("%t", "Penalty_Already_Active");
-		return;
-	}
-
-	KillPenaltyTimer();
-	KillTimerSafe(gShootoutTimer);
-	gShootoutWaitingRoundStart = false;
-	gShootoutActive = true;
-	gPenaltyActive = false;
-	gShootoutScoreCT = 0;
-	gShootoutScoreT = 0;
-	gShootoutTakenCT = 0;
-	gShootoutTakenT = 0;
-	gShootoutShooterIndexCT = 0;
-	gShootoutShooterIndexT = 0;
-	gShootoutNextTeam = TEAM_CT;
-	PrintToChatAll("%t", "Penalty_Shootout_Start");
-	StartNextShootoutPenalty();
-}
-
 public Action TimerNextShootoutPenalty(Handle timer)
 {
 	gShootoutTimer = null;
@@ -5711,37 +5801,8 @@ public Action TimerNextShootoutPenalty(Handle timer)
 	return Plugin_Stop;
 }
 
-void StartNextShootoutPenalty()
-{
-	if (!gShootoutActive)
-	{
-		return;
-	}
-
-	if (IsShootoutDecided())
-	{
-		FinishShootout();
-		return;
-	}
-
-	int team = gShootoutNextTeam;
-	int shooter = GetNextShootoutShooter(team);
-	if (!IsValidClient(shooter))
-	{
-		FinishShootout();
-		return;
-	}
-
-	gShootoutNextTeam = team == TEAM_CT ? TEAM_T : TEAM_CT;
-	// Goalkeeper 0 lets StartPenalty pick the defending side's goalkeeper.
-	if (!StartPenalty(team, shooter, 0, true))
-	{
-		FinishShootout();
-	}
-}
-
 // The shootout is over as soon as one team leads by more than the other can still
-// reach with the shots it is owed. Once both teams are past the regulation five and
+// reach with the shots it is owed. Once both teams are past the regulation kicks and
 // level on shots taken, "owed" is zero and this reduces to a plain score comparison.
 bool IsShootoutDecided()
 {
@@ -5752,66 +5813,19 @@ bool IsShootoutDecided()
 		|| gShootoutScoreT > gShootoutScoreCT + remainingCT;
 }
 
-// Shots a team still has coming: whatever is left of the regulation five, or the
+// Shots a team still has coming: whatever is left of the regulation kicks, or the
 // shots it owes to match the opponent during sudden death, whichever is greater.
 int GetRemainingShootoutShots(int taken, int takenByOpponent)
 {
-	int regulation = PENALTY_MAX_SHOTS - taken;
+	int regulation = (gShootoutKickers > 0 ? gShootoutKickers : PENALTY_MAX_SHOTS) - taken;
 	int owed = takenByOpponent - taken;
 	int remaining = regulation > owed ? regulation : owed;
 	return remaining > 0 ? remaining : 0;
 }
 
-int GetNextShootoutShooter(int team)
-{
-	int start = team == TEAM_CT ? gShootoutShooterIndexCT : gShootoutShooterIndexT;
-	for (int pass = 0; pass < 2; pass++)
-	{
-		for (int client = start + 1; client <= MaxClients; client++)
-		{
-			if (IsValidClient(client) && !IsFakeClient(client) && GetClientTeam(client) == team && !gRedCard[client])
-			{
-				if (team == TEAM_CT)
-				{
-					gShootoutShooterIndexCT = client;
-				}
-				else
-				{
-					gShootoutShooterIndexT = client;
-				}
-				return client;
-			}
-		}
-		start = 0;
-	}
-	return 0;
-}
-
-void FinishShootout()
-{
-	gShootoutActive = false;
-	gShootoutWaitingRoundStart = false;
-	KillTimerSafe(gShootoutTimer);
-	if (gShootoutScoreCT > gShootoutScoreT)
-	{
-		char teamName[16];
-		GetTeamNameServer(TEAM_CT, teamName, sizeof(teamName));
-		PrintToChatAll("%t", "Penalty_Winner", teamName);
-	}
-	else if (gShootoutScoreT > gShootoutScoreCT)
-	{
-		char teamName[16];
-		GetTeamNameServer(TEAM_T, teamName, sizeof(teamName));
-		PrintToChatAll("%t", "Penalty_Winner", teamName);
-	}
-	else
-	{
-		PrintToChatAll("%t", "Penalty_No_Winner");
-	}
-}
-
 void KillPenaltyTimer()
 {
+	KillTimerSafe(gPenaltyWarningTimer);
 	if (gPenaltyTimer != null)
 	{
 		KillTimer(gPenaltyTimer);
@@ -6652,6 +6666,7 @@ void PrecacheConfiguredModels()
 	PrecacheModelFromConVar(gCvarModelTGK);
 	PrecacheModelFromConVar(gCvarTrainingBallModel);
 	PrecacheSoundFromConVar(gCvarPenaltyTurnSound);
+	ShootoutPrecacheSounds();
 	PrecacheStoppageTriggerModel();
 }
 
@@ -6761,6 +6776,19 @@ void PrecacheSoundFromConVar(ConVar cvar)
 {
 	char sound[PLATFORM_MAX_PATH];
 	cvar.GetString(sound, sizeof(sound));
+	if (sound[0] == '\0')
+	{
+		return;
+	}
+
+	// A sound shipped with the plugin, unlike one from the game files, has to
+	// be downloaded by the players.
+	char fullPath[PLATFORM_MAX_PATH];
+	Format(fullPath, sizeof(fullPath), "sound/%s", sound);
+	if (FileExists(fullPath, false))
+	{
+		AddFileToDownloadsTable(fullPath);
+	}
 	PrepareSoundPath(sound);
 }
 
@@ -6945,6 +6973,12 @@ void SetTrainingGoalsDisabled(int client, bool disabled)
 	if (gMatchLive)
 	{
 		PrintToChat(client, "%t", "Training_Goals_Match_Live");
+		return;
+	}
+	// Penalties need the goal triggers to see goals.
+	if (gShootoutActive || gPenaltyActive)
+	{
+		PrintToChat(client, "%t", "Penalty_Already_Active");
 		return;
 	}
 	if (disabled == gTrainingGoalsDisabled)

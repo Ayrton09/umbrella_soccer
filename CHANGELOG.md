@@ -1,5 +1,21 @@
 # Changelog
 
+## Unreleased
+
+### Penalty shootout
+- The shootout starts by itself when overtime ends tied (`sm_soccer_shootout_after_overtime`), or from the penalties menu, where the admin chooses how many kickers each team has (3, 5 or any number up to 20; `sm_soccer_shootout_kickers` when it starts by itself). `sm_soccer_penalties <number>` does the same from the console.
+- Each team's captain lines up its kickers in order from a menu (`!kickers` reopens it). A team without a captain is lined up by the admin who started the shootout, or by an admin on the server, and with no admin around its order is filled in automatically. The penalties menu can also fill in any order still open. Nothing is kicked until both orders are set, or until `sm_soccer_shootout_order_time` (120 s) runs out and the rest is filled in. Then the order is shown in chat, a coin toss picks the first team and the kicks start 5 seconds later.
+- Kickers follow that order. In sudden death the rest of the team kicks next, then the order starts over, as in a real shootout; players who left or changed team are skipped.
+- Everyone else waits frozen at a waiting spot, marked per map from the menu (the centre spot by default). The kicker is placed behind the ball and the defending goalkeeper on the goal line, found from the goalkeeper area or else from the map's goal trigger. After the kick the kicker is held still until the result, so a save or a ball off the post cannot be knocked in again.
+- The HUD shows a board like the TV graphic: the score and each team's kicks (`O` goal, `X` miss, `-` to come), who is kicking and the time left, and the winner for a few seconds after the end.
+- Goals no longer kill anyone during penalties, shootout or practice. The map's ball goal triggers are held back and the plugin calls the goal itself; a kick that is not in within `sm_soccer_penalty_result_time` (5 s) is a miss. On maps whose goals are not made with a ball trigger, goals work as before.
+- A referee whistle, shipped with the plugin, opens each kick and blows again with `sm_soccer_penalty_warning_time` (10) seconds left, with a warning to the kicker; a final whistle ends the shootout. The time to take a penalty is now 20 seconds (`sm_soccer_penalty_shot_time`).
+- The winner is announced with the shootout score, and a decided shootout ends at once instead of after the next kick's delay. A few seconds later the round restarts, so the last ball cannot turn into a goal.
+- A kick cut short by a round restart (the round timer running out, an admin restart) is taken again by the same kicker.
+- Disabling the goals for training is refused while a penalty or shootout is on, since penalties need the goal triggers.
+- The penalty spot and the waiting spot are saved per map in `configs/umbrella_soccer_penalty_spots.cfg`, and the penalties menu shows whether they are marked and can draw them. Before, the penalty spot was kept in memory only and carried over to the next map.
+- Without a marked penalty spot, kicks are taken about 11 m in front of each goal, worked out from the goalkeeper areas, instead of wherever the ball happened to be (the centre spot right after a match).
+
 ## 1.1.3
 
 ### New
