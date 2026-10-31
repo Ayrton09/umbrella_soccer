@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.2.0
 
 ### New map and ball
 - New map `ka_soccer_maradona_v1`, the Estadio Diego Armando Maradona in La Plata, at night. Its pitch, goals and boundaries are the same as `ka_soccer_world_cup_2026`, so the game plays the same on it. Its own ball is the Argentum.
@@ -19,6 +19,9 @@
 - Disabling the goals for training is refused while a penalty or shootout is on, since penalties need the goal triggers.
 - The penalty spot and the waiting spot are saved per map in `configs/umbrella_soccer_penalty_spots.cfg`, and the penalties menu shows whether they are marked and can draw them. Before, the penalty spot was kept in memory only and carried over to the next map.
 - Without a marked penalty spot, kicks are taken about 11 m in front of each goal, worked out from the goalkeeper areas, instead of wherever the ball happened to be (the centre spot right after a match).
+
+Compiled with SourcePawn 1.12.0.7255, no warnings.
+Plugin SHA256: `67780589E2544C1AFFF4E282D09086896C6367B5FFEE8DAC7F177766646DC165`
 
 ## 1.1.3
 
