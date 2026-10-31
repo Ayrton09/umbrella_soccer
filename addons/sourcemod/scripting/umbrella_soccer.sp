@@ -276,7 +276,7 @@ public void OnPluginStart()
 	gCvarPenaltyShotTime = CreateConVar("sm_soccer_penalty_shot_time", "20", "Seconds the shooter has to take a penalty before it counts as a miss.", FCVAR_NOTIFY, true, 3.0, true, 60.0);
 	gCvarPenaltyShotDelay = CreateConVar("sm_soccer_penalty_shot_delay", "4.0", "Delay in seconds before restarting to the next penalty shot.", FCVAR_NOTIFY, true, 0.2, true, 10.0);
 	gCvarPenaltyTurnSound = CreateConVar("sm_soccer_penalty_turn_sound", "buttons/blip1.wav", "Sound played to the shooter when it is their penalty turn. Empty disables.", FCVAR_NONE);
-	gCvarTrainingBallModel = CreateConVar("sm_soccer_training_ball_model", "models/ayrton09/fifa_trionda_2026/trionda_2026.mdl", "Model used for spawned training balls. Empty disables training ball spawning.", FCVAR_NONE);
+	gCvarTrainingBallModel = CreateConVar("sm_soccer_training_ball_model", "models/ayrton09/fifa_trionda_2026/trionda_2026.mdl", "Model used for spawned training balls. Shipped: models/ayrton09/fifa_trionda_2026/trionda_2026.mdl (Trionda) and models/ayrton09/argentum_ball/argentum_ball.mdl (Argentum). Empty disables training ball spawning.", FCVAR_NONE);
 	gCvarTrainingCannonFireRate = CreateConVar("sm_soccer_training_cannon_fire_rate", "2.5", "Seconds between training cannon shots.", FCVAR_NOTIFY, true, 0.2, true, 30.0);
 	gCvarTrainingCannonPower = CreateConVar("sm_soccer_training_cannon_power", "900.0", "Velocity applied by the training cannon.", FCVAR_NOTIFY, true, 100.0, true, 3000.0);
 	gCvarTrainingCannonRandomness = CreateConVar("sm_soccer_training_cannon_randomness", "0.0", "Random velocity spread added to training cannon shots.", FCVAR_NOTIFY, true, 0.0, true, 500.0);
@@ -6739,6 +6739,9 @@ void AddModelDownloads(const char[] model)
 	AddMaterialDownloads(modelDir, "trionda_2026_blender");
 	AddMaterialDownloads(modelDir, "trionda_2026_blender_base");
 	AddMaterialDownloads(modelDir, "trionda_2026_blender_normal");
+	AddMaterialDownloads(modelDir, "argentum_ball");
+	AddMaterialDownloads(modelDir, "argentum_ball_base");
+	AddMaterialDownloads(modelDir, "argentum_ball_normal");
 }
 
 void AddMaterialDownloads(const char[] modelDir, const char[] materialName)

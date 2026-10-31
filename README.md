@@ -61,6 +61,7 @@ sound/umbrella_soccer/...
 models/...
 materials/...
 maps/ka_soccer_world_cup_2026.bsp
+maps/ka_soccer_maradona_v1.bsp
 ```
 
 **FastDL**
@@ -70,6 +71,7 @@ maps/ka_soccer_world_cup_2026.bsp
 
 ```text
 maps/ka_soccer_world_cup_2026.bsp.bz2
+maps/ka_soccer_maradona_v1.bsp.bz2
 materials/...
 models/...
 ```
@@ -149,6 +151,12 @@ All settings live in `cfg/sourcemod/umbrella_soccer.cfg`. The most useful ones:
 | `sm_soccer_shootout_order_time` | `120` | Seconds to line up the kickers before the rest is filled in automatically. `0` = wait. |
 | `sm_soccer_penalty_whistle` | `umbrella_soccer/whistle_short.wav` | Whistle for each kick and for the warning. Empty = off. |
 | `sm_soccer_shootout_end_whistle` | `umbrella_soccer/whistle_long.wav` | Whistle when the shootout ends. Empty = off. |
+
+**Training**
+
+| Cvar | Default | Description |
+| --- | ---: | --- |
+| `sm_soccer_training_ball_model` | `models/ayrton09/fifa_trionda_2026/trionda_2026.mdl` | Model of the training balls: the Trionda, or `models/ayrton09/argentum_ball/argentum_ball.mdl` for the Argentum. Empty = no training balls. The match ball is always the map's own. |
 
 **Server settings** (applied once when a soccer map starts)
 
@@ -235,7 +243,9 @@ Before a shootout, mark from the penalties menu, once per map:
 | Asset | Path |
 | --- | --- |
 | Official map | `maps/ka_soccer_world_cup_2026.bsp` |
-| Ball | `models/ayrton09/fifa_trionda_2026/trionda_2026.mdl` |
+| Estadio Diego Armando Maradona map | `maps/ka_soccer_maradona_v1.bsp` |
+| Trionda ball | `models/ayrton09/fifa_trionda_2026/trionda_2026.mdl` |
+| Argentum ball | `models/ayrton09/argentum_ball/argentum_ball.mdl` |
 | Home kit | `models/player/soccer2026/home/ct_urban.mdl` |
 | Away kit | `models/player/soccer2026/away/ct_urban.mdl` |
 | Home goalkeeper | `models/player/soccer2026/gkhome/ct_urban.mdl` |

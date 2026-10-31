@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### New map and ball
+- New map `ka_soccer_maradona_v1`, the Estadio Diego Armando Maradona in La Plata, at night. Its pitch, goals and boundaries are the same as `ka_soccer_world_cup_2026`, so the game plays the same on it. Its own ball is the Argentum.
+- The Argentum ball (`models/ayrton09/argentum_ball/argentum_ball.mdl`) ships with the plugin next to the Trionda, and either can be the training ball: set `sm_soccer_training_ball_model` to its model. Players download its materials like the Trionda's. The match ball is still each map's own.
+
 ### Penalty shootout
 - The shootout starts by itself when overtime ends tied (`sm_soccer_shootout_after_overtime`), or from the penalties menu, where the admin chooses how many kickers each team has (3, 5 or any number up to 20; `sm_soccer_shootout_kickers` when it starts by itself). `sm_soccer_penalties <number>` does the same from the console.
 - Each team's captain lines up its kickers in order from a menu (`!kickers` reopens it). A team without a captain is lined up by the admin who started the shootout, or by an admin on the server, and with no admin around its order is filled in automatically. The penalties menu can also fill in any order still open. Nothing is kicked until both orders are set, or until `sm_soccer_shootout_order_time` (120 s) runs out and the rest is filled in. Then the order is shown in chat, a coin toss picks the first team and the kicks start 5 seconds later.
